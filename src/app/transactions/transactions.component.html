@@ -1,0 +1,42 @@
+
+<div *ngIf="selectedTypes" class="type-filter flxr">
+
+  <div>
+    <label for="add">Add</label>
+    <input [(ngModel)]="selectedTypes.add" type="checkbox" name="add" id="add" (change)="filterType()" />
+  </div>
+
+  <div>
+    <label for="doubleSwap">Double Swap</label>
+    <input [(ngModel)]="selectedTypes.doubleSwap" type="checkbox" name="doubleSwap" (change)="filterType()" />
+  </div>
+
+  <div>
+    <label for="refund">Refund</label>
+    <input [(ngModel)]="selectedTypes.refund" type="checkbox" name="refund" (change)="filterType()" />
+  </div>
+
+  <div>
+    <label for="stake">Stake</label>
+    <input [(ngModel)]="selectedTypes.stake" type="checkbox" name="stake" (change)="filterType()" />
+  </div>
+
+  <div>
+    <label for="swap">Swap</label>
+    <input [(ngModel)]="selectedTypes.swap" type="checkbox" name="swap" (change)="filterType()" />
+  </div>
+
+  <div>
+    <label for="unstake">Unstake</label>
+    <input [(ngModel)]="selectedTypes.unstake" type="checkbox" name="unstake" (change)="filterType()" />
+  </div>
+
+
+</div>
+
+<app-transactions-table [transactions]="transactions"></app-transactions-table>
+
+<button *ngIf="offset > 0" (click)="setPage(0)"><<</button>
+<button *ngIf="offset > 0" (click)="setPage(offset - limit)"><</button>
+<button *ngIf="offset + limit < totalCount" (click)="setPage(offset + limit)">></button>
+<button *ngIf="offset + limit < totalCount" (click)="setPage(getLastPageOffset())">>></button>

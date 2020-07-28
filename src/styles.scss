@@ -1,1 +1,77 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  font-family: monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  background-color: rgba(0, 0, 0, 0.01)
+}
+
+
+table {
+  border-collapse: collapse;
+  background-color: white;
+  margin-bottom: 15px;
+  // table-layout: fixed;
+  width:100%;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
+  border-radius: 5px;
+  overflow: hidden;
+
+  th {
+    background-color: rgba(0, 0, 0, 0.01);
+    border-top: 0;
+
+    // &:first-of-type {
+    //   border-top-left-radius: 5px;
+    //   overflow: hidden;
+    // }
+
+    // &:last-of-type {
+    //   border-top-right-radius: 5px;
+    //   overflow: hidden;
+    // }
+  }
+
+  th, td {
+    padding: 5px 10px;
+    border: 1px solid gainsboro;
+    overflow:hidden;/* optionnal*/
+
+
+    &:first-of-type {
+      border-left: 0;
+    }
+    &:last-of-type {
+      border-right: 0;
+    }
+  }
+
+}
+
+ul {
+  padding-left: 0;
+
+  li {
+    list-style-type: none;
+  }
+
+}
+
+.flxr {
+  display: flex;
+
+  &--space-between {
+    justify-content: space-between;
+  }
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
+
+  /* Required for text-overflow to do anything */
+  white-space: nowrap;
+  overflow: hidden;
+}

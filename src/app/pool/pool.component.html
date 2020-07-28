@@ -1,0 +1,19 @@
+<div *ngIf="asset">
+  <h1>{{asset.asset}}</h1>
+  <nav>
+    <a [routerLink]="['/', 'pools', asset.asset]" style="margin-right: 15px;">Details</a>
+    <a [routerLink]="['/', 'pools', asset.asset, 'txs']" [queryParams]="{offset: '0'}">Transactions</a>
+  </nav>
+  <br />
+  <span>Price: {{asset.priceRune}}</span> <br />
+  <span>Date Created: {{asset.dateCreated * 1000 | date:'short'}}</span>
+
+</div>
+
+<br />
+
+<router-outlet></router-outlet>
+
+
+
+

@@ -1,0 +1,75 @@
+<table *ngIf="transactions">
+  <thead>
+    <tr>
+      <th>In</th>
+      <th>Out</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let transaction of transactions">
+      <!-- <td *ngIf="transaction.pool && transaction.pool.length > 1"><a [routerLink]="['/', 'pools', transaction.pool]">{{transaction.pool}}</a></td> -->
+      <!-- <td *ngIf="!transaction.pool || transaction.pool && transaction.pool.length <= 1">-</td> -->
+
+      <!-- IN -->
+      <td>
+
+        <div>Address <br />
+          <a [routerLink]="['/', 'addresses', transaction.in.address]">{{transaction.in.address.substring(0, 8)}}...{{transaction.in.address.substring(transaction.in.address.length - 4, transaction.in.address.length)}}</a>
+        </div>
+        <br />
+        <div>ID <br />
+          <a [routerLink]="['/', 'txs', transaction.in.txID]">{{transaction.in.txID.substring(0, 8)}}...{{transaction.in.txID.substring(transaction.in.txID.length - 4, transaction.in.txID.length)}}</a>
+        </div>
+        <br />
+
+        <table>
+
+          <tbody>
+            <tr *ngFor="let coin of transaction.in.coins; let i = index">
+              <td><a [routerLink]="['/', 'pools', coin.asset]">{{coin.asset}}</a></td>
+              <td>{{coin.amount}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </td>
+
+      <!-- OUT -->
+      <td>
+
+        <ul *ngFor="let out of transaction.out">
+
+          <li>
+
+            <div>Address <br />
+              <a [routerLink]="['/', 'addresses', out.address]">{{out.address.substring(0, 8)}}...{{out.address.substring(out.address.length - 4, out.address.length)}}</a>
+            </div>
+            <br />
+            <div>ID <br />
+              <a [routerLink]="['/', 'txs', out.txID]">{{out.txID.substring(0, 8)}}...{{out.txID.substring(out.txID.length - 4, out.txID.length)}}</a>
+            </div>
+            <br />
+
+            <table>
+
+              <tbody>
+                <tr *ngFor="let coin of out.coins; let i = index">
+                  <td><a [routerLink]="['/', 'pools', coin.asset]">{{coin.asset}}</a></td>
+                  <td>{{coin.amount}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </li>
+
+        </ul>
+      </td>
+      <td>{{transaction.type}}</td>
+      <td>{{transaction.status}}</td>
+      <td>{{transaction.date * 1000 | date:'short'}}</td>
+    </tr>
+  </tbody>
+</table>

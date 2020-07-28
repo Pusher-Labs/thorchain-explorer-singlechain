@@ -1,0 +1,39 @@
+<h1 *ngIf="address">{{address}}</h1>
+
+<table *ngIf="staker">
+  <thead>
+    <tr>
+      <th>Total Earned</th>
+      <th>Total Staked</th>
+      <th>Total ROI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{staker.totalEarned}}</td>
+      <td>{{staker.totalStaked}}</td>
+      <td>{{staker.totalROI}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<table *ngIf="stakerPoolsData">
+  <thead>
+    <tr>
+      <th>Asset</th>
+      <th>Date First Staked</th>
+      <th>Height Last Staked</th>
+      <th>Stake Units</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pool of stakerPoolsData">
+      <td><a [routerLink]="['/', 'pools', pool.asset]">{{pool.asset}}</a></td>
+      <td>{{pool.dateFirstStaked * 1000 | date:'short'}}</td>
+      <td>{{pool.heightLastStaked}}</td>
+      <td>{{pool.stakeUnits}}</td>
+    </tr>
+  </tbody>
+</table>
+
+

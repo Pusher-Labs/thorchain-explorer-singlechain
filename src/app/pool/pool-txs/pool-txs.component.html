@@ -1,0 +1,6 @@
+<app-transactions-table [transactions]="transactions"></app-transactions-table>
+
+<button *ngIf="offset > 0" (click)="setPage(0)"><<</button>
+<button *ngIf="offset > 0" (click)="setPage(offset - limit)"><</button>
+<button *ngIf="offset + limit < totalCount" (click)="setPage(offset + limit)">></button>
+<button *ngIf="offset + limit < totalCount" (click)="setPage(getLastPageOffset())">>></button>
