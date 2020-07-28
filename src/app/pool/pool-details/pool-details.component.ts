@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PoolDetail, PoolService } from 'src/app/_services/pool.service';
 import { ActivatedRoute } from '@angular/router';
-import midgard from '@thorchain/asgardex-midgard';
 
 @Component({
   selector: 'app-pool-details',
@@ -25,9 +24,8 @@ export class PoolDetailsComponent implements OnInit {
   }
 
   async getPoolDetails(poolName: string) {
-    const baseUrl = await midgard();
 
-    this.poolService.details(baseUrl, [poolName]).subscribe(
+    this.poolService.details([poolName]).subscribe(
       (res) => {
         if (res.length > 0) {
           this.poolDetail = res[0];

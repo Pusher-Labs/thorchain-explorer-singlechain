@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TransactionService, TransactionIndexParams } from '../_services/transaction.service';
-import midgard from '@thorchain/asgardex-midgard';
 import { Transaction } from '../_classes/transaction';
 
 @Component({
@@ -49,14 +48,13 @@ export class AddressComponent implements OnInit {
   }
 
   async getAddressTransactions() {
-    const baseUrl = await midgard();
 
     const params: TransactionIndexParams = {
       offset: this.offset,
       address: this.address
     };
 
-    this.transactionService.index(baseUrl, params).subscribe(
+    this.transactionService.index(params).subscribe(
       (res) => this.transactions = res.txs,
       (err) => console.error('error fetching stakers: ', err)
     );

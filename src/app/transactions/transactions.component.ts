@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import midgard from '@thorchain/asgardex-midgard';
 import { TransactionService, TransactionIndexParams } from '../_services/transaction.service';
 import { Transaction } from '../_classes/transaction';
 import { ActivatedRoute, Router, Params } from '@angular/router';
@@ -89,7 +88,6 @@ export class TransactionsComponent implements OnInit {
   }
 
   async getTransactions() {
-    const baseUrl = await midgard();
 
     const params: TransactionIndexParams = {
       offset: this.offset
@@ -109,7 +107,7 @@ export class TransactionsComponent implements OnInit {
 
     params.type = this.filterTypes();
 
-    this.transactionService.index(baseUrl, params).subscribe(
+    this.transactionService.index(params).subscribe(
       (res) => {
         this.transactions = res.txs;
         this.totalCount = res.count;

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import midgard from '@thorchain/asgardex-midgard';
 import { ActivatedRoute } from '@angular/router';
 import { TransactionIndexParams, TransactionService } from '../_services/transaction.service';
 import { Transaction } from '../_classes/transaction';
@@ -32,14 +31,13 @@ export class TransactionComponent implements OnInit {
   }
 
   async getTransaction() {
-    const baseUrl = await midgard();
 
     const params: TransactionIndexParams = {
       offset: 0,
       txid: this.txid
     };
 
-    this.transactionService.index(baseUrl, params).subscribe(
+    this.transactionService.index(params).subscribe(
       (res) => {
         this.transactions = res.txs;
         console.log(this.transactions);

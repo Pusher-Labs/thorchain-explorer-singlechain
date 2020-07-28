@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import midgard from '@thorchain/asgardex-midgard';
 import { StakerService } from './_services/staker.service';
 import { StatsService, GlobalStats } from './_services/stats.service';
 import { PoolService } from './_services/pool.service';
@@ -26,18 +25,15 @@ export class AppComponent implements OnInit {
 
   async getStakers() {
 
-    const baseUrl = await midgard();
-
-    this.stakerService.findAll(baseUrl).subscribe(
+    this.stakerService.findAll().subscribe(
       (res) => this.stakers = res,
       (err) => console.error('error fetching stakers: ', err)
     );
   }
 
   async getGlobalStats() {
-    const baseUrl = await midgard();
 
-    this.statsService.getStats(baseUrl).subscribe(
+    this.statsService.getStats().subscribe(
       (res) => this.stats = res,
       (err) => console.error(err)
     );
@@ -45,9 +41,8 @@ export class AppComponent implements OnInit {
   }
 
   async getPools() {
-    const baseUrl = await midgard();
 
-    this.poolService.index(baseUrl).subscribe(
+    this.poolService.index().subscribe(
       (res) => this.pools = res,
       (err) => console.error(err)
     );

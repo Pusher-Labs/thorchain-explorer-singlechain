@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface GlobalStats {
   dailyActiveUsers: string;
@@ -28,8 +29,8 @@ export class StatsService {
 
   constructor(private http: HttpClient) { }
 
-  getStats(baseUrl): Observable<GlobalStats> {
-    return this.http.get<GlobalStats>(`${baseUrl}/v1/stats`);
+  getStats(): Observable<GlobalStats> {
+    return this.http.get<GlobalStats>(`${environment.midgardUrl}/v1/stats`);
   }
 
 }

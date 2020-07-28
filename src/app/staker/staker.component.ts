@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import midgard from '@thorchain/asgardex-midgard';
 import { Staker } from '../_classes/staker';
 import { StakerService } from '../_services/staker.service';
 import { StakerPoolData } from '../_classes/staker-pool-data';
@@ -34,9 +33,8 @@ export class StakerComponent implements OnInit {
 
   async fetchStaker(address: string) {
 
-    const baseUrl = await midgard();
 
-    this.stakerService.findOne(baseUrl, address).subscribe(
+    this.stakerService.findOne(address).subscribe(
       (res) => {
         this.staker = new Staker(res);
         if (this.staker) {
@@ -50,9 +48,7 @@ export class StakerComponent implements OnInit {
 
   async fetchPoolsData(address: string, pools: string[]) {
 
-    const baseUrl = await midgard();
-
-    this.stakerService.findStakerPoolData(baseUrl, address, pools).subscribe(
+    this.stakerService.findStakerPoolData(address, pools).subscribe(
       (res) => this.stakerPoolsData = res,
       (err) => console.error('error finding staker: ', err)
     );

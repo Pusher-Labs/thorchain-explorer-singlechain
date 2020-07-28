@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { TransactionType } from '../_const/transaction-type.enum';
 import { Observable } from 'rxjs';
 import { TransactionDTO } from '../_classes/transaction';
+import { environment } from '../../environments/environment';
 
 export interface TransactionIndexParams {
   offset: number;
@@ -23,7 +24,7 @@ export class TransactionService {
     this.limit = 10;
   }
 
-  index(baseUrl: string, p: TransactionIndexParams)
+  index(p: TransactionIndexParams)
   : Observable<TransactionDTO> {
 
     console.log('params are: ', p);
@@ -47,7 +48,7 @@ export class TransactionService {
       params = params.append('address', p.address);
     }
 
-    return this.http.get<TransactionDTO>(`${baseUrl}/v1/txs`, {params});
+    return this.http.get<TransactionDTO>(`${environment.midgardUrl}/v1/txs`, {params});
 
   }
 

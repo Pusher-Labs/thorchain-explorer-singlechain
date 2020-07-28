@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface PoolDetail {
   asset: string;
@@ -50,14 +51,14 @@ export class PoolService {
 
   constructor(private http: HttpClient) { }
 
-  index(baseUrl: string): Observable<string[]> {
-    return this.http.get<string[]>(`${baseUrl}/v1/pools`);
+  index(): Observable<string[]> {
+    return this.http.get<string[]>(`${environment.midgardUrl}/v1/pools`);
   }
 
-  details(baseUrl: string, assets: string[]): Observable<PoolDetail[]> {
+  details(assets: string[]): Observable<PoolDetail[]> {
     const params = new HttpParams().set('asset', assets.join(','));
 
-    return this.http.get<PoolDetail[]>(`${baseUrl}/v1/pools/detail`, {params});
+    return this.http.get<PoolDetail[]>(`${environment.midgardUrl}/v1/pools/detail`, {params});
   }
 
 }

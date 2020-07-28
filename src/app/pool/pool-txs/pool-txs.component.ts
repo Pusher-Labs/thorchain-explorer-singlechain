@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Transaction } from 'src/app/_classes/transaction';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import midgard from '@thorchain/asgardex-midgard';
 import { TransactionIndexParams, TransactionService } from 'src/app/_services/transaction.service';
 
 @Component({
@@ -40,12 +39,12 @@ export class PoolTxsComponent implements OnInit {
   }
 
   async getAssetTransactions() {
-    const baseUrl = await midgard();
+
     const params: TransactionIndexParams = {
       offset: this.offset,
       asset: this.poolName
     };
-    this.transactionsService.index(baseUrl, params).subscribe(
+    this.transactionsService.index(params).subscribe(
       (res) => {
         this.totalCount = res.count;
         this.transactions = res.txs;
