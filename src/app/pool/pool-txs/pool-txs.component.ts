@@ -48,7 +48,6 @@ export class PoolTxsComponent implements OnInit {
       (res) => {
         this.totalCount = res.count;
         this.transactions = res.txs;
-        window.scroll(0, 0);
       },
       (err) => console.error('err is: ', err)
     );

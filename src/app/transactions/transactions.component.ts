@@ -139,8 +139,6 @@ export class TransactionsComponent implements OnInit {
       }
     );
 
-    window.scroll(0, 0);
-
   }
 
   getLastPageOffset(): number {
