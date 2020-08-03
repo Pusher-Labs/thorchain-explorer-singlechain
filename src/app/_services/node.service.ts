@@ -12,15 +12,15 @@ export class NodeService {
   private baseUrl: string;
 
   constructor(private http: HttpClient) {
-    this.baseUrl = `${environment.thorNodeUrl}/thorchain/nodeaccounts`;
+    this.baseUrl = `${environment.thorNodeUrl}/thorchain`;
   }
 
   findAll(): Observable<ThorNode[]> {
-    return this.http.get<ThorNode[]>(this.baseUrl);
+    return this.http.get<ThorNode[]>(`${this.baseUrl}/nodeaccounts`);
   }
 
-  findOne(address: string): Observable<ThorNode[]> {
-    return this.http.get<ThorNode[]>(`${this.baseUrl}/${address}`);
+  findOne(address: string): Observable<ThorNode> {
+    return this.http.get<ThorNode>(`${this.baseUrl}/nodeaccount/${address}`);
   }
 
 
