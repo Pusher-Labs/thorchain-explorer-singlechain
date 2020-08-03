@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   midgardUrl: 'https://midgard.bepswap.com',
-  thorNodeUrl: 'https://ui1pjvknb0.execute-api.us-east-1.amazonaws.com/default/'
+  thorNodeUrl: 'https://ui1pjvknb0.execute-api.us-east-1.amazonaws.com/default'
 };
 
 /*
