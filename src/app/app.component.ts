@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { StakerService } from './_services/staker.service';
 import { StatsService, GlobalStats } from './_services/stats.service';
 import { PoolService } from './_services/pool.service';
+import { NodeService } from './_services/node.service';
+import { ThorNode } from './_classes/thor-node';
 
 @Component({
   selector: 'app-root',
@@ -10,20 +12,33 @@ import { PoolService } from './_services/pool.service';
 })
 export class AppComponent implements OnInit {
 
-  stakers: string[];
+  nodes: ThorNode[];
   pools: string[];
+  stakers: string[];
   stats: GlobalStats;
 
-  constructor(private stakerService: StakerService, private statsService: StatsService, private poolService: PoolService) { }
+  constructor(
+    private nodeService: NodeService,
+    private stakerService: StakerService,
+    private statsService: StatsService,
+    private poolService: PoolService,
+  ) { }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.getPools();
     this.getStakers();
     this.getGlobalStats();
+    this.getNodes();
   }
 
+  getNodes(): void {
+    this.nodeService.findAll().subscribe(
+      (res) => this.nodes = res,
+      (err) => console.error('error getting nodes: ', err)
+    );
+  }
 
-  async getStakers() {
+  getStakers(): void {
 
     this.stakerService.findAll().subscribe(
       (res) => this.stakers = res,
@@ -31,7 +46,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  async getGlobalStats() {
+  getGlobalStats(): void {
 
     this.statsService.getStats().subscribe(
       (res) => this.stats = res,
@@ -40,7 +55,7 @@ export class AppComponent implements OnInit {
 
   }
 
-  async getPools() {
+  getPools(): void {
 
     this.poolService.index().subscribe(
       (res) => this.pools = res,
