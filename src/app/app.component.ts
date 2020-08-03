@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StakerService } from './_services/staker.service';
 import { StatsService, GlobalStats } from './_services/stats.service';
-import { PoolService } from './_services/pool.service';
 import { NodeService } from './_services/node.service';
 import { ThorNode } from './_classes/thor-node';
 
@@ -17,16 +15,9 @@ export class AppComponent implements OnInit {
   stakers: string[];
   stats: GlobalStats;
 
-  constructor(
-    private nodeService: NodeService,
-    private stakerService: StakerService,
-    private statsService: StatsService,
-    private poolService: PoolService,
-  ) { }
+  constructor(private nodeService: NodeService, private statsService: StatsService) { }
 
   ngOnInit() {
-    // this.getPools();
-    // this.getStakers();
     this.getGlobalStats();
     this.getNodes();
   }
@@ -38,14 +29,6 @@ export class AppComponent implements OnInit {
     );
   }
 
-  // getStakers(): void {
-
-  //   this.stakerService.findAll().subscribe(
-  //     (res) => this.stakers = res,
-  //     (err) => console.error('error fetching stakers: ', err)
-  //   );
-  // }
-
   getGlobalStats(): void {
 
     this.statsService.getStats().subscribe(
@@ -54,13 +37,5 @@ export class AppComponent implements OnInit {
     );
 
   }
-
-  // getPools(): void {
-
-  //   // this.poolService.index().subscribe(
-  //   //   (res) => this.pools = res,
-  //   //   (err) => console.error(err)
-  //   // );
-  // }
 
 }
