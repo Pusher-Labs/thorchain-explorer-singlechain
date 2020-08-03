@@ -25,8 +25,8 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getPools();
-    this.getStakers();
+    // this.getPools();
+    // this.getStakers();
     this.getGlobalStats();
     this.getNodes();
   }
@@ -38,13 +38,13 @@ export class AppComponent implements OnInit {
     );
   }
 
-  getStakers(): void {
+  // getStakers(): void {
 
-    this.stakerService.findAll().subscribe(
-      (res) => this.stakers = res,
-      (err) => console.error('error fetching stakers: ', err)
-    );
-  }
+  //   this.stakerService.findAll().subscribe(
+  //     (res) => this.stakers = res,
+  //     (err) => console.error('error fetching stakers: ', err)
+  //   );
+  // }
 
   getGlobalStats(): void {
 
@@ -55,12 +55,12 @@ export class AppComponent implements OnInit {
 
   }
 
-  getPools(): void {
+  // getPools(): void {
 
-    this.poolService.index().subscribe(
-      (res) => this.pools = res,
-      (err) => console.error(err)
-    );
-  }
+  //   // this.poolService.index().subscribe(
+  //   //   (res) => this.pools = res,
+  //   //   (err) => console.error(err)
+  //   // );
+  // }
 
 }

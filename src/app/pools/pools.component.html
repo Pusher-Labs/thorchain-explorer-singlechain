@@ -1,0 +1,11 @@
+<h1>Asset Pools</h1>
+
+<table *ngIf="pools">
+  <tbody>
+    <tr *ngFor="let pool of pools">
+      <td><a [routerLink]="['/', 'pools', pool]">{{pool}}</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<span *ngIf="!pools">...</span>

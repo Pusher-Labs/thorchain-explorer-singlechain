@@ -7,7 +7,15 @@
 
       <a [routerLink]="['/']">THORChain Explorer</a>
 
-      <app-search></app-search>
+      <div style="width: 900px;">
+        <app-search></app-search>
+        <nav>
+          <a [routerLink]="['/', 'pools']">Assets</a>
+          <a [routerLink]="['/', 'nodes']">Nodes</a>
+          <a [routerLink]="['/', 'txs']" [queryParams]="{offset: '0'}">Transactions</a>
+          <a [routerLink]="['/', 'stakers']">Stakers</a>
+        </nav>
+      </div>
 
     </div>
 
@@ -90,35 +98,6 @@
         </tbody>
       </table>
 
-      <hr />
-
-      Assets
-      <ul *ngIf="pools">
-        <li *ngFor="let pool of pools">
-          <a [routerLink]="['/', 'pools', pool]">{{pool}}</a>
-        </li>
-      </ul>
-
-      <hr />
-
-      <a [routerLink]="['/', 'nodes']">Nodes</a>
-      <ul *ngIf="nodes">
-        <li *ngFor="let node of nodes" class="ellipsis">
-          <a [routerLink]="['/', 'nodes', node.node_address]">{{node.node_address}}</a>
-        </li>
-      </ul>
-
-      <hr />
-
-
-      Stakers
-      <ul *ngIf="stakers">
-        <li *ngFor="let staker of stakers" class="ellipsis">
-          <a [routerLink]="['/', 'stakers', staker]">{{staker}}</a>
-        </li>
-      </ul>
-
-      <hr />
     </aside>
 
     <main>
