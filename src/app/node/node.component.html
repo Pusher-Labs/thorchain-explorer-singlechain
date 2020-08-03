@@ -1,0 +1,113 @@
+<h1>Node:
+  <span *ngIf="address">{{address}}</span>
+  <span *ngIf="!address">...</span>
+</h1>
+
+<div *ngIf="thorNode">
+
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2">
+          General Stats
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Status</td>
+        <td>{{thorNode.status}}</td>
+      </tr>
+      <tr>
+        <td>Status Since</td>
+        <td>{{thorNode.status_since}}</td>
+      </tr>
+      <tr>
+        <td>IP Address</td>
+        <td>{{thorNode.ip_address}}</td>
+      </tr>
+      <tr>
+        <td>Version</td>
+        <td>{{thorNode.version}}</td>
+      </tr>
+      <tr>
+        <td>Active Block Height</td>
+        <td>{{thorNode.active_block_height}}</td>
+      </tr>
+      <tr>
+        <td>In Jail</td>
+        <td>
+          <div *ngIf="isInJail">
+            Until Block: {{thorNode.jail.release_height}} <br />
+            Reason: {{thorNode.jail.reason}}
+          </div>
+          <div *ngIf="!isInJail">
+            false
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Validator Cons Pub Key</td>
+        <td>{{thorNode.validator_cons_pub_key}}</td>
+      </tr>
+      <tr>
+        <td>Bond</td>
+        <td>{{thorNode.bond}}</td>
+      </tr>
+      <tr>
+        <td>Bond Address</td>
+        <td>{{thorNode.bond_address}}</td>
+      </tr>
+      <tr>
+        <td>Requested To Leave</td>
+        <td>{{thorNode.requested_to_leave}}</td>
+      </tr>
+      <tr>
+        <td>Forced To Leave</td>
+        <td>{{thorNode.forced_to_leave}}</td>
+      </tr>
+      <tr>
+        <td>Leave Height</td>
+        <td>{{thorNode.leave_height}}</td>
+      </tr>
+      <tr>
+        <td>Slash Points</td>
+        <td>{{thorNode.slash_points}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2">Pub Key Set</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>secp256k1</td>
+        <td>{{thorNode.pub_key_set.secp256k1}}</td>
+      </tr>
+      <tr>
+        <td>ed25519</td>
+        <td>{{thorNode.pub_key_set.ed25519}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Signer Membership</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let signer of thorNode.signer_membership">
+        <td>{{signer}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<span *ngIf="!thorNode">...</span>

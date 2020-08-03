@@ -6,7 +6,6 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'txs',
-    // loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
     pathMatch: 'full'
   },
   {
@@ -64,6 +63,19 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: 'nodes',
+    children: [
+      {
+        path: ':address',
+        loadChildren: () => import('./node/node.module').then(m => m.NodeModule),
+      },
+      {
+        path: '',
+        loadChildren: () => import('./nodes/nodes.module').then(m => m.NodesModule),
+      }
+    ]
+  }
 ];
 
 @NgModule({
