@@ -23,16 +23,6 @@ table {
   th {
     background-color: rgba(0, 0, 0, 0.01);
     border-top: 0;
-
-    // &:first-of-type {
-    //   border-top-left-radius: 5px;
-    //   overflow: hidden;
-    // }
-
-    // &:last-of-type {
-    //   border-top-right-radius: 5px;
-    //   overflow: hidden;
-    // }
   }
 
   th, td {
@@ -50,6 +40,8 @@ table {
   }
 
 }
+
+input, select, textarea, button{font-family:inherit;}
 
 ul {
   padding-left: 0;
