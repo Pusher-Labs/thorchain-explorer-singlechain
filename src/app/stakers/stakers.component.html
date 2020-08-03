@@ -1,0 +1,13 @@
+<h1>Stakers</h1>
+
+<table *ngIf="stakers">
+  <tbody>
+    <tr *ngFor="let staker of stakers">
+      <td>
+        <a [routerLink]="['/', 'stakers', staker]">{{staker}}</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<span *ngIf="!stakers">...</span>

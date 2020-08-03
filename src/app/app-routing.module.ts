@@ -30,8 +30,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/',
-        pathMatch: 'full'
+        loadChildren: () => import('./pools/pools.module').then(m => m.PoolsModule),
       }
     ]
   },
@@ -44,8 +43,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/',
-        pathMatch: 'full'
+        loadChildren: () => import('./stakers/stakers.module').then(m => m.StakersModule),
       }
     ]
   },
