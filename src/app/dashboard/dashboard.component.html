@@ -1,0 +1,121 @@
+<h1 class="mobile-padding">THORChain Explorer</h1>
+
+<div id="dashboard">
+
+  <!-- Network Status Summary -->
+  <div class="dash-section" [ngClass]="{'flxr flxr--just-center flxr--align-center': !network}">
+    <table *ngIf="network">
+      <thead>
+        <tr>
+          <th colspan="2">Network Summary</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Total Staked</td>
+          <td>{{network.totalStaked}}</td>
+        </tr>
+        <tr>
+          <td>Total Reserve</td>
+          <td>{{network.totalReserve}}</td>
+        </tr>
+        <tr>
+          <td>Active Node Count</td>
+          <td>{{network.activeNodeCount}}</td>
+        </tr>
+        <tr>
+          <td>Standby Node Count</td>
+          <td>{{network.standbyNodeCount}}</td>
+        </tr>
+        <tr>
+          <td>Pool Share Factor</td>
+          <td>{{network.poolShareFactor}}</td>
+        </tr>
+        <tr>
+          <td>Pool Activation Countdown</td>
+          <td>{{network.poolActivationCountdown}}</td>
+        </tr>
+        <tr>
+          <td>Next Churn Height</td>
+          <td>{{network.nextChurnHeight}}</td>
+        </tr>
+        <tr>
+          <td>Bonding ROI</td>
+          <td>{{network.bondingROI}}</td>
+        </tr>
+        <tr>
+          <td>Staking ROI</td>
+          <td>{{network.stakingROI}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <span *ngIf="!network">...</span>
+  </div>
+
+  <!-- Nodes Summary -->
+  <div class="dash-section" [ngClass]="{'flxr flxr--just-center flxr--align-center': !nodes}">
+    <table *ngIf="nodes">
+      <thead>
+        <tr><th colspan="2">Nodes</th></tr>
+        <tr>
+          <th>Address</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let node of nodes | slice:0:8;">
+          <td>
+            <a [routerLink]="['/', 'nodes', node.node_address]">{{node.node_address.substring(0, 8)}}...{{node.node_address.substring(node.node_address.length - 4, node.node_address.length)}}</a>
+          </td>
+          <td>{{node.status}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <a *ngIf="nodes" [routerLink]="['/', 'nodes']" class="view-more">View All Nodes</a>
+    <span *ngIf="!nodes">...</span>
+  </div>
+
+  <!-- Dash Transactions Summary-->
+  <div class="dash-section" [ngClass]="{'flxr flxr--just-center flxr--align-center': !transactions}">
+    <table *ngIf="transactions">
+      <thead>
+        <tr>
+          <th colspan="2">Recent Transactions</th>
+        </tr>
+        <tr>
+          <th>In</th>
+          <th>Out</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tx of transactions">
+          <td>
+            <a [routerLink]="['/', 'addresses', tx.in.address]">{{tx.in.address.substring(0, 8)}}...{{tx.in.address.substring(tx.in.address.length - 4, tx.in.address.length)}}</a> <br />
+            <a *ngFor="let coin of tx.in.coins" [routerLink]="['/', 'pools', coin.asset]">{{coin.asset}}</a>
+          </td>
+          <td>
+            <span *ngIf="!tx.out || tx.out && tx.out.length < 1">...</span>
+            <div *ngIf="tx.out && tx.out.length > 0">
+              <a [routerLink]="['/', 'addresses', tx.out[0].address]">
+                {{tx.out[0].address.substring(0, 8)}}...{{tx.out[0].address.substring(tx.in.address.length - 4, tx.in.address.length)}}
+              </a>
+              <br *ngIf="tx.out.length > 1" />
+              <span *ngIf="tx.out.length > 1"> + {{tx.out.length - 1}}</span> <br />
+              <div *ngFor="let out of tx.out">
+                <a *ngFor="let coin of out.coins" [routerLink]="['/', 'pools', coin.asset]">{{coin.asset}}</a>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <a *ngIf="transactions" [routerLink]="['/', 'txs']" [queryParams]="{offset: 0}" class="view-more">View More Transactions</a>
+    <span *ngIf="!transactions">...</span>
+  </div>
+
+  <div class="dash-section" [ngClass]="{'flxr flxr--just-center flxr--align-center': !stats}">
+    <app-stats-table *ngIf="stats" [stats]="stats"></app-stats-table>
+    <span *ngIf="!stats">...</span>
+  </div>
+
+</div>
