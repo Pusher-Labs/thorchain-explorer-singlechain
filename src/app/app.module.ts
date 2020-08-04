@@ -14,18 +14,18 @@ import { SearchComponent } from './_components/search/search.component';
  * Services
  */
 import { AssetService } from './_services/asset.service';
+import { NetworkService } from './_services/network.service';
 import { NodeService } from './_services/node.service';
 import { PoolService } from './_services/pool.service';
 import { StakerService } from './_services/staker.service';
 import { StatsService } from './_services/stats.service';
 import { TransactionService } from './_services/transaction.service';
-import { StatsTableComponent } from './_components/stats-table/stats-table.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
-    StatsTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +35,7 @@ import { StatsTableComponent } from './_components/stats-table/stats-table.compo
   ],
   providers: [
     AssetService,
+    NetworkService,
     NodeService,
     PoolService,
     StakerService,
