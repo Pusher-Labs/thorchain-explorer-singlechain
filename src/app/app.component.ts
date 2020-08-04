@@ -18,24 +18,24 @@ export class AppComponent implements OnInit {
   constructor(private nodeService: NodeService, private statsService: StatsService) { }
 
   ngOnInit() {
-    this.getGlobalStats();
-    this.getNodes();
+    // this.getGlobalStats();
+    // this.getNodes();
   }
 
-  getNodes(): void {
-    this.nodeService.findAll().subscribe(
-      (res) => this.nodes = res,
-      (err) => console.error('error getting nodes: ', err)
-    );
-  }
+  // getNodes(): void {
+  //   this.nodeService.findAll().subscribe(
+  //     (res) => this.nodes = res,
+  //     (err) => console.error('error getting nodes: ', err)
+  //   );
+  // }
 
-  getGlobalStats(): void {
+  // getGlobalStats(): void {
 
-    this.statsService.getStats().subscribe(
-      (res) => this.stats = res,
-      (err) => console.error(err)
-    );
+  //   this.statsService.getStats().subscribe(
+  //     (res) => this.stats = res,
+  //     (err) => console.error(err)
+  //   );
 
-  }
+  // }
 
 }
