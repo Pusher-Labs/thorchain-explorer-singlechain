@@ -1,23 +1,9 @@
 table {
-  // border-collapse: collapse;
-  // background-color: white;
-  // margin-bottom: 15px;
-  // // table-layout: fixed;
-  // width:100%;
-
-  tr {
-    border-bottom: 2px solid gainsboro;
-  }
-
-  // th {
-  //   background-color: rgba(0, 0, 0, 0.01);
-  // }
 
   th, td {
-    // padding: 5px 10px;
-    // border: 1px solid gainsboro;
-    // overflow:hidden;/* optionnal*/
 
+    // this is sub table
+    // for asset + amount spent
     table {
       margin-bottom: 0;
 
@@ -41,10 +27,65 @@ table {
 
     }
 
-    .address {
-      padding: 5px 10px;
-    }
-
   }
 
+}
+
+/** TODO: simplify the table for mobile */
+/*
+Max width before for this particular table
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media
+only screen and (max-width: 767px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr {
+		display: block;
+	}
+
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+
+	td {
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee;
+		position: relative;
+    padding-left: 25%;
+
+    tr {
+      td:nth-of-type(1):before { display: none; }
+      td:nth-of-type(2):before { display: none; }
+      td:nth-of-type(3):before { display: none; }
+      td:nth-of-type(4):before { display: none; }
+      td:nth-of-type(5):before { display: none; }
+    }
+	}
+
+	td:before {
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%;
+		padding-right: 10px;
+		white-space: nowrap;
+	}
+
+	/*
+	Label the data
+	*/
+	td:nth-of-type(1):before { content: "In"; }
+	td:nth-of-type(2):before { content: "Out"; }
+	td:nth-of-type(3):before { content: "Type"; }
+	td:nth-of-type(4):before { content: "Status"; }
+	td:nth-of-type(5):before { content: "Date"; }
 }

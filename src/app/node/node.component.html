@@ -1,5 +1,5 @@
-<h1>Node:
-  <span *ngIf="address">{{address}}</span>
+<h1 class="mobile-padding">Node:
+  <span *ngIf="address" class="break-word">{{address}}</span>
   <span *ngIf="!address">...</span>
 </h1>
 
@@ -48,7 +48,7 @@
       </tr>
       <tr>
         <td>Validator Cons Pub Key</td>
-        <td>{{thorNode.validator_cons_pub_key}}</td>
+        <td class="break-word">{{thorNode.validator_cons_pub_key}}</td>
       </tr>
       <tr>
         <td>Bond</td>
@@ -56,7 +56,7 @@
       </tr>
       <tr>
         <td>Bond Address</td>
-        <td>{{thorNode.bond_address}}</td>
+        <td class="break-word">{{thorNode.bond_address}}</td>
       </tr>
       <tr>
         <td>Requested To Leave</td>
@@ -86,11 +86,11 @@
     <tbody>
       <tr>
         <td>secp256k1</td>
-        <td>{{thorNode.pub_key_set.secp256k1}}</td>
+        <td class="break-word">{{thorNode.pub_key_set.secp256k1}}</td>
       </tr>
       <tr>
         <td>ed25519</td>
-        <td>{{thorNode.pub_key_set.ed25519}}</td>
+        <td class="break-word">{{thorNode.pub_key_set.ed25519}}</td>
       </tr>
     </tbody>
   </table>
@@ -103,7 +103,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let signer of thorNode.signer_membership">
-        <td>{{signer}}</td>
+        <td class="break-word">{{signer}}</td>
       </tr>
     </tbody>
   </table>

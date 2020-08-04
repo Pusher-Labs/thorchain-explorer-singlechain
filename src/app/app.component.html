@@ -1,120 +1,41 @@
 
 
-<header>
+<header class="flxr flxr--just-center">
+
   <div class="container">
 
     <div class="flxr flxr--space-between">
 
-      <a [routerLink]="['/']">THORChain Explorer</a>
+      <a id="logo" [routerLink]="['/']"><img src="assets/images/thorchain.png" /></a>
 
-      <div style="width: 900px;">
+      <div style="width: 100%;">
         <app-search></app-search>
-        <nav>
-          <a [routerLink]="['/', 'pools']">Assets</a>
-          <a [routerLink]="['/', 'nodes']">Nodes</a>
-          <a [routerLink]="['/', 'txs']" [queryParams]="{offset: '0'}">Transactions</a>
-          <a [routerLink]="['/', 'stakers']">Stakers</a>
-        </nav>
       </div>
 
     </div>
 
+    <nav>
+      <a [routerLink]="['/', 'pools']">Assets</a>
+      <a [routerLink]="['/', 'nodes']">Nodes</a>
+      <a [routerLink]="['/', 'txs']" [queryParams]="{offset: '0'}">Transactions</a>
+      <a [routerLink]="['/', 'stakers']">Stakers</a>
+    </nav>
+
+
   </div>
+
 </header>
 
-<div class="container">
+<div class="flxr flxr--just-center">
 
-  <div class="flxr">
+  <main>
 
-    <aside>
+    <router-outlet></router-outlet>
 
-      Stats
-      <table *ngIf="stats" style="margin-top: 3px;">
-        <tbody>
-          <tr>
-            <td>Daily Active Users</td>
-            <td>{{stats.dailyActiveUsers}}</td>
-          </tr>
-          <tr>
-            <td>Monthly Active Users</td>
-            <td>{{stats.monthlyActiveUsers}}</td>
-          </tr>
-          <tr>
-            <td>Total Users</td>
-            <td>{{stats.totalUsers}}</td>
-          </tr>
-          <tr>
-            <td>Daily Tx</td>
-            <td>{{stats.dailyTx}}</td>
-          </tr>
-          <tr>
-            <td>Monthly Tx</td>
-            <td>{{stats.monthlyTx}}</td>
-          </tr>
-          <tr>
-            <td>Total Tx</td>
-            <td>{{stats.totalTx}}</td>
-          </tr>
-          <tr>
-            <td>Volume (24 Hour)</td>
-            <td>{{stats.totalVolume24hr}}</td>
-          </tr>
-          <tr>
-            <td>Total Volume</td>
-            <td>{{stats.totalVolume}}</td>
-          </tr>
-          <tr>
-            <td>Total Staked</td>
-            <td>{{stats.totalStaked}}</td>
-          </tr>
-          <tr>
-            <td>Total Depth</td>
-            <td>{{stats.totalDepth}}</td>
-          </tr>
-          <tr>
-            <td>Total Earned</td>
-            <td>{{stats.totalEarned}}</td>
-          </tr>
-          <tr>
-            <td>Pool Count</td>
-            <td>{{stats.poolCount}}</td>
-          </tr>
-          <tr>
-            <td>Total Asset Buys</td>
-            <td>{{stats.totalAssetBuys}}</td>
-          </tr>
-          <tr>
-            <td>Total Asset Sells</td>
-            <td>{{stats.totalAssetSells}}</td>
-          </tr>
-          <tr>
-            <td>Total Stake Tx</td>
-            <td>{{stats.totalStakeTx}}</td>
-          </tr>
-          <tr>
-            <td>Total Withdraw Tx</td>
-            <td>{{stats.totalWithdrawTx}}</td>
-          </tr>
-        </tbody>
-      </table>
-
-    </aside>
-
-    <main>
-
-      <!-- <div>
-        Pools
-        <ul *ngIf="pools">
-          <li *ngFor="let pool of pools">{{pool}}</li>
-        </ul>
-      </div> -->
-
-      <router-outlet></router-outlet>
-
-    </main>
-
-  </div>
+  </main>
 
 </div>
+
+
 
 

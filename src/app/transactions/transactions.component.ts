@@ -148,7 +148,6 @@ export class TransactionsComponent implements OnInit {
   setSelectedTypes(queryParam: string) {
 
     const split = queryParam.split(',').filter( (str) => str.length > 0 );
-    console.log('split is: ', split);
 
     return {
       [TransactionType.ADD]: split.includes(TransactionType.ADD),

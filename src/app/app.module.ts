@@ -19,11 +19,13 @@ import { PoolService } from './_services/pool.service';
 import { StakerService } from './_services/staker.service';
 import { StatsService } from './_services/stats.service';
 import { TransactionService } from './_services/transaction.service';
+import { StatsTableComponent } from './_components/stats-table/stats-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
+    StatsTableComponent,
   ],
   imports: [
     BrowserModule,

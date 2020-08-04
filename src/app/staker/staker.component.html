@@ -1,24 +1,36 @@
-<h1 *ngIf="address">{{address}}</h1>
+<h1 *ngIf="address" class="mobile-padding break-word">Staker: {{address}}</h1>
 
 <table *ngIf="staker">
   <thead>
     <tr>
-      <th>Total Earned</th>
-      <th>Total Staked</th>
-      <th>Total ROI</th>
+      <th colspan="2">Staker Info</th>
     </tr>
   </thead>
   <tbody>
+
     <tr>
+      <td>Total Earned</td>
       <td>{{staker.totalEarned}}</td>
+    </tr>
+
+    <tr>
+      <td>Total Staked</td>
       <td>{{staker.totalStaked}}</td>
+    </tr>
+
+    <tr>
+      <td>Total ROI</td>
       <td>{{staker.totalROI}}</td>
     </tr>
+
   </tbody>
 </table>
 
 <table *ngIf="stakerPoolsData">
   <thead>
+    <tr>
+      <th colspan="4">Staker Pools</th>
+    </tr>
     <tr>
       <th>Asset</th>
       <th>Date First Staked</th>

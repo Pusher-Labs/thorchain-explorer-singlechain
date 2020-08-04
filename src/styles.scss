@@ -1,29 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+/*** iPhone and iOS Form Input Zoom Fixes ***/
+/* Fix Input Zoom on devices older than iPhone 5: */
+@media screen and (device-aspect-ratio: 2/3) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="url"]{ font-size: 16px; }
+}
+
 body {
   font-family: monospace;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-flow: column;
-  background-color: rgba(0, 0, 0, 0.01)
+  background-color: rgba(0, 0, 0, 0.01);
+  font-size: 1.6rem;
+  margin: 0;
+  overflow-x: hidden;
 }
 
 
 table {
   border-collapse: collapse;
   background-color: white;
-  margin-bottom: 15px;
+  margin-bottom: 45px;
   // table-layout: fixed;
   width:100%;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
   border-radius: 5px;
   overflow: hidden;
-
-  th {
-    background-color: rgba(0, 0, 0, 0.01);
-    border-top: 0;
-  }
 
   th, td {
     padding: 5px 10px;
@@ -39,9 +56,84 @@ table {
     }
   }
 
+  th {
+    border-top: 0;
+  }
+
+  tbody {
+
+    tr {
+      &:nth-of-type(even) {
+
+        background: whitesmoke;
+
+        @media (min-width: 768px) { background: none; }
+
+      }
+    }
+
+  }
+
+}
+
+h1 {
+  font-weight: normal;
+  font-size: 2.0rem;
+}
+
+a {
+  color: darkcyan;
 }
 
 input, select, textarea, button{font-family:inherit;}
+
+input {
+  font-size: 1.6rem;
+  border: 1px solid gainsboro;
+  border-radius: 3px;
+}
+
+.checkbox-container {
+  input[type="checkbox"] {
+    visibility: hidden;
+  }
+  label {
+    cursor: pointer;
+  }
+  input[type="checkbox"] + label:before {
+    border: 2px solid darkcyan;
+    content: "\00a0";
+    display:inline-flex;
+    align-items: center;
+    font: 22px/1rem monospace;
+    height: 14px;
+    margin: 0 .25em 0 0;
+    padding: 0;
+    vertical-align: top;
+    width: 14px;
+    color: #fff;
+    border-radius: 3px;
+  }
+  input[type="checkbox"]:checked + label:before {
+    background: darkcyan;
+    color: #fff;
+    content: "\2713";
+    text-align: center;
+  }
+  input[type="checkbox"]:checked + label:after {
+    font-weight: bold;
+  }
+
+  input[type="checkbox"]:focus + label::before {
+      outline: darkcyan;
+  }
+}
+
+button {
+  background-color: rgb(239, 239, 239);
+  border: 1px solid grey;
+  border-radius: 3px;
+}
 
 ul {
   padding-left: 0;
@@ -58,6 +150,10 @@ ul {
   &--space-between {
     justify-content: space-between;
   }
+
+  &--just-center {
+    justify-content: center;
+  }
 }
 
 .ellipsis {
@@ -66,4 +162,40 @@ ul {
   /* Required for text-overflow to do anything */
   white-space: nowrap;
   overflow: hidden;
+}
+
+.mobile-hidden {
+  @media
+  only screen and (max-width: 767px),
+  (min-device-width: 768px) and (max-device-width: 1024px)  {
+    display: none;
+  }
+}
+
+.mobile-padding {
+  @media
+  only screen and (max-width: 767px),
+  (min-device-width: 768px) and (max-device-width: 1024px)  {
+    padding: 0 15px;
+  }
+}
+
+.break-word {
+  word-break: break-word;
+}
+
+.page-actions {
+  float: right;
+  margin: -30px 0 30px;
+
+  @media
+  only screen and (max-width: 767px),
+  (min-device-width: 768px) and (max-device-width: 1024px)  {
+    padding: 0 15px;
+  }
+
+  button {
+    margin-left: 5px;
+  }
+
 }
