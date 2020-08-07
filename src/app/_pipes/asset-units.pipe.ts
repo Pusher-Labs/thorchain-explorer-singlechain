@@ -9,7 +9,6 @@ export class AssetUnitsPipe implements PipeTransform {
   transform(value: unknown, unit: number): unknown {
 
     const int = Number(value);
-    console.log('int is: ', int);
 
     if (typeof int === 'number') {
       return int / 10 ** unit;
