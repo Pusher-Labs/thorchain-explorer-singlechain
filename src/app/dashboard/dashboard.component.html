@@ -13,11 +13,11 @@
       <tbody>
         <tr>
           <td>Total Staked</td>
-          <td>{{network.totalStaked}}</td>
+          <td>{{network.totalStaked | assetUnits:8 | number:'1.0-0'}}</td>
         </tr>
         <tr>
           <td>Total Reserve</td>
-          <td>{{network.totalReserve}}</td>
+          <td>{{network.totalReserve | assetUnits:8 | number:'1.0-0'}}</td>
         </tr>
         <tr>
           <td>Active Node Count</td>
@@ -29,7 +29,7 @@
         </tr>
         <tr>
           <td>Pool Share Factor</td>
-          <td>{{network.poolShareFactor}}</td>
+          <td>{{network.poolShareFactor | percent:'1.0-2'}}</td>
         </tr>
         <tr>
           <td>Pool Activation Countdown</td>
@@ -41,11 +41,11 @@
         </tr>
         <tr>
           <td>Bonding ROI</td>
-          <td>{{network.bondingROI}}</td>
+          <td>{{network.bondingROI | percent:'1.0-2'}}</td>
         </tr>
         <tr>
           <td>Staking ROI</td>
-          <td>{{network.stakingROI}}</td>
+          <td>{{network.stakingROI | percent:'1.0-2'}}</td>
         </tr>
       </tbody>
     </table>
