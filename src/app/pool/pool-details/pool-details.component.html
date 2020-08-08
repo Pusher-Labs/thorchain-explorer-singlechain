@@ -7,8 +7,11 @@
         <td>{{poolDetail.assetDepth | assetUnits:8 | number:'1.0-2'}}</td>
       </tr>
       <tr>
-        <td>Asset ROI</td>
-        <td>{{poolDetail.assetROI | percent:'1.0-2'}}</td>
+        <td>Asset ROI (APY)</td>
+        <td>
+          <span *ngIf="asset">{{setAPY(poolDetail.assetROI) | percent:'1.2-4'}}</span>
+          <span *ngIf="!asset">...</span>
+        </td>
       </tr>
       <tr>
         <td>Asset Staked Total</td>
@@ -55,8 +58,11 @@
         <td>{{poolDetail.poolSlipAverage | percent:'1.0-2'}}</td>
       </tr>
       <tr>
-        <td>Pool ROI</td>
-        <td>{{poolDetail.poolROI | percent:'1.0-2'}}</td>
+        <td>Pool ROI (APY)</td>
+        <td>
+          <span *ngIf="asset">{{setAPY(poolDetail.poolROI) | percent:'1.2-4'}}</span>
+          <span *ngIf="!asset">...</span>
+        </td>
       </tr>
       <tr>
         <td>Pool Staked Total</td>
@@ -83,8 +89,11 @@
         <td>{{poolDetail.runeDepth | assetUnits:8 | number:'1.0-2'}}</td>
       </tr>
       <tr>
-        <td>Rune ROI</td>
-        <td>{{poolDetail.runeROI | percent:'1.0-2'}}</td>
+        <td>Rune ROI (APY)</td>
+        <td>
+          <span *ngIf="asset">{{setAPY(poolDetail.runeROI) | percent:'1.2-4'}}</span>
+          <span *ngIf="!asset">...</span>
+        </td>
       </tr>
       <tr>
         <td>Rune Staked Total</td>
