@@ -9,7 +9,7 @@
       <tr>
         <td>Asset ROI (APY)</td>
         <td>
-          <span *ngIf="asset">{{setAPY(poolDetail.assetROI) | percent:'1.2-4'}}</span>
+          <span *ngIf="asset">{{setAPY(poolDetail.assetROI) | percent:'1.0-2'}}</span>
           <span *ngIf="!asset">...</span>
         </td>
       </tr>
@@ -60,7 +60,7 @@
       <tr>
         <td>Pool ROI (APY)</td>
         <td>
-          <span *ngIf="asset">{{setAPY(poolDetail.poolROI) | percent:'1.2-4'}}</span>
+          <span *ngIf="asset">{{setAPY(poolDetail.poolROI) | percent:'1.0-2'}}</span>
           <span *ngIf="!asset">...</span>
         </td>
       </tr>
@@ -91,7 +91,7 @@
       <tr>
         <td>Rune ROI (APY)</td>
         <td>
-          <span *ngIf="asset">{{setAPY(poolDetail.runeROI) | percent:'1.2-4'}}</span>
+          <span *ngIf="asset">{{setAPY(poolDetail.runeROI) | percent:'1.0-2'}}</span>
           <span *ngIf="!asset">...</span>
         </td>
       </tr>
