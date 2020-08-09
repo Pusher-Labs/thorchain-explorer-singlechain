@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NodeService } from '../_services/node.service';
-import { ThorNode } from '../_classes/thor-node';
+import { ThorNode, NodeStatus } from '../_classes/thor-node';
+import { VersionService, VersionSummary } from '../_services/version.service';
 
 @Component({
   selector: 'app-nodes',
@@ -10,11 +11,13 @@ import { ThorNode } from '../_classes/thor-node';
 export class NodesComponent implements OnInit {
 
   nodes: ThorNode[];
+  versionSummary: VersionSummary;
 
-  constructor(private nodeService: NodeService) { }
+  constructor(private nodeService: NodeService, private versionService: VersionService) { }
 
   ngOnInit(): void {
     this.getNodes();
+    this.getVersion();
   }
 
   getNodes(): void {
@@ -22,6 +25,40 @@ export class NodesComponent implements OnInit {
       (res) => this.nodes = res,
       (err) => console.error('NodesComponent -> getNodes: ', err)
     );
+  }
+
+  getVersion(): void {
+    this.versionService.fetch().subscribe(
+      (res) => this.versionSummary = res,
+      (err) => console.error('error fetching version summary: ', err)
+    );
+  }
+
+  calculateNodesOnVersion(version: string): number {
+
+    if (this.nodes) {
+
+      const activeNodes = this.nodes.filter( (node) => node.status === NodeStatus.ACTIVE );
+
+      const total = activeNodes.reduce( (count, node) => {
+
+        if (node.version === version) {
+          count++;
+        }
+
+        return count;
+
+      }, 0);
+
+
+      return total / activeNodes.length;
+
+    }
+
+    console.error('nodes is not set');
+
+    return null;
+
   }
 
 }

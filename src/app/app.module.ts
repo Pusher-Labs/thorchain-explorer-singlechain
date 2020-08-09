@@ -20,7 +20,7 @@ import { PoolService } from './_services/pool.service';
 import { StakerService } from './_services/staker.service';
 import { StatsService } from './_services/stats.service';
 import { TransactionService } from './_services/transaction.service';
-
+import { VersionService } from './_services/version.service';
 
 @NgModule({
   declarations: [
@@ -41,6 +41,7 @@ import { TransactionService } from './_services/transaction.service';
     StakerService,
     StatsService,
     TransactionService,
+    VersionService
   ],
   bootstrap: [AppComponent]
 })
