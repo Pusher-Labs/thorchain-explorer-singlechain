@@ -63,6 +63,7 @@ table {
   tbody {
 
     tr {
+
       &:nth-of-type(even) {
 
         background: whitesmoke;
@@ -70,6 +71,11 @@ table {
         @media (min-width: 768px) { background: none; }
 
       }
+
+      &:hover {
+        background-color: whitesmoke;
+      }
+
     }
 
   }
@@ -83,6 +89,10 @@ h1 {
 
 a {
   color: darkcyan;
+
+  &:active {
+    color: darken($color: darkcyan, $amount: 12%);
+  }
 }
 
 input, select, textarea, button{font-family:inherit;}
