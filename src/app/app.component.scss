@@ -6,6 +6,7 @@
 main {
   width: 100%;
   max-width: 100%;
+  min-height: calc(100vh - 155px);
 
   // Medium devices (tablets, 768px and up)
   @media (min-width: 768px) { width: 768px; }
@@ -41,6 +42,7 @@ header {
     height: 30px;
     margin-right: 15px;
     border-radius: 5px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     overflow: hidden;
 
     img {
@@ -48,6 +50,36 @@ header {
       height: 100%;
     }
   }
+}
+
+footer {
+  padding-bottom: 24px;
+
+  ul {
+    float: right;
+    margin: 0;
+
+    li {
+
+      float: left;
+      padding: 0 15px;
+
+      a {
+        font-size: 2.2rem;
+        color: gainsboro;
+
+        &:hover {
+          color: darken($color: gainsboro, $amount: 12%)
+        }
+      }
+
+      &:last-of-type {
+        padding-right: 0;
+      }
+    }
+
+  }
+
 }
 
 nav {
