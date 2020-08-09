@@ -38,8 +38,15 @@ export class NodesComponent implements OnInit {
 
     if (this.nodes) {
 
+      /**
+       * Filter for Active Nodes
+       */
       const activeNodes = this.nodes.filter( (node) => node.status === NodeStatus.ACTIVE );
 
+
+      /**
+       * Get the total count of active nodes that match version
+       */
       const total = activeNodes.reduce( (count, node) => {
 
         if (node.version === version) {
@@ -51,6 +58,9 @@ export class NodesComponent implements OnInit {
       }, 0);
 
 
+      /**
+       * Return percentage of total nodes running version
+       */
       return total / activeNodes.length;
 
     }
