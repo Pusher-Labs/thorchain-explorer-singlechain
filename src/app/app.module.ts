@@ -22,6 +22,11 @@ import { StatsService } from './_services/stats.service';
 import { TransactionService } from './_services/transaction.service';
 import { VersionService } from './_services/version.service';
 
+/**
+ * External
+ */
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +36,8 @@ import { VersionService } from './_services/version.service';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   providers: [
     AssetService,

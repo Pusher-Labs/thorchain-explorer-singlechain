@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IconDefinition, faReddit, faGitlab, faTelegram, faDiscord, faMedium, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
-  constructor() { }
+  twitterIcon: IconDefinition;
+  redditIcon: IconDefinition;
+  gitlabIcon: IconDefinition;
+  telegramIcon: IconDefinition;
+  discordIcon: IconDefinition;
+  mediumIcon: IconDefinition;
+
+  constructor() {
+    this.twitterIcon = faTwitter;
+    this.redditIcon = faReddit;
+    this.gitlabIcon = faGitlab;
+    this.telegramIcon = faTelegram;
+    this.discordIcon = faDiscord;
+    this.mediumIcon = faMedium;
+  }
 
   ngOnInit() {
   }
