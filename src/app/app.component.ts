@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IconDefinition, faReddit, faGitlab, faTelegram, faDiscord, faMedium, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { NodeService } from './_services/node.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,7 @@ export class AppComponent implements OnInit {
   discordIcon: IconDefinition;
   mediumIcon: IconDefinition;
 
-  constructor() {
+  constructor(private nodeService: NodeService) {
     this.twitterIcon = faTwitter;
     this.redditIcon = faReddit;
     this.gitlabIcon = faGitlab;
@@ -25,6 +26,17 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.nodeService.corsTest().subscribe(
+      (res) => console.log('cors test res is: ', res),
+      (err) => console.error('cors test err is: ', err)
+    );
+
+    this.nodeService.corsTest2().subscribe(
+      (res) => console.log('222 res is: ', res),
+      (err) => console.error('222 err is: ', err)
+    );
+
   }
 
 }
