@@ -1,6 +1,6 @@
 <h1 class="mobile-padding">Nodes</h1>
 <div *ngIf="versionSummary && nodes">
-  <span><b>{{calculateNodesOnVersion(versionSummary.next) | percent}}</b> network running: <b>{{versionSummary.next}}</b></span><br />
+  <span *ngIf="versionSummary.next != versionSummary.current"><b>{{calculateNodesOnVersion(versionSummary.next) | percent}}</b> network running: <b>{{versionSummary.next}}</b></span><br />
   <span><b>{{calculateNodesOnVersion(versionSummary.current) | percent}}</b> network running: <b>{{versionSummary.current}}</b></span><br />
 </div>
 
