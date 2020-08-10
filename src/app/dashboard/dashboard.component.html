@@ -63,7 +63,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let node of nodes | slice:0:8;">
+        <tr *ngFor="let node of nodes | slice:0:(nodes.length < 8) ? nodes.length : 8;">
           <td>
             <a [routerLink]="['/', 'nodes', node.node_address]">{{node.node_address.substring(0, 8)}}...{{node.node_address.substring(node.node_address.length - 4, node.node_address.length)}}</a>
           </td>
@@ -76,7 +76,7 @@
   </div>
 
   <!-- Dash Transactions Summary-->
-  <!-- <div class="dash-section" [ngClass]="{'flxr flxr--just-center flxr--align-center': !transactions}">
+  <div class="dash-section" [ngClass]="{'flxr flxr--just-center flxr--align-center': !transactions}">
     <table *ngIf="transactions">
       <thead>
         <tr>
@@ -111,7 +111,7 @@
     </table>
     <a *ngIf="transactions" [routerLink]="['/', 'txs']" [queryParams]="{offset: 0}" class="view-more">View More Transactions</a>
     <span *ngIf="!transactions">...</span>
-  </div> -->
+  </div>
 
   <!-- <div class="dash-section" [ngClass]="{'flxr flxr--just-center flxr--align-center': !stats}">
     <app-stats-table *ngIf="stats" [stats]="stats"></app-stats-table>
