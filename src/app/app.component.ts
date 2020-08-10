@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { IconDefinition, faReddit, faGitlab, faTelegram, faDiscord, faMedium, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { NodeService } from './_services/node.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +15,7 @@ export class AppComponent implements OnInit {
   discordIcon: IconDefinition;
   mediumIcon: IconDefinition;
 
-  constructor(private nodeService: NodeService) {
+  constructor() {
     this.twitterIcon = faTwitter;
     this.redditIcon = faReddit;
     this.gitlabIcon = faGitlab;
@@ -26,21 +24,6 @@ export class AppComponent implements OnInit {
     this.mediumIcon = faMedium;
   }
 
-  ngOnInit() {
-
-    this.nodeService.corsTest().subscribe(
-      (res) => console.log('cors test res is: ', res),
-      (err) => console.error('cors test err is: ', err)
-    );
-
-    this.nodeService.corsTest2().subscribe(
-      (res) => console.log('222 res is: ', res),
-      (err) => console.error('222 err is: ', err)
-    );
-
-    console.log('is production? ', environment.production);
-    console.log('thornode url is: ', environment.thorNodeUrl);
-
-  }
+  ngOnInit() { }
 
 }

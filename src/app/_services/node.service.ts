@@ -23,13 +23,5 @@ export class NodeService {
     return this.http.get<ThorNode>(`${this.baseUrl}/nodeaccount/${address}`);
   }
 
-  corsTest() {
-    return this.http.get('https://a2wva4alb6.execute-api.us-east-1.amazonaws.com/dev/thornode/thorchain/nodeaccounts');
-  }
-
-  corsTest2() {
-    return this.http.get('https://a2wva4alb6.execute-api.us-east-1.amazonaws.com/dev/midgard/v1/network');
-  }
-
 
 }
