@@ -24,7 +24,7 @@ export class NodeService {
   }
 
   corsTest() {
-    return this.http.get('https://a2wva4alb6.execute-api.us-east-1.amazonaws.com/dev/thornode/nodeaccounts');
+    return this.http.get('https://a2wva4alb6.execute-api.us-east-1.amazonaws.com/dev/thornode/thorchain/nodeaccounts');
   }
 
   corsTest2() {
