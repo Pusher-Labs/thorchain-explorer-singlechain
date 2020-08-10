@@ -53,7 +53,7 @@
   </div>
 
   <!-- Nodes Summary -->
-  <div class="dash-section" [ngClass]="{'flxr flxr--just-center flxr--align-center': !nodes}">
+  <!-- <div class="dash-section" [ngClass]="{'flxr flxr--just-center flxr--align-center': !nodes}">
     <table *ngIf="nodes">
       <thead>
         <tr><th colspan="2">Nodes</th></tr>
@@ -73,10 +73,10 @@
     </table>
     <a *ngIf="nodes" [routerLink]="['/', 'nodes']" class="view-more">View All Nodes</a>
     <span *ngIf="!nodes">...</span>
-  </div>
+  </div> -->
 
   <!-- Dash Transactions Summary-->
-  <div class="dash-section" [ngClass]="{'flxr flxr--just-center flxr--align-center': !transactions}">
+  <!-- <div class="dash-section" [ngClass]="{'flxr flxr--just-center flxr--align-center': !transactions}">
     <table *ngIf="transactions">
       <thead>
         <tr>
@@ -111,11 +111,11 @@
     </table>
     <a *ngIf="transactions" [routerLink]="['/', 'txs']" [queryParams]="{offset: 0}" class="view-more">View More Transactions</a>
     <span *ngIf="!transactions">...</span>
-  </div>
+  </div> -->
 
-  <div class="dash-section" [ngClass]="{'flxr flxr--just-center flxr--align-center': !stats}">
+  <!-- <div class="dash-section" [ngClass]="{'flxr flxr--just-center flxr--align-center': !stats}">
     <app-stats-table *ngIf="stats" [stats]="stats"></app-stats-table>
     <span *ngIf="!stats">...</span>
-  </div>
+  </div> -->
 
 </div>
