@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IconDefinition, faReddit, faGitlab, faTelegram, faDiscord, faMedium, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { NodeService } from './_services/node.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -36,6 +37,9 @@ export class AppComponent implements OnInit {
       (res) => console.log('222 res is: ', res),
       (err) => console.error('222 err is: ', err)
     );
+
+    console.log('is production? ', environment.production);
+    console.log('thornode url is: ', environment.thorNodeUrl);
 
   }
 
