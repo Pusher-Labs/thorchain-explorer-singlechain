@@ -27,7 +27,11 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getGlobalStats();
+    /**
+     * Temporarily removed bc this call frequently times out
+     */
+    // this.getGlobalStats();
+
     this.getTransactions();
     this.getNetworkStatus();
     this.getNodes();
