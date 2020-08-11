@@ -1,0 +1,45 @@
+<table *ngIf="network">
+  <thead>
+    <tr>
+      <th colspan="2">Network Summary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Total Staked</td>
+      <td>{{network.totalStaked | assetUnits:8 | number:'1.0-0'}}</td>
+    </tr>
+    <tr>
+      <td>Total Reserve</td>
+      <td>{{network.totalReserve | assetUnits:8 | number:'1.0-0'}}</td>
+    </tr>
+    <tr>
+      <td>Active Node Count</td>
+      <td>{{network.activeNodeCount}}</td>
+    </tr>
+    <tr>
+      <td>Standby Node Count</td>
+      <td>{{network.standbyNodeCount}}</td>
+    </tr>
+    <tr>
+      <td>Pool Share Factor</td>
+      <td>{{network.poolShareFactor | percent:'1.0-2'}}</td>
+    </tr>
+    <tr>
+      <td>Pool Activation Countdown</td>
+      <td>{{network.poolActivationCountdown}}</td>
+    </tr>
+    <tr>
+      <td>Next Churn Height</td>
+      <td>{{network.nextChurnHeight}}</td>
+    </tr>
+    <tr>
+      <td>Bonding ROI</td>
+      <td>{{network.bondingROI | percent:'1.0-2'}}</td>
+    </tr>
+    <tr>
+      <td>Staking ROI</td>
+      <td>{{network.stakingROI | percent:'1.0-2'}}</td>
+    </tr>
+  </tbody>
+</table>

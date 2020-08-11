@@ -1,59 +1,16 @@
 <h1 class="mobile-padding">THORChain Explorer</h1>
 
-<div id="dashboard">
+<div id="dashboard" class="grid">
 
   <!-- Network Status Summary -->
-  <div class="dash-section" [ngClass]="{'flxr flxr--just-center flxr--align-center': !network}">
-    <table *ngIf="network">
-      <thead>
-        <tr>
-          <th colspan="2">Network Summary</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Total Staked</td>
-          <td>{{network.totalStaked | assetUnits:8 | number:'1.0-0'}}</td>
-        </tr>
-        <tr>
-          <td>Total Reserve</td>
-          <td>{{network.totalReserve | assetUnits:8 | number:'1.0-0'}}</td>
-        </tr>
-        <tr>
-          <td>Active Node Count</td>
-          <td>{{network.activeNodeCount}}</td>
-        </tr>
-        <tr>
-          <td>Standby Node Count</td>
-          <td>{{network.standbyNodeCount}}</td>
-        </tr>
-        <tr>
-          <td>Pool Share Factor</td>
-          <td>{{network.poolShareFactor | percent:'1.0-2'}}</td>
-        </tr>
-        <tr>
-          <td>Pool Activation Countdown</td>
-          <td>{{network.poolActivationCountdown}}</td>
-        </tr>
-        <tr>
-          <td>Next Churn Height</td>
-          <td>{{network.nextChurnHeight}}</td>
-        </tr>
-        <tr>
-          <td>Bonding ROI</td>
-          <td>{{network.bondingROI | percent:'1.0-2'}}</td>
-        </tr>
-        <tr>
-          <td>Staking ROI</td>
-          <td>{{network.stakingROI | percent:'1.0-2'}}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="grid-item" [ngClass]="{'flxr flxr--just-center flxr--align-center': !network}">
+    <app-network-summary-table *ngIf="network" [network]="network"></app-network-summary-table>
+    <a *ngIf="network" [routerLink]="['/', 'network']" class="view-more">View Network</a>
     <span *ngIf="!network">...</span>
   </div>
 
   <!-- Nodes Summary -->
-  <div class="dash-section" [ngClass]="{'flxr flxr--just-center flxr--align-center': !nodes}">
+  <div class="grid-item" [ngClass]="{'flxr flxr--just-center flxr--align-center': !nodes}">
     <table *ngIf="nodes">
       <thead>
         <tr><th colspan="2">Nodes</th></tr>
@@ -76,7 +33,7 @@
   </div>
 
   <!-- Dash Transactions Summary-->
-  <div class="dash-section" [ngClass]="{'flxr flxr--just-center flxr--align-center': !transactions}">
+  <div class="grid-item" [ngClass]="{'flxr flxr--just-center flxr--align-center': !transactions}">
     <table *ngIf="transactions">
       <thead>
         <tr>
@@ -113,7 +70,7 @@
     <span *ngIf="!transactions">...</span>
   </div>
 
-  <!-- <div class="dash-section" [ngClass]="{'flxr flxr--just-center flxr--align-center': !stats}">
+  <!-- <div class="grid-item" [ngClass]="{'flxr flxr--just-center flxr--align-center': !stats}">
     <app-stats-table *ngIf="stats" [stats]="stats"></app-stats-table>
     <span *ngIf="!stats">...</span>
   </div> -->

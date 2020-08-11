@@ -1,6 +1,6 @@
 <h1 *ngIf="address" class="mobile-padding break-word">Staker: {{address}}</h1>
 
-<table *ngIf="staker">
+<table *ngIf="staker" class="shadow margin-bottom">
   <thead>
     <tr>
       <th colspan="2">Staker Info</th>
@@ -26,7 +26,7 @@
   </tbody>
 </table>
 
-<table *ngIf="stakerPoolsData">
+<table *ngIf="stakerPoolsData" class="shadow">
   <thead>
     <tr>
       <th colspan="4">Staker Pools</th>

@@ -35,10 +35,7 @@ body {
 table {
   border-collapse: collapse;
   background-color: white;
-  margin-bottom: 45px;
-  // table-layout: fixed;
   width:100%;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
   border-radius: 5px;
   overflow: hidden;
 
@@ -192,7 +189,7 @@ ul {
 
 .page-actions {
   float: right;
-  margin: -30px 0 30px;
+  margin: 30px 0;
 
   @media
   only screen and (max-width: 767px),
@@ -204,4 +201,27 @@ ul {
     margin-left: 5px;
   }
 
+}
+
+.shadow {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.margin-bottom {
+  margin-bottom: 45px;
+}
+
+.grid {
+  margin-bottom: 45px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(369px, 1fr));
+  grid-column-gap: 30px;
+  row-gap: 30px;
+
+  .grid-item {
+    background-color: white;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    min-height: 225px;
+  }
 }

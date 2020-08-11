@@ -1,27 +1,23 @@
 
 #dashboard {
-  margin-bottom: 45px;
-
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(369px, 1fr));
-  grid-column-gap: 30px;
-  row-gap: 30px;
 
   .dash-section {
-    background-color: white;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    min-height: 300px;
+    // background-color: white;
+    // box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    // border-radius: 5px;
+    // min-height: 300px;
 
     table {
       box-shadow: none;
       margin-bottom: 0;
     }
 
-     .view-more {
-       float: right;
-       padding: 10px 15px;
-     }
   }
+
+  .view-more {
+    float: right;
+    padding: 10px 15px;
+  }
+
 }
 
