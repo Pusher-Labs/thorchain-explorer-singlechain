@@ -1,31 +1,4 @@
-
-
-<header class="flxr flxr--just-center">
-
-  <div class="container">
-
-    <div class="flxr flxr--space-between">
-
-      <a id="logo" [routerLink]="['/']"><img src="assets/images/thorchain.png" /></a>
-
-      <div style="width: 100%;">
-        <app-search></app-search>
-      </div>
-
-    </div>
-
-    <nav>
-      <a [routerLink]="['/', 'pools']">Assets</a>
-      <a [routerLink]="['/', 'network']">Network</a>
-      <a [routerLink]="['/', 'nodes']">Nodes</a>
-      <a [routerLink]="['/', 'txs']" [queryParams]="{offset: '0'}">TXs</a>
-      <a [routerLink]="['/', 'stakers']">Stakers</a>
-    </nav>
-
-
-  </div>
-
-</header>
+<app-header></app-header>
 
 <div class="flxr flxr--just-center">
 

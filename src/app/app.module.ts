@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
  * Components
  */
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './_components/header/header.component';
 import { SearchComponent } from './_components/search/search.component';
 
 /**
@@ -31,6 +32,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   declarations: [
     AppComponent,
     SearchComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

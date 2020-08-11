@@ -1,0 +1,38 @@
+<header class="flxr flxr--just-center">
+
+  <div class="container">
+
+    <div class="flxr flxr--space-between">
+
+      <a id="logo" [routerLink]="['/']"><img src="assets/images/thorchain.png" /></a>
+
+      <div style="width: 100%;">
+        <app-search></app-search>
+      </div>
+
+    </div>
+
+    <nav>
+      <a [routerLink]="['/', 'pools']">Assets</a>
+      <a [routerLink]="['/', 'network']">Network</a>
+      <a [routerLink]="['/', 'nodes']">Nodes</a>
+      <a [routerLink]="['/', 'txs']" [queryParams]="{offset: '0'}">TXs</a>
+      <a [routerLink]="['/', 'stakers']">Stakers</a>
+    </nav>
+
+    <br />
+
+    <div id="network-status-container">Network Status:
+      <span *ngIf="networkSecurity && networkSecurityStatus" id="network-status">
+        <fa-icon class="optimal" *ngIf="networkSecurityStatus == 'Optimal'" [icon]="optimalIcon"></fa-icon>
+        <fa-icon class="warning" *ngIf="(networkSecurityStatus == 'Underbonded' || networkSecurityStatus == 'Overbonded')" [icon]="warningIcon"></fa-icon>
+        <fa-icon class="alert" *ngIf="(networkSecurityStatus == 'Insecure' || networkSecurityStatus == 'Inefficient')" [icon]="alertIcon"></fa-icon>
+        {{networkSecurityStatus}}
+      </span>
+      <span *ngIf="!networkSecurityStatus">...</span>
+    </div>
+
+
+  </div>
+
+</header>

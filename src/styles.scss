@@ -92,6 +92,17 @@ input {
   border-radius: 3px;
 }
 
+.container {
+  width: 100%;
+  max-width: 100%;
+
+  // Medium devices (tablets, 768px and up)
+  @media (min-width: 768px) { width: 768px; }
+
+  // Large devices (desktops, 992px and up)
+  @media (min-width: 992px) { width: 992px; }
+}
+
 .checkbox-container {
   input[type="checkbox"] {
     visibility: hidden;
