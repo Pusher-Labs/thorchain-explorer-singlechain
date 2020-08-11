@@ -1,0 +1,126 @@
+<div *ngIf="network" class="grid">
+
+  <div class="shadow grid-item">
+    <app-network-summary-table [network]="network"></app-network-summary-table>
+  </div>
+
+  <div class="shadow grid-item">
+    <table *ngIf="network.bondMetrics">
+      <thead>
+        <tr>
+          <th colspan="2">Bond Metrics</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Average Active Bond</td>
+          <td>{{network.bondMetrics.averageActiveBond | assetUnits:8 | number:"1.0-0"}}</td>
+        </tr>
+        <tr>
+          <td>Average Standby Bond</td>
+          <td>{{network.bondMetrics.averageStandbyBond | assetUnits:8 | number:"1.0-0"}}</td>
+        </tr>
+        <tr>
+          <td>Maximum Active Bond</td>
+          <td>{{network.bondMetrics.maximumActiveBond | assetUnits:8 | number:"1.0-0"}}</td>
+        </tr>
+        <tr>
+          <td>Maximum Standby Bond</td>
+          <td>{{network.bondMetrics.maximumStandbyBond | assetUnits:8 | number:"1.0-0"}}</td>
+        </tr>
+        <tr>
+          <td>Median Active Bond</td>
+          <td>{{network.bondMetrics.medianActiveBond | assetUnits:8 | number:"1.0-0"}}</td>
+        </tr>
+        <tr>
+          <td>Median Standby Bond</td>
+          <td>{{network.bondMetrics.medianStandbyBond | assetUnits:8 | number:"1.0-0"}}</td>
+        </tr>
+        <tr>
+          <td>Minimum Active Bond</td>
+          <td>{{network.bondMetrics.minimumActiveBond | assetUnits:8 | number:"1.0-0"}}</td>
+        </tr>
+        <tr>
+          <td>Minimum Standby Bond</td>
+          <td>{{network.bondMetrics.minimumStandbyBond | assetUnits:8 | number:"1.0-0"}}</td>
+        </tr>
+        <tr>
+          <td>Total Active Bond</td>
+          <td>{{network.bondMetrics.totalActiveBond | assetUnits:8 | number:"1.0-0"}}</td>
+        </tr>
+        <tr>
+          <td>Total Standby Bond</td>
+          <td>{{network.bondMetrics.totalStandbyBond | assetUnits:8 | number:"1.0-0"}}</td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+  <div class="shadow grid-item">
+    <table *ngIf="network.activeBonds">
+
+      <thead>
+        <tr>
+          <th colspan="2">Active Bonds</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let bond of network.activeBonds">
+          <td>{{bond | assetUnits:8 | number:"1.0-0"}}</td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+  <div class="shadow grid-item">
+    <table *ngIf="network.standbyBonds">
+
+      <thead>
+        <tr>
+          <th colspan="2">Standby Bonds</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let bond of network.standbyBonds">
+          <td>{{bond | assetUnits:8 | number:"1.0-0"}}</td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+  <div class="shadow grid-item">
+    <table *ngIf="network.blockRewards">
+
+      <thead>
+        <tr>
+          <th colspan="2">Block Rewards</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Block Reward</td>
+          <td>{{network.blockRewards.blockReward | number}}</td>
+        </tr>
+        <tr>
+          <td>Bond Reward</td>
+          <td>{{network.blockRewards.bondReward | number}}</td>
+        </tr>
+        <tr>
+          <td>Stake Reward</td>
+          <td>{{network.blockRewards.stakeReward | number}}</td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+</div>
+
+<span *ngIf="!network" class="mobile-padding">...</span>

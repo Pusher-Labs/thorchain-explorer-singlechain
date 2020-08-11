@@ -1,6 +1,6 @@
 <h1 class="mobile-padding">Asset Pools</h1>
 
-<table *ngIf="pools">
+<table *ngIf="pools" class="shadow">
   <tbody>
     <tr *ngFor="let pool of pools">
       <td><a [routerLink]="['/', 'pools', pool]">{{pool}}</a></td>

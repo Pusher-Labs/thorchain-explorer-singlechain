@@ -38,6 +38,8 @@
 
 <app-transactions-table [transactions]="transactions"></app-transactions-table>
 
+<!-- <br /> -->
+
 <div class="page-actions">
   <button *ngIf="offset > 0" (click)="setPage(0)"><<</button>
   <button *ngIf="offset > 0" (click)="setPage(offset - limit)"><</button>

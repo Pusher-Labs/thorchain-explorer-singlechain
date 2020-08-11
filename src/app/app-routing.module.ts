@@ -63,6 +63,10 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'network',
+    loadChildren: () => import('./network/network.module').then(m => m.NetworkModule),
+  },
+  {
     path: 'nodes',
     children: [
       {
