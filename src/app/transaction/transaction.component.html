@@ -1,3 +1,136 @@
 <h1 class="mobile-padding break-word">TX: {{txid}}</h1>
 
-<app-transactions-table [transactions]="transactions"></app-transactions-table>
+<div *ngIf="transaction">
+
+  <table class="shadow margin-bottom">
+    <thead>
+      <tr>
+        <th colspan="2">
+          Transaction Summary
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>Pool</td>
+        <td>
+          <a [routerLink]="['/', 'pools', transaction.pool]">{{transaction.pool}}</a>
+        </td>
+      </tr>
+      <tr>
+        <td>Status</td>
+        <td>{{transaction.status}}</td>
+      </tr>
+      <tr>
+        <td>Type</td>
+        <td>{{transaction.type}}</td>
+      </tr>
+      <tr>
+        <td>Date</td>
+        <td>{{transaction.date * 1000 | date:'short'}}</td>
+      </tr>
+      <tr>
+        <td>Asymmetry</td>
+        <td>{{transaction.options.asymmetry}}</td>
+      </tr>
+      <tr>
+        <td>Price Target</td>
+        <td>{{transaction.options.priceTarget}}</td>
+      </tr>
+      <tr>
+        <td>Withdraw Basis Points</td>
+        <td>{{transaction.options.withdrawBasisPoints}}</td>
+      </tr>
+    </tbody>
+
+  </table>
+
+  <div class="grid">
+
+    <div class="grid-item">
+
+      <table>
+        <thead>
+          <tr>
+            <th colspan="2">
+              In
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Address</td>
+            <td class="break-word">
+              <a [routerLink]="['/', 'addresses', transaction.in.address]">{{transaction.in.address.substring(0, 8)}}...{{transaction.in.address.substring(transaction.in.address.length - 4, transaction.in.address.length)}}</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Memo</td>
+            <td class="break-word">{{transaction.in.memo}}</td>
+          </tr>
+          <tr>
+            <td>Transaction Id</td>
+            <td>
+              <a [routerLink]="['/', 'txs', transaction.in.txID]">{{transaction.in.txID.substring(0, 8)}}...{{transaction.in.txID.substring(transaction.in.txID.length - 4, transaction.in.txID.length)}}</a>
+            </td>
+          </tr>
+          <tr *ngFor="let coin of transaction.in.coins">
+            <td>Asset: <a [routerLink]="['/', 'pools', coin.asset]">{{coin.asset}}</a></td>
+            <td>Amount: {{coin.amount | assetUnits:8 | number}}</td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div *ngIf="transaction.out && transaction.out.length > 0" class="grid-item">
+
+      <table>
+        <thead>
+          <tr>
+            <th colspan="2">
+              Out
+            </th>
+          </tr>
+        </thead>
+
+        <tbody *ngFor="let out of transaction.out; let i = index" [ngClass]="{'out-separator': transaction.out.length > 1 && i < transaction.out.length - 1}">
+          <tr>
+            <td>Address</td>
+            <td class="break-word">
+              <a [routerLink]="['/', 'addresses', out.address]">{{out.address.substring(0, 8)}}...{{out.address.substring(out.address.length - 4, out.address.length)}}</a>
+            </td>
+          </tr>
+          <tr>
+            <td>Memo</td>
+            <td class="break-word">{{out.memo}}</td>
+          </tr>
+          <tr>
+            <td>Transaction Id</td>
+            <td>
+              <a [routerLink]="['/', 'txs', out.txID]">{{out.txID.substring(0, 8)}}...{{out.txID.substring(out.txID.length - 4, out.txID.length)}}</a>
+
+            </td>
+          </tr>
+          <tr *ngFor="let coin of out.coins">
+            <td>Asset: <a [routerLink]="['/', 'pools', coin.asset]">{{coin.asset}}</a></td>
+            <td>Amount: {{coin.amount | assetUnits:8 | number}}</td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div *ngIf="!transaction && !error">...</div>
+
+<div *ngIf="!transaction && error">
+  {{error}}
+</div>

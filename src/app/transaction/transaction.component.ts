@@ -11,7 +11,8 @@ import { Transaction } from '../_classes/transaction';
 export class TransactionComponent implements OnInit {
 
   txid: string;
-  transactions: Transaction[];
+  transaction: Transaction;
+  error: string;
 
   constructor(private route: ActivatedRoute, private transactionService: TransactionService) {
     this.txid = '';
@@ -30,7 +31,7 @@ export class TransactionComponent implements OnInit {
 
   }
 
-  async getTransaction() {
+  getTransaction(): void {
 
     const params: TransactionIndexParams = {
       offset: 0,
@@ -39,10 +40,15 @@ export class TransactionComponent implements OnInit {
 
     this.transactionService.index(params).subscribe(
       (res) => {
-        this.transactions = res.txs;
-        console.log(this.transactions);
+
+        if (res.txs != null && res.txs.length > 0) {
+          this.transaction = res.txs[0];
+        } else {
+          this.error = 'Sorry, no transaction with that ID was found 😕';
+        }
+
       },
-      (err) => console.error('error fetching stakers: ', err)
+      (err) => console.error('error fetching transaction: ', err)
     );
 
   }
