@@ -14,9 +14,7 @@ export class NetworkDetailsComponent implements OnInit {
   dailyBlockReward: number;
   dailyBondReward: number;
   dailyStakeReward: number;
-  monthlyNodeBlockReward: number;
   monthlyNodeBondReward: number;
-  monthlyNodeStakeReward: number;
 
   constructor(private networkService: NetworkService, private constantsService: ConstantsService) { }
 
@@ -46,9 +44,7 @@ export class NetworkDetailsComponent implements OnInit {
         this.dailyBondReward = (+res.blockRewards.bondReward / 10 ** 8) * (blocksPerYear / 365);
         this.dailyStakeReward = (+res.blockRewards.stakeReward / 10 ** 8) * (blocksPerYear / 365);
 
-        this.monthlyNodeBlockReward = (this.dailyBlockReward * 30) / activeNodeCount;
         this.monthlyNodeBondReward = (this.dailyBondReward * 30) / activeNodeCount;
-        this.monthlyNodeStakeReward = (this.dailyStakeReward * 30) / activeNodeCount;
 
         this.network = res;
       },
