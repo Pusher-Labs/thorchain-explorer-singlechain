@@ -7,7 +7,8 @@ enum NetworkSecurityStatus {
   OVERBONDED = 'Overbonded',
   OPTIMAL = 'Optimal',
   UNDERBONDED = 'Underbonded',
-  INSECURE = 'Insecure'
+  INSECURE = 'Insecure',
+  DOWN = 'Down'
 }
 
 @Component({
@@ -37,9 +38,23 @@ export class HeaderComponent implements OnInit {
   getNetworkStatus() {
     this.networkService.network().subscribe(
       (res) => {
-        const activeBond = +res.bondMetrics.totalActiveBond;
-        this.networkSecurity = activeBond / (activeBond + Number(res.totalStaked));
-        this.setNetworkSecurityStatus();
+
+        // Network is running, set security status
+        if (res.activeNodeCount > 0) {
+
+          const activeBond = +res.bondMetrics.totalActiveBond;
+
+          this.networkSecurity = activeBond / (activeBond + Number(res.totalStaked));
+
+          this.setNetworkSecurityStatus();
+
+        // All Nodes are Down
+        } else {
+
+          this.networkSecurityStatus = NetworkSecurityStatus.DOWN;
+
+        }
+
       },
       (err) => console.error('HeaderComponent -> error fetching network: ', err)
     );

@@ -23,10 +23,10 @@
     <br />
 
     <div id="network-status-container">Network Status:
-      <span *ngIf="networkSecurity && networkSecurityStatus" id="network-status">
+      <span *ngIf="networkSecurityStatus" id="network-status">
         <fa-icon class="optimal" *ngIf="networkSecurityStatus == 'Optimal'" [icon]="optimalIcon"></fa-icon>
         <fa-icon class="warning" *ngIf="(networkSecurityStatus == 'Underbonded' || networkSecurityStatus == 'Overbonded')" [icon]="warningIcon"></fa-icon>
-        <fa-icon class="alert" *ngIf="(networkSecurityStatus == 'Insecure' || networkSecurityStatus == 'Inefficient')" [icon]="alertIcon"></fa-icon>
+        <fa-icon class="alert" *ngIf="(networkSecurityStatus == 'Insecure' || networkSecurityStatus == 'Inefficient' || networkSecurityStatus == 'Down')" [icon]="alertIcon"></fa-icon>
         {{networkSecurityStatus}}
       </span>
       <span *ngIf="!networkSecurityStatus">...</span>
