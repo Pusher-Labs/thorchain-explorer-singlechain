@@ -15,6 +15,7 @@ import { SearchComponent } from './_components/search/search.component';
  * Services
  */
 import { AssetService } from './_services/asset.service';
+import { ConstantsService } from './_services/constants.service';
 import { NetworkService } from './_services/network.service';
 import { NodeService } from './_services/node.service';
 import { PoolService } from './_services/pool.service';
@@ -43,6 +44,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   ],
   providers: [
     AssetService,
+    ConstantsService,
     NetworkService,
     NodeService,
     PoolService,
