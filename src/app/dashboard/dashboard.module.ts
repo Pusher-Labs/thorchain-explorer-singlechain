@@ -5,6 +5,8 @@ import { DashboardComponent } from './dashboard.component';
 import { StatsTableComponent } from '../_components/stats-table/stats-table.component';
 import { PipesModule } from '../_pipes/pipes.module';
 import { NetworkSummaryTableModule } from '../_components/network-summary-table/network-summary-table.module';
+import { TxDetailTableDataModule } from '../_components/tx-detail-table-data/tx-detail-table-data.module';
+
 
 @NgModule({
   declarations: [DashboardComponent, StatsTableComponent],
@@ -12,6 +14,7 @@ import { NetworkSummaryTableModule } from '../_components/network-summary-table/
     CommonModule,
     PipesModule,
     NetworkSummaryTableModule,
+    TxDetailTableDataModule,
     RouterModule.forChild([
       {
         path: '',

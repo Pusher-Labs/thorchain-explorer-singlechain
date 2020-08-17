@@ -45,23 +45,29 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let tx of transactions">
+        <tr *ngFor="let tx of transactions | slice:0:5">
           <td>
-            <a [routerLink]="['/', 'addresses', tx.in.address]">{{tx.in.address.substring(0, 8)}}...{{tx.in.address.substring(tx.in.address.length - 4, tx.in.address.length)}}</a> <br />
-            <a *ngFor="let coin of tx.in.coins" [routerLink]="['/', 'pools', coin.asset]">{{coin.asset}}</a>
+
+            <app-tx-detail-table-data [transactionDetail]="tx.in" direction="IN"></app-tx-detail-table-data>
+
           </td>
           <td>
-            <span *ngIf="!tx.out || tx.out && tx.out.length < 1">...</span>
+
             <div *ngIf="tx.out && tx.out.length > 0">
-              <a [routerLink]="['/', 'addresses', tx.out[0].address]">
-                {{tx.out[0].address.substring(0, 8)}}...{{tx.out[0].address.substring(tx.in.address.length - 4, tx.in.address.length)}}
-              </a>
-              <br *ngIf="tx.out.length > 1" />
-              <span *ngIf="tx.out.length > 1"> + {{tx.out.length - 1}}</span> <br />
-              <div *ngFor="let out of tx.out">
-                <a *ngFor="let coin of out.coins" [routerLink]="['/', 'pools', coin.asset]">{{coin.asset}}</a>
+
+              <div class="out-data">
+
+                <app-tx-detail-table-data [transactionDetail]="tx.out[0]" direction="OUT"></app-tx-detail-table-data>
+
+                <br *ngIf="tx.out.length > 1" />
+                <span style="float: right;" *ngIf="tx.out.length > 1"> + {{tx.out.length - 1}}</span> <br />
+
               </div>
+
             </div>
+
+            <span *ngIf="!tx.out || tx.out && tx.out.length < 1"> - </span>
+
           </td>
         </tr>
       </tbody>
