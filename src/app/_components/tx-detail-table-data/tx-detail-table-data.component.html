@@ -1,5 +1,5 @@
 
-<div class="flxr flxr--align-center">
+<div *ngIf="transactionDetail" class="flxr flxr--align-center">
   <div class="tx-id" [class.tx-id--out]="direction === 'OUT'">
     <a [routerLink]="['/', 'txs', transactionDetail.txID]" title="Transaction ID">
       <b>{{transactionDetail.txID.substring(0, 8)}}...</b>
@@ -9,7 +9,7 @@
   <a class="tx-address" [routerLink]="['/', 'addresses', transactionDetail.address]" title="Address"><b>{{transactionDetail.address.substring(0, 8)}}...</b></a>
 </div>
 
-<ul class="asset-row">
+<ul *ngIf="transactionDetail" class="asset-row">
   <li *ngFor="let coin of transactionDetail.coins; let i = index" class="asset-data flxr flxr--align-center" [class.unknown-asset]="!isKnownAsset(coin.asset)">
     <div class="asset-logo">
       <a [routerLink]="['/', 'pools', coin.asset]"><img [src]="matchIcon(coin.asset)" /></a>

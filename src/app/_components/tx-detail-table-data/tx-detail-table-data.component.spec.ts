@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
 import { TxDetailTableDataComponent } from './tx-detail-table-data.component';
 
 describe('TxDetailTableDataComponent', () => {
@@ -8,7 +8,8 @@ describe('TxDetailTableDataComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TxDetailTableDataComponent ]
+      declarations: [ TxDetailTableDataComponent ],
+      imports: [ RouterTestingModule ]
     })
     .compileComponents();
   }));
