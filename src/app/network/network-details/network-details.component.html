@@ -106,15 +106,23 @@
       <tbody>
         <tr>
           <td>Block Reward</td>
-          <td>{{network.blockRewards.blockReward | number}}</td>
+          <td *ngIf="dailyBlockReward">{{ dailyBlockReward | number:"0.0-2" }} / day</td>
+          <td *ngIf="!dailyBlockReward"> - </td>
         </tr>
         <tr>
           <td>Bond Reward</td>
-          <td>{{network.blockRewards.bondReward | number}}</td>
+          <td *ngIf="dailyBondReward">{{ dailyBondReward | number:"0.0-2"}} / day</td>
+          <td *ngIf="!dailyBondReward"> - </td>
         </tr>
         <tr>
           <td>Stake Reward</td>
-          <td>{{network.blockRewards.stakeReward | number}}</td>
+          <td *ngIf="dailyStakeReward">{{ dailyStakeReward | number:"0.0-2"}} / day</td>
+          <td *ngIf="!dailyStakeReward"> - </td>
+        </tr>
+        <tr>
+          <td>Bond Reward / Node</td>
+          <td *ngIf="monthlyNodeBondReward">{{ monthlyNodeBondReward | number:"0.0-2"}} / month</td>
+          <td *ngIf="!monthlyNodeBondReward"> - </td>
         </tr>
       </tbody>
 

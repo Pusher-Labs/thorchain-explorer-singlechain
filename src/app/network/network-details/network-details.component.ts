@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NetworkService, NetworkStatus } from 'src/app/_services/network.service';
+import { ConstantsService, MidgardConstants } from 'src/app/_services/constants.service';
 
 @Component({
   selector: 'app-network-details',
@@ -8,17 +9,49 @@ import { NetworkService, NetworkStatus } from 'src/app/_services/network.service
 })
 export class NetworkDetailsComponent implements OnInit {
 
+  constants: MidgardConstants;
   network: NetworkStatus;
+  dailyBlockReward: number;
+  dailyBondReward: number;
+  dailyStakeReward: number;
+  monthlyNodeBlockReward: number;
+  monthlyNodeBondReward: number;
+  monthlyNodeStakeReward: number;
 
-  constructor(private networkService: NetworkService) { }
+  constructor(private networkService: NetworkService, private constantsService: ConstantsService) { }
 
   ngOnInit(): void {
-    this.getNetworkStatus();
+    this.getConstants();
+
+  }
+
+  getConstants(): void {
+    this.constantsService.getConstants().subscribe(
+      (res) => {
+        this.constants = res;
+        this.getNetworkStatus();
+      },
+      (err) => console.error('error fetching constants...', err)
+    );
   }
 
   getNetworkStatus(): void {
     this.networkService.network().subscribe(
-      (res) => this.network = res,
+      (res) => {
+
+        const blocksPerYear = this.constants.int_64_values.BlocksPerYear;
+        const activeNodeCount = res.activeNodeCount;
+
+        this.dailyBlockReward = (+res.blockRewards.blockReward / 10 ** 8) * (blocksPerYear / 365);
+        this.dailyBondReward = (+res.blockRewards.bondReward / 10 ** 8) * (blocksPerYear / 365);
+        this.dailyStakeReward = (+res.blockRewards.stakeReward / 10 ** 8) * (blocksPerYear / 365);
+
+        this.monthlyNodeBlockReward = (this.dailyBlockReward * 30) / activeNodeCount;
+        this.monthlyNodeBondReward = (this.dailyBondReward * 30) / activeNodeCount;
+        this.monthlyNodeStakeReward = (this.dailyStakeReward * 30) / activeNodeCount;
+
+        this.network = res;
+      },
       (err) => console.error('NetworkDetailsComponent -> error fetching network status: ', err)
     );
   }
