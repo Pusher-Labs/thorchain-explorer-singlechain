@@ -59,6 +59,7 @@ only screen and (max-width: 767px),
 		border-bottom: 1px solid #eee;
 		position: relative;
     padding-left: 25%;
+    min-height: 30px;
 
     tr {
       td:nth-of-type(1):before { display: none; }
@@ -83,9 +84,9 @@ only screen and (max-width: 767px),
 	/*
 	Label the data
 	*/
-	td:nth-of-type(1):before { content: "In"; }
-	td:nth-of-type(2):before { content: "Out"; }
-	td:nth-of-type(3):before { content: "Type"; }
+	td:nth-of-type(1):before { content: "Type"; }
+	td:nth-of-type(2):before { content: "In"; }
+	td:nth-of-type(3):before { content: "Out"; }
 	td:nth-of-type(4):before { content: "Status"; }
 	td:nth-of-type(5):before { content: "Date"; }
 }
