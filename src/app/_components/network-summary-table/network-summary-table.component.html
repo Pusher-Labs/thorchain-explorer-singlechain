@@ -35,7 +35,8 @@
     </tr>
     <tr>
       <td>Bonding ROI</td>
-      <td>{{network.bondingROI | percent:'1.0-2'}}</td>
+      <td *ngIf="isFinite(network.bondingROI)">{{network.bondingROI | percent:'1.0-2'}}</td>
+      <td *ngIf="!isFinite(network.bondingROI)">{{network.bondingROI}}</td>
     </tr>
     <tr>
       <td>Staking ROI</td>

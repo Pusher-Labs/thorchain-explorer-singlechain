@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NetworkStatus } from 'src/app/_services/network.service';
 
 @Component({
@@ -6,10 +6,16 @@ import { NetworkStatus } from 'src/app/_services/network.service';
   templateUrl: './network-summary-table.component.html',
   styleUrls: ['./network-summary-table.component.scss']
 })
-export class NetworkSummaryTableComponent {
+export class NetworkSummaryTableComponent{
 
   @Input() network: NetworkStatus;
 
   constructor() { }
+
+  isFinite(num: string): boolean {
+
+    return Number.isFinite(+num);
+
+  }
 
 }
