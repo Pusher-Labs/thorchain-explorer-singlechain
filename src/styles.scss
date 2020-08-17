@@ -41,9 +41,10 @@ table {
 
   th, td {
     padding: 5px 10px;
-    border: 1px solid gainsboro;
+    border-bottom: 1px solid gainsboro;
     overflow:hidden;/* optionnal*/
-
+    padding: 10px;
+    vertical-align: top;
 
     &:first-of-type {
       border-left: 0;
@@ -79,6 +80,10 @@ table {
 
 }
 
+a {
+  color: black;
+}
+
 h1 {
   font-weight: normal;
   font-size: 2.0rem;
@@ -111,7 +116,7 @@ input {
     cursor: pointer;
   }
   input[type="checkbox"] + label:before {
-    border: 2px solid darkcyan;
+    border: 2px solid black;
     content: "\00a0";
     display:inline-flex;
     align-items: center;
@@ -125,7 +130,7 @@ input {
     border-radius: 3px;
   }
   input[type="checkbox"]:checked + label:before {
-    background: darkcyan;
+    background: black;
     color: #fff;
     content: "\2713";
     text-align: center;
@@ -135,7 +140,7 @@ input {
   }
 
   input[type="checkbox"]:focus + label::before {
-      outline: darkcyan;
+      outline: black;
   }
 }
 
@@ -147,6 +152,7 @@ button {
 
 ul {
   padding-left: 0;
+  margin: 0;
 
   li {
     list-style-type: none;

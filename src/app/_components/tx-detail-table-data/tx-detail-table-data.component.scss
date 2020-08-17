@@ -1,0 +1,64 @@
+:host {
+  float: left;
+  clear: both;
+
+  &.pad {
+    margin-bottom: 10px;
+  }
+}
+
+.asset-row {
+  // width: 100%;
+  float: left;
+  clear: both;
+  margin-top: 15px;
+
+  .asset-data {
+    float: left;
+    min-width: 80px;
+
+    .asset-logo {
+      display: flex;
+      position: relative;
+      justify-content: center;
+      align-items: center;
+      height: 16px;
+      width: 16px;
+      margin-right: 8px;
+
+      img {
+        width: 100%;
+      }
+
+      .unknown-asset-name {
+        font-size: 1.0rem;
+        position: absolute;
+        top: 0;
+      }
+    }
+  }
+
+}
+
+.tx-id {
+  background-color: darkgreen;
+  float: left;
+  color: white;
+  padding: 3px;
+  border-radius: 3px;
+  margin-right: 8px;
+
+  &--out {
+    background-color: navy;
+  }
+
+  a {
+    color: white;
+  }
+}
+
+.tx-address {
+  float: left;
+  clear: both;
+}
+

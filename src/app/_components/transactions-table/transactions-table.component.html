@@ -1,73 +1,52 @@
 <table *ngIf="transactions" class="shadow">
   <thead>
     <tr>
+      <th>Type</th>
       <th>In</th>
       <th>Out</th>
-      <th>Type</th>
       <th>Status</th>
       <th>Date</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let transaction of transactions">
-      <!-- <td *ngIf="transaction.pool && transaction.pool.length > 1"><a [routerLink]="['/', 'pools', transaction.pool]">{{transaction.pool}}</a></td> -->
-      <!-- <td *ngIf="!transaction.pool || transaction.pool && transaction.pool.length <= 1">-</td> -->
 
-      <!-- IN -->
       <td>
 
-        <div>Address <br />
-          <a [routerLink]="['/', 'addresses', transaction.in.address]">{{transaction.in.address.substring(0, 8)}}...{{transaction.in.address.substring(transaction.in.address.length - 4, transaction.in.address.length)}}</a>
-        </div>
-        <br />
-        <div>ID <br />
-          <a [routerLink]="['/', 'txs', transaction.in.txID]">{{transaction.in.txID.substring(0, 8)}}...{{transaction.in.txID.substring(transaction.in.txID.length - 4, transaction.in.txID.length)}}</a>
-        </div>
-        <br />
+        {{transaction.type}}
 
-        <table>
+        <!-- <fa-icon *ngIf="transaction.type == 'swap'" [icon]="swapIcon" [title]="transaction.type"></fa-icon>
+        <fa-icon *ngIf="transaction.type == 'stake'" [icon]="stakeIcon" [title]="transaction.type"></fa-icon>
+        <fa-icon *ngIf="transaction.type == 'unstake'" [icon]="unStakeIcon" [title]="transaction.type"></fa-icon>
+        <fa-icon *ngIf="transaction.type == 'refund'" [icon]="refundIcon" [title]="transaction.type"></fa-icon>
+        <fa-icon *ngIf="transaction.type == 'add'" [icon]="addIcon" [title]="transaction.type"></fa-icon>
+        <div *ngIf="transaction.type == 'doubleSwap'" [title]="transaction.type">
+          <fa-icon [icon]="swapIcon"></fa-icon><br/>
+          <fa-icon [icon]="swapIcon"></fa-icon>
+        </div> -->
+      </td>
 
-          <tbody>
-            <tr *ngFor="let coin of transaction.in.coins; let i = index">
-              <td><a [routerLink]="['/', 'pools', coin.asset]">{{coin.asset}}</a></td>
-              <td>{{coin.amount}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- IN -->
+      <td class="transaction-data">
+
+        <app-tx-detail-table-data [transactionDetail]="transaction.in" direction="IN"></app-tx-detail-table-data>
 
       </td>
 
       <!-- OUT -->
-      <td>
+      <td class="transaction-data">
 
-        <ul *ngFor="let out of transaction.out">
+        <ul>
 
-          <li>
+          <li class="out-data" *ngFor="let out of transaction.out; let i = index">
 
-            <div>Address <br />
-              <a [routerLink]="['/', 'addresses', out.address]">{{out.address.substring(0, 8)}}...{{out.address.substring(out.address.length - 4, out.address.length)}}</a>
-            </div>
-            <br />
-            <div>ID <br />
-              <a [routerLink]="['/', 'txs', out.txID]">{{out.txID.substring(0, 8)}}...{{out.txID.substring(out.txID.length - 4, out.txID.length)}}</a>
-            </div>
-            <br />
-
-            <table>
-
-              <tbody>
-                <tr *ngFor="let coin of out.coins; let i = index">
-                  <td><a [routerLink]="['/', 'pools', coin.asset]">{{coin.asset}}</a></td>
-                  <td>{{coin.amount}}</td>
-                </tr>
-              </tbody>
-            </table>
+            <app-tx-detail-table-data [transactionDetail]="out" direction="OUT" [class.pad]="transaction.out.length > 1 && i < (transaction.out.length - 1)"></app-tx-detail-table-data>
 
           </li>
 
         </ul>
       </td>
-      <td>{{transaction.type}}</td>
+
       <td>{{transaction.status}}</td>
       <td>{{transaction.date * 1000 | date:'short'}}</td>
     </tr>
