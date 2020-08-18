@@ -30,7 +30,7 @@ export class UiStyleToggleService {
     }
     setTimeout(() => {
       document.body.classList.add('animate-colors-transition');
-    }, 500);
+    }, 250);
   }
 
   public toggle() {
