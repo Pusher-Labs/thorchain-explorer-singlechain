@@ -1,12 +1,13 @@
 <h1 class="mobile-padding">THORChain Explorer</h1>
 
-<div id="dashboard" class="grid">
+<app-loading *ngIf="!network || !nodes || !transactions"></app-loading>
+
+<div id="dashboard" class="grid" *ngIf="network && nodes && transactions">
 
   <!-- Network Status Summary -->
   <div class="grid-item" [ngClass]="{'flxr flxr--just-center flxr--align-center': !network}">
     <app-network-summary-table *ngIf="network" [network]="network"></app-network-summary-table>
     <a *ngIf="network" [routerLink]="['/', 'network']" class="view-more">View Network</a>
-    <span *ngIf="!network">...</span>
   </div>
 
   <!-- Nodes Summary -->
@@ -29,7 +30,6 @@
       </tbody>
     </table>
     <a *ngIf="nodes" [routerLink]="['/', 'nodes']" class="view-more">View All Nodes</a>
-    <span *ngIf="!nodes">...</span>
   </div>
 
   <!-- Dash Transactions Summary-->
@@ -73,12 +73,10 @@
       </tbody>
     </table>
     <a *ngIf="transactions" [routerLink]="['/', 'txs']" [queryParams]="{offset: 0}" class="view-more">View More Transactions</a>
-    <span *ngIf="!transactions">...</span>
   </div>
 
   <!-- <div class="grid-item" [ngClass]="{'flxr flxr--just-center flxr--align-center': !stats}">
     <app-stats-table *ngIf="stats" [stats]="stats"></app-stats-table>
-    <span *ngIf="!stats">...</span>
   </div> -->
 
 </div>

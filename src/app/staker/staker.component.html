@@ -1,51 +1,57 @@
 <h1 *ngIf="address" class="mobile-padding break-word">Staker: {{address}}</h1>
 
-<table *ngIf="staker" class="shadow margin-bottom">
-  <thead>
-    <tr>
-      <th colspan="2">Staker Info</th>
-    </tr>
-  </thead>
-  <tbody>
+<div *ngIf="staker && stakerPoolsData">
 
-    <tr>
-      <td>Total Earned</td>
-      <td>{{staker.totalEarned}}</td>
-    </tr>
+  <table *ngIf="staker" class="shadow margin-bottom">
+    <thead>
+      <tr>
+        <th colspan="2">Staker Info</th>
+      </tr>
+    </thead>
+    <tbody>
 
-    <tr>
-      <td>Total Staked</td>
-      <td>{{staker.totalStaked}}</td>
-    </tr>
+      <tr>
+        <td>Total Earned</td>
+        <td>{{staker.totalEarned}}</td>
+      </tr>
 
-    <tr>
-      <td>Total ROI</td>
-      <td>{{staker.totalROI}}</td>
-    </tr>
+      <tr>
+        <td>Total Staked</td>
+        <td>{{staker.totalStaked}}</td>
+      </tr>
 
-  </tbody>
-</table>
+      <tr>
+        <td>Total ROI</td>
+        <td>{{staker.totalROI}}</td>
+      </tr>
 
-<table *ngIf="stakerPoolsData" class="shadow">
-  <thead>
-    <tr>
-      <th colspan="4">Staker Pools</th>
-    </tr>
-    <tr>
-      <th>Asset</th>
-      <th>Date First Staked</th>
-      <th>Height Last Staked</th>
-      <th>Stake Units</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let pool of stakerPoolsData">
-      <td><a [routerLink]="['/', 'pools', pool.asset]">{{pool.asset}}</a></td>
-      <td>{{pool.dateFirstStaked * 1000 | date:'short'}}</td>
-      <td>{{pool.heightLastStaked}}</td>
-      <td>{{pool.stakeUnits}}</td>
-    </tr>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+
+  <table *ngIf="stakerPoolsData" class="shadow">
+    <thead>
+      <tr>
+        <th colspan="4">Staker Pools</th>
+      </tr>
+      <tr>
+        <th>Asset</th>
+        <th>Date First Staked</th>
+        <th>Height Last Staked</th>
+        <th>Stake Units</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pool of stakerPoolsData">
+        <td><a [routerLink]="['/', 'pools', pool.asset]">{{pool.asset}}</a></td>
+        <td>{{pool.dateFirstStaked * 1000 | date:'short'}}</td>
+        <td>{{pool.heightLastStaked}}</td>
+        <td>{{pool.stakeUnits}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<app-loading *ngIf="!staker || !stakerPoolsData"></app-loading>
 
 

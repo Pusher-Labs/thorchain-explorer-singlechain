@@ -8,4 +8,4 @@
 
 <app-nodes-table *ngIf="nodes" [nodes]="nodes"></app-nodes-table>
 
-<span *ngIf="!nodes">. . .</span>
+<app-loading *ngIf="!nodes"></app-loading>
