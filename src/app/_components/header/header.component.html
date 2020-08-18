@@ -22,11 +22,20 @@
 
     <br />
 
+    <label class="switch">
+      <input type="checkbox" (click)="toggleTheme()">
+      <span class="slider round"></span>
+    </label>
+
     <div id="network-status-container">Network Status:
       <span *ngIf="networkSecurityStatus" id="network-status">
         <fa-icon class="optimal" *ngIf="networkSecurityStatus == 'Optimal'" [icon]="optimalIcon"></fa-icon>
-        <fa-icon class="warning" *ngIf="(networkSecurityStatus == 'Underbonded' || networkSecurityStatus == 'Overbonded')" [icon]="warningIcon"></fa-icon>
-        <fa-icon class="alert" *ngIf="(networkSecurityStatus == 'Insecure' || networkSecurityStatus == 'Inefficient' || networkSecurityStatus == 'Down')" [icon]="alertIcon"></fa-icon>
+        <fa-icon class="warning"
+          *ngIf="(networkSecurityStatus == 'Underbonded' || networkSecurityStatus == 'Overbonded')"
+          [icon]="warningIcon"></fa-icon>
+        <fa-icon class="alert"
+          *ngIf="(networkSecurityStatus == 'Insecure' || networkSecurityStatus == 'Inefficient' || networkSecurityStatus == 'Down')"
+          [icon]="alertIcon"></fa-icon>
         {{networkSecurityStatus}}
       </span>
       <span *ngIf="!networkSecurityStatus">...</span>

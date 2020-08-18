@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,11 +23,17 @@ import { StakerService } from './_services/staker.service';
 import { StatsService } from './_services/stats.service';
 import { TransactionService } from './_services/transaction.service';
 import { VersionService } from './_services/version.service';
+import { UiStyleToggleService } from './_services/ui-style-toggle.service';
+import { LocalStorageService } from './_services/local-storage.service';
 
 /**
  * External
  */
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+export function themeFactory(themeService: UiStyleToggleService) {
+  return () => themeService.setThemeOnStart();
+}
 
 @NgModule({
   declarations: [
@@ -51,7 +57,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     StakerService,
     StatsService,
     TransactionService,
-    VersionService
+    VersionService,
+    UiStyleToggleService,
+    LocalStorageService,
+    {provide: APP_INITIALIZER, useFactory: themeFactory, deps: [UiStyleToggleService], multi: true},
   ],
   bootstrap: [AppComponent]
 })

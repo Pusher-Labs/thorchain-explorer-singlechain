@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+@import "styles/colors";
+@import "styles/animations";
+@import "styles/theme";
 
 * {
   box-sizing: border-box;
@@ -25,16 +28,23 @@ body {
   justify-content: center;
   align-items: center;
   flex-flow: column;
-  background-color: rgba(0, 0, 0, 0.01);
+  background-color: var(--background-color);
   font-size: 1.6rem;
   margin: 0;
   overflow-x: hidden;
 }
 
+h1, span, label {
+  color: var(--toolbar-text-color);
+}
+
+span {
+  color: var(--toolbar-text-color);
+}
 
 table {
   border-collapse: collapse;
-  background-color: white;
+  background-color: var(--background-dashboard);
   width:100%;
   border-radius: 5px;
   overflow: hidden;
@@ -42,9 +52,10 @@ table {
   th, td {
     padding: 5px 10px;
     border-bottom: 1px solid gainsboro;
-    overflow:hidden;/* optionnal*/
+    overflow: hidden; /* optionnal*/
     padding: 10px;
     vertical-align: top;
+    color: var(--toolbar-text-color);
 
     &:first-of-type {
       border-left: 0;
@@ -71,7 +82,7 @@ table {
       }
 
       &:hover {
-        background-color: whitesmoke;
+        background-color: var(--hover-text-color);
       }
 
     }
@@ -81,7 +92,7 @@ table {
 }
 
 a {
-  color: black;
+  color: var(--link-color);
 }
 
 h1 {
@@ -236,7 +247,7 @@ ul {
   row-gap: 30px;
 
   .grid-item {
-    background-color: white;
+    background-color: var(--background-dashboard);
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     min-height: 225px;
