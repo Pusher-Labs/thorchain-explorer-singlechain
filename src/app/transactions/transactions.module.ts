@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TransactionsComponent } from './transactions.component';
 import { TransactionsTableModule } from '../_components/transactions-table/transactions-table.module';
-
+import { LoadingModule } from '../_components/loading/loading.module';
 
 @NgModule({
   declarations: [TransactionsComponent],
@@ -12,6 +12,7 @@ import { TransactionsTableModule } from '../_components/transactions-table/trans
     CommonModule,
     TransactionsTableModule,
     FormsModule,
+    LoadingModule,
     RouterModule.forChild([
       {
         path: '',

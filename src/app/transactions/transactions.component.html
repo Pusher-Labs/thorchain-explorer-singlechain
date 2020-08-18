@@ -1,49 +1,52 @@
 
 <h1 class="mobile-padding">TXs</h1>
 
-<div *ngIf="selectedTypes" class="type-filter flxr">
+<div *ngIf="transactions">
 
-  <div class="checkbox-container">
-    <input [(ngModel)]="selectedTypes.add" type="checkbox" name="add" id="add" (change)="filterType()" />
-    <label for="add">Add</label>
+  <div *ngIf="selectedTypes" class="type-filter flxr">
+
+    <div class="checkbox-container">
+      <input [(ngModel)]="selectedTypes.add" type="checkbox" name="add" id="add" (change)="filterType()" />
+      <label for="add">Add</label>
+    </div>
+
+    <div class="checkbox-container">
+      <input [(ngModel)]="selectedTypes.doubleSwap" type="checkbox" name="doubleSwap" id="doubleSwap" (change)="filterType()" />
+      <label for="doubleSwap">Double Swap</label>
+    </div>
+
+    <div class="checkbox-container">
+      <input [(ngModel)]="selectedTypes.refund" type="checkbox" name="refund" id="refund" (change)="filterType()" />
+      <label for="refund">Refund</label>
+    </div>
+
+    <div class="checkbox-container">
+      <input [(ngModel)]="selectedTypes.stake" type="checkbox" name="stake" id="stake" (change)="filterType()" />
+      <label for="stake">Stake</label>
+    </div>
+
+    <div class="checkbox-container">
+      <input [(ngModel)]="selectedTypes.swap" type="checkbox" name="swap" id="swap" (change)="filterType()" />
+      <label for="swap">Swap</label>
+    </div>
+
+    <div class="checkbox-container">
+      <input [(ngModel)]="selectedTypes.unstake" type="checkbox" name="unstake" id="unstake" (change)="filterType()" />
+      <label for="unstake">Unstake</label>
+    </div>
+
+
   </div>
 
-  <div class="checkbox-container">
-    <input [(ngModel)]="selectedTypes.doubleSwap" type="checkbox" name="doubleSwap" id="doubleSwap" (change)="filterType()" />
-    <label for="doubleSwap">Double Swap</label>
-  </div>
+  <app-transactions-table [transactions]="transactions"></app-transactions-table>
 
-  <div class="checkbox-container">
-    <input [(ngModel)]="selectedTypes.refund" type="checkbox" name="refund" id="refund" (change)="filterType()" />
-    <label for="refund">Refund</label>
+  <div class="page-actions">
+    <button *ngIf="offset > 0" (click)="setPage(0)"><<</button>
+    <button *ngIf="offset > 0" (click)="setPage(offset - limit)"><</button>
+    <button *ngIf="offset + limit < totalCount" (click)="setPage(offset + limit)">></button>
+    <button *ngIf="offset + limit < totalCount" (click)="setPage(getLastPageOffset())">>></button>
   </div>
-
-  <div class="checkbox-container">
-    <input [(ngModel)]="selectedTypes.stake" type="checkbox" name="stake" id="stake" (change)="filterType()" />
-    <label for="stake">Stake</label>
-  </div>
-
-  <div class="checkbox-container">
-    <input [(ngModel)]="selectedTypes.swap" type="checkbox" name="swap" id="swap" (change)="filterType()" />
-    <label for="swap">Swap</label>
-  </div>
-
-  <div class="checkbox-container">
-    <input [(ngModel)]="selectedTypes.unstake" type="checkbox" name="unstake" id="unstake" (change)="filterType()" />
-    <label for="unstake">Unstake</label>
-  </div>
-
 
 </div>
 
-<app-transactions-table [transactions]="transactions"></app-transactions-table>
-
-<!-- <br /> -->
-
-<div class="page-actions">
-  <button *ngIf="offset > 0" (click)="setPage(0)"><<</button>
-  <button *ngIf="offset > 0" (click)="setPage(offset - limit)"><</button>
-  <button *ngIf="offset + limit < totalCount" (click)="setPage(offset + limit)">></button>
-  <button *ngIf="offset + limit < totalCount" (click)="setPage(getLastPageOffset())">>></button>
-</div>
-
+<app-loading *ngIf="!transactions"></app-loading>

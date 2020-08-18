@@ -129,7 +129,7 @@
 
 </div>
 
-<div *ngIf="!transaction && !error">...</div>
+<app-loading *ngIf="!transaction && !error">...</app-loading>
 
 <div *ngIf="!transaction && error">
   {{error}}

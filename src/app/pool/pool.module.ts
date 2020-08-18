@@ -6,6 +6,7 @@ import { TransactionsTableModule } from '../_components/transactions-table/trans
 import { PoolTxsComponent } from './pool-txs/pool-txs.component';
 import { PoolDetailsComponent } from './pool-details/pool-details.component';
 import { PipesModule } from '../_pipes/pipes.module';
+import { LoadingModule } from '../_components/loading/loading.module';
 
 @NgModule({
   declarations: [PoolComponent, PoolTxsComponent, PoolDetailsComponent],
@@ -13,6 +14,7 @@ import { PipesModule } from '../_pipes/pipes.module';
     CommonModule,
     PipesModule,
     TransactionsTableModule,
+    LoadingModule,
     RouterModule.forChild([
       {
         path: '',
