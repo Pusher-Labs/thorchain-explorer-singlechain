@@ -75,7 +75,8 @@ table {
 
       &:nth-of-type(even) {
 
-        background: whitesmoke;
+        // todo: make work with dark mode..
+        // background: whitesmoke;
 
         @media (min-width: 768px) { background: none; }
 
