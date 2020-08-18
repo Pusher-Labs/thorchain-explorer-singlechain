@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+@import "styles/colors";
+@import "styles/animations";
+@import "styles/theme";
 
 * {
   box-sizing: border-box;
@@ -25,7 +28,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-flow: column;
-  background-color: rgba(0, 0, 0, 0.01);
+  background-color: var(--background-color);
   font-size: 1.6rem;
   margin: 0;
   overflow-x: hidden;

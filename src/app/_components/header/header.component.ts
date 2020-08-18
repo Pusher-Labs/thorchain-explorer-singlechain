@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NetworkService } from 'src/app/_services/network.service';
 import { IconDefinition, faExclamationCircle, faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { UiStyleToggleService } from '../../_services/ui-style-toggle.service';
 
 enum NetworkSecurityStatus {
   INEFFICIENT = 'Inefficient',
@@ -25,7 +26,8 @@ export class HeaderComponent implements OnInit {
   networkSecurity: number;
   networkSecurityStatus: NetworkSecurityStatus;
 
-  constructor(private networkService: NetworkService) {
+  constructor(private networkService: NetworkService,
+              private uiStyleToggleService: UiStyleToggleService) {
     this.optimalIcon = faCheckCircle;
     this.warningIcon = faExclamationCircle;
     this.alertIcon = faExclamationTriangle;
@@ -74,6 +76,10 @@ export class HeaderComponent implements OnInit {
       this.networkSecurityStatus = NetworkSecurityStatus.INSECURE;
     }
 
+  }
+
+  toggleTheme() {
+    this.uiStyleToggleService.toggle();
   }
 
 }
