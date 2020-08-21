@@ -7,6 +7,23 @@ header {
 
   //Theme button
 
+  .icon-style {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    &:hover {
+      background: var(--hover-text-color);
+      transition: background-color 100ms ease-in-out 0.1s;
+    }
+    svg {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+      overflow: visible;
+    }
+  }
+
   .switch {
     position: relative;
     display: inline-block;
@@ -69,7 +86,7 @@ header {
     border-radius: 50%;
   }
 
-  //
+  // End theme button
 
   #logo {
     width: 30px;

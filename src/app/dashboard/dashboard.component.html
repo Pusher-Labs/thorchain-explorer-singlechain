@@ -14,10 +14,11 @@
   <div class="grid-item" [ngClass]="{'flxr flxr--just-center flxr--align-center': !nodes}">
     <table *ngIf="nodes">
       <thead>
-        <tr><th colspan="2">Nodes</th></tr>
+        <tr><th colspan="3">Nodes</th></tr>
         <tr>
           <th>Address</th>
           <th>Status</th>
+          <th>Current Award</th>
         </tr>
       </thead>
       <tbody>
@@ -26,6 +27,7 @@
             <a [routerLink]="['/', 'nodes', node.node_address]">{{node.node_address.substring(0, 8)}}...{{node.node_address.substring(node.node_address.length - 4, node.node_address.length)}}</a>
           </td>
           <td>{{node.status}}</td>
+          <td>{{node.current_award}}</td>
         </tr>
       </tbody>
     </table>
