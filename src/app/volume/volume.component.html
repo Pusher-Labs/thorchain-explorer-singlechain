@@ -1,0 +1,15 @@
+<div *ngIf="this.chartOptions !== undefined">
+  <div>
+    <highcharts-chart style="display: block" [Highcharts]="Highcharts" [constructorType]="'chart'"
+      [options]="chartOptions"></highcharts-chart>
+  </div>
+
+  <form>
+    <div class="form-group">
+      <label for="volume">Choose option</label>
+      <select class="form-control ploth-volume" id="volume" (change)="onChange($event)">
+        <option *ngFor="let state of states" [value]="state.value"> {{ state.name }} </option>
+      </select>
+    </div>
+  </form>
+</div>

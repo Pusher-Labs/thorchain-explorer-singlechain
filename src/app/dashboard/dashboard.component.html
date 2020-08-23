@@ -77,6 +77,10 @@
     <a *ngIf="transactions" [routerLink]="['/', 'txs']" [queryParams]="{offset: 0}" class="view-more">View More Transactions</a>
   </div>
 
+  <div class="grid-item">
+    <app-volume></app-volume>
+  </div>
+
   <!-- <div class="grid-item" [ngClass]="{'flxr flxr--just-center flxr--align-center': !stats}">
     <app-stats-table *ngIf="stats" [stats]="stats"></app-stats-table>
   </div> -->
