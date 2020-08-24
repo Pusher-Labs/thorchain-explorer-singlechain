@@ -22,7 +22,7 @@ export class NetworkDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getConstants();
-    const item = setInterval(() => console.log(this.orderActiveandStandByBonds()), 1000);
+    const item = setInterval(() => console.log(this.orderActiveandStandByBonds(), 1000));
     setTimeout(() => { clearInterval(item); }, 1000);
   }
 

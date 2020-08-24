@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
   warningIcon: IconDefinition;
   alertIcon: IconDefinition;
   checking: boolean;
+  theme: string;
 
   networkSecurity: number;
   networkSecurityStatus: NetworkSecurityStatus;
@@ -32,6 +33,7 @@ export class HeaderComponent implements OnInit {
     this.optimalIcon = faCheckCircle;
     this.warningIcon = faExclamationCircle;
     this.alertIcon = faExclamationTriangle;
+    this.theme = localStorage.getItem('THEME');
   }
 
   ngOnInit(): void {
@@ -86,10 +88,10 @@ export class HeaderComponent implements OnInit {
 
   checkTheme() {
     if (localStorage.getItem('THEME') === 'DARK') {
-      this.checking = false;
+      this.theme = 'DARK';
     }
     if (localStorage.getItem('THEME') === 'LIGHT') {
-      this.checking = true;
+      this.theme = 'LIGHT';
     }
   }
 
