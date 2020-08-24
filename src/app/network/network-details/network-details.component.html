@@ -100,7 +100,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let bond of network.standbyBonds">
+        <tr *ngFor="let bond of standByBonds">
           <td>{{bond | assetUnits:8 | number:"1.0-0"}}</td>
         </tr>
       </tbody>
