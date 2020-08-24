@@ -22,7 +22,7 @@ export class NetworkDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getConstants();
-    const item = setInterval(() => console.log(this.orderActiveandStandByBonds(), 1000));
+    const item = setInterval(() => this.orderActiveandStandByBonds(), 1000);
     setTimeout(() => { clearInterval(item); }, 1000);
   }
 
@@ -57,20 +57,22 @@ export class NetworkDetailsComponent implements OnInit {
 
   orderActiveandStandByBonds(): void {
 
-    for (const elem in this.network.activeBonds) {
-      if (elem) {
-        this.activeBonds.push(parseFloat(this.network.activeBonds[elem]));
+    if (this.network.activeBonds !== undefined) {
+      for (const elem in this.network.activeBonds) {
+        if (elem) {
+          this.activeBonds.push(parseFloat(this.network.activeBonds[elem]));
+        }
       }
-    }
 
-    for (const elem in this.network.standbyBonds) {
-      if (elem) {
-        this.standByBonds.push(parseFloat(this.network.standbyBonds[elem]));
+      for (const elem in this.network.standbyBonds) {
+        if (elem) {
+          this.standByBonds.push(parseFloat(this.network.standbyBonds[elem]));
+        }
       }
-    }
 
-    this.activeBonds.sort((a, b) => b - a);
-    this.standByBonds.sort((a, b) => b - a);
+      this.activeBonds.sort((a, b) => b - a);
+      this.standByBonds.sort((a, b) => b - a);
+    }
   }
 
 }
