@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VolumeService } from '../_services/volume.service';
+import { VolumeService } from '../../_services/volume.service';
 import * as Highcharts from 'highcharts';
 
 @Component({
@@ -11,8 +11,8 @@ export class VolumeComponent implements OnInit {
   states = [
     { name: 'Hour', value: 'hour' },
     { name: 'Day', value: 'day' },
-    { name: 'Month', value: 'month' },
-    { name: 'Year', value: 'year' }
+    // { name: 'Month', value: 'month' },
+    // { name: 'Year', value: 'year' }
   ];
 
   Highcharts = Highcharts;
@@ -39,24 +39,33 @@ export class VolumeComponent implements OnInit {
   onChange(event: any) {
     const value = event.target.value;
     if (value === 'hour') {
-      return this.getDefaultData();
+      this.getDefaultData();
+      return;
     }
     if (value === 'day') {
-      this.result = this.timeNow - (this.timeLabels.length * (this.unixHour * 24));
+      this.result = this.timeNow - (30 * (this.unixHour * 24));
     }
-    if (value === 'month') {
-      this.result = this.timeNow - (this.timeLabels.length * (this.unixHour * 730));
-    }
-    if (value === 'year') {
-      this.result = this.timeNow - (this.timeLabels.length * (this.unixHour * 8760));
-    }
+    // if (value === 'month') {
+    //   this.result = this.timeNow - (30 * (this.unixHour * 730));
+    // }
+    // if (value === 'year') {
+    //   this.result = this.timeNow - (30 * (this.unixHour * 8760));
+    // }
 
     this.volumeService.queryVolume(value, this.result, this.timeNow).subscribe(val => {
-      this.totalVolume = [{ data: val.map(prop => prop.totalVolume) }];
+
+      this.timeLabels = val.map(value => value.time);
+
+
+      this.setDayLabels(this.timeLabels);
+
+
+
+      this.totalVolume = [{ data: val.map(prop => +prop.totalVolume / (10 ** 8)) }];
       this.totalVolume = [{ data: this.totalVolume[0].data.toString().split(',').map((item: string) => parseInt(item, 10)) }];
-      this.buyVolume = [{ data: val.map(prop => prop.buyVolume) }];
+      this.buyVolume = [{ data: val.map(prop => +prop.buyVolume / (10 ** 8)) }];
       this.buyVolume = [{ data: this.buyVolume[0].data.toString().split(',').map((item: string) => parseInt(item, 10)) }];
-      this.sellVolume = [{ data: val.map(prop => prop.sellVolume) }];
+      this.sellVolume = [{ data: val.map(prop => +prop.sellVolume / (10 ** 8)) }];
       this.sellVolume = [{ data: this.sellVolume[0].data.toString().split(',').map((item: string) => parseInt(item, 10)) }];
 
       this.chartOptions = {
@@ -72,8 +81,15 @@ export class VolumeComponent implements OnInit {
           {
             name: 'sellVolume',
             data: this.sellVolume[0].data
-          }
-        ]
+          },
+        ],
+        xAxis: {
+          title: {
+            text: 'Time'
+          },
+          gridLineWidth: 1,
+          categories: this.timeString
+        },
       };
     });
   }
@@ -83,24 +99,12 @@ export class VolumeComponent implements OnInit {
     this.result = this.timeNow - (24 * (this.unixHour));
     this.volumeService.queryVolume(defaultChoose, this.result, this.timeNow).subscribe(value => {
       this.timeLabels = value.map(val => val.time);
-      for (const iter of this.timeLabels) {
-        const givenSeconds = iter;
-        const monthsArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        const dateObj = new Date(givenSeconds * 1000);
-        const hours = dateObj.getUTCHours();
-        const minutes = dateObj.getUTCMinutes();
-        const day = dateObj.getDate();
-        const year = dateObj.getFullYear();
-        const month = monthsArr[dateObj.getMonth()];
-
-        this.timeString.push(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}\
-        ${day.toString()} ${month.toString()} ${year.toString()}`);
-      }
-      this.totalVolume = [{ data: value.map(val => val.totalVolume) }];
+      this.setHourLabels(this.timeLabels);
+      this.totalVolume = [{ data: value.map(val => +val.totalVolume / (10 ** 8)) }];
       this.totalVolume = [{ data: this.totalVolume[0].data.toString().split(',').map((item) => parseInt(item, 10)) }];
-      this.buyVolume = [{ data: value.map(val => val.buyVolume) }];
+      this.buyVolume = [{ data: value.map(val => +val.buyVolume / (10 ** 8)) }];
       this.buyVolume = [{ data: this.buyVolume[0].data.toString().split(',').map((item) => parseInt(item, 10)) }];
-      this.sellVolume = [{ data: value.map(val => val.sellVolume) }];
+      this.sellVolume = [{ data: value.map(val => +val.sellVolume / (10 ** 8)) }];
       this.sellVolume = [{ data: this.sellVolume[0].data.toString().split(',').map((item) => parseInt(item, 10)) }];
 
       this.chartOptions = {
@@ -129,7 +133,7 @@ export class VolumeComponent implements OnInit {
           verticalAlign: 'bottom'
         },
         chart: {
-          styledMode: true
+          styledMode: true,
         },
         series: [
           {
@@ -150,4 +154,40 @@ export class VolumeComponent implements OnInit {
     });
 
   }
+
+
+  setHourLabels(timeLabels: number[]) {
+    this.timeString = [];
+    for (const iter of this.timeLabels) {
+      const givenSeconds = iter;
+      const monthsArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const dateObj = new Date(givenSeconds * 1000);
+      const hours = dateObj.getHours();
+      const minutes = dateObj.getUTCMinutes();
+      const day = dateObj.getDate();
+      const month = monthsArr[dateObj.getMonth()];
+
+      this.timeString.push(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}\
+      ${day.toString()} ${month.toString()}`);
+    }
+    console.log('time string is: ', this.timeString);
+  }
+
+  setDayLabels(timeLabels: number[]) {
+    this.timeString = [];
+
+
+    for (const iter of this.timeLabels) {
+      const givenSeconds = iter;
+      const monthsArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const dateObj = new Date(givenSeconds * 1000);
+      const day = dateObj.getDate();
+      const year = dateObj.getFullYear();
+      const month = monthsArr[dateObj.getMonth()];
+
+      this.timeString.push(`${day.toString()} ${month.toString()} ${year.toString()}`);
+    }
+
+  }
+
 }

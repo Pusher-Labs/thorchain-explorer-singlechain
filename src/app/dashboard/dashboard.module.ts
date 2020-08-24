@@ -8,10 +8,11 @@ import { PipesModule } from '../_pipes/pipes.module';
 import { NetworkSummaryTableModule } from '../_components/network-summary-table/network-summary-table.module';
 import { TxDetailTableDataModule } from '../_components/tx-detail-table-data/tx-detail-table-data.module';
 import { LoadingModule } from '../_components/loading/loading.module';
-import { VolumeComponent } from '../volume/volume.component';
+import { VolumeModule } from '../_components/volume/volume.module';
+import { TransactionsTableModule } from '../_components/transactions-table/transactions-table.module';
 
 @NgModule({
-  declarations: [DashboardComponent, StatsTableComponent, VolumeComponent],
+  declarations: [DashboardComponent, StatsTableComponent],
   imports: [
     CommonModule,
     PipesModule,
@@ -19,6 +20,8 @@ import { VolumeComponent } from '../volume/volume.component';
     NetworkSummaryTableModule,
     TxDetailTableDataModule,
     LoadingModule,
+    VolumeModule,
+    TransactionsTableModule,
     RouterModule.forChild([
       {
         path: '',

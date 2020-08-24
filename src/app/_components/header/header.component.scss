@@ -4,6 +4,7 @@ header {
   background-color: var(--header-background);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 15px;
+  position: relative;
 
   //Theme button
 
@@ -11,6 +12,15 @@ header {
     width: 35px;
     height: 35px;
     cursor: pointer;
+    position: absolute;
+    display: flex;
+
+    @media
+    only screen and (max-width: 767px),
+    (min-device-width: 768px) and (max-device-width: 1024px)  {
+      bottom: 5px;
+    }
+
     &:hover {
       background: var(--hover-text-color);
       transition: background-color 100ms ease-in-out 0.1s;
