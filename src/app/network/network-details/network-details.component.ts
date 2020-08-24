@@ -15,12 +15,15 @@ export class NetworkDetailsComponent implements OnInit {
   dailyBondReward: number;
   dailyStakeReward: number;
   monthlyNodeBondReward: number;
+  activeBonds: Array<number> = new Array();
+  standByBonds: Array<number> = new Array();
 
   constructor(private networkService: NetworkService, private constantsService: ConstantsService) { }
 
   ngOnInit(): void {
     this.getConstants();
-
+    const item = setInterval(() => console.log(this.orderActiveandStandByBonds()), 1000);
+    setTimeout(() => { clearInterval(item); }, 1000);
   }
 
   getConstants(): void {
@@ -50,6 +53,24 @@ export class NetworkDetailsComponent implements OnInit {
       },
       (err) => console.error('NetworkDetailsComponent -> error fetching network status: ', err)
     );
+  }
+
+  orderActiveandStandByBonds(): void {
+
+    for (const elem in this.network.activeBonds) {
+      if (elem) {
+        this.activeBonds.push(parseFloat(this.network.activeBonds[elem]));
+      }
+    }
+
+    for (const elem in this.network.standbyBonds) {
+      if (elem) {
+        this.standByBonds.push(parseFloat(this.network.standbyBonds[elem]));
+      }
+    }
+
+    this.activeBonds.sort((a, b) => b - a);
+    this.standByBonds.sort((a, b) => b - a);
   }
 
 }
