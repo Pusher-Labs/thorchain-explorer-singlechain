@@ -28,4 +28,5 @@ export interface ThorNode {
     release_height: string;
     reason: string;
   };
+  current_award: string;
 }

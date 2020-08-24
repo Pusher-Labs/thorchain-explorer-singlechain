@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
   optimalIcon: IconDefinition;
   warningIcon: IconDefinition;
   alertIcon: IconDefinition;
+  checking: boolean;
 
   networkSecurity: number;
   networkSecurityStatus: NetworkSecurityStatus;
@@ -80,6 +81,16 @@ export class HeaderComponent implements OnInit {
 
   toggleTheme() {
     this.uiStyleToggleService.toggle();
+    this.checkTheme();
+  }
+
+  checkTheme() {
+    if (localStorage.getItem('THEME') === 'DARK') {
+      this.checking = false;
+    }
+    if (localStorage.getItem('THEME') === 'LIGHT') {
+      this.checking = true;
+    }
   }
 
 }
