@@ -54,7 +54,7 @@ export class VolumeComponent implements OnInit {
 
     this.volumeService.queryVolume(value, this.result, this.timeNow).subscribe(val => {
 
-      this.timeLabels = val.map(value => value.time);
+      this.timeLabels = val.map(vol => vol.time);
 
       this.setDayLabels();
 
