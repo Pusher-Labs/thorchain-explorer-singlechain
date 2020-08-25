@@ -56,9 +56,7 @@ export class VolumeComponent implements OnInit {
 
       this.timeLabels = val.map(value => value.time);
 
-
-      this.setDayLabels(this.timeLabels);
-
+      this.setDayLabels();
 
 
       this.totalVolume = [{ data: val.map(prop => +prop.totalVolume / (10 ** 8)) }];
@@ -99,7 +97,7 @@ export class VolumeComponent implements OnInit {
     this.result = this.timeNow - (24 * (this.unixHour));
     this.volumeService.queryVolume(defaultChoose, this.result, this.timeNow).subscribe(value => {
       this.timeLabels = value.map(val => val.time);
-      this.setHourLabels(this.timeLabels);
+      this.setHourLabels();
       this.totalVolume = [{ data: value.map(val => +val.totalVolume / (10 ** 8)) }];
       this.totalVolume = [{ data: this.totalVolume[0].data.toString().split(',').map((item) => parseInt(item, 10)) }];
       this.buyVolume = [{ data: value.map(val => +val.buyVolume / (10 ** 8)) }];
@@ -156,7 +154,7 @@ export class VolumeComponent implements OnInit {
   }
 
 
-  setHourLabels(timeLabels: number[]) {
+  setHourLabels() {
     this.timeString = [];
     for (const iter of this.timeLabels) {
       const givenSeconds = iter;
@@ -170,12 +168,11 @@ export class VolumeComponent implements OnInit {
       this.timeString.push(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}\
       ${day.toString()} ${month.toString()}`);
     }
-    console.log('time string is: ', this.timeString);
+
   }
 
-  setDayLabels(timeLabels: number[]) {
+  setDayLabels() {
     this.timeString = [];
-
 
     for (const iter of this.timeLabels) {
       const givenSeconds = iter;

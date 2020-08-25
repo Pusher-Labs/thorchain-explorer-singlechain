@@ -24,10 +24,7 @@ export class TransactionService {
     this.limit = 10;
   }
 
-  index(p: TransactionIndexParams)
-  : Observable<TransactionDTO> {
-
-    console.log('params are: ', p);
+  index(p: TransactionIndexParams): Observable<TransactionDTO> {
 
     let params = new HttpParams().set('offset', String(p.offset)).set('limit', String(this.limit));
 

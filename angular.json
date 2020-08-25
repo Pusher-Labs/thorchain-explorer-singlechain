@@ -16,9 +16,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "allowedCommonJsDependencies": [
-            "lodash"
-          ],
+          "allowedCommonJsDependencies": [],
           "options": {
             "outputPath": "dist/thorchain-test",
             "index": "src/index.html",
