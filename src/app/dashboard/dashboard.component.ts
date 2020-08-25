@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
     /**
      * Temporarily removed bc this call frequently times out
      */
-    // this.getGlobalStats();
+    this.getGlobalStats();
 
     this.getTransactions();
     this.getNetworkStatus();

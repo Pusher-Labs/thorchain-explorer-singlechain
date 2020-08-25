@@ -7,67 +7,69 @@
   <tbody>
     <tr>
       <td>Daily Active Users</td>
-      <td>{{stats.dailyActiveUsers}}</td>
+      <td>{{stats.dailyActiveUsers | number}}</td>
     </tr>
     <tr>
       <td>Monthly Active Users</td>
-      <td>{{stats.monthlyActiveUsers}}</td>
+      <td>{{stats.monthlyActiveUsers | number}}</td>
     </tr>
     <tr>
       <td>Total Users</td>
-      <td>{{stats.totalUsers}}</td>
+      <td>{{stats.totalUsers | number}}</td>
     </tr>
     <tr>
       <td>Daily Tx</td>
-      <td>{{stats.dailyTx}}</td>
+      <td>{{stats.dailyTx | number}}</td>
     </tr>
     <tr>
       <td>Monthly Tx</td>
-      <td>{{stats.monthlyTx}}</td>
+      <td>{{stats.monthlyTx | number}}</td>
     </tr>
     <tr>
       <td>Total Tx</td>
-      <td>{{stats.totalTx}}</td>
+      <td>{{stats.totalTx | number}}</td>
     </tr>
     <tr>
       <td>Volume (24 Hour)</td>
-      <td>{{stats.totalVolume24hr}}</td>
+      <td>{{stats.totalVolume24hr | assetUnits:8 | number:"0.0-2"}}</td>
     </tr>
     <tr>
       <td>Total Volume</td>
-      <td>{{stats.totalVolume}}</td>
+      <td>{{stats.totalVolume | assetUnits:8 | number:"0.0-2"}}</td>
     </tr>
     <tr>
       <td>Total Staked</td>
-      <td>{{stats.totalStaked}}</td>
+      <td>{{stats.totalStaked | assetUnits:8 | number:"0.0-2"}}</td>
     </tr>
     <tr>
       <td>Total Depth</td>
-      <td>{{stats.totalDepth}}</td>
+      <td>{{stats.totalDepth | assetUnits:8 | number:"0.0-2"}}</td>
     </tr>
-    <tr>
+
+    <!-- TODO: add this back in once midgard is updated-->
+    <!-- <tr>
       <td>Total Earned</td>
-      <td>{{stats.totalEarned}}</td>
-    </tr>
+      <td>{{stats.totalEarned | assetUnits:8 | number:"0.0-2"}}</td>
+    </tr> -->
     <tr>
       <td>Pool Count</td>
       <td>{{stats.poolCount}}</td>
     </tr>
     <tr>
       <td>Total Asset Buys</td>
-      <td>{{stats.totalAssetBuys}}</td>
+      <td>{{stats.totalAssetBuys | number}}</td>
     </tr>
     <tr>
       <td>Total Asset Sells</td>
-      <td>{{stats.totalAssetSells}}</td>
+      <td>{{stats.totalAssetSells | number}}</td>
     </tr>
     <tr>
       <td>Total Stake Tx</td>
-      <td>{{stats.totalStakeTx}}</td>
+      <td>{{stats.totalStakeTx | number}}</td>
     </tr>
     <tr>
       <td>Total Withdraw Tx</td>
-      <td>{{stats.totalWithdrawTx}}</td>
+      <td>{{stats.totalWithdrawTx | number}}</td>
     </tr>
   </tbody>
 </table>

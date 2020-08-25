@@ -1,0 +1,12 @@
+<div class="volume-container" *ngIf="this.chartOptions !== undefined">
+
+
+  <select id="volume-interval-select" (change)="onChange($event)">
+    <option *ngFor="let state of states" [value]="state.value"> {{ state.name }} </option>
+  </select>
+
+  <highcharts-chart style="display: block" [Highcharts]="Highcharts" constructorType="chart"
+    [options]="chartOptions">
+  </highcharts-chart>
+
+</div>

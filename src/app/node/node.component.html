@@ -76,7 +76,7 @@
       </tr>
       <tr>
         <td>Current Award</td>
-        <td>{{thorNode.current_award}}</td>
+        <td>{{thorNode.current_award | assetUnits:8 | number:"0.0-2"}}</td>
       </tr>
     </tbody>
   </table>
