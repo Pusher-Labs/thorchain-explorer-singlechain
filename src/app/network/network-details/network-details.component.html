@@ -8,7 +8,7 @@
     <table *ngIf="network.bondMetrics">
       <thead>
         <tr>
-          <th colspan="2">Bond Metrics</th>
+          <th colspan="2">Active Bond Metrics</th>
         </tr>
       </thead>
 
@@ -18,43 +18,57 @@
           <td>{{network.bondMetrics.averageActiveBond | assetUnits:8 | number:"1.0-0"}}</td>
         </tr>
         <tr>
-          <td>Average Standby Bond</td>
-          <td>{{network.bondMetrics.averageStandbyBond | assetUnits:8 | number:"1.0-0"}}</td>
-        </tr>
-        <tr>
           <td>Maximum Active Bond</td>
           <td>{{network.bondMetrics.maximumActiveBond | assetUnits:8 | number:"1.0-0"}}</td>
-        </tr>
-        <tr>
-          <td>Maximum Standby Bond</td>
-          <td>{{network.bondMetrics.maximumStandbyBond | assetUnits:8 | number:"1.0-0"}}</td>
         </tr>
         <tr>
           <td>Median Active Bond</td>
           <td>{{network.bondMetrics.medianActiveBond | assetUnits:8 | number:"1.0-0"}}</td>
         </tr>
         <tr>
-          <td>Median Standby Bond</td>
-          <td>{{network.bondMetrics.medianStandbyBond | assetUnits:8 | number:"1.0-0"}}</td>
-        </tr>
-        <tr>
           <td>Minimum Active Bond</td>
           <td>{{network.bondMetrics.minimumActiveBond | assetUnits:8 | number:"1.0-0"}}</td>
+        </tr>
+        <tr>
+          <td>Total Active Bond</td>
+          <td>{{network.bondMetrics.totalActiveBond | assetUnits:8 | number:"1.0-0"}}</td>
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <div class="shadow grid-item">
+    <table *ngIf="network.bondMetrics">
+      <thead>
+        <tr>
+          <th colspan="2">Standby Bond Metrics</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Average Standby Bond</td>
+          <td>{{network.bondMetrics.averageStandbyBond | assetUnits:8 | number:"1.0-0"}}</td>
+        </tr>
+        <tr>
+          <td>Maximum Standby Bond</td>
+          <td>{{network.bondMetrics.maximumStandbyBond | assetUnits:8 | number:"1.0-0"}}</td>
+        </tr>
+        <tr>
+          <td>Median Standby Bond</td>
+          <td>{{network.bondMetrics.medianStandbyBond | assetUnits:8 | number:"1.0-0"}}</td>
         </tr>
         <tr>
           <td>Minimum Standby Bond</td>
           <td>{{network.bondMetrics.minimumStandbyBond | assetUnits:8 | number:"1.0-0"}}</td>
         </tr>
         <tr>
-          <td>Total Active Bond</td>
-          <td>{{network.bondMetrics.totalActiveBond | assetUnits:8 | number:"1.0-0"}}</td>
-        </tr>
-        <tr>
           <td>Total Standby Bond</td>
           <td>{{network.bondMetrics.totalStandbyBond | assetUnits:8 | number:"1.0-0"}}</td>
         </tr>
       </tbody>
-
     </table>
   </div>
 
@@ -68,7 +82,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let bond of network.activeBonds">
+        <tr *ngFor="let bond of activeBonds">
           <td>{{bond | assetUnits:8 | number:"1.0-0"}}</td>
         </tr>
       </tbody>
@@ -86,7 +100,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let bond of network.standbyBonds">
+        <tr *ngFor="let bond of standByBonds">
           <td>{{bond | assetUnits:8 | number:"1.0-0"}}</td>
         </tr>
       </tbody>

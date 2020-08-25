@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {TransactionDetail} from '../../_classes/transaction';
+import { TransactionDetail } from '../../_classes/transaction';
 
-enum CoveredAssets {
+export enum CoveredAssets {
   AVA   = 'AVA',
   AWC   = 'AWC',
   BNB   = 'BNB',

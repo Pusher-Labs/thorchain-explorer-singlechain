@@ -25,6 +25,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@thorchain/asgardex-binance": "^2.0.0",
     "@thorchain/asgardex-midgard": "^0.1.0",
+    "highcharts": "^8.2.0",
+    "highcharts-angular": "^2.7.0",
     "rxjs": "~6.6.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
