@@ -5,7 +5,60 @@
   </div>
 
   <div class="shadow grid-item">
-    <table *ngIf="network.bondMetrics">
+    <table *ngIf="network.blockRewards">
+
+      <thead>
+        <tr>
+          <th colspan="2">Block Rewards</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Block Reward</td>
+          <td *ngIf="dailyBlockReward">{{ dailyBlockReward | number:"0.0-2" }} / day</td>
+          <td *ngIf="!dailyBlockReward"> - </td>
+        </tr>
+        <tr>
+          <td>Bond Reward</td>
+          <td *ngIf="dailyBondReward">{{ dailyBondReward | number:"0.0-2"}} / day</td>
+          <td *ngIf="!dailyBondReward"> - </td>
+        </tr>
+        <tr>
+          <td>Stake Reward</td>
+          <td *ngIf="dailyStakeReward">{{ dailyStakeReward | number:"0.0-2"}} / day</td>
+          <td *ngIf="!dailyStakeReward"> - </td>
+        </tr>
+        <tr>
+          <td>Bond Reward / Node</td>
+          <td *ngIf="monthlyNodeBondReward">{{ monthlyNodeBondReward | number:"0.0-2"}} / month</td>
+          <td *ngIf="!monthlyNodeBondReward"> - </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+  <div class="shadow grid-item">
+    <table *ngIf="network.activeBonds">
+
+      <thead>
+        <tr>
+          <th colspan="2">Active Bonds</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let bond of activeBonds">
+          <td>{{bond | assetUnits:8 | number:"1.0-0"}}</td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+  <div class="shadow grid-item">
+    <table *ngIf="activeBonds">
       <thead>
         <tr>
           <th colspan="2">Active Bond Metrics</th>
@@ -40,6 +93,24 @@
   </div>
 
   <div class="shadow grid-item">
+    <table *ngIf="network.standbyBonds">
+
+      <thead>
+        <tr>
+          <th colspan="2">Standby Bonds</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let bond of standByBonds">
+          <td>{{bond | assetUnits:8 | number:"1.0-0"}}</td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+  <div class="shadow grid-item">
     <table *ngIf="network.bondMetrics">
       <thead>
         <tr>
@@ -69,77 +140,6 @@
           <td>{{network.bondMetrics.totalStandbyBond | assetUnits:8 | number:"1.0-0"}}</td>
         </tr>
       </tbody>
-    </table>
-  </div>
-
-  <div class="shadow grid-item">
-    <table *ngIf="network.activeBonds">
-
-      <thead>
-        <tr>
-          <th colspan="2">Active Bonds</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr *ngFor="let bond of activeBonds">
-          <td>{{bond | assetUnits:8 | number:"1.0-0"}}</td>
-        </tr>
-      </tbody>
-
-    </table>
-  </div>
-
-  <div class="shadow grid-item">
-    <table *ngIf="network.standbyBonds">
-
-      <thead>
-        <tr>
-          <th colspan="2">Standby Bonds</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr *ngFor="let bond of standByBonds">
-          <td>{{bond | assetUnits:8 | number:"1.0-0"}}</td>
-        </tr>
-      </tbody>
-
-    </table>
-  </div>
-
-  <div class="shadow grid-item">
-    <table *ngIf="network.blockRewards">
-
-      <thead>
-        <tr>
-          <th colspan="2">Block Rewards</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr>
-          <td>Block Reward</td>
-          <td *ngIf="dailyBlockReward">{{ dailyBlockReward | number:"0.0-2" }} / day</td>
-          <td *ngIf="!dailyBlockReward"> - </td>
-        </tr>
-        <tr>
-          <td>Bond Reward</td>
-          <td *ngIf="dailyBondReward">{{ dailyBondReward | number:"0.0-2"}} / day</td>
-          <td *ngIf="!dailyBondReward"> - </td>
-        </tr>
-        <tr>
-          <td>Stake Reward</td>
-          <td *ngIf="dailyStakeReward">{{ dailyStakeReward | number:"0.0-2"}} / day</td>
-          <td *ngIf="!dailyStakeReward"> - </td>
-        </tr>
-        <tr>
-          <td>Bond Reward / Node</td>
-          <td *ngIf="monthlyNodeBondReward">{{ monthlyNodeBondReward | number:"0.0-2"}} / month</td>
-          <td *ngIf="!monthlyNodeBondReward"> - </td>
-        </tr>
-      </tbody>
-
     </table>
   </div>
 
