@@ -16,6 +16,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
+          "allowedCommonJsDependencies": [],
           "options": {
             "outputPath": "dist/thorchain-test",
             "index": "src/index.html",
@@ -130,6 +131,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "thorchain-test"
 }

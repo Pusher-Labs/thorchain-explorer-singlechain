@@ -23,6 +23,7 @@ import { StakerService } from './_services/staker.service';
 import { StatsService } from './_services/stats.service';
 import { TransactionService } from './_services/transaction.service';
 import { VersionService } from './_services/version.service';
+import { VolumeService } from './_services/volume.service';
 import { UiStyleToggleService } from './_services/ui-style-toggle.service';
 import { LocalStorageService } from './_services/local-storage.service';
 
@@ -30,6 +31,7 @@ import { LocalStorageService } from './_services/local-storage.service';
  * External
  */
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 export function themeFactory(themeService: UiStyleToggleService) {
   return () => themeService.setThemeOnStart();
@@ -39,14 +41,15 @@ export function themeFactory(themeService: UiStyleToggleService) {
   declarations: [
     AppComponent,
     SearchComponent,
-    HeaderComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HighchartsChartModule
   ],
   providers: [
     AssetService,
@@ -58,6 +61,7 @@ export function themeFactory(themeService: UiStyleToggleService) {
     StatsService,
     TransactionService,
     VersionService,
+    VolumeService,
     UiStyleToggleService,
     LocalStorageService,
     {provide: APP_INITIALIZER, useFactory: themeFactory, deps: [UiStyleToggleService], multi: true},

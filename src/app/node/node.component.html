@@ -20,7 +20,7 @@
       </tr>
       <tr>
         <td>Status Since</td>
-        <td>{{thorNode.status_since}}</td>
+        <td>{{thorNode.status_since | number}}</td>
       </tr>
       <tr>
         <td>IP Address</td>
@@ -32,7 +32,7 @@
       </tr>
       <tr>
         <td>Active Block Height</td>
-        <td>{{thorNode.active_block_height}}</td>
+        <td>{{thorNode.active_block_height | number}}</td>
       </tr>
       <tr>
         <td>In Jail</td>
@@ -52,7 +52,7 @@
       </tr>
       <tr>
         <td>Bond</td>
-        <td>{{thorNode.bond}}</td>
+        <td>{{thorNode.bond | assetUnits:8 | number}}</td>
       </tr>
       <tr>
         <td>Bond Address</td>
@@ -73,6 +73,10 @@
       <tr>
         <td>Slash Points</td>
         <td>{{thorNode.slash_points}}</td>
+      </tr>
+      <tr>
+        <td>Current Award</td>
+        <td>{{thorNode.current_award | assetUnits:8 | number:"0.0-2"}}</td>
       </tr>
     </tbody>
   </table>

@@ -38,7 +38,9 @@
 
   </div>
 
-  <app-transactions-table [transactions]="transactions"></app-transactions-table>
+
+    <app-transactions-table class="shadow" [transactions]="transactions"></app-transactions-table>
+
 
   <div class="page-actions">
     <button *ngIf="offset > 0" (click)="setPage(0)"><<</button>

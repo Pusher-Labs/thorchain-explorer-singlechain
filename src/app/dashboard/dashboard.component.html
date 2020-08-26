@@ -1,82 +1,60 @@
 <h1 class="mobile-padding">THORChain Explorer</h1>
 
-<app-loading *ngIf="!network || !nodes || !transactions"></app-loading>
+<app-loading *ngIf="!network || !nodes || !transactions || !stats"></app-loading>
 
-<div id="dashboard" class="grid" *ngIf="network && nodes && transactions">
+<div id="dashboard">
 
-  <!-- Network Status Summary -->
-  <div class="grid-item" [ngClass]="{'flxr flxr--just-center flxr--align-center': !network}">
-    <app-network-summary-table *ngIf="network" [network]="network"></app-network-summary-table>
-    <a *ngIf="network" [routerLink]="['/', 'network']" class="view-more">View Network</a>
+  <div class="grid" *ngIf="network && nodes && transactions && stats">
+
+    <!-- Network Status Summary -->
+    <div class="grid-item">
+      <app-network-summary-table *ngIf="network" [network]="network"></app-network-summary-table>
+      <a *ngIf="network" [routerLink]="['/', 'network']" class="view-more">View Network</a>
+    </div>
+
+
+    <!-- Volume -->
+    <div class="grid-item">
+      <app-volume></app-volume>
+    </div>
+
+    <!-- Daily Stats-->
+    <div class="grid-item">
+      <app-stats-table *ngIf="stats" [stats]="stats"></app-stats-table>
+    </div>
+
+
+    <!-- Nodes Summary -->
+    <div class="grid-item">
+      <table *ngIf="nodes">
+        <thead>
+          <tr><th colspan="3">Nodes</th></tr>
+          <tr>
+            <th>Address</th>
+            <th>Status</th>
+            <th>Current Award</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let node of nodes | slice:0:(nodes.length < 13) ? nodes.length : 13;">
+            <td>
+              <a [routerLink]="['/', 'nodes', node.node_address]">{{node.node_address.substring(0, 8)}}...{{node.node_address.substring(node.node_address.length - 4, node.node_address.length)}}</a>
+            </td>
+            <td>{{node.status}}</td>
+            <td>{{node.current_award | assetUnits:8 | number}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <a *ngIf="nodes" [routerLink]="['/', 'nodes']" class="view-more">View All Nodes</a>
+    </div>
+
   </div>
 
-  <!-- Nodes Summary -->
-  <div class="grid-item" [ngClass]="{'flxr flxr--just-center flxr--align-center': !nodes}">
-    <table *ngIf="nodes">
-      <thead>
-        <tr><th colspan="2">Nodes</th></tr>
-        <tr>
-          <th>Address</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let node of nodes | slice:0:(nodes.length < 8) ? nodes.length : 8;">
-          <td>
-            <a [routerLink]="['/', 'nodes', node.node_address]">{{node.node_address.substring(0, 8)}}...{{node.node_address.substring(node.node_address.length - 4, node.node_address.length)}}</a>
-          </td>
-          <td>{{node.status}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <a *ngIf="nodes" [routerLink]="['/', 'nodes']" class="view-more">View All Nodes</a>
-  </div>
+    <!-- Dash Transactions Summary-->
 
-  <!-- Dash Transactions Summary-->
-  <div class="grid-item" [ngClass]="{'flxr flxr--just-center flxr--align-center': !transactions}">
-    <table *ngIf="transactions">
-      <thead>
-        <tr>
-          <th colspan="2">Recent Transactions</th>
-        </tr>
-        <tr>
-          <th>In</th>
-          <th>Out</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let tx of transactions | slice:0:5">
-          <td>
-
-            <app-tx-detail-table-data [transactionDetail]="tx.in" direction="IN"></app-tx-detail-table-data>
-
-          </td>
-          <td>
-
-            <div *ngIf="tx.out && tx.out.length > 0">
-
-              <div class="out-data">
-
-                <app-tx-detail-table-data [transactionDetail]="tx.out[0]" direction="OUT"></app-tx-detail-table-data>
-
-                <br *ngIf="tx.out.length > 1" />
-                <span style="float: right;" *ngIf="tx.out.length > 1"> + {{tx.out.length - 1}}</span> <br />
-
-              </div>
-
-            </div>
-
-            <span *ngIf="!tx.out || tx.out && tx.out.length < 1"> - </span>
-
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <a *ngIf="transactions" [routerLink]="['/', 'txs']" [queryParams]="{offset: 0}" class="view-more">View More Transactions</a>
-  </div>
-
-  <!-- <div class="grid-item" [ngClass]="{'flxr flxr--just-center flxr--align-center': !stats}">
-    <app-stats-table *ngIf="stats" [stats]="stats"></app-stats-table>
-  </div> -->
+    <div class="grid-item">
+      <app-transactions-table [transactions]="transactions"></app-transactions-table>
+      <a [routerLink]="['/', 'txs']" [queryParams]="{offset: 0}" class="view-more">View More Transactions</a>
+    </div>
 
 </div>

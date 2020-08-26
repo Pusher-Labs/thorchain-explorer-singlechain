@@ -6,6 +6,7 @@
       <th class="mobile-hidden">Version</th>
       <th>IP</th>
       <th class="mobile-hidden">Slash Points</th>
+      <th>Current Award</th>
     </tr>
   </thead>
   <tbody>
@@ -23,6 +24,9 @@
         {{node.ip_address}}
       </td>
       <td class="mobile-hidden">{{node.slash_points}}</td>
+      <td>
+        {{node.current_award | assetUnits:8 | number:"0.0-2"}}
+      </td>
     </tr>
   </tbody>
 </table>
