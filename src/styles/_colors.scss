@@ -1,0 +1,26 @@
+$background-color-light: #EEEEEE;
+$background-color-dark: #232323;
+
+$text-color: $background-color-dark;
+$text-color-dark: $background-color-light;
+
+$background-header: #fafafa;
+$background-header-dark: #494949;
+
+$background-dashboard-light: white;
+$background-dashboard-dark: rgb(49, 49, 49);
+
+$link-color-light: black;
+$link-color-dark: #F07C04;
+
+$hover-color-light: whitesmoke;
+$hover-color-dark: rgba(255,255,255, 0.3);
+
+$colors: (
+  --background-color: ($background-color-light, $background-color-dark),
+  --toolbar-text-color: ($text-color, $text-color-dark),
+  --hover-text-color: ($hover-color-light, $hover-color-dark),
+  --header-background: ($background-header, $background-header-dark),
+  --background-dashboard: ($background-dashboard-light, $background-dashboard-dark),
+  --link-color: ($link-color-light, $link-color-dark)
+)

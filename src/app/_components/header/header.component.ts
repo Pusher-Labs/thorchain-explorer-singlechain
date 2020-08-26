@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NetworkService } from 'src/app/_services/network.service';
 import { IconDefinition, faExclamationCircle, faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { UiStyleToggleService } from '../../_services/ui-style-toggle.service';
 
 enum NetworkSecurityStatus {
   INEFFICIENT = 'Inefficient',
@@ -21,14 +22,18 @@ export class HeaderComponent implements OnInit {
   optimalIcon: IconDefinition;
   warningIcon: IconDefinition;
   alertIcon: IconDefinition;
+  checking: boolean;
+  theme: string;
 
   networkSecurity: number;
   networkSecurityStatus: NetworkSecurityStatus;
 
-  constructor(private networkService: NetworkService) {
+  constructor(private networkService: NetworkService,
+              private uiStyleToggleService: UiStyleToggleService) {
     this.optimalIcon = faCheckCircle;
     this.warningIcon = faExclamationCircle;
     this.alertIcon = faExclamationTriangle;
+    this.theme = localStorage.getItem('THEME');
   }
 
   ngOnInit(): void {
@@ -74,6 +79,20 @@ export class HeaderComponent implements OnInit {
       this.networkSecurityStatus = NetworkSecurityStatus.INSECURE;
     }
 
+  }
+
+  toggleTheme() {
+    this.uiStyleToggleService.toggle();
+    this.checkTheme();
+  }
+
+  checkTheme() {
+    if (localStorage.getItem('THEME') === 'DARK') {
+      this.theme = 'DARK';
+    }
+    if (localStorage.getItem('THEME') === 'LIGHT') {
+      this.theme = 'LIGHT';
+    }
   }
 
 }

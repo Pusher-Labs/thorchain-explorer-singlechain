@@ -74,6 +74,10 @@
         <td>Slash Points</td>
         <td>{{thorNode.slash_points}}</td>
       </tr>
+      <tr>
+        <td>Current Award</td>
+        <td>{{thorNode.current_award}}</td>
+      </tr>
     </tbody>
   </table>
 
@@ -110,4 +114,4 @@
 
 </div>
 
-<span *ngIf="!thorNode">...</span>
+<app-loading *ngIf="!thorNode"></app-loading>

@@ -55,7 +55,6 @@ export class DashboardComponent implements OnInit {
     this.transactionService.index(params).subscribe(
       (res) => {
         this.transactions = res.txs;
-        console.log(this.transactions);
       },
       (err) => console.error('error fetching stakers: ', err)
     );
@@ -73,6 +72,7 @@ export class DashboardComponent implements OnInit {
       (res) => this.nodes = res,
       (err) => console.error('error on dashboard fetching nodes: ', err)
     );
+
   }
 
 }

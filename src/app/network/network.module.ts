@@ -5,13 +5,14 @@ import { NetworkComponent } from './network.component';
 import { NetworkDetailsComponent } from './network-details/network-details.component';
 import { NetworkSummaryTableModule } from '../_components/network-summary-table/network-summary-table.module';
 import { PipesModule } from '../_pipes/pipes.module';
-
+import { LoadingModule } from '../_components/loading/loading.module';
 
 @NgModule({
   declarations: [NetworkComponent, NetworkDetailsComponent],
   imports: [
     CommonModule,
     PipesModule,
+    LoadingModule,
     NetworkSummaryTableModule,
     RouterModule.forChild([
       {
