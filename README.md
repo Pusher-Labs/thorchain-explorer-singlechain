@@ -1,7 +1,7 @@
 # Thorchain Explorer
 
 This is an open source explorer for THORChain, a decentralized liquidity network.
-Visit it at [thorchain.net](https://thorchain.net).
+Visit it at [thorchain.net](https://thorchain.net). Community contributions are always welcome [Contributions](https://github.com/Pusher-Labs/thorchain-explorer/blob/master/CONTRIBUTING.md)
 
 ## Development server
 
