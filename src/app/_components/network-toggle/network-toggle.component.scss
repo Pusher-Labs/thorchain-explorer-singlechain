@@ -29,8 +29,8 @@
 .slider:before {
   position: absolute;
   content: "";
-  height: 14px;
-  width: 14px;
+  height: 12px;
+  width: 12px;
   left: 3px;
   bottom: 2px;
   background-color: var(--toolbar-text-color);
@@ -56,6 +56,7 @@ input:checked + .slider:before {
 /* Rounded sliders */
 .slider.round {
   border-radius: 34px;
+  border: 1px solid #dcdcdc;
 }
 
 .slider.round:before {
