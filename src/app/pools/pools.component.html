@@ -5,7 +5,7 @@
     <tr *ngFor="let pool of pools">
       <td>
         <div class="flxr">
-          <app-asset-logo ngIf="pool" [assetPool]="pool"></app-asset-logo>
+          <!-- <app-asset-logo ngIf="pool" [assetPool]="pool"></app-asset-logo> -->
           <a [routerLink]="['/', 'pools', pool]">{{pool}}</a>
         </div>
       </td>
