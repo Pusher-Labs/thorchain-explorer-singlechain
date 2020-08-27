@@ -23,9 +23,6 @@ export class ThorchainNetworkService {
 
   setNetwork(network: THORChainNetwork) {
 
-    console.log('setting network to: ', network);
-    console.log('isDevMode is: ', isDevMode());
-
     switch (network) {
       case THORChainNetwork.TESTNET:
         this.midgardBasePath = 'https://midgard.bepswap.com';

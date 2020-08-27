@@ -81,6 +81,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   getNodes() {
+    this.nodes = null;
     this.nodeService.findAll().subscribe(
       (res) => this.nodes = res,
       (err) => console.error('error on dashboard fetching nodes: ', err)

@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { VolumeService } from '../../_services/volume.service';
 import * as Highcharts from 'highcharts';
+import { ThorchainNetworkService } from 'src/app/_services/thorchain-network.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-volume',
   templateUrl: './volume.component.html',
   styleUrls: ['./volume.component.scss']
 })
-export class VolumeComponent implements OnInit {
+export class VolumeComponent implements OnInit, OnDestroy {
   states = [
     { name: 'Hour', value: 'hour' },
     { name: 'Day', value: 'day' },
@@ -22,14 +24,24 @@ export class VolumeComponent implements OnInit {
   timeNow: number;
   unixHour: number;
   timeLabels: number[];
+  subs: Subscription[];
 
   private totalVolume: any[] = [{ data: [] }];
   private buyVolume: any[] = [{ data: [] }];
   private sellVolume: any[] = [{ data: [] }];
 
-  constructor(private volumeService: VolumeService) {
+  constructor(private volumeService: VolumeService, private thorchainNetworkService: ThorchainNetworkService) {
     this.unixHour = 3600;
     this.timeNow = Math.floor(Date.now() / 1000);
+
+    const network$ = this.thorchainNetworkService.network$.subscribe(
+      (_) => {
+        this.getDefaultData();
+      }
+    );
+
+    this.subs = [network$];
+
   }
 
   ngOnInit(): void {
@@ -185,6 +197,12 @@ export class VolumeComponent implements OnInit {
       this.timeString.push(`${day.toString()} ${month.toString()} ${year.toString()}`);
     }
 
+  }
+
+  ngOnDestroy() {
+    for (const sub of this.subs) {
+      sub.unsubscribe();
+    }
   }
 
 }
