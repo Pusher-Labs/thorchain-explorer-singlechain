@@ -7,6 +7,7 @@ import { PoolTxsComponent } from './pool-txs/pool-txs.component';
 import { PoolDetailsComponent } from './pool-details/pool-details.component';
 import { PipesModule } from '../_pipes/pipes.module';
 import { LoadingModule } from '../_components/loading/loading.module';
+import { AssetLogoModule } from '../_components/asset-logo/asset-logo.module';
 
 @NgModule({
   declarations: [PoolComponent, PoolTxsComponent, PoolDetailsComponent],
@@ -15,6 +16,7 @@ import { LoadingModule } from '../_components/loading/loading.module';
     PipesModule,
     TransactionsTableModule,
     LoadingModule,
+    AssetLogoModule,
     RouterModule.forChild([
       {
         path: '',
