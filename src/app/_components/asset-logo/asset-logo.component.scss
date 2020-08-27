@@ -1,0 +1,22 @@
+.asset-logo {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  min-height: 16px;
+  width: 16px;
+  margin-right: 8px;
+
+  img {
+    width: 100%;
+  }
+
+  .unknown-asset-name {
+    font-size: 1.0rem;
+    position: absolute;
+    top: 1px;
+    left: 0;
+    width: 16px;
+    height: 16px;
+  }
+}

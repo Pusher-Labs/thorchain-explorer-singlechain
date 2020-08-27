@@ -15,26 +15,6 @@
   .asset-data {
     float: left;
     min-width: 80px;
-
-    .asset-logo {
-      display: flex;
-      position: relative;
-      justify-content: center;
-      align-items: center;
-      height: 16px;
-      width: 16px;
-      margin-right: 8px;
-
-      img {
-        width: 100%;
-      }
-
-      .unknown-asset-name {
-        font-size: 1.0rem;
-        position: absolute;
-        top: 0;
-      }
-    }
   }
 
 }

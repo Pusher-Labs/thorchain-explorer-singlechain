@@ -3,7 +3,8 @@ import { BehaviorSubject } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 
 export enum ThemeMode {
-  DARK, LIGHT
+  DARK = 'DARK',
+  LIGHT = 'LIGHT'
 }
 
 @Injectable({

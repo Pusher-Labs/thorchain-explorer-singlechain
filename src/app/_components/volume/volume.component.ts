@@ -161,7 +161,7 @@ export class VolumeComponent implements OnInit {
       const monthsArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
       const dateObj = new Date(givenSeconds * 1000);
       const hours = dateObj.getHours();
-      const minutes = dateObj.getUTCMinutes();
+      const minutes = dateObj.getMinutes();
       const day = dateObj.getDate();
       const month = monthsArr[dateObj.getMonth()];
 
