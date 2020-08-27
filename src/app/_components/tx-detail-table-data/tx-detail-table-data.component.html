@@ -12,7 +12,7 @@
 <ul *ngIf="transactionDetail" class="asset-row">
   <li *ngFor="let coin of transactionDetail.coins; let i = index" class="asset-data flxr flxr--align-center">
 
-    <app-asset-logo [assetPool]="coin.asset"></app-asset-logo>
+    <app-asset-logo *ngIf="coin.asset" [assetPool]="coin.asset"></app-asset-logo>
 
     <span>{{coin.amount | assetUnits:8 | number:'1.0-0'}}</span>
   </li>

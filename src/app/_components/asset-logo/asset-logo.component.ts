@@ -16,7 +16,7 @@ export class AssetLogoComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.asset = this.setAsset(this.assetPool);
+    this.asset = this.setAsset();
     this.assetImgPath = this.matchIcon();
     this.isKnownAsset = this.setIsKnownAsset();
   }
@@ -90,14 +90,21 @@ export class AssetLogoComponent implements OnInit {
 
   }
 
-  setAsset(assetPool: string): string {
-    const split = assetPool.split('.');
+  setAsset(): string {
 
-    const assetWithId = split[split.length - 1];
+    if (this.assetPool) {
+      const split = this.assetPool.split('.');
 
-    const asset = assetWithId.split('-');
+      const assetWithId = split[split.length - 1];
 
-    return asset[0];
+      const asset = assetWithId.split('-');
+
+      return asset[0];
+    } else {
+      console.error('no asset pool!!');
+      return null;
+    }
+
   }
 
 }

@@ -1,6 +1,6 @@
 <div *ngIf="asset" class="mobile-padding">
   <h1 class="flxr flxr--align-center">
-    <app-asset-logo [assetPool]="asset.asset"></app-asset-logo>
+    <app-asset-logo *ngIf="asset.asset" [assetPool]="asset.asset"></app-asset-logo>
     {{asset.asset}}
   </h1>
   <nav>
