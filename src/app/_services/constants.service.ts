@@ -56,4 +56,8 @@ export class ConstantsService {
     return this.http.get<MidgardConstants>(`${environment.midgardUrl}/v1/thorchain/constants`);
   }
 
+  getMimir(): Observable<object> {
+    return this.http.get<object>(`${environment.thorNodeUrl}/thorchain/mimir`);
+  }
+
 }
