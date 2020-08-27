@@ -16,9 +16,15 @@ export class AssetLogoComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.asset = this.setAsset();
-    this.assetImgPath = this.matchIcon();
-    this.isKnownAsset = this.setIsKnownAsset();
+
+    if (this.assetPool) {
+      this.asset = this.setAsset();
+      this.assetImgPath = this.matchIcon();
+      this.isKnownAsset = this.setIsKnownAsset();
+    } else {
+      console.error('no asset pool provided!');
+    }
+
   }
 
   matchIcon(): string {
