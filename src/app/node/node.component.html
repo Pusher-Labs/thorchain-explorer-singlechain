@@ -114,4 +114,6 @@
 
 </div>
 
-<app-loading *ngIf="!thorNode"></app-loading>
+<app-loading *ngIf="!thorNode && !error"></app-loading>
+
+<app-error *ngIf="error" [message]="error"></app-error>

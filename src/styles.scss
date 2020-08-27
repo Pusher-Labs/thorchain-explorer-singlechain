@@ -185,8 +185,16 @@ ul {
     justify-content: center;
   }
 
+  &--just-end {
+    justify-content: flex-end;
+  }
+
   &--align-center {
     align-items: center;
+  }
+
+  &--flow-column {
+    flex-flow: column;
   }
 }
 

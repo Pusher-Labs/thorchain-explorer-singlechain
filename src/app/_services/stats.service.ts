@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { ThorchainNetworkService } from './thorchain-network.service';
 
 export interface GlobalStats {
   dailyActiveUsers: string;
@@ -27,10 +28,10 @@ export interface GlobalStats {
 })
 export class StatsService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private thorchainNetworkService: ThorchainNetworkService) { }
 
   getStats(): Observable<GlobalStats> {
-    return this.http.get<GlobalStats>(`${environment.midgardUrl}/v1/stats`);
+    return this.http.get<GlobalStats>(`${this.thorchainNetworkService.midgardBasePath}/v1/stats`);
   }
 
 }

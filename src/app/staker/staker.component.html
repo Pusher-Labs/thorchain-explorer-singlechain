@@ -1,6 +1,6 @@
 <h1 *ngIf="address" class="mobile-padding break-word">Staker: {{address}}</h1>
 
-<div *ngIf="staker && stakerPoolsData">
+<div *ngIf="staker && stakerPoolsData && !error">
 
   <table *ngIf="staker" class="shadow margin-bottom">
     <thead>
@@ -45,7 +45,7 @@
         <td><a [routerLink]="['/', 'pools', pool.asset]">{{pool.asset}}</a></td>
         <td>{{pool.dateFirstStaked * 1000 | date:'short'}}</td>
         <td>{{pool.heightLastStaked}}</td>
-        <td>{{pool.stakeUnits}}</td>
+        <td>{{pool.stakeUnits | assetUnits:8 | number}}</td>
       </tr>
     </tbody>
   </table>
@@ -53,5 +53,7 @@
 </div>
 
 <app-loading *ngIf="!staker || !stakerPoolsData"></app-loading>
+
+<app-error *ngIf="error" [message]="error"></app-error>
 
 

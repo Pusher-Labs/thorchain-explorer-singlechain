@@ -1,40 +1,58 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NodeService } from '../_services/node.service';
 import { ThorNode } from '../_classes/thor-node';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { ThorchainNetworkService } from '../_services/thorchain-network.service';
 
 @Component({
   selector: 'app-node',
   templateUrl: './node.component.html',
   styleUrls: ['./node.component.scss']
 })
-export class NodeComponent implements OnInit {
+export class NodeComponent implements OnInit, OnDestroy {
 
   thorNode: ThorNode;
   address: string;
   isInJail: boolean;
+  subs: Subscription[];
+  error: string;
 
-  constructor(private route: ActivatedRoute, private nodeService: NodeService) {
+  constructor(private route: ActivatedRoute, private nodeService: NodeService, private thorchainNetworkService: ThorchainNetworkService) {
     this.isInJail = false;
+
+    const network$ = this.thorchainNetworkService.network$.subscribe(
+      (_) => {
+        this.getNode();
+      }
+    );
+
+    this.subs = [network$];
+
   }
 
   ngOnInit(): void {
 
-    this.route.paramMap.subscribe( (params) => {
+    const routeParams$ = this.route.paramMap.subscribe( (params) => {
 
       this.address = params.get('address');
 
       if (this.address) {
-        this.getNode(this.address);
+        this.getNode();
       }
 
     });
 
+    this.subs.push(routeParams$);
+
 
   }
 
-  getNode(address: string): void {
-    this.nodeService.findOne(address).subscribe(
+  getNode(): void {
+
+    this.thorNode = null;
+
+    this.nodeService.findOne(this.address).subscribe(
       (res) => {
         this.thorNode = res;
 
@@ -53,8 +71,17 @@ export class NodeComponent implements OnInit {
         }
 
       },
-      (err) => console.error('error fetching node: ', err)
+      (err) => {
+        console.error('error fetching node: ', err);
+        this.error = 'An error occurred searching for this node';
+      }
     );
+  }
+
+  ngOnDestroy() {
+    for (const sub of this.subs) {
+      sub.unsubscribe();
+    }
   }
 
 }
