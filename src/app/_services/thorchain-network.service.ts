@@ -24,11 +24,12 @@ export class ThorchainNetworkService {
   setNetwork(network: THORChainNetwork) {
 
     console.log('setting network to: ', network);
+    console.log('isDevMode is: ', isDevMode());
 
     switch (network) {
       case THORChainNetwork.TESTNET:
         this.midgardBasePath = 'https://midgard.bepswap.com';
-        this.nodeBasePath = (isDevMode) ? 'http://195.248.242.140:1317' : 'https://a2wva4alb6.execute-api.us-east-1.amazonaws.com/dev/thornode';
+        this.nodeBasePath = (isDevMode()) ? 'http://195.248.242.140:1317' : 'https://a2wva4alb6.execute-api.us-east-1.amazonaws.com/dev/thornode';
         break;
 
     /**
@@ -36,7 +37,7 @@ export class ThorchainNetworkService {
      **/
       default:
         this.midgardBasePath = 'https://chaosnet-midgard.bepswap.com';
-        this.nodeBasePath = (isDevMode) ? 'http://18.159.173.48:1317' : 'https://a2wva4alb6.execute-api.us-east-1.amazonaws.com/dev/thornode';
+        this.nodeBasePath = (isDevMode()) ? 'http://18.159.173.48:1317' : 'https://a2wva4alb6.execute-api.us-east-1.amazonaws.com/dev/thornode';
         break;
     }
 
