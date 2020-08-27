@@ -3,7 +3,7 @@ import { NodeService } from '../_services/node.service';
 import { ThorNode } from '../_classes/thor-node';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ThorchainNetworkService } from '../_services/thorchain-network.service';
+import { ThorchainNetworkService, THORChainNetwork } from '../_services/thorchain-network.service';
 
 @Component({
   selector: 'app-node',
@@ -17,12 +17,14 @@ export class NodeComponent implements OnInit, OnDestroy {
   isInJail: boolean;
   subs: Subscription[];
   error: string;
+  thorchainNetwork: THORChainNetwork;
 
   constructor(private route: ActivatedRoute, private nodeService: NodeService, private thorchainNetworkService: ThorchainNetworkService) {
     this.isInJail = false;
 
     const network$ = this.thorchainNetworkService.network$.subscribe(
-      (_) => {
+      (network) => {
+        this.thorchainNetwork = network;
         this.getNode();
       }
     );
@@ -52,7 +54,10 @@ export class NodeComponent implements OnInit, OnDestroy {
 
     this.thorNode = null;
 
-    this.nodeService.findOne(this.address).subscribe(
+    this.nodeService.findOne(
+      this.address,
+      (this.thorchainNetwork && this.thorchainNetwork === THORChainNetwork.TESTNET) ? THORChainNetwork.TESTNET : null
+    ).subscribe(
       (res) => {
         this.thorNode = res;
 

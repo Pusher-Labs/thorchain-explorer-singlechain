@@ -5,7 +5,7 @@ import { Transaction } from '../_classes/transaction';
 import { NetworkStatus, NetworkService } from '../_services/network.service';
 import { NodeService } from '../_services/node.service';
 import { ThorNode } from '../_classes/thor-node';
-import { ThorchainNetworkService } from '../_services/thorchain-network.service';
+import { ThorchainNetworkService, THORChainNetwork } from '../_services/thorchain-network.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   nodes: ThorNode[];
   subs: Subscription[];
   error: string;
+  thorchainNetwork: THORChainNetwork;
 
   constructor(
     private statsService: StatsService,
@@ -31,7 +32,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private thorchainNetworkService: ThorchainNetworkService
   ) {
     const network$ = this.thorchainNetworkService.network$.subscribe(
-      (_) => {
+      (network) => {
+        this.thorchainNetwork = network;
         this.getGlobalStats();
         this.getTransactions();
         this.getNetworkStatus();
@@ -82,9 +84,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getNodes() {
     this.nodes = null;
-    this.nodeService.findAll().subscribe(
-      (res) => this.nodes = res,
-      (err) => console.error('error on dashboard fetching nodes: ', err)
+    this.nodeService.findAll(
+      (this.thorchainNetwork && this.thorchainNetwork === THORChainNetwork.TESTNET)
+      ? THORChainNetwork.TESTNET
+      : null).subscribe(
+        (res) => this.nodes = res,
+        (err) => console.error('error on dashboard fetching nodes: ', err)
     );
 
   }

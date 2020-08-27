@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NodeService } from '../_services/node.service';
 import { ThorNode, NodeStatus } from '../_classes/thor-node';
 import { VersionService, VersionSummary } from '../_services/version.service';
-import { ThorchainNetworkService } from '../_services/thorchain-network.service';
+import { ThorchainNetworkService, THORChainNetwork } from '../_services/thorchain-network.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,13 +15,15 @@ export class NodesComponent implements OnInit, OnDestroy {
   nodes: ThorNode[];
   versionSummary: VersionSummary;
   subs: Subscription[];
+  thorchainNetwork: THORChainNetwork;
 
   constructor(
     private nodeService: NodeService,
     private versionService: VersionService,
     private thorchainNetworkService: ThorchainNetworkService) {
       const network$ = this.thorchainNetworkService.network$.subscribe(
-        (_) => {
+        (network) => {
+          this.thorchainNetwork = network;
           this.getNodes();
           this.getVersion();
         }
@@ -37,7 +39,8 @@ export class NodesComponent implements OnInit, OnDestroy {
 
   getNodes(): void {
     this.nodes = null;
-    this.nodeService.findAll().subscribe(
+    this.nodeService.findAll(
+      (this.thorchainNetwork && this.thorchainNetwork === THORChainNetwork.TESTNET) ? THORChainNetwork.TESTNET : null ).subscribe(
       (res) => this.nodes = res,
       (err) => console.error('NodesComponent -> getNodes: ', err)
     );
@@ -45,7 +48,8 @@ export class NodesComponent implements OnInit, OnDestroy {
 
   getVersion(): void {
     this.versionSummary = null;
-    this.versionService.fetch().subscribe(
+    this.versionService.fetch(
+      (this.thorchainNetwork && this.thorchainNetwork === THORChainNetwork.TESTNET) ? THORChainNetwork.TESTNET : null).subscribe(
       (res) => this.versionSummary = res,
       (err) => console.error('error fetching version summary: ', err)
     );
