@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NetworkService, NetworkStatus } from 'src/app/_services/network.service';
 import { ConstantsService, MidgardConstants } from 'src/app/_services/constants.service';
-import { ConstantTableItem } from '../../_classes/constants-table';
 import { ThorchainNetworkService, THORChainNetwork } from 'src/app/_services/thorchain-network.service';
 import { Subscription } from 'rxjs';
 
@@ -20,7 +19,6 @@ export class NetworkDetailsComponent implements OnInit, OnDestroy {
   monthlyNodeBondReward: number;
   activeBonds: number[];
   standByBonds: number[];
-  numbersValue: ConstantTableItem<number>;
   subs: Subscription[];
   thorchainNetwork: THORChainNetwork;
 
