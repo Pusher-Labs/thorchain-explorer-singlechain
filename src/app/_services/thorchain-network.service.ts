@@ -11,7 +11,7 @@ export enum THORChainNetwork {
 })
 export class ThorchainNetworkService {
 
-  // network: THORChainNetwork;
+  // tslint:disable-next-line:variable-name
   private _networkUpdated = new Subject<THORChainNetwork>();
   midgardBasePath: string;
   nodeBasePath: string;
@@ -33,7 +33,7 @@ export class ThorchainNetworkService {
 
     /**
      * Right now default is CHAOSNET
-     **/
+     */
       default:
         this.midgardBasePath = 'https://chaosnet-midgard.bepswap.com';
         this.nodeBasePath = (isDevMode()) ? 'http://18.159.173.48:1317' : 'https://a2wva4alb6.execute-api.us-east-1.amazonaws.com/dev/thornode';
