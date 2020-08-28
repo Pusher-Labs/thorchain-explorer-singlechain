@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NetworkService, NetworkStatus } from 'src/app/_services/network.service';
 import { ConstantsService, MidgardConstants } from 'src/app/_services/constants.service';
+import { ConstantTableItem } from '../../_classes/constants-table';
 import { ThorchainNetworkService, THORChainNetwork } from 'src/app/_services/thorchain-network.service';
 import { Subscription } from 'rxjs';
 
@@ -19,6 +20,7 @@ export class NetworkDetailsComponent implements OnInit, OnDestroy {
   monthlyNodeBondReward: number;
   activeBonds: number[];
   standByBonds: number[];
+  numbersValue: ConstantTableItem<number>;
   subs: Subscription[];
   thorchainNetwork: THORChainNetwork;
 
@@ -41,6 +43,7 @@ export class NetworkDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getConstants();
+    this.getOverrideData();
   }
 
   getConstants(): void {
@@ -49,6 +52,39 @@ export class NetworkDetailsComponent implements OnInit, OnDestroy {
       (res) => {
         this.constants = res;
         this.getNetworkStatus();
+      },
+      (err) => console.error('error fetching constants...', err)
+    );
+  }
+
+  getOverrideData(): void {
+    this.constantsService.getConstants().subscribe(
+      (res) => {
+        this.constantsService.getMimir().subscribe(
+          (val) => {
+            const item: Array<object> = new Array();
+            for (const elem in res.int_64_values) {
+              if (elem) {
+                this.numbersValue = {
+                  key: elem,
+                  value: res.int_64_values[elem]
+                };
+                item.push(this.numbersValue);
+                for (const el in val) {
+                  if (elem.toUpperCase().includes(el.split('mimir//').pop()) === true) {
+                    this.numbersValue = {
+                      key: elem,
+                      value: res.int_64_values[elem],
+                      override: val[el]
+                    };
+                    item.push(this.numbersValue);
+                  }
+                }
+              }
+            }
+          },
+          (err) => console.error('error fetching mimir...', err)
+        );
       },
       (err) => console.error('error fetching constants...', err)
     );
