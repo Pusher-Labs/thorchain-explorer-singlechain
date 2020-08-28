@@ -14,8 +14,10 @@
     <tbody>
       <tr *ngFor="let constant of int64Vals">
         <td>{{constant.key}}</td>
-        <td>{{constant.value | number}}</td>
-        <td>{{constant.override | number}}</td>
+        <td>{{constant.value | number}}<span>{{addDetail(constant.key)}}</span></td>
+        <td>
+          <div *ngIf="constant.override">{{constant.override | number}} <span>{{addDetail(constant.key)}}</span></div>
+        </td>
       </tr>
     </tbody>
   </table>

@@ -58,10 +58,48 @@ export class ConstantsComponent implements OnInit, OnDestroy {
          * Create Int64 Values
          */
         for (const [key, value] of Object.entries(constants.int_64_values)) {
-          const mimirMatch =  mimirVals.find( (mimir) => mimir.key === key.toUpperCase() );
-          const formattedKey = key.match(/[A-Z][a-z]+/g).join(' ');
 
-          int64vals.push(new ConstantTableItem<number>(formattedKey, value, ((mimirMatch) ? +(mimirMatch.value) : null) ));
+          let formattedKey = key.match(/[A-Z][a-z]+/g).join(' ');
+
+          /**
+           * Is it a (Block)?
+           */
+          if (this.addBlockToKey(key)) {
+            formattedKey += ' (Blocks)';
+          }
+
+          let formattedMimirValue;
+
+          /**
+           * See if Mimir Match is available
+           */
+          const mimirMatch =  mimirVals.find( (mimir) => mimir.key === key.toUpperCase() );
+
+          /**
+           * Should we format the number like num / 10 ** 8?
+           */
+          const formatNumber = this.formatNumber(key);
+
+          /**
+           * Format value if necessary
+           */
+          const formattedValue = (formatNumber === true)
+          ? this.assetUnits(value)
+          : value;
+
+
+
+          if (mimirMatch) {
+            formattedMimirValue = (formatNumber === true)
+              ? this.assetUnits(+(mimirMatch.value))
+              : +(mimirMatch.value);
+          }
+
+          int64vals.push(new ConstantTableItem<number>(
+            formattedKey,
+            formattedValue,
+            ((formattedMimirValue) ? formattedMimirValue : null)
+          ));
         }
 
         /**
@@ -90,6 +128,49 @@ export class ConstantsComponent implements OnInit, OnDestroy {
       },
       (err) => console.error('error fetching mimir...', err)
     );
+  }
+
+  formatNumber(key: string): boolean {
+    return (key === 'CliTxCost' || key === 'MinimumBondInRune' || key === 'TransactionFee')
+      ? true
+      : false;
+  }
+
+  addBlockToKey(key: string): boolean {
+    switch (key) {
+      case 'BadValidatorRate':
+      case 'DoubleSignMaxAge':
+      case 'FundMigrationInterval':
+      case 'JailTimeKeygen':
+      case 'JailTimeKeysign':
+      case 'NewPoolCycle':
+      case 'ObserveFlex':
+      case 'OldValidatorRate':
+      case 'RotatePerBlockHeight':
+      case 'RotateRetryBlocks':
+      case 'SigningTransactionPeriod':
+      case 'StakeLockUpBlocks':
+        return true;
+
+      default:
+        return false;
+    }
+  }
+
+  addDetail(key: string) {
+
+    switch (key) {
+      case 'Ygg Fund Limit':
+        return '%';
+
+      default:
+        return '';
+    }
+
+  }
+
+  assetUnits(num: number) {
+    return num / 10 ** 8;
   }
 
   ngOnDestroy() {
