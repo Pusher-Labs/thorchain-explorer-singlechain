@@ -1,6 +1,7 @@
 # Thorchain Explorer
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.6.
+This is an open source explorer for THORChain, a decentralized liquidity network.
+Visit it at [thorchain.net](https://thorchain.net). Community contributions are always welcome [Contributions](https://github.com/Pusher-Labs/thorchain-explorer/blob/master/CONTRIBUTING.md)
 
 ## Development server
 

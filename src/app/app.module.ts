@@ -26,12 +26,14 @@ import { VersionService } from './_services/version.service';
 import { VolumeService } from './_services/volume.service';
 import { UiStyleToggleService } from './_services/ui-style-toggle.service';
 import { LocalStorageService } from './_services/local-storage.service';
+import { ThorchainNetworkService } from './_services/thorchain-network.service';
 
 /**
  * External
  */
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { NetworkToggleComponent } from './_components/network-toggle/network-toggle.component';
 
 export function themeFactory(themeService: UiStyleToggleService) {
   return () => themeService.setThemeOnStart();
@@ -41,7 +43,8 @@ export function themeFactory(themeService: UiStyleToggleService) {
   declarations: [
     AppComponent,
     SearchComponent,
-    HeaderComponent
+    HeaderComponent,
+    NetworkToggleComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ export function themeFactory(themeService: UiStyleToggleService) {
     HighchartsChartModule
   ],
   providers: [
+    ThorchainNetworkService,
     AssetService,
     ConstantsService,
     NetworkService,

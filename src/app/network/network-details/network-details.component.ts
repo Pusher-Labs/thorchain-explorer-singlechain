@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NetworkService, NetworkStatus } from 'src/app/_services/network.service';
 import { ConstantsService, MidgardConstants } from 'src/app/_services/constants.service';
 import { ConstantTableItem } from '../../_classes/constants-table';
+import { ThorchainNetworkService, THORChainNetwork } from 'src/app/_services/thorchain-network.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-network-details',
   templateUrl: './network-details.component.html',
   styleUrls: ['./network-details.component.scss']
 })
-export class NetworkDetailsComponent implements OnInit {
+export class NetworkDetailsComponent implements OnInit, OnDestroy {
 
   constants: MidgardConstants;
   network: NetworkStatus;
@@ -19,10 +21,24 @@ export class NetworkDetailsComponent implements OnInit {
   activeBonds: number[];
   standByBonds: number[];
   numbersValue: ConstantTableItem<number>;
+  subs: Subscription[];
+  thorchainNetwork: THORChainNetwork;
 
-  constructor(private networkService: NetworkService, private constantsService: ConstantsService) {
-    this.activeBonds = [];
-    this.standByBonds = [];
+  constructor(
+    private networkService: NetworkService,
+    private constantsService: ConstantsService,
+    private thorchainNetworkService: ThorchainNetworkService) {
+      this.activeBonds = [];
+      this.standByBonds = [];
+
+      const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
+        (_) => {
+          this.getConstants();
+        }
+      );
+
+      this.subs = [network$];
+
   }
 
   ngOnInit(): void {
@@ -31,6 +47,7 @@ export class NetworkDetailsComponent implements OnInit {
   }
 
   getConstants(): void {
+
     this.constantsService.getConstants().subscribe(
       (res) => {
         this.constants = res;
@@ -111,6 +128,12 @@ export class NetworkDetailsComponent implements OnInit {
 
       this.activeBonds.sort((a, b) => b - a);
       this.standByBonds.sort((a, b) => b - a);
+    }
+  }
+
+  ngOnDestroy() {
+    for (const sub of this.subs) {
+      sub.unsubscribe();
     }
   }
 

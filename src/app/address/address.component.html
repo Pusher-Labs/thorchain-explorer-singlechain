@@ -1,5 +1,7 @@
 <h1 class="mobile-padding break-word">Address: {{address}}</h1>
 
-<app-transactions-table *ngIf="transactions" [transactions]="transactions"></app-transactions-table>
+<app-transactions-table *ngIf="transactions && transactions.length > 0" [transactions]="transactions"></app-transactions-table>
 
 <app-loading *ngIf="!transactions"></app-loading>
+
+<app-error *ngIf="error" [message]="error"></app-error>

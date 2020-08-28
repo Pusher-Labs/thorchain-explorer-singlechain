@@ -185,8 +185,16 @@ ul {
     justify-content: center;
   }
 
+  &--just-end {
+    justify-content: flex-end;
+  }
+
   &--align-center {
     align-items: center;
+  }
+
+  &--flow-column {
+    flex-flow: column;
   }
 }
 
@@ -248,6 +256,17 @@ ul {
   grid-template-columns: repeat(auto-fit, minmax(369px, 1fr));
   grid-column-gap: 30px;
   row-gap: 30px;
+
+  &--col-3 {
+    grid-template-columns: repeat(auto-fit, minmax(236px, 1fr));
+
+    @media
+    only screen and (max-width: 767px),
+    (min-device-width: 768px) and (max-device-width: 1024px)  {
+      grid-template-columns: repeat(auto-fit, minmax(369px, 1fr));
+    }
+
+  }
 }
 
 .grid-item {
@@ -256,7 +275,7 @@ ul {
   background-color: var(--background-dashboard);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  min-height: 225px;
+  min-height: 145px;
 }
 
 .highcharts-figure, .highcharts-data-table table {

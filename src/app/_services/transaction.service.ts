@@ -4,6 +4,7 @@ import { TransactionType } from '../_const/transaction-type.enum';
 import { Observable } from 'rxjs';
 import { TransactionDTO } from '../_classes/transaction';
 import { environment } from '../../environments/environment';
+import { ThorchainNetworkService } from './thorchain-network.service';
 
 export interface TransactionIndexParams {
   offset: number;
@@ -20,7 +21,7 @@ export class TransactionService {
 
   public limit: number;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private thorchainNetworkService: ThorchainNetworkService) {
     this.limit = 10;
   }
 
@@ -45,7 +46,7 @@ export class TransactionService {
       params = params.append('address', p.address);
     }
 
-    return this.http.get<TransactionDTO>(`${environment.midgardUrl}/v1/txs`, {params});
+    return this.http.get<TransactionDTO>(`${this.thorchainNetworkService.midgardBasePath}/v1/txs`, {params});
 
   }
 

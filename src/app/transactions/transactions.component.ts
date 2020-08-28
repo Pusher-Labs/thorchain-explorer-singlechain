@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TransactionService, TransactionIndexParams } from '../_services/transaction.service';
 import { Transaction } from '../_classes/transaction';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { TransactionType } from '../_const/transaction-type.enum';
+import { Subscription } from 'rxjs';
+import { ThorchainNetworkService } from '../_services/thorchain-network.service';
 
 @Component({
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
   styleUrls: ['./transactions.component.scss']
 })
-export class TransactionsComponent implements OnInit {
+export class TransactionsComponent implements OnInit, OnDestroy {
 
   transactions: Transaction[];
   offset: number;
@@ -27,18 +29,41 @@ export class TransactionsComponent implements OnInit {
     [TransactionType.SWAP]: boolean,
     [TransactionType.UNSTAKE]: boolean,
   };
+  subs: Subscription[];
 
   constructor(
     private transactionService: TransactionService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private thorchainNetworkService: ThorchainNetworkService
   ) {
     this.limit = this.transactionService.limit;
+
+    const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
+      (_) => {
+        const queryParams: Params = { offset: String(0) };
+
+        this.router.navigate(
+          [],
+          {
+            relativeTo: this.route,
+            queryParams,
+            queryParamsHandling: 'merge',
+          }
+        );
+
+        this.transactions = null;
+        this.getTransactions();
+      }
+    );
+
+    this.subs = [network$];
+
   }
 
   ngOnInit(): void {
 
-    this.route.queryParamMap.subscribe( (params) => {
+    const queryParams$ = this.route.queryParamMap.subscribe( (params) => {
 
       const offset = params.get('offset');
       this.offset = offset ? +offset : 0;
@@ -85,6 +110,8 @@ export class TransactionsComponent implements OnInit {
 
     });
 
+    this.subs.push(queryParams$);
+
   }
 
   async getTransactions() {
@@ -111,7 +138,6 @@ export class TransactionsComponent implements OnInit {
       (res) => {
         this.transactions = res.txs;
         this.totalCount = res.count;
-        console.log(this.transactions);
       },
       (err) => console.error('error fetching stakers: ', err)
     );
@@ -218,6 +244,12 @@ export class TransactionsComponent implements OnInit {
 
     return types;
 
+  }
+
+  ngOnDestroy() {
+    for (const sub of this.subs) {
+      sub.unsubscribe();
+    }
   }
 
 }

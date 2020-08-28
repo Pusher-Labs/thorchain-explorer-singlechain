@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { ThorchainNetworkService } from './thorchain-network.service';
 
 export interface PoolDetail {
   asset: string;
@@ -49,16 +50,16 @@ export interface PoolDetail {
 })
 export class PoolService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private thorchainNetworkService: ThorchainNetworkService) { }
 
   index(): Observable<string[]> {
-    return this.http.get<string[]>(`${environment.midgardUrl}/v1/pools`);
+    return this.http.get<string[]>(`${this.thorchainNetworkService.midgardBasePath}/v1/pools`);
   }
 
   details(assets: string[]): Observable<PoolDetail[]> {
     const params = new HttpParams().set('asset', assets.join(','));
 
-    return this.http.get<PoolDetail[]>(`${environment.midgardUrl}/v1/pools/detail`, {params});
+    return this.http.get<PoolDetail[]>(`${this.thorchainNetworkService.midgardBasePath}/v1/pools/detail`, {params});
   }
 
 }

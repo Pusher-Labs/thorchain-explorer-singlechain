@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { VolumeService } from '../../_services/volume.service';
 import * as Highcharts from 'highcharts';
+import { ThorchainNetworkService } from 'src/app/_services/thorchain-network.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-volume',
   templateUrl: './volume.component.html',
   styleUrls: ['./volume.component.scss']
 })
-export class VolumeComponent implements OnInit {
+export class VolumeComponent implements OnInit, OnDestroy {
   states = [
     { name: 'Hour', value: 'hour' },
     { name: 'Day', value: 'day' },
@@ -22,14 +24,24 @@ export class VolumeComponent implements OnInit {
   timeNow: number;
   unixHour: number;
   timeLabels: number[];
+  subs: Subscription[];
 
   private totalVolume: any[] = [{ data: [] }];
   private buyVolume: any[] = [{ data: [] }];
   private sellVolume: any[] = [{ data: [] }];
 
-  constructor(private volumeService: VolumeService) {
+  constructor(private volumeService: VolumeService, private thorchainNetworkService: ThorchainNetworkService) {
     this.unixHour = 3600;
     this.timeNow = Math.floor(Date.now() / 1000);
+
+    const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
+      (_) => {
+        this.getDefaultData();
+      }
+    );
+
+    this.subs = [network$];
+
   }
 
   ngOnInit(): void {
@@ -120,7 +132,7 @@ export class VolumeComponent implements OnInit {
         },
         xAxis: {
           title: {
-            text: 'Time'
+            text: 'Time (UTC)'
           },
           gridLineWidth: 1,
           categories: this.timeString
@@ -160,10 +172,10 @@ export class VolumeComponent implements OnInit {
       const givenSeconds = iter;
       const monthsArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
       const dateObj = new Date(givenSeconds * 1000);
-      const hours = dateObj.getHours();
+      const hours = dateObj.getUTCHours();
       const minutes = dateObj.getUTCMinutes();
-      const day = dateObj.getDate();
-      const month = monthsArr[dateObj.getMonth()];
+      const day = dateObj.getUTCDate();
+      const month = monthsArr[dateObj.getUTCMonth()];
 
       this.timeString.push(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}\
       ${day.toString()} ${month.toString()}`);
@@ -175,16 +187,23 @@ export class VolumeComponent implements OnInit {
     this.timeString = [];
 
     for (const iter of this.timeLabels) {
+
       const givenSeconds = iter;
       const monthsArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
       const dateObj = new Date(givenSeconds * 1000);
-      const day = dateObj.getDate();
-      const year = dateObj.getFullYear();
-      const month = monthsArr[dateObj.getMonth()];
+      const day = dateObj.getUTCDate();
+      const year = dateObj.getUTCFullYear();
+      const month = monthsArr[dateObj.getUTCMonth()];
 
       this.timeString.push(`${day.toString()} ${month.toString()} ${year.toString()}`);
     }
 
+  }
+
+  ngOnDestroy() {
+    for (const sub of this.subs) {
+      sub.unsubscribe();
+    }
   }
 
 }

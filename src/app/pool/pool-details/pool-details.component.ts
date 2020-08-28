@@ -1,53 +1,92 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PoolDetail, PoolService } from 'src/app/_services/pool.service';
 import { ActivatedRoute } from '@angular/router';
 import { AssetService, Asset } from 'src/app/_services/asset.service';
+import { ThorchainNetworkService } from 'src/app/_services/thorchain-network.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-pool-details',
   templateUrl: './pool-details.component.html',
   styleUrls: ['./pool-details.component.scss']
 })
-export class PoolDetailsComponent implements OnInit {
+export class PoolDetailsComponent implements OnInit, OnDestroy {
 
   poolDetail: PoolDetail;
   apy: number;
   asset: Asset;
+  poolName: string;
+  subs: Subscription[];
+  error: boolean;
 
-  constructor(private route: ActivatedRoute, private poolService: PoolService, private assetService: AssetService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private poolService: PoolService,
+    private assetService: AssetService,
+    private thorchainNetworkService: ThorchainNetworkService
+  ) {
 
-  ngOnInit(): void {
-    this.route.parent.paramMap.subscribe( async (params) => {
+    const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
+      (_) => {
+        this.fetchData();
+      }
+    );
 
-      const poolName = params.get('pool');
+    this.subs = [network$];
 
-      this.getPoolDetails(poolName);
-      this.getAsset(poolName);
-
-    });
   }
 
-  async getPoolDetails(poolName: string) {
+  ngOnInit(): void {
+    const route$ = this.route.parent.paramMap.subscribe( async (params) => {
 
-    this.poolService.details([poolName]).subscribe(
+      this.poolName = params.get('pool');
+      console.log('this pool name is: ', this.poolName);
+
+      this.fetchData();
+
+    });
+    this.subs.push(route$);
+  }
+
+  async getPoolDetails() {
+
+    this.poolService.details([this.poolName]).subscribe(
       (res) => {
         if (res.length > 0) {
           this.poolDetail = res[0];
         }
       },
-      (err) => console.error('err is: ', err)
+      (err) => {
+        console.error('err is: ', err);
+        this.error = true;
+      }
     );
   }
 
-  async getAsset(poolName: string) {
+  fetchData() {
+    if (this.poolName) {
+      console.log('fetch data called with pool name: ', this.poolName);
+      this.poolDetail = null;
+      this.error = false;
+      this.getPoolDetails();
+      this.getAsset();
+    } else {
+      console.log('no poolname set');
+    }
+  }
 
-    this.assetService.index([poolName]).subscribe(
+  async getAsset() {
+
+    this.assetService.index([this.poolName]).subscribe(
       (res) => {
         if (res.length > 0) {
           this.asset = res[0];
         }
       },
-      (err) => console.error('err is: ', err)
+      (err) => {
+        console.error('err is: ', err);
+        this.error = true;
+      }
     );
   }
 
@@ -65,6 +104,12 @@ export class PoolDetailsComponent implements OnInit {
 
     return null;
 
+  }
+
+  ngOnDestroy() {
+    for (const sub of this.subs) {
+      sub.unsubscribe();
+    }
   }
 
 }

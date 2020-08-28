@@ -3,7 +3,12 @@
 <table *ngIf="pools" class="shadow">
   <tbody>
     <tr *ngFor="let pool of pools">
-      <td><a [routerLink]="['/', 'pools', pool]">{{pool}}</a></td>
+      <td>
+        <div class="flxr">
+          <app-asset-logo *ngIf="pool" [assetPool]="pool"></app-asset-logo>
+          <a [routerLink]="['/', 'pools', pool]">{{pool}}</a>
+        </div>
+      </td>
     </tr>
   </tbody>
 </table>

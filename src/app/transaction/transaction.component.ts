@@ -1,26 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TransactionIndexParams, TransactionService } from '../_services/transaction.service';
 import { Transaction } from '../_classes/transaction';
+import { ThorchainNetworkService } from '../_services/thorchain-network.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-transaction',
   templateUrl: './transaction.component.html',
   styleUrls: ['./transaction.component.scss']
 })
-export class TransactionComponent implements OnInit {
+export class TransactionComponent implements OnInit, OnDestroy {
 
   txid: string;
   transaction: Transaction;
   error: string;
+  subs: Subscription[];
 
-  constructor(private route: ActivatedRoute, private transactionService: TransactionService) {
-    this.txid = '';
+  constructor(
+    private route: ActivatedRoute,
+    private transactionService: TransactionService,
+    private thorchainNetworkService: ThorchainNetworkService) {
+      this.txid = '';
+
+      const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
+        (_) => {
+          this.transaction = null;
+          this.getTransaction();
+        }
+      );
+
+      this.subs = [network$];
+
   }
 
   ngOnInit(): void {
 
-    this.route.paramMap.subscribe( (params) => {
+    const params$ = this.route.paramMap.subscribe( (params) => {
 
       const txid = params.get('id');
       this.txid = txid;
@@ -28,6 +44,8 @@ export class TransactionComponent implements OnInit {
       this.getTransaction();
 
     });
+
+    this.subs.push(params$);
 
   }
 
@@ -51,6 +69,12 @@ export class TransactionComponent implements OnInit {
       (err) => console.error('error fetching transaction: ', err)
     );
 
+  }
+
+  ngOnDestroy() {
+    for (const sub of this.subs) {
+      sub.unsubscribe();
+    }
   }
 
 }

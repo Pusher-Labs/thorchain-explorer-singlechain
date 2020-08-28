@@ -1,26 +1,36 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { ThorNode } from '../_classes/thor-node';
+import { ThorchainNetworkService, THORChainNetwork } from './thorchain-network.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NodeService {
 
-  private baseUrl: string;
-
-  constructor(private http: HttpClient) {
-    this.baseUrl = `${environment.thorNodeUrl}/thorchain`;
-  }
+  constructor(private http: HttpClient, private thorchainNetworkService: ThorchainNetworkService) { }
 
   findAll(): Observable<ThorNode[]> {
-    return this.http.get<ThorNode[]>(`${this.baseUrl}/nodeaccounts`);
+
+    let params = new HttpParams();
+
+    if (this.thorchainNetworkService.network === THORChainNetwork.TESTNET) {
+      params = params.set('network', THORChainNetwork.TESTNET);
+    }
+
+    return this.http.get<ThorNode[]>(`${this.thorchainNetworkService.nodeBasePath}/thorchain/nodeaccounts`, {params});
   }
 
   findOne(address: string): Observable<ThorNode> {
-    return this.http.get<ThorNode>(`${this.baseUrl}/nodeaccount/${address}`);
+
+    let params = new HttpParams();
+
+    if (this.thorchainNetworkService.network === THORChainNetwork.TESTNET) {
+      params = params.set('network', THORChainNetwork.TESTNET);
+    }
+
+    return this.http.get<ThorNode>(`${this.thorchainNetworkService.nodeBasePath}/thorchain/nodeaccount/${address}`, {params});
   }
 
 

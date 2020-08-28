@@ -10,6 +10,7 @@ import { TxDetailTableDataModule } from '../_components/tx-detail-table-data/tx-
 import { LoadingModule } from '../_components/loading/loading.module';
 import { VolumeModule } from '../_components/volume/volume.module';
 import { TransactionsTableModule } from '../_components/transactions-table/transactions-table.module';
+import { ErrorModule } from '../_components/error/error.module';
 
 @NgModule({
   declarations: [DashboardComponent, StatsTableComponent],
@@ -22,6 +23,7 @@ import { TransactionsTableModule } from '../_components/transactions-table/trans
     LoadingModule,
     VolumeModule,
     TransactionsTableModule,
+    ErrorModule,
     RouterModule.forChild([
       {
         path: '',
