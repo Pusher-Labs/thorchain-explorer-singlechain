@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { ThorchainNetworkService, THORChainNetwork } from './thorchain-network.service';
 
 export interface VersionSummary {
   current: string;
@@ -13,14 +13,17 @@ export interface VersionSummary {
 })
 export class VersionService {
 
-  private baseUrl: string;
-
-  constructor(private http: HttpClient) {
-    this.baseUrl = `${environment.thorNodeUrl}/thorchain`;
-  }
+  constructor(private http: HttpClient, private thorchainNetworkService: ThorchainNetworkService) {}
 
   fetch(): Observable<VersionSummary> {
-    return this.http.get<VersionSummary>(`${this.baseUrl}/version`);
+
+    let params = new HttpParams();
+
+    if (this.thorchainNetworkService.network === THORChainNetwork.TESTNET) {
+      params = params.set('network', THORChainNetwork.TESTNET);
+    }
+
+    return this.http.get<VersionSummary>(`${this.thorchainNetworkService.nodeBasePath}/thorchain/version`, {params});
   }
 
 }

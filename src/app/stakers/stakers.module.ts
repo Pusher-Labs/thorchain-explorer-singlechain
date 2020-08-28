@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { StakersComponent } from './stakers.component';
 import { LoadingModule } from '../_components/loading/loading.module';
+import { ErrorModule } from '../_components/error/error.module';
 
 
 @NgModule({
@@ -10,6 +11,7 @@ import { LoadingModule } from '../_components/loading/loading.module';
   imports: [
     CommonModule,
     LoadingModule,
+    ErrorModule,
     RouterModule.forChild([
       {
         path: '',

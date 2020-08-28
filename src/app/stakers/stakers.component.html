@@ -11,3 +11,5 @@
 </table>
 
 <app-loading *ngIf="!stakers"></app-loading>
+
+<app-error *ngIf="error" [message]="error"></app-error>

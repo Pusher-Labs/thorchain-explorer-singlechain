@@ -131,6 +131,4 @@
 
 <app-loading *ngIf="!transaction && !error">...</app-loading>
 
-<div *ngIf="!transaction && error">
-  {{error}}
-</div>
+<app-error *ngIf="!transaction && error" [message]="error"></app-error>

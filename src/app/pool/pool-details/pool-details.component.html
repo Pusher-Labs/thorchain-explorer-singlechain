@@ -1,4 +1,4 @@
-<div *ngIf="poolDetail">
+<div *ngIf="poolDetail && !error">
 
   <div class="grid grid--col-3">
 
@@ -246,4 +246,6 @@
 
 </div>
 
-<app-loading *ngIf="!poolDetail"></app-loading>
+<app-loading *ngIf="!poolDetail && !error"></app-loading>
+
+<app-error message="Pool Not Found"></app-error>

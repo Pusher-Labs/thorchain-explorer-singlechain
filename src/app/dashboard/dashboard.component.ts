@@ -1,37 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { StatsService, GlobalStats } from '../_services/stats.service';
 import { TransactionService, TransactionIndexParams } from '../_services/transaction.service';
 import { Transaction } from '../_classes/transaction';
 import { NetworkStatus, NetworkService } from '../_services/network.service';
 import { NodeService } from '../_services/node.service';
 import { ThorNode } from '../_classes/thor-node';
+import { ThorchainNetworkService, THORChainNetwork } from '../_services/thorchain-network.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   stats: GlobalStats;
   transactions: Transaction[];
   network: NetworkStatus;
   assets: string[];
   nodes: ThorNode[];
+  subs: Subscription[];
+  error: string;
+  thorchainNetwork: THORChainNetwork;
 
   constructor(
     private statsService: StatsService,
     private transactionService: TransactionService,
     private networkService: NetworkService,
-    private nodeService: NodeService
-  ) { }
+    private nodeService: NodeService,
+    private thorchainNetworkService: ThorchainNetworkService
+  ) {
+    const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
+      (network) => {
+        this.thorchainNetwork = network;
+        this.getGlobalStats();
+        this.getTransactions();
+        this.getNetworkStatus();
+        this.getNodes();
+      }
+    );
+
+    this.subs = [network$];
+  }
 
   ngOnInit(): void {
-    /**
-     * Temporarily removed bc this call frequently times out
-     */
-    this.getGlobalStats();
 
+    this.getGlobalStats();
     this.getTransactions();
     this.getNetworkStatus();
     this.getNodes();
@@ -68,11 +83,18 @@ export class DashboardComponent implements OnInit {
   }
 
   getNodes() {
+    this.nodes = null;
     this.nodeService.findAll().subscribe(
-      (res) => this.nodes = res,
-      (err) => console.error('error on dashboard fetching nodes: ', err)
+        (res) => this.nodes = res,
+        (err) => console.error('error on dashboard fetching nodes: ', err)
     );
 
+  }
+
+  ngOnDestroy() {
+    for (const sub of this.subs) {
+      sub.unsubscribe();
+    }
   }
 
 }

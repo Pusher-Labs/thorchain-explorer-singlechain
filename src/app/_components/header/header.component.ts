@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NetworkService } from 'src/app/_services/network.service';
 import { IconDefinition, faExclamationCircle, faExclamationTriangle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { UiStyleToggleService } from '../../_services/ui-style-toggle.service';
+import { ThorchainNetworkService } from 'src/app/_services/thorchain-network.service';
+import { Subscription } from 'rxjs';
 
 enum NetworkSecurityStatus {
   INEFFICIENT = 'Inefficient',
@@ -17,23 +19,34 @@ enum NetworkSecurityStatus {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   optimalIcon: IconDefinition;
   warningIcon: IconDefinition;
   alertIcon: IconDefinition;
   checking: boolean;
   theme: string;
-
   networkSecurity: number;
   networkSecurityStatus: NetworkSecurityStatus;
+  subs: Subscription[];
 
-  constructor(private networkService: NetworkService,
-              private uiStyleToggleService: UiStyleToggleService) {
-    this.optimalIcon = faCheckCircle;
-    this.warningIcon = faExclamationCircle;
-    this.alertIcon = faExclamationTriangle;
-    this.theme = localStorage.getItem('THEME');
+  constructor(
+    private networkService: NetworkService,
+    private uiStyleToggleService: UiStyleToggleService,
+    private thorchainNetworkService: ThorchainNetworkService) {
+      this.optimalIcon = faCheckCircle;
+      this.warningIcon = faExclamationCircle;
+      this.alertIcon = faExclamationTriangle;
+      this.theme = localStorage.getItem('THEME');
+
+      const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
+        (_) => {
+          this.getNetworkStatus();
+        }
+      );
+
+      this.subs = [network$];
+
   }
 
   ngOnInit(): void {
@@ -92,6 +105,12 @@ export class HeaderComponent implements OnInit {
     }
     if (localStorage.getItem('THEME') === 'LIGHT') {
       this.theme = 'LIGHT';
+    }
+  }
+
+  ngOnDestroy() {
+    for (const sub of this.subs) {
+      sub.unsubscribe();
     }
   }
 

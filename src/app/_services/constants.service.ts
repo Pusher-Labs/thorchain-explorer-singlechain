@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ThorchainNetworkService } from './thorchain-network.service';
 
 export class MidgardConstants {
   // tslint:disable-next-line:variable-name
@@ -50,10 +51,10 @@ export class MidgardConstants {
 })
 export class ConstantsService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private thorchainNetworkService: ThorchainNetworkService) { }
 
   getConstants(): Observable<MidgardConstants> {
-    return this.http.get<MidgardConstants>(`${environment.midgardUrl}/v1/thorchain/constants`);
+    return this.http.get<MidgardConstants>(`${this.thorchainNetworkService.midgardBasePath}/v1/thorchain/constants`);
   }
 
 }
