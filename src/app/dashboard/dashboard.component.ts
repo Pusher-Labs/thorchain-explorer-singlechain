@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private nodeService: NodeService,
     private thorchainNetworkService: ThorchainNetworkService
   ) {
-    const network$ = this.thorchainNetworkService.network$.subscribe(
+    const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
       (network) => {
         this.thorchainNetwork = network;
         this.getGlobalStats();
@@ -84,10 +84,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getNodes() {
     this.nodes = null;
-    this.nodeService.findAll(
-      (this.thorchainNetwork && this.thorchainNetwork === THORChainNetwork.TESTNET)
-      ? THORChainNetwork.TESTNET
-      : null).subscribe(
+    this.nodeService.findAll().subscribe(
         (res) => this.nodes = res,
         (err) => console.error('error on dashboard fetching nodes: ', err)
     );

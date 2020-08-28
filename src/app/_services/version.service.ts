@@ -15,12 +15,12 @@ export class VersionService {
 
   constructor(private http: HttpClient, private thorchainNetworkService: ThorchainNetworkService) {}
 
-  fetch(network?: THORChainNetwork): Observable<VersionSummary> {
+  fetch(): Observable<VersionSummary> {
 
     let params = new HttpParams();
 
-    if (network) {
-      params = params.set('network', 'TESTNET');
+    if (this.thorchainNetworkService.network === THORChainNetwork.TESTNET) {
+      params = params.set('network', THORChainNetwork.TESTNET);
     }
 
     return this.http.get<VersionSummary>(`${this.thorchainNetworkService.nodeBasePath}/thorchain/version`, {params});

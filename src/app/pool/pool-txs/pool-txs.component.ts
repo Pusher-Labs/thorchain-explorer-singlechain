@@ -26,7 +26,7 @@ export class PoolTxsComponent implements OnInit, OnDestroy {
     private thorchainNetworkService: ThorchainNetworkService) {
       this.limit = this.transactionsService.limit;
 
-      const network$ = this.thorchainNetworkService.network$.subscribe(
+      const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
         (_) => {
 
           const queryParams: Params = { offset: String(0)};

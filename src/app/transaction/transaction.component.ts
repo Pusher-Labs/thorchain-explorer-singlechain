@@ -23,7 +23,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
     private thorchainNetworkService: ThorchainNetworkService) {
       this.txid = '';
 
-      const network$ = this.thorchainNetworkService.network$.subscribe(
+      const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
         (_) => {
           this.transaction = null;
           this.getTransaction();

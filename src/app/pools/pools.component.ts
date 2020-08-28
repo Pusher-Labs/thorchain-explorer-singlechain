@@ -14,7 +14,7 @@ export class PoolsComponent implements OnInit, OnDestroy {
   networkSub: Subscription;
 
   constructor(private poolService: PoolService, private thorchainNetworkService: ThorchainNetworkService) {
-    this.networkSub = this.thorchainNetworkService.network$.subscribe(
+    this.networkSub = this.thorchainNetworkService.networkUpdated$.subscribe(
       (_) => {
         this.pools = null;
         this.getAssetPools();

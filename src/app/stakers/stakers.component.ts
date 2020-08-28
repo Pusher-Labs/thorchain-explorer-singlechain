@@ -15,7 +15,7 @@ export class StakersComponent implements OnInit, OnDestroy {
   error: string;
 
   constructor(private stakerService: StakerService, private thorchainNetworkService: ThorchainNetworkService) {
-    const network$ = this.thorchainNetworkService.network$.subscribe(
+    const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
       (_) => {
         this.getStakers();
       }

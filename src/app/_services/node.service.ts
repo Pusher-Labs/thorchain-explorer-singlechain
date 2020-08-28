@@ -11,23 +11,23 @@ export class NodeService {
 
   constructor(private http: HttpClient, private thorchainNetworkService: ThorchainNetworkService) { }
 
-  findAll(network?: THORChainNetwork): Observable<ThorNode[]> {
+  findAll(): Observable<ThorNode[]> {
 
     let params = new HttpParams();
 
-    if (network) {
-      params = params.set('network', network);
+    if (this.thorchainNetworkService.network === THORChainNetwork.TESTNET) {
+      params = params.set('network', THORChainNetwork.TESTNET);
     }
 
     return this.http.get<ThorNode[]>(`${this.thorchainNetworkService.nodeBasePath}/thorchain/nodeaccounts`, {params});
   }
 
-  findOne(address: string, network?: THORChainNetwork): Observable<ThorNode> {
+  findOne(address: string): Observable<ThorNode> {
 
     let params = new HttpParams();
 
-    if (network) {
-      params = params.set('network', network);
+    if (this.thorchainNetworkService.network === THORChainNetwork.TESTNET) {
+      params = params.set('network', THORChainNetwork.TESTNET);
     }
 
     return this.http.get<ThorNode>(`${this.thorchainNetworkService.nodeBasePath}/thorchain/nodeaccount/${address}`, {params});

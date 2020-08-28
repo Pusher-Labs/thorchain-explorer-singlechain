@@ -23,7 +23,7 @@ export class StakerComponent implements OnInit {
     private route: ActivatedRoute,
     private stakerService: StakerService,
     private thorchainNetworkService: ThorchainNetworkService) {
-      const network$ = this.thorchainNetworkService.network$.subscribe(
+      const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
         (_) => {
           if (this.address) {
             this.fetchStaker(this.address);

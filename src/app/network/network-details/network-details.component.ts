@@ -29,7 +29,7 @@ export class NetworkDetailsComponent implements OnInit, OnDestroy {
       this.activeBonds = [];
       this.standByBonds = [];
 
-      const network$ = this.thorchainNetworkService.network$.subscribe(
+      const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
         (_) => {
           this.getConstants();
         }

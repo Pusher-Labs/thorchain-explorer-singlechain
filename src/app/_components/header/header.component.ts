@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.alertIcon = faExclamationTriangle;
       this.theme = localStorage.getItem('THEME');
 
-      const network$ = this.thorchainNetworkService.network$.subscribe(
+      const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
         (_) => {
           this.getNetworkStatus();
         }

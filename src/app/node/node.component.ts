@@ -22,7 +22,7 @@ export class NodeComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private nodeService: NodeService, private thorchainNetworkService: ThorchainNetworkService) {
     this.isInJail = false;
 
-    const network$ = this.thorchainNetworkService.network$.subscribe(
+    const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
       (network) => {
         this.thorchainNetwork = network;
         this.getNode();
@@ -54,10 +54,7 @@ export class NodeComponent implements OnInit, OnDestroy {
 
     this.thorNode = null;
 
-    this.nodeService.findOne(
-      this.address,
-      (this.thorchainNetwork && this.thorchainNetwork === THORChainNetwork.TESTNET) ? THORChainNetwork.TESTNET : null
-    ).subscribe(
+    this.nodeService.findOne(this.address).subscribe(
       (res) => {
         this.thorNode = res;
 

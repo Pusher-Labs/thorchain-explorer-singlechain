@@ -12,10 +12,11 @@ export enum THORChainNetwork {
 export class ThorchainNetworkService {
 
   // network: THORChainNetwork;
-  private _network = new Subject<THORChainNetwork>();
+  private _networkUpdated = new Subject<THORChainNetwork>();
   midgardBasePath: string;
   nodeBasePath: string;
-  network$ = this._network.asObservable();
+  networkUpdated$ = this._networkUpdated.asObservable();
+  network: THORChainNetwork;
 
   constructor() {
     this.setNetwork(THORChainNetwork.CHAOSNET);
@@ -27,6 +28,7 @@ export class ThorchainNetworkService {
       case THORChainNetwork.TESTNET:
         this.midgardBasePath = 'https://midgard.bepswap.com';
         this.nodeBasePath = (isDevMode()) ? 'http://195.248.242.140:1317' : 'https://a2wva4alb6.execute-api.us-east-1.amazonaws.com/dev/thornode';
+        this.network = network;
         break;
 
     /**
@@ -35,10 +37,11 @@ export class ThorchainNetworkService {
       default:
         this.midgardBasePath = 'https://chaosnet-midgard.bepswap.com';
         this.nodeBasePath = (isDevMode()) ? 'http://18.159.173.48:1317' : 'https://a2wva4alb6.execute-api.us-east-1.amazonaws.com/dev/thornode';
+        this.network = network;
         break;
     }
 
-    this._network.next(network);
+    this._networkUpdated.next(network);
 
   }
 

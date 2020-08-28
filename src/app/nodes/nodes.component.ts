@@ -21,7 +21,7 @@ export class NodesComponent implements OnInit, OnDestroy {
     private nodeService: NodeService,
     private versionService: VersionService,
     private thorchainNetworkService: ThorchainNetworkService) {
-      const network$ = this.thorchainNetworkService.network$.subscribe(
+      const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
         (network) => {
           this.thorchainNetwork = network;
           this.getNodes();
@@ -39,8 +39,7 @@ export class NodesComponent implements OnInit, OnDestroy {
 
   getNodes(): void {
     this.nodes = null;
-    this.nodeService.findAll(
-      (this.thorchainNetwork && this.thorchainNetwork === THORChainNetwork.TESTNET) ? THORChainNetwork.TESTNET : null ).subscribe(
+    this.nodeService.findAll().subscribe(
       (res) => this.nodes = res,
       (err) => console.error('NodesComponent -> getNodes: ', err)
     );
@@ -48,8 +47,7 @@ export class NodesComponent implements OnInit, OnDestroy {
 
   getVersion(): void {
     this.versionSummary = null;
-    this.versionService.fetch(
-      (this.thorchainNetwork && this.thorchainNetwork === THORChainNetwork.TESTNET) ? THORChainNetwork.TESTNET : null).subscribe(
+    this.versionService.fetch().subscribe(
       (res) => this.versionSummary = res,
       (err) => console.error('error fetching version summary: ', err)
     );

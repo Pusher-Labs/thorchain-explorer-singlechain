@@ -12,7 +12,7 @@ export class NetworkToggleComponent implements OnInit {
   isTestnet: boolean;
 
   constructor(private thorchainNetworkService: ThorchainNetworkService) {
-    this.thorchainNetworkService.network$.subscribe(
+    this.thorchainNetworkService.networkUpdated$.subscribe(
       (network) => {
         this.network = network;
         this.isTestnet = (network === THORChainNetwork.TESTNET) ? true : false;

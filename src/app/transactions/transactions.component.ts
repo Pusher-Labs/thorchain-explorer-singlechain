@@ -39,7 +39,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   ) {
     this.limit = this.transactionService.limit;
 
-    const network$ = this.thorchainNetworkService.network$.subscribe(
+    const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
       (_) => {
         const queryParams: Params = { offset: String(0) };
 

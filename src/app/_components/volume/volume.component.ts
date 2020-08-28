@@ -34,7 +34,7 @@ export class VolumeComponent implements OnInit, OnDestroy {
     this.unixHour = 3600;
     this.timeNow = Math.floor(Date.now() / 1000);
 
-    const network$ = this.thorchainNetworkService.network$.subscribe(
+    const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
       (_) => {
         this.getDefaultData();
       }

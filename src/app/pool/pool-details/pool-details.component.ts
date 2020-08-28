@@ -26,7 +26,7 @@ export class PoolDetailsComponent implements OnInit, OnDestroy {
     private thorchainNetworkService: ThorchainNetworkService
   ) {
 
-    const network$ = this.thorchainNetworkService.network$.subscribe(
+    const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
       (_) => {
         this.fetchData();
       }
