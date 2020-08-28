@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ThorchainNetworkService } from './thorchain-network.service';
+import { ThorchainNetworkService, THORChainNetwork } from './thorchain-network.service';
 
 export class MidgardConstants {
   // tslint:disable-next-line:variable-name
@@ -62,7 +62,14 @@ export class ConstantsService {
   }
 
   getMimir(): Observable<StringDictionary> {
-    return this.http.get<StringDictionary>(`${environment.thorNodeUrl}/thorchain/mimir`);
+
+    let params = new HttpParams();
+
+    if (this.thorchainNetworkService.network === THORChainNetwork.TESTNET) {
+      params = params.set('network', THORChainNetwork.TESTNET);
+    }
+
+    return this.http.get<StringDictionary>(`${this.thorchainNetworkService.nodeBasePath}/thorchain/mimir`, {params});
   }
 
 }

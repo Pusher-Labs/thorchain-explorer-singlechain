@@ -1,32 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ConstantsService, MidgardConstants, StringDictionary } from 'src/app/_services/constants.service';
 import { ConstantTableItem } from 'src/app/_classes/constants-table';
+import { ThorchainNetworkService } from 'src/app/_services/thorchain-network.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-constants',
   templateUrl: './constants.component.html',
   styleUrls: ['./constants.component.scss']
 })
-export class ConstantsComponent implements OnInit {
+export class ConstantsComponent implements OnInit, OnDestroy {
 
-  constants: MidgardConstants;
   int64Vals: ConstantTableItem<number>[];
   stringVals: ConstantTableItem<string>[];
   boolVals: ConstantTableItem<boolean>[];
+  subs: Subscription[];
 
-  constructor(private constantsService: ConstantsService) { }
+  constructor(private constantsService: ConstantsService, private thorchainNetworkService: ThorchainNetworkService) {
+    const network$ = this.thorchainNetworkService.networkUpdated$.subscribe((_) => this.getConstants());
+    this.subs = [network$];
+  }
 
   ngOnInit(): void {
     this.getConstants();
   }
 
   getConstants() {
+
+    this.int64Vals = null;
+    this.stringVals = null;
+    this.boolVals = null;
+
     this.constantsService.getConstants().subscribe(
-      (res) => {
-        console.log('got some constants...');
-        this.constants = res;
-        this.getMimirOverrides(this.constants);
-      }
+      (res) => this.getMimirOverrides(res),
+      (err) => console.error('error fetching constants: ', err)
     );
   }
 
@@ -83,6 +90,12 @@ export class ConstantsComponent implements OnInit {
       },
       (err) => console.error('error fetching mimir...', err)
     );
+  }
+
+  ngOnDestroy() {
+    for (const sub of this.subs) {
+      sub.unsubscribe();
+    }
   }
 
 }
