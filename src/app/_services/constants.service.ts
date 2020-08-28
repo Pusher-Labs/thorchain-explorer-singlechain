@@ -46,6 +46,10 @@ export class MidgardConstants {
 
 }
 
+export interface StringDictionary {
+  [key: string]: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -57,8 +61,8 @@ export class ConstantsService {
     return this.http.get<MidgardConstants>(`${this.thorchainNetworkService.midgardBasePath}/v1/thorchain/constants`);
   }
 
-  getMimir(): Observable<object> {
-    return this.http.get<object>(`${environment.thorNodeUrl}/thorchain/mimir`);
+  getMimir(): Observable<StringDictionary> {
+    return this.http.get<StringDictionary>(`${environment.thorNodeUrl}/thorchain/mimir`);
   }
 
 }
