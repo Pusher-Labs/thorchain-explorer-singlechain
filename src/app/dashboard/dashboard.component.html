@@ -2,9 +2,9 @@
 
 <app-loading *ngIf="!network || !nodes || !transactions || !stats"></app-loading>
 
-<div id="dashboard">
+<div id="dashboard" *ngIf="network && nodes && transactions && stats">
 
-  <div class="grid" *ngIf="network && nodes && transactions && stats">
+  <div class="grid">
 
     <!-- Network Status Summary -->
     <div class="grid-item">
@@ -50,11 +50,13 @@
 
   </div>
 
-    <!-- Dash Transactions Summary-->
+  <!-- Dash Transactions Summary-->
 
-    <div class="grid-item">
-      <app-transactions-table [transactions]="transactions"></app-transactions-table>
-      <a [routerLink]="['/', 'txs']" [queryParams]="{offset: 0}" class="view-more">View More Transactions</a>
-    </div>
+  <div class="grid-item">
+    <app-transactions-table [transactions]="transactions"></app-transactions-table>
+    <a [routerLink]="['/', 'txs']" [queryParams]="{offset: 0}" class="view-more">View More Transactions</a>
+  </div>
 
 </div>
+
+<app-error *ngIf="error" [message]="error"></app-error>

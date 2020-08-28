@@ -132,7 +132,7 @@ export class VolumeComponent implements OnInit, OnDestroy {
         },
         xAxis: {
           title: {
-            text: 'Time'
+            text: 'Time (UTC)'
           },
           gridLineWidth: 1,
           categories: this.timeString
@@ -172,10 +172,10 @@ export class VolumeComponent implements OnInit, OnDestroy {
       const givenSeconds = iter;
       const monthsArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
       const dateObj = new Date(givenSeconds * 1000);
-      const hours = dateObj.getHours();
-      const minutes = dateObj.getMinutes();
-      const day = dateObj.getDate();
-      const month = monthsArr[dateObj.getMonth()];
+      const hours = dateObj.getUTCHours();
+      const minutes = dateObj.getUTCMinutes();
+      const day = dateObj.getUTCDate();
+      const month = monthsArr[dateObj.getUTCMonth()];
 
       this.timeString.push(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}\
       ${day.toString()} ${month.toString()}`);
@@ -187,12 +187,13 @@ export class VolumeComponent implements OnInit, OnDestroy {
     this.timeString = [];
 
     for (const iter of this.timeLabels) {
+
       const givenSeconds = iter;
       const monthsArr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
       const dateObj = new Date(givenSeconds * 1000);
-      const day = dateObj.getDate();
-      const year = dateObj.getFullYear();
-      const month = monthsArr[dateObj.getMonth()];
+      const day = dateObj.getUTCDate();
+      const year = dateObj.getUTCFullYear();
+      const month = monthsArr[dateObj.getUTCMonth()];
 
       this.timeString.push(`${day.toString()} ${month.toString()} ${year.toString()}`);
     }
