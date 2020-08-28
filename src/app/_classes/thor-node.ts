@@ -29,4 +29,5 @@ export interface ThorNode {
     reason: string;
   };
   current_award: string;
+  error: string;
 }

@@ -56,18 +56,25 @@ export class NodeComponent implements OnInit, OnDestroy {
 
     this.nodeService.findOne(this.address).subscribe(
       (res) => {
-        this.thorNode = res;
 
-        if (res.jail) {
+        if (res.error) {
+          this.error = 'Invalid account address. Are you on the correct network?';
+        } else {
 
-          const jailReleaseHeight = Number(res.jail.release_height);
-          const activeBlockHeight = Number(res.active_block_height);
+          this.thorNode = res;
 
-          if (jailReleaseHeight && activeBlockHeight) {
-            this.isInJail = (res.jail.node_address === res.node_address)
-            && (jailReleaseHeight > activeBlockHeight)
-              ? true
-              : false;
+          if (res.jail) {
+
+            const jailReleaseHeight = Number(res.jail.release_height);
+            const activeBlockHeight = Number(res.active_block_height);
+
+            if (jailReleaseHeight && activeBlockHeight) {
+              this.isInJail = (res.jail.node_address === res.node_address)
+              && (jailReleaseHeight > activeBlockHeight)
+                ? true
+                : false;
+            }
+
           }
 
         }
