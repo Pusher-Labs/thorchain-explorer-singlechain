@@ -22,7 +22,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   nodes: ThorNode[];
   subs: Subscription[];
   error: string;
-  thorchainNetwork: THORChainNetwork;
 
   constructor(
     private statsService: StatsService,
@@ -32,12 +31,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private thorchainNetworkService: ThorchainNetworkService
   ) {
     const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
-      (network) => {
-        this.thorchainNetwork = network;
-        this.getGlobalStats();
-        this.getTransactions();
-        this.getNetworkStatus();
-        this.getNodes();
+      (_) => {
+        this.fetchData();
       }
     );
 
@@ -45,6 +40,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.fetchData();
+  }
+
+  fetchData() {
+    this.error = null;
 
     this.getGlobalStats();
     this.getTransactions();
@@ -54,14 +54,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getGlobalStats(): void {
 
+    this.stats = null;
+
     this.statsService.getStats().subscribe(
       (res) => this.stats = res,
-      (err) => console.error(err)
+      (err) => {
+        console.error(err);
+        this.error = `Error fetching ${this.thorchainNetworkService.network} data`;
+      }
     );
 
   }
 
   getTransactions() {
+
+    this.transactions = null;
 
     const params: TransactionIndexParams = {
       offset: 0
@@ -71,14 +78,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
       (res) => {
         this.transactions = res.txs;
       },
-      (err) => console.error('error fetching stakers: ', err)
+      (err) => {
+        console.error('error fetching stakers: ', err);
+        this.error = `Error fetching ${this.thorchainNetworkService.network} data`;
+      }
     );
   }
 
   getNetworkStatus() {
+
+    this.network = null;
+
     this.networkService.network().subscribe(
       (res) => this.network = res,
-      (err) => console.error('error fetching network status: ', err)
+      (err) => {
+        console.error('error fetching network status: ', err);
+        this.error = `Error fetching ${this.thorchainNetworkService.network} data`;
+      }
     );
   }
 
@@ -86,7 +102,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.nodes = null;
     this.nodeService.findAll().subscribe(
         (res) => this.nodes = res,
-        (err) => console.error('error on dashboard fetching nodes: ', err)
+        (err) => {
+          console.error('error on dashboard fetching nodes: ', err);
+          this.error = `Error fetching ${this.thorchainNetworkService.network} data`;
+        }
     );
 
   }
