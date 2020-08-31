@@ -4,10 +4,17 @@ import { ConstantTableItem } from 'src/app/_classes/constants-table';
 import { ThorchainNetworkService } from 'src/app/_services/thorchain-network.service';
 import { Subscription } from 'rxjs';
 
+enum ConstantType {
+  INT64 = 'INT64',
+  STRING = 'STRING',
+  BOOLEAN = 'BOOLEAN'
+}
+
 interface MimirTableItem {
   key: string;
   label: string;
   value: string;
+  type: ConstantType;
 }
 
 @Component({
@@ -137,6 +144,7 @@ export class ConstantsComponent implements OnInit, OnDestroy {
       const splitKey = key.replace('mimir//', '');
       let keyString = splitKey;
       let val = mimirs[key];
+      let constantType: ConstantType;
 
       /**
        * Match Mimir to int64 constants
@@ -145,6 +153,7 @@ export class ConstantsComponent implements OnInit, OnDestroy {
         if (keyString.localeCompare(keys.toUpperCase()) === 0) {
           keyString = keys.match(/[A-Z][a-z]+/g).join(' ');
           val = this.formatNumber(splitKey) ? String(this.assetUnits(+val)) : val;
+          constantType = ConstantType.INT64;
         }
 
         /**
@@ -153,6 +162,7 @@ export class ConstantsComponent implements OnInit, OnDestroy {
         if (keyString === 'MAXIMUMSTAKERUNE') {
           keyString = 'Maximum Stake Rune';
           val = this.formatNumber(splitKey) ? String(this.assetUnits(+val)) : val;
+          constantType = ConstantType.INT64;
         }
       }
 
@@ -162,6 +172,7 @@ export class ConstantsComponent implements OnInit, OnDestroy {
       for (const [keys] of Object.entries(constants.string_values)) {
         if (keyString.localeCompare(keys.toUpperCase()) === 0) {
           keyString = keys.match(/[A-Z][a-z]+/g).join(' ');
+          constantType = ConstantType.STRING;
         }
       }
 
@@ -171,11 +182,12 @@ export class ConstantsComponent implements OnInit, OnDestroy {
       for (const [keys] of Object.entries(constants.bool_values)) {
         if (keyString.localeCompare(keys.toUpperCase()) === 0) {
           keyString = keys.match(/[A-Z][a-z]+/g).join(' ');
+          constantType = ConstantType.BOOLEAN;
         }
       }
 
 
-      mimirArr.push({ key: splitKey, label: keyString, value: val });
+      mimirArr.push({ key: splitKey, label: keyString, value: val, type: constantType });
     }
 
     return mimirArr;

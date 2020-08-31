@@ -83,7 +83,8 @@
     <tbody>
       <tr *ngFor="let val of mimirVals">
         <td>{{val.label}}</td>
-        <td>{{val.value | number}}</td>
+        <td *ngIf="val.type == 'INT64'">{{val.value | number}}</td>
+        <td *ngIf="val.type != 'INT64'">{{val.value }}</td>
       </tr>
     </tbody>
   </table>
