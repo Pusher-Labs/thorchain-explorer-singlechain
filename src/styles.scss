@@ -46,14 +46,14 @@ span {
 table {
   border-collapse: collapse;
   background-color: var(--background-dashboard);
-  width:100%;
+  width: 100%;
   border-radius: 5px;
-  overflow: hidden;
+  overflow: auto;
 
   th, td {
     padding: 5px 10px;
     border-bottom: 1px solid gainsboro;
-    overflow: hidden; /* optionnal*/
+    overflow-x: auto;
     padding: 10px;
     vertical-align: top;
     color: var(--toolbar-text-color);
