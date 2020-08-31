@@ -95,7 +95,7 @@ export class VolumeComponent implements OnInit, OnDestroy {
         ],
         xAxis: {
           title: {
-            text: 'Time'
+            text: 'Time (UTC)'
           },
           gridLineWidth: 1,
           categories: this.timeString
