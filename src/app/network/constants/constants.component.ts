@@ -4,6 +4,12 @@ import { ConstantTableItem } from 'src/app/_classes/constants-table';
 import { ThorchainNetworkService } from 'src/app/_services/thorchain-network.service';
 import { Subscription } from 'rxjs';
 
+interface MimirTableItem {
+  key: string;
+  label: string;
+  value: string;
+}
+
 @Component({
   selector: 'app-constants',
   templateUrl: './constants.component.html',
@@ -15,7 +21,7 @@ export class ConstantsComponent implements OnInit, OnDestroy {
   stringVals: ConstantTableItem<string>[];
   boolVals: ConstantTableItem<boolean>[];
   subs: Subscription[];
-  mimirVals: { key: string, label: string, value: string }[] = [];
+  mimirVals: MimirTableItem[] = [];
 
   constructor(private constantsService: ConstantsService, private thorchainNetworkService: ThorchainNetworkService) {
     const network$ = this.thorchainNetworkService.networkUpdated$.subscribe((_) => this.getConstants());
@@ -49,20 +55,7 @@ export class ConstantsComponent implements OnInit, OnDestroy {
         /**
          * Create an array of Mimir Overrides
          */
-        for (const [key, _] of Object.entries(res)) {
-          const splitKey = key.replace('mimir//', '');
-          let keyValue = splitKey;
-
-          for (const [keys] of Object.entries(constants.int_64_values)) {
-            if (keyValue.localeCompare(keys.toUpperCase()) === 0) {
-              keyValue = keys.match(/[A-Z][a-z]+/g).join(' ');
-            }
-            if (keyValue === 'MAXIMUMSTAKERUNE') {
-              keyValue = 'Maximum Stake Rune';
-            }
-          }
-          this.mimirVals.push({ key: splitKey, label: keyValue, value: res[key] });
-        }
+        this.mimirVals = this.createMimirsArray(res, constants);
 
         /**
          * Create Int64 Values
@@ -98,9 +91,7 @@ export class ConstantsComponent implements OnInit, OnDestroy {
           : value;
 
           if (mimirMatch) {
-            formattedMimirValue = (formatNumber === true)
-              ? this.assetUnits(+(mimirMatch.value))
-              : +(mimirMatch.value);
+            formattedMimirValue = +(mimirMatch.value);
           }
 
           int64vals.push(new ConstantTableItem<number>(
@@ -138,8 +129,60 @@ export class ConstantsComponent implements OnInit, OnDestroy {
     );
   }
 
+  createMimirsArray(mimirs: StringDictionary, constants: MidgardConstants): MimirTableItem[] {
+
+    const mimirArr: MimirTableItem[] = [];
+
+    for (const [key, _] of Object.entries(mimirs)) {
+      const splitKey = key.replace('mimir//', '');
+      let keyString = splitKey;
+      let val = mimirs[key];
+
+      /**
+       * Match Mimir to int64 constants
+       */
+      for (const [keys] of Object.entries(constants.int_64_values)) {
+        if (keyString.localeCompare(keys.toUpperCase()) === 0) {
+          keyString = keys.match(/[A-Z][a-z]+/g).join(' ');
+          val = this.formatNumber(splitKey) ? String(this.assetUnits(+val)) : val;
+        }
+
+        /**
+         * this is temporary for chaosnet
+         */
+        if (keyString === 'MAXIMUMSTAKERUNE') {
+          keyString = 'Maximum Stake Rune';
+          val = this.formatNumber(splitKey) ? String(this.assetUnits(+val)) : val;
+        }
+      }
+
+      /**
+       * Match Mimir to string constants
+       */
+      for (const [keys] of Object.entries(constants.string_values)) {
+        if (keyString.localeCompare(keys.toUpperCase()) === 0) {
+          keyString = keys.match(/[A-Z][a-z]+/g).join(' ');
+        }
+      }
+
+      /**
+       * Match Mimir to boolean constants
+       */
+      for (const [keys] of Object.entries(constants.bool_values)) {
+        if (keyString.localeCompare(keys.toUpperCase()) === 0) {
+          keyString = keys.match(/[A-Z][a-z]+/g).join(' ');
+        }
+      }
+
+
+      mimirArr.push({ key: splitKey, label: keyString, value: val });
+    }
+
+    return mimirArr;
+  }
+
   formatNumber(key: string): boolean {
-    return (key === 'CliTxCost' || key === 'MinimumBondInRune' || key === 'TransactionFee')
+    return (key === 'CliTxCost' || key === 'MinimumBondInRune' || key === 'TransactionFee' || key === 'MAXIMUMSTAKERUNE' || key === 'MINIMUMBONDINRUNE')
       ? true
       : false;
   }
