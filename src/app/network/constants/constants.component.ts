@@ -15,6 +15,7 @@ export class ConstantsComponent implements OnInit, OnDestroy {
   stringVals: ConstantTableItem<string>[];
   boolVals: ConstantTableItem<boolean>[];
   subs: Subscription[];
+  mimirVals: { key: string, label: string, value: string }[] = [];
 
   constructor(private constantsService: ConstantsService, private thorchainNetworkService: ThorchainNetworkService) {
     const network$ = this.thorchainNetworkService.networkUpdated$.subscribe((_) => this.getConstants());
@@ -44,14 +45,23 @@ export class ConstantsComponent implements OnInit, OnDestroy {
         const int64vals: ConstantTableItem<number>[] = [];
         const stringVals: ConstantTableItem<string>[] = [];
         const boolVals: ConstantTableItem<boolean>[] = [];
-        const mimirVals: {key: string, value: string}[] = [];
 
         /**
          * Create an array of Mimir Overrides
          */
         for (const [key, _] of Object.entries(res)) {
           const splitKey = key.replace('mimir//', '');
-          mimirVals.push({key: splitKey, value: res[key] });
+          let keyValue = splitKey;
+
+          for (const [keys] of Object.entries(constants.int_64_values)) {
+            if (keyValue.localeCompare(keys.toUpperCase()) === 0) {
+              keyValue = keys.match(/[A-Z][a-z]+/g).join(' ');
+            }
+            if (keyValue === 'MAXIMUMSTAKERUNE') {
+              keyValue = 'Maximum Stake Rune';
+            }
+          }
+          this.mimirVals.push({ key: splitKey, label: keyValue, value: res[key] });
         }
 
         /**
@@ -73,7 +83,7 @@ export class ConstantsComponent implements OnInit, OnDestroy {
           /**
            * See if Mimir Match is available
            */
-          const mimirMatch =  mimirVals.find( (mimir) => mimir.key === key.toUpperCase() );
+          const mimirMatch =  this.mimirVals.find( (mimir) => mimir.key === key.toUpperCase() );
 
           /**
            * Should we format the number like num / 10 ** 8?
@@ -86,8 +96,6 @@ export class ConstantsComponent implements OnInit, OnDestroy {
           const formattedValue = (formatNumber === true)
           ? this.assetUnits(value)
           : value;
-
-
 
           if (mimirMatch) {
             formattedMimirValue = (formatNumber === true)
@@ -106,7 +114,7 @@ export class ConstantsComponent implements OnInit, OnDestroy {
          * Create String Values
          */
         for (const [key, value] of Object.entries(constants.string_values)) {
-          const mimirMatch =  mimirVals.find( (mimir) => mimir.key === key.toUpperCase() );
+          const mimirMatch =  this.mimirVals.find( (mimir) => mimir.key === key.toUpperCase() );
           const formattedKey = key.match(/[A-Z][a-z]+/g).join(' ');
 
           stringVals.push(new ConstantTableItem<string>(formattedKey, value, ((mimirMatch) ? mimirMatch.value : null) ));
@@ -116,7 +124,7 @@ export class ConstantsComponent implements OnInit, OnDestroy {
          * Create Boolean Values
          */
         for (const [key, value] of Object.entries(constants.bool_values)) {
-          const mimirMatch =  mimirVals.find( (mimir) => mimir.key === key.toUpperCase() );
+          const mimirMatch =  this.mimirVals.find( (mimir) => mimir.key === key.toUpperCase() );
           const formattedKey = key.match(/[A-Z][a-z]+/g).join(' ');
 
           boolVals.push(new ConstantTableItem<boolean>(formattedKey, value, ((mimirMatch) ? Boolean(mimirMatch.value) : null) ));
