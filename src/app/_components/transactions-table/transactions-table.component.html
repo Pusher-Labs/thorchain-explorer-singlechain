@@ -16,14 +16,14 @@
         {{transaction.type}}
 
         <!-- <fa-icon *ngIf="transaction.type == 'swap'" [icon]="swapIcon" [title]="transaction.type"></fa-icon>
-        <fa-icon *ngIf="transaction.type == 'stake'" [icon]="stakeIcon" [title]="transaction.type"></fa-icon>
-        <fa-icon *ngIf="transaction.type == 'unstake'" [icon]="unStakeIcon" [title]="transaction.type"></fa-icon>
-        <fa-icon *ngIf="transaction.type == 'refund'" [icon]="refundIcon" [title]="transaction.type"></fa-icon>
-        <fa-icon *ngIf="transaction.type == 'add'" [icon]="addIcon" [title]="transaction.type"></fa-icon>
-        <div *ngIf="transaction.type == 'doubleSwap'" [title]="transaction.type">
-          <fa-icon [icon]="swapIcon"></fa-icon><br/>
-          <fa-icon [icon]="swapIcon"></fa-icon>
-        </div> -->
+          <fa-icon *ngIf="transaction.type == 'stake'" [icon]="stakeIcon" [title]="transaction.type"></fa-icon>
+          <fa-icon *ngIf="transaction.type == 'unstake'" [icon]="unStakeIcon" [title]="transaction.type"></fa-icon>
+          <fa-icon *ngIf="transaction.type == 'refund'" [icon]="refundIcon" [title]="transaction.type"></fa-icon>
+          <fa-icon *ngIf="transaction.type == 'add'" [icon]="addIcon" [title]="transaction.type"></fa-icon>
+          <div *ngIf="transaction.type == 'doubleSwap'" [title]="transaction.type">
+            <fa-icon [icon]="swapIcon"></fa-icon><br/>
+            <fa-icon [icon]="swapIcon"></fa-icon>
+          </div> -->
       </td>
 
       <!-- IN -->
@@ -40,7 +40,8 @@
 
           <li class="out-data" *ngFor="let out of transaction.out; let i = index">
 
-            <app-tx-detail-table-data [transactionDetail]="out" direction="OUT" [class.pad]="transaction.out.length > 1 && i < (transaction.out.length - 1)"></app-tx-detail-table-data>
+            <app-tx-detail-table-data [transactionDetail]="out" direction="OUT"
+              [class.pad]="transaction.out.length > 1 && i < (transaction.out.length - 1)"></app-tx-detail-table-data>
 
           </li>
 
