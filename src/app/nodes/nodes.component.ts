@@ -60,7 +60,7 @@ export class NodesComponent implements OnInit, OnDestroy {
         /**
          * TODO: add back in when we can check against a jailed node
          */
-        // this.checkIfJailed();
+        this.checkIfJailed();
       },
       (err) => console.error('NodesComponent -> getNodes: ', err)
     );
