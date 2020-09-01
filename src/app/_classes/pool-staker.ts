@@ -1,10 +1,10 @@
-export class PoolStaker {
+export interface PoolStaker {
     asset: string;
-    runeAddress: string;
-    assetAddress: string;
-    lastStake: string;
-    lastUnstake: string;
+    rune_address: string;
+    asset_address: string;
+    last_stake: string;
+    last_unstake: string;
     units: string;
-    pendingRune: string;
-    pendingTxId: string;
+    pending_rune: string;
+    pending_tx_id: string;
 }
