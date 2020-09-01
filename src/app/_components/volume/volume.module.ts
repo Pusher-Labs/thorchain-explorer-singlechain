@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VolumeComponent } from './volume.component';
-import { HighchartsChartModule } from 'highcharts-angular';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [VolumeComponent],
   imports: [
     CommonModule,
-    HighchartsChartModule
+    ChartsModule
   ],
   exports: [VolumeComponent]
 })

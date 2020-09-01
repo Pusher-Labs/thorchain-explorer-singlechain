@@ -1,5 +1,4 @@
 import { FormattableAsset } from './helpers/formattable-asset';
-import { numberFormat } from 'highcharts';
 
 export interface BondMetrics {
   totalActiveBond: string;

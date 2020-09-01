@@ -1,12 +1,20 @@
-<div class="volume-container" *ngIf="this.chartOptions !== undefined">
+<div class="volume-container" *ngIf="this.lineChartData !== undefined">
 
 
   <select id="volume-interval-select" (change)="onChange($event)">
     <option *ngFor="let state of states" [value]="state.value"> {{ state.name }} </option>
   </select>
 
-  <highcharts-chart style="display: block" [Highcharts]="Highcharts" constructorType="chart"
-    [options]="chartOptions">
-  </highcharts-chart>
+  <div style="display: block;">
+    <canvas baseChart width="400" height="380"
+      [datasets]="lineChartData"
+      [labels]="lineChartLabels"
+      [options]="lineChartOptions"
+      [colors]="lineChartColors"
+      [legend]="lineChartLegend"
+      [chartType]="lineChartType"
+      [plugins]="lineChartPlugins">
+    </canvas>
+  </div>
 
 </div>
