@@ -13,24 +13,26 @@ import { Subscription } from 'rxjs';
 export class NodesComponent implements OnInit, OnDestroy {
 
   nodes: ThorNode[];
+  thorNode: ThorNode;
   versionSummary: VersionSummary;
   subs: Subscription[];
   thorchainNetwork: THORChainNetwork;
+  isInJail: boolean;
 
   constructor(
     private nodeService: NodeService,
     private versionService: VersionService,
     private thorchainNetworkService: ThorchainNetworkService) {
-      const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
-        (network) => {
-          this.thorchainNetwork = network;
-          this.getNodes();
-          this.getVersion();
-        }
-      );
+    const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
+      (network) => {
+        this.thorchainNetwork = network;
+        this.getNodes();
+        this.getVersion();
+      }
+    );
 
-      this.subs = [network$];
-    }
+    this.subs = [network$];
+  }
 
   ngOnInit(): void {
     this.getNodes();
@@ -40,7 +42,10 @@ export class NodesComponent implements OnInit, OnDestroy {
   getNodes(): void {
     this.nodes = null;
     this.nodeService.findAll().subscribe(
-      (res) => this.nodes = res,
+      (res) => {
+        this.nodes = res;
+        this.checkIfJailed();
+      },
       (err) => console.error('NodesComponent -> getNodes: ', err)
     );
   }
@@ -60,13 +65,13 @@ export class NodesComponent implements OnInit, OnDestroy {
       /**
        * Filter for Active Nodes
        */
-      const activeNodes = this.nodes.filter( (node) => node.status === NodeStatus.ACTIVE );
+      const activeNodes = this.nodes.filter((node) => node.status === NodeStatus.ACTIVE);
 
 
       /**
        * Get the total count of active nodes that match version
        */
-      const total = activeNodes.reduce( (count, node) => {
+      const total = activeNodes.reduce((count, node) => {
 
         if (node.version === version) {
           count++;
@@ -87,6 +92,22 @@ export class NodesComponent implements OnInit, OnDestroy {
     console.error('nodes is not set');
 
     return null;
+
+  }
+
+  checkIfJailed() {
+
+    this.nodes.map((value) => {
+      const jailReleaseHeight = Number(value.jail.release_height);
+      const activeBlockHeight = Number(value.active_block_height);
+
+      if (jailReleaseHeight > activeBlockHeight) {
+        value.status = NodeStatus.JAILED;
+      }
+      if (jailReleaseHeight === activeBlockHeight) {
+        value.status = NodeStatus.STANDBY;
+      }
+    });
 
   }
 
