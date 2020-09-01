@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NodeService } from '../_services/node.service';
-import { ThorNode } from '../_classes/thor-node';
+import { ThorNode, NodeStatus } from '../_classes/thor-node';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ThorchainNetworkService, THORChainNetwork } from '../_services/thorchain-network.service';
@@ -74,7 +74,9 @@ export class NodeComponent implements OnInit, OnDestroy {
                 ? true
                 : false;
             }
-
+            if (this.isInJail) {
+              this.thorNode.status = NodeStatus.JAILED;
+            }
           }
 
         }
