@@ -16,6 +16,7 @@ export class PoolStakersComponent implements OnInit, OnDestroy {
   totalCount: number;
   poolName: string;
   subs: Subscription[];
+  error: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -47,11 +48,22 @@ export class PoolStakersComponent implements OnInit, OnDestroy {
   }
 
   async getAssetStakers() {
+    this.error = false;
     this.poolStakerService.findAll(this.poolName).subscribe(
       (res) => {
-        this.stakers = res;
+          if(res){
+              this.stakers = res;
+              this.error = false
+          }else{
+              //Because on 404 issues the api returns null
+              //so need to check for null and raise error here
+              this.error = true
+          }
       },
-      (err) => console.error('err is: ', err)
+      (err) => {
+        console.error('err is: ', err)
+        this.error = true
+      }
     );
   }
 
