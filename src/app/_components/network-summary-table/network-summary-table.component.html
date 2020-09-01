@@ -7,11 +7,31 @@
   <tbody>
     <tr>
       <td>Total Staked</td>
-      <td>{{network.totalStaked | assetUnits:8 | number:'1.0-0'}}</td>
+      <td>
+        {{ network.totalStaked | number:'1.0-0' }}
+        <span *ngIf="currentRate">(${{network.totalStaked * currentRate | number:'1.0-0'}})</span>
+      </td>
     </tr>
     <tr>
       <td>Total Reserve</td>
-      <td>{{network.totalReserve | assetUnits:8 | number:'1.0-0'}}</td>
+      <td>
+        {{network.totalReserve | number:'1.0-0'}}
+        <span *ngIf="currentRate">(${{network.totalReserve * currentRate | number:'1.0-0'}})</span>
+      </td>
+    </tr>
+    <tr>
+      <td>Total Bonded</td>
+      <td>
+        {{network.totalBonded | number:'1.0-0'}}
+        <span *ngIf="currentRate">(${{network.totalBonded * currentRate | number:'1.0-0'}})</span>
+      </td>
+    </tr>
+    <tr>
+      <td>Total Capital</td>
+      <td>
+        {{network.totalCapital | number:'1.0-0'}}
+        <span *ngIf="currentRate">(${{network.totalCapital * currentRate | number:'1.0-0'}})</span>
+      </td>
     </tr>
     <tr>
       <td>Active Node Count</td>
@@ -30,10 +50,6 @@
       <td>{{network.poolActivationCountdown}}</td>
     </tr>
     <tr>
-      <td>Next Churn Height</td>
-      <td>{{network.nextChurnHeight}}</td>
-    </tr>
-    <tr>
       <td>Bonding ROI</td>
       <td *ngIf="isFinite(network.bondingROI)">{{network.bondingROI | percent:'1.0-2'}}</td>
       <td *ngIf="!isFinite(network.bondingROI)">{{network.bondingROI}}</td>
@@ -41,6 +57,10 @@
     <tr>
       <td>Staking ROI</td>
       <td>{{network.stakingROI | percent:'1.0-2'}}</td>
+    </tr>
+    <tr>
+      <td>Next Churn Height</td>
+      <td>{{network.nextChurnHeight}}</td>
     </tr>
   </tbody>
 </table>

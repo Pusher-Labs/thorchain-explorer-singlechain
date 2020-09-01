@@ -8,7 +8,7 @@
 
     <!-- Network Status Summary -->
     <div class="grid-item">
-      <app-network-summary-table *ngIf="network" [network]="network"></app-network-summary-table>
+      <app-network-summary-table *ngIf="network" [network]="network" [currentRate]="currentRate"></app-network-summary-table>
       <a *ngIf="network" [routerLink]="['/', 'network']" class="view-more">View Network</a>
     </div>
 

@@ -1,7 +1,7 @@
 <div *ngIf="network" class="grid">
 
   <div class="shadow grid-item">
-    <app-network-summary-table [network]="network"></app-network-summary-table>
+    <app-network-summary-table [network]="network" [currentRate]="currentRate"></app-network-summary-table>
   </div>
 
   <div class="shadow grid-item">
@@ -50,7 +50,7 @@
 
       <tbody>
         <tr *ngFor="let bond of activeBonds">
-          <td>{{bond | assetUnits:8 | number:"1.0-0"}}</td>
+          <td>{{bond | number:"1.0-0"}}</td>
         </tr>
       </tbody>
 
@@ -103,7 +103,7 @@
 
       <tbody>
         <tr *ngFor="let bond of standByBonds">
-          <td>{{bond | assetUnits:8 | number:"1.0-0"}}</td>
+          <td>{{bond | number:"1.0-0"}}</td>
         </tr>
       </tbody>
 
