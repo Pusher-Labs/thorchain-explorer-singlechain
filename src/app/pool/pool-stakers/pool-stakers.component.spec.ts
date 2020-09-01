@@ -18,7 +18,8 @@ describe('PoolStakersComponent', () => {
           provide: ActivatedRoute,
           useValue: {
             parent: {
-              paramMap: of(convertToParamMap({pool: 'BNB.AVA-ADF'}))
+              paramMap: of(convertToParamMap({pool: 'BNB.BNB'})),
+              queryParamMap: of(convertToParamMap({offset: 0}))
             }
           }
         }
