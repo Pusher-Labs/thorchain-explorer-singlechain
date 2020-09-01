@@ -2,10 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { StatsService, GlobalStats } from '../_services/stats.service';
 import { TransactionService, TransactionIndexParams } from '../_services/transaction.service';
 import { Transaction } from '../_classes/transaction';
-import { NetworkStatus, NetworkService } from '../_services/network.service';
+import { NetworkService } from '../_services/network.service';
+import { NetworkStatus } from '../_classes/network-status';
 import { NodeService } from '../_services/node.service';
 import { ThorNode } from '../_classes/thor-node';
-import { ThorchainNetworkService, THORChainNetwork } from '../_services/thorchain-network.service';
+import { ThorchainNetworkService } from '../_services/thorchain-network.service';
+import { CoinGeckoService } from '../_services/coingecko.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -22,13 +24,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
   nodes: ThorNode[];
   subs: Subscription[];
   error: string;
+  currentRate: number;
 
   constructor(
     private statsService: StatsService,
     private transactionService: TransactionService,
     private networkService: NetworkService,
     private nodeService: NodeService,
-    private thorchainNetworkService: ThorchainNetworkService
+    private thorchainNetworkService: ThorchainNetworkService,
+    private coinGeckoService: CoinGeckoService
   ) {
     const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
       (_) => {
@@ -46,10 +50,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
   fetchData() {
     this.error = null;
 
+    this.fetchCurrentPrice();
     this.getGlobalStats();
     this.getTransactions();
     this.getNetworkStatus();
     this.getNodes();
+  }
+
+  fetchCurrentPrice() {
+    this.coinGeckoService.getCurrencyConversion().subscribe(
+      (res) => {
+        if (res.thorchain && res.thorchain.usd) {
+          this.currentRate = res.thorchain.usd;
+        }
+      },
+      (err) => console.error('error fetching current price: ', err)
+    );
   }
 
   getGlobalStats(): void {
@@ -90,7 +106,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.network = null;
 
     this.networkService.network().subscribe(
-      (res) => this.network = res,
+      (res) => {
+        this.network = new NetworkStatus(res);
+      },
       (err) => {
         console.error('error fetching network status: ', err);
         this.error = `Error fetching ${this.thorchainNetworkService.network} data`;
