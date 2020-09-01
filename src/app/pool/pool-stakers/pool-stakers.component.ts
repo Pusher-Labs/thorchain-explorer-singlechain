@@ -51,18 +51,18 @@ export class PoolStakersComponent implements OnInit, OnDestroy {
     this.error = false;
     this.poolStakerService.findAll(this.poolName).subscribe(
       (res) => {
-          if(res){
+          if (res){
               this.stakers = res;
-              this.error = false
+              this.error = false;
           }else{
-              //Because on 404 issues the api returns null
-              //so need to check for null and raise error here
-              this.error = true
+              // Because on 404 issues the api returns null
+              // so need to check for null and raise error here
+              this.error = true;
           }
       },
       (err) => {
-        console.error('err is: ', err)
-        this.error = true
+        console.error('err is: ', err);
+        this.error = true;
       }
     );
   }
