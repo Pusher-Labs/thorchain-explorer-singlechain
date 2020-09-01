@@ -19,7 +19,6 @@ describe('PoolStakersComponent', () => {
           useValue: {
             parent: {
               paramMap: of(convertToParamMap({pool: 'BNB.BNB'})),
-              queryParamMap: of(convertToParamMap({offset: 0}))
             }
           }
         }

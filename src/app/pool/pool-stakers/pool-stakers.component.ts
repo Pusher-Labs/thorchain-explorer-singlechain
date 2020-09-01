@@ -25,17 +25,6 @@ export class PoolStakersComponent implements OnInit, OnDestroy {
       const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
         (_) => {
 
-          const queryParams: Params = {};
-
-          this.router.navigate(
-            [],
-            {
-              relativeTo: this.route,
-              queryParams,
-              queryParamsHandling: 'merge',
-            }
-          );
-
           this.stakers = null;
           this.getAssetStakers();
 
@@ -48,17 +37,12 @@ export class PoolStakersComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    const queryParams$ = this.route.parent.queryParamMap.subscribe( (params) => {
-
-    });
-
     const params$ = this.route.parent.paramMap.subscribe( async (params) => {
       this.poolName = params.get('pool');
       this.getAssetStakers();
-
     });
 
-    this.subs.push(queryParams$, params$);
+    this.subs.push(params$);
 
   }
 
