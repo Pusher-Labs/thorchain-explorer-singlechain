@@ -27,6 +27,7 @@ import { VolumeService } from './_services/volume.service';
 import { UiStyleToggleService } from './_services/ui-style-toggle.service';
 import { LocalStorageService } from './_services/local-storage.service';
 import { ThorchainNetworkService } from './_services/thorchain-network.service';
+import { CoinGeckoService } from './_services/coingecko.service';
 
 /**
  * External
@@ -68,6 +69,7 @@ export function themeFactory(themeService: UiStyleToggleService) {
     VolumeService,
     UiStyleToggleService,
     LocalStorageService,
+    CoinGeckoService,
     {provide: APP_INITIALIZER, useFactory: themeFactory, deps: [UiStyleToggleService], multi: true},
   ],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NetworkStatus } from 'src/app/_services/network.service';
+import { NetworkStatus } from '../../_classes/network-status';
 
 @Component({
   selector: 'app-network-summary-table',
@@ -9,6 +9,7 @@ import { NetworkStatus } from 'src/app/_services/network.service';
 export class NetworkSummaryTableComponent{
 
   @Input() network: NetworkStatus;
+  @Input() currentRate: number;
 
   constructor() { }
 

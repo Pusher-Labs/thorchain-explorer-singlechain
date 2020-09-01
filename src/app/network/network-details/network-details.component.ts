@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NetworkService, NetworkStatus } from 'src/app/_services/network.service';
+import { NetworkService } from 'src/app/_services/network.service';
 import { ConstantsService, MidgardConstants } from 'src/app/_services/constants.service';
 import { ThorchainNetworkService, THORChainNetwork } from 'src/app/_services/thorchain-network.service';
 import { Subscription } from 'rxjs';
+import { NetworkStatus } from 'src/app/_classes/network-status';
+import { CoinGeckoService } from 'src/app/_services/coingecko.service';
 
 @Component({
   selector: 'app-network-details',
@@ -21,11 +23,13 @@ export class NetworkDetailsComponent implements OnInit, OnDestroy {
   standByBonds: number[];
   subs: Subscription[];
   thorchainNetwork: THORChainNetwork;
+  currentRate: number;
 
   constructor(
     private networkService: NetworkService,
     private constantsService: ConstantsService,
-    private thorchainNetworkService: ThorchainNetworkService) {
+    private thorchainNetworkService: ThorchainNetworkService,
+    private coinGeckoService: CoinGeckoService) {
       this.activeBonds = [];
       this.standByBonds = [];
 
@@ -41,6 +45,18 @@ export class NetworkDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getConstants();
+    this.getCurrentRate();
+  }
+
+  getCurrentRate() {
+    this.coinGeckoService.getCurrencyConversion().subscribe(
+      (res) => {
+        if (res.thorchain && res.thorchain.usd) {
+          this.currentRate = res.thorchain.usd;
+        }
+      },
+      (err) => console.error('error fetching current thorchain rate: ', err)
+    );
   }
 
   getConstants(): void {
@@ -67,7 +83,7 @@ export class NetworkDetailsComponent implements OnInit, OnDestroy {
 
         this.monthlyNodeBondReward = (this.dailyBondReward * 30) / activeNodeCount;
 
-        this.network = res;
+        this.network = new NetworkStatus(res);
 
         this.orderActiveandStandByBonds();
       },
@@ -80,13 +96,13 @@ export class NetworkDetailsComponent implements OnInit, OnDestroy {
     if (this.network.activeBonds !== undefined) {
       for (const elem in this.network.activeBonds) {
         if (elem) {
-          this.activeBonds.push(parseFloat(this.network.activeBonds[elem]));
+          this.activeBonds.push(this.network.activeBonds[elem]);
         }
       }
 
       for (const elem in this.network.standbyBonds) {
         if (elem) {
-          this.standByBonds.push(parseFloat(this.network.standbyBonds[elem]));
+          this.standByBonds.push(this.network.standbyBonds[elem]);
         }
       }
 
