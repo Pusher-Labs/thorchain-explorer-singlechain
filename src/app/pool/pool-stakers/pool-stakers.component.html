@@ -1,0 +1,6 @@
+<div *ngIf="stakers">
+  <app-pool-stakers-table [stakers]="stakers"></app-pool-stakers-table>
+</div>
+
+<app-loading *ngIf="!stakers"></app-loading>
+
