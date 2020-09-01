@@ -1,0 +1,7 @@
+<div *ngIf="stakers">
+  <app-pool-stakers-table [stakers]="stakers"></app-pool-stakers-table>
+</div>
+
+<app-loading *ngIf="!stakers && !error"></app-loading>
+
+<app-error *ngIf="error" message="Pool Stakers Not Found"></app-error>

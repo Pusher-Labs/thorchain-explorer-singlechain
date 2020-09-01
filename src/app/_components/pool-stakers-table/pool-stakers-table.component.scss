@@ -1,0 +1,43 @@
+table {
+	th,
+	td {
+		// this is sub table
+		// for asset + amount spent
+		table {
+			margin-bottom: 0;
+
+			tr {
+				border-bottom: 0;
+			}
+
+			th,
+			td {
+				font-weight: normal;
+				padding: 5px 10px;
+				border-top: 0;
+				border-bottom: 0;
+				border-left: 0;
+				border-right: 0;
+				overflow: hidden; /* optionnal*/
+			}
+
+			th {
+				border-top: 1px solid gainsboro;
+			}
+		}
+	}
+}
+
+/*
+Max width before for this particular table
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media only screen and (max-width: 767px), (min-device-width: 768px) and (max-device-width: 1024px) {
+	table {
+		display: block;
+		overflow-x: auto;
+		white-space: nowrap;
+	}
+
+}
