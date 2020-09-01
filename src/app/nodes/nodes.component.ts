@@ -4,6 +4,7 @@ import { ThorNode, NodeStatus } from '../_classes/thor-node';
 import { VersionService, VersionSummary } from '../_services/version.service';
 import { ThorchainNetworkService, THORChainNetwork } from '../_services/thorchain-network.service';
 import { Subscription } from 'rxjs';
+import { LastBlockService, LastBlock } from '../_services/last-block.service';
 
 @Component({
   selector: 'app-nodes',
@@ -17,16 +18,17 @@ export class NodesComponent implements OnInit, OnDestroy {
   versionSummary: VersionSummary;
   subs: Subscription[];
   thorchainNetwork: THORChainNetwork;
-  isInJail: boolean;
+  lastBlock: LastBlock;
 
   constructor(
     private nodeService: NodeService,
     private versionService: VersionService,
+    private lastBlockService: LastBlockService,
     private thorchainNetworkService: ThorchainNetworkService) {
     const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
       (network) => {
         this.thorchainNetwork = network;
-        this.getNodes();
+        this.getLastBlock();
         this.getVersion();
       }
     );
@@ -35,8 +37,18 @@ export class NodesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getNodes();
     this.getVersion();
+    this.getLastBlock();
+  }
+
+  getLastBlock() {
+    this.lastBlockService.getLastBlock().subscribe(
+      (res) => {
+        this.lastBlock = res;
+        this.getNodes();
+      },
+      (err) => console.error('error fetching last block: ', err)
+    );
   }
 
   getNodes(): void {
@@ -44,7 +56,11 @@ export class NodesComponent implements OnInit, OnDestroy {
     this.nodeService.findAll().subscribe(
       (res) => {
         this.nodes = res;
-        this.checkIfJailed();
+
+        /**
+         * TODO: add back in when we can check against a jailed node
+         */
+        // this.checkIfJailed();
       },
       (err) => console.error('NodesComponent -> getNodes: ', err)
     );
@@ -99,14 +115,11 @@ export class NodesComponent implements OnInit, OnDestroy {
 
     this.nodes.map((value) => {
       const jailReleaseHeight = Number(value.jail.release_height);
-      const activeBlockHeight = Number(value.active_block_height);
 
-      if (jailReleaseHeight > activeBlockHeight) {
+      if (jailReleaseHeight > Number(this.lastBlock.thorchain)) {
         value.status = NodeStatus.JAILED;
       }
-      if (jailReleaseHeight === activeBlockHeight) {
-        value.status = NodeStatus.STANDBY;
-      }
+
     });
 
   }
