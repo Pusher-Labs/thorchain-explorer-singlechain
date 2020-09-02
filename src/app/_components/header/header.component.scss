@@ -57,10 +57,6 @@ header {
     justify-content: flex-end;
     margin-bottom: 10px;
 
-    a {
-      margin-left: 15px;
-    }
-
     @media only screen and (max-width: 767px), (min-device-width: 768px) and (max-device-width: 1024px) {
       justify-content: space-between;
 
@@ -68,6 +64,22 @@ header {
         margin-left: 0;
       }
     }
+
+    // TODO Combine same style on other navs :CSSRefactor
+    a {
+      padding-bottom: 5px;
+      margin-left: 15px;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: all 150ms;
+    }
+    a:hover {
+      border-bottom: 2px solid var(--link-color);
+    }
+    a.nav-active {
+      border-bottom: 2px solid var(--link-color);
+    }
+
   }
 
   #network-status-container {
