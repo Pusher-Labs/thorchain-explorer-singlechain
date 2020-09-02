@@ -13,6 +13,7 @@
   list-style-type: none;
   padding: 0 3px;
   opacity: 0.5;
+  color: var(--link-color);
 }
 
 .breadcrumb li:hover {
@@ -26,7 +27,6 @@
 
 .breadcrumb{
   a {
-    color: var(--link-color);
     text-decoration: none;
   }
   a:hover {
