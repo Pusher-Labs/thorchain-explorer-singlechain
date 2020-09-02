@@ -4,9 +4,9 @@
     {{asset.asset}}
   </h1>
   <nav>
-    <a [routerLink]="['/', 'pools', asset.asset]" style="margin-right: 15px;">Details</a>
-    <a [routerLink]="['/', 'pools', asset.asset, 'txs']" [queryParams]="{offset: '0'}" style="margin-right: 15px;">Transactions</a>
-    <a [routerLink]="['/', 'pools', asset.asset, 'stakers']">Stakers</a>
+    <a  [routerLink]="['/', 'pools', asset.asset]" [routerLinkActive]="['nav-active']" [routerLinkActiveOptions]="{ exact: true }">Details</a>
+    <a  [routerLink]="['/', 'pools', asset.asset, 'txs']" [queryParams]="{offset: '0'}" [routerLinkActive]="['nav-active']" [routerLinkActiveOptions]="{ exact: true }">Transactions</a>
+    <a  [routerLink]="['/', 'pools', asset.asset, 'stakers']" [routerLinkActive]="['nav-active']" [routerLinkActiveOptions]="{ exact: true }">Stakers</a>
   </nav>
   <br />
   <span>Price: {{asset.priceRune}}</span> <br />
