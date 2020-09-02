@@ -248,4 +248,4 @@
 
 <app-loading *ngIf="!poolDetail && !error"></app-loading>
 
-<app-error message="Pool Not Found"></app-error>
+<app-error *ngIf="error" message="Pool Not Found"></app-error>

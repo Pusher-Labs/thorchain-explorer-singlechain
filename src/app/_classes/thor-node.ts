@@ -1,7 +1,8 @@
 export enum NodeStatus {
   ACTIVE = 'active',
   STANDBY = 'standby',
-  DISABLED = 'disabled'
+  DISABLED = 'disabled',
+  JAILED = 'jailed'
 }
 
 export interface ThorNode {
