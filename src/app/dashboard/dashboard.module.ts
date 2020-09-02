@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { HighchartsChartModule } from 'highcharts-angular';
+import { ChartsModule } from 'ng2-charts';
 import { DashboardComponent } from './dashboard.component';
 import { StatsTableComponent } from '../_components/stats-table/stats-table.component';
 import { PipesModule } from '../_pipes/pipes.module';
@@ -17,7 +17,7 @@ import { ErrorModule } from '../_components/error/error.module';
   imports: [
     CommonModule,
     PipesModule,
-    HighchartsChartModule,
+    ChartsModule,
     NetworkSummaryTableModule,
     TxDetailTableDataModule,
     LoadingModule,
