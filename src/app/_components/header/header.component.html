@@ -13,11 +13,11 @@
     </div>
 
     <nav>
-      <a [routerLink]="['/', 'pools']">Assets</a>
-      <a [routerLink]="['/', 'network']">Network</a>
-      <a [routerLink]="['/', 'nodes']">Nodes</a>
-      <a [routerLink]="['/', 'txs']" [queryParams]="{offset: '0'}">TXs</a>
-      <a [routerLink]="['/', 'stakers']">Stakers</a>
+      <a [routerLinkActive]="['nav-active']" [routerLink]="['/', 'pools']">Assets</a>
+      <a [routerLinkActive]="['nav-active']" [routerLink]="['/', 'network']">Network</a>
+      <a [routerLinkActive]="['nav-active']" [routerLink]="['/', 'nodes']">Nodes</a>
+      <a [routerLinkActive]="['nav-active']" [routerLink]="['/', 'txs']" [queryParams]="{offset: '0'}">TXs</a>
+      <a [routerLinkActive]="['nav-active']" [routerLink]="['/', 'stakers']">Stakers</a>
     </nav>
 
     <br />
