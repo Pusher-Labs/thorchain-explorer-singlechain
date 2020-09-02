@@ -20,7 +20,10 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('./transactions/transactions.module').then(m => m.TransactionsModule),
       }
-    ]
+    ],
+    data: {
+        breadcrumb: 'Transactions'
+    }
   },
   {
     path: 'pools',
@@ -33,7 +36,10 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('./pools/pools.module').then(m => m.PoolsModule),
       }
-    ]
+    ],
+    data: {
+        breadcrumb: 'Assets'
+    }
   },
   {
     path: 'stakers',
@@ -46,7 +52,10 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('./stakers/stakers.module').then(m => m.StakersModule),
       }
-    ]
+    ],
+    data: {
+        breadcrumb: 'Stakers'
+    }
   },
   {
     path: 'addresses',
@@ -60,11 +69,17 @@ const routes: Routes = [
         redirectTo: '/',
         pathMatch: 'full'
       }
-    ]
+    ],
+    data: {
+        breadcrumb: 'Addresses'
+    }
   },
   {
     path: 'network',
     loadChildren: () => import('./network/network.module').then(m => m.NetworkModule),
+    data: {
+        breadcrumb: 'Network'
+    }
   },
   {
     path: 'nodes',
@@ -77,7 +92,10 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('./nodes/nodes.module').then(m => m.NodesModule),
       }
-    ]
+    ],
+    data: {
+        breadcrumb: 'Nodes'
+    }
   }
 ];
 

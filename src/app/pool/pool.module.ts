@@ -33,11 +33,17 @@ import { ErrorModule } from '../_components/error/error.module';
           },
           {
             path: 'txs',
-            component: PoolTxsComponent
+            component: PoolTxsComponent,
+            data: {
+                breadcrumb: 'Transactions'
+            }
           },
           {
             path: 'stakers',
-            component: PoolStakersComponent
+            component: PoolStakersComponent,
+            data: {
+                breadcrumb: 'Stakers'
+            }
           }
         ]
       }
