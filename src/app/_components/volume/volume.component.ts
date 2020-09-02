@@ -42,8 +42,23 @@ export class VolumeComponent implements OnInit, OnDestroy {
 
   public lineChartColors: Color[] = [
     {
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      borderColor: '#7cb5ec',
+      backgroundColor: '#7cb5ec',
+      pointBorderColor: '#7cb5ec',
+      pointBackgroundColor: '#7cb5ec',
     },
+    {
+      borderColor: '#90ed7d',
+      backgroundColor: '#90ed7d',
+      pointBorderColor: '#90ed7d',
+      pointBackgroundColor: '#90ed7d'
+    },
+    {
+      borderColor: '#FFB886',
+      backgroundColor: '#FFB886',
+      pointBorderColor: '#FFB886',
+      pointBackgroundColor: '#FFB886',
+    }
   ];
   public lineChartLegend = true;
   public lineChartType = 'line';
@@ -84,14 +99,18 @@ export class VolumeComponent implements OnInit, OnDestroy {
         display: true,
         text: 'Volume History',
         fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black',
-        fontSize: '13'
+        fontSize: '13',
+        fontFamily: 'monospace',
       },
       ticks: {
         fontFamily: 'monospace'
       },
       legend: {
         labels: {
-          fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black'
+          fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black',
+          fontFamily: 'monospace',
+          defaultFontFamily: 'monospace',
+
         }
       },
       scales: {
@@ -101,10 +120,12 @@ export class VolumeComponent implements OnInit, OnDestroy {
             labelString: 'Volume',
             fontStyle: 'bold',
             fontSize: '13',
-            fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black'
+            fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black',
+            fontFamily: 'monospace'
           },
           ticks: {
             fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black',
+            fontFamily: 'monospace'
           }
         }],
         xAxes: [{
@@ -113,10 +134,12 @@ export class VolumeComponent implements OnInit, OnDestroy {
             labelString: 'Time (UTC)',
             fontStyle: 'bold',
             fontSize: '13',
-            fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black'
+            fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black',
+            fontFamily: 'monospace'
           },
           ticks: {
             fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black',
+            fontFamily: 'monospace'
           }
         }]
       }
@@ -137,9 +160,9 @@ export class VolumeComponent implements OnInit, OnDestroy {
       this.sellVolume = [{ data: this.sellVolume[0].data.toString().split(',').map((item) => parseInt(item, 10)) }];
 
       this.lineChartData = [
-        { data: this.totalVolume[0].data, label: 'totalVolume' },
-        { data: this.buyVolume[0].data, label: 'buyVolume' },
-        { data: this.sellVolume[0].data, label: 'sellVolume' }
+        { data: this.totalVolume[0].data, label: 'totalVolume', fill: false },
+        { data: this.buyVolume[0].data, label: 'buyVolume', fill: false },
+        { data: this.sellVolume[0].data, label: 'sellVolume', fill: false }
       ];
       this.lineChartLabels = this.timeString;
     });
@@ -176,9 +199,9 @@ export class VolumeComponent implements OnInit, OnDestroy {
       this.sellVolume = [{ data: this.sellVolume[0].data.toString().split(',').map((item: string) => parseInt(item, 10)) }];
 
       this.lineChartData = [
-        { data: this.totalVolume[0].data, label: 'totalVolume' },
-        { data: this.buyVolume[0].data, label: 'buyVolume' },
-        { data: this.sellVolume[0].data, label: 'sellVolume' }
+        { data: this.totalVolume[0].data, label: 'totalVolume', fill: false },
+        { data: this.buyVolume[0].data, label: 'buyVolume', fill: false },
+        { data: this.sellVolume[0].data, label: 'sellVolume', fill: false }
       ];
       this.lineChartLabels = this.timeString;
     });
