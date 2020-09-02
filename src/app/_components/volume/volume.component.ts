@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
+import { UiStyleToggleService, ThemeMode } from '../../_services/ui-style-toggle.service';
 
 @Component({
   selector: 'app-volume',
@@ -48,98 +49,81 @@ export class VolumeComponent implements OnInit, OnDestroy {
   public lineChartType = 'line';
   public lineChartPlugins = [pluginAnnotations];
 
-  constructor(private volumeService: VolumeService, private thorchainNetworkService: ThorchainNetworkService) {
+  constructor(private volumeService: VolumeService, private thorchainNetworkService: ThorchainNetworkService,
+              uiService: UiStyleToggleService) {
     this.unixHour = 3600;
     this.timeNow = Math.floor(Date.now() / 1000);
-    this.theme = localStorage.getItem('THEME');
 
-    const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
-      (_) => {
-        this.getDefaultChartJs();
+    const theme$ = uiService.theme$.subscribe(
+      (theme) => {
+        this.theme = theme;
+
+        this.changeTheme();
       }
     );
 
-    this.subs = [network$];
+    const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
+      (_) => {
+        this.getDefaultData();
+      }
+    );
+
+    this.subs = [network$, theme$];
 
   }
 
   ngOnInit(): void {
-    this.getDefaultChartJs();
-    this.changeTheme();
+    this.getDefaultData();
   }
 
   changeTheme() {
-    if (this.theme === 'DARK') {
-      this.lineChartOptions = {
-        responsive: true,
-        title: {
-          display: true,
-          text: 'Volume History',
-          fontColor: 'grey'
-        },
-        ticks: {
-          fontFamily: 'monospace'
-        },
-        legend: {
-          labels: {
-            fontColor: 'grey'
-          }
-        },
-        scales: {
-          yAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Volume',
-              fontColor: 'grey'
-            }
-          }],
-          xAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Time (UTC)',
-              fontColor: 'grey'
-            }
-          }]
+    this.lineChartOptions = {
+      responsive: true,
+      maintainAspectRatio: true,
+      title: {
+        display: true,
+        text: 'Volume History',
+        fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black',
+        fontSize: '13'
+      },
+      ticks: {
+        fontFamily: 'monospace'
+      },
+      legend: {
+        labels: {
+          fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black'
         }
-      };
-    }
-    if (this.theme === 'LIGHT') {
-      this.lineChartOptions = {
-        responsive: true,
-        title: {
-          display: true,
-          text: 'Volume History',
-          fontColor: 'black'
-        },
-        ticks: {
-          fontFamily: 'monospace'
-        },
-        legend: {
-          labels: {
-            fontColor: 'black'
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Volume',
+            fontStyle: 'bold',
+            fontSize: '13',
+            fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black'
+          },
+          ticks: {
+            fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black',
           }
-        },
-        scales: {
-          yAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Volume',
-              fontColor: 'black'
-            }
-          }],
-          xAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Time (UTC)',
-              fontColor: 'black'
-            }
-          }]
-        }
-      };
-    }
+        }],
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Time (UTC)',
+            fontStyle: 'bold',
+            fontSize: '13',
+            fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black'
+          },
+          ticks: {
+            fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black',
+          }
+        }]
+      }
+    };
   }
 
-  getDefaultChartJs() {
+  getDefaultData() {
     const defaultChoose = 'hour';
     this.result = this.timeNow - (24 * (this.unixHour));
     this.volumeService.queryVolume(defaultChoose, this.result, this.timeNow).subscribe(value => {
@@ -160,10 +144,11 @@ export class VolumeComponent implements OnInit, OnDestroy {
       this.lineChartLabels = this.timeString;
     });
   }
+
   onChange(event: any) {
     const value = event.target.value;
     if (value === 'hour') {
-      this.getDefaultChartJs();
+      this.getDefaultData();
       return;
     }
     if (value === 'day') {
