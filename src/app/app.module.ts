@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
  */
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './_components/header/header.component';
+import { BreadcrumbComponent } from './_components/breadcrumb/breadcrumb.component';
 import { SearchComponent } from './_components/search/search.component';
 import { NetworkToggleComponent } from './_components/network-toggle/network-toggle.component';
 
@@ -46,6 +47,7 @@ export function themeFactory(themeService: UiStyleToggleService) {
     AppComponent,
     SearchComponent,
     HeaderComponent,
+    BreadcrumbComponent,
     NetworkToggleComponent
   ],
   imports: [

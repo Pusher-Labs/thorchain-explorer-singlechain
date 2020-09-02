@@ -26,7 +26,10 @@ import { ConstantsComponent } from './constants/constants.component';
           },
           {
             path: 'constants',
-            component: ConstantsComponent
+            component: ConstantsComponent,
+            data: {
+                breadcrumb: 'Constants'
+            }
           }
         ]
       }
