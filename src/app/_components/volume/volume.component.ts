@@ -1,8 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { VolumeService } from '../../_services/volume.service';
-import * as Highcharts from 'highcharts';
 import { ThorchainNetworkService } from 'src/app/_services/thorchain-network.service';
 import { Subscription } from 'rxjs';
+import { ChartDataSets } from 'chart.js';
+import { Color, Label } from 'ng2-charts';
+import * as pluginAnnotations from 'chartjs-plugin-annotation';
+import { UiStyleToggleService, ThemeMode } from '../../_services/ui-style-toggle.service';
 
 @Component({
   selector: 'app-volume',
@@ -17,8 +20,7 @@ export class VolumeComponent implements OnInit, OnDestroy {
     // { name: 'Year', value: 'year' }
   ];
 
-  Highcharts = Highcharts;
-  chartOptions: object;
+  theme: string;
   timeString: Array<string> = new Array();
   result: number;
   timeNow: number;
@@ -30,9 +32,50 @@ export class VolumeComponent implements OnInit, OnDestroy {
   private buyVolume: any[] = [{ data: [] }];
   private sellVolume: any[] = [{ data: [] }];
 
-  constructor(private volumeService: VolumeService, private thorchainNetworkService: ThorchainNetworkService) {
+  public lineChartData: ChartDataSets[] = [
+    { data: this.totalVolume, label: 'totalVolume' },
+    { data: this.buyVolume, label: 'buyVolume' },
+    { data: this.sellVolume, label: 'sellVolume' }
+  ];
+  public lineChartLabels: Label[] = [];
+  public lineChartOptions = {};
+
+  public lineChartColors: Color[] = [
+    {
+      borderColor: '#7cb5ec',
+      backgroundColor: '#7cb5ec',
+      pointBorderColor: '#7cb5ec',
+      pointBackgroundColor: '#7cb5ec',
+    },
+    {
+      borderColor: '#90ed7d',
+      backgroundColor: '#90ed7d',
+      pointBorderColor: '#90ed7d',
+      pointBackgroundColor: '#90ed7d'
+    },
+    {
+      borderColor: '#FFB886',
+      backgroundColor: '#FFB886',
+      pointBorderColor: '#FFB886',
+      pointBackgroundColor: '#FFB886',
+    }
+  ];
+  public lineChartLegend = true;
+  public lineChartType = 'line';
+  public lineChartPlugins = [pluginAnnotations];
+
+  constructor(private volumeService: VolumeService, private thorchainNetworkService: ThorchainNetworkService,
+              uiService: UiStyleToggleService) {
     this.unixHour = 3600;
     this.timeNow = Math.floor(Date.now() / 1000);
+
+    const theme$ = uiService.theme$.subscribe(
+      (theme) => {
+        this.theme = theme;
+
+        this.changeTheme();
+      }
+    );
 
     const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
       (_) => {
@@ -40,12 +83,89 @@ export class VolumeComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.subs = [network$];
+    this.subs = [network$, theme$];
 
   }
 
   ngOnInit(): void {
     this.getDefaultData();
+  }
+
+  changeTheme() {
+    this.lineChartOptions = {
+      responsive: true,
+      maintainAspectRatio: true,
+      title: {
+        display: true,
+        text: 'Volume History',
+        fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black',
+        fontSize: '13',
+        fontFamily: 'monospace',
+      },
+      ticks: {
+        fontFamily: 'monospace'
+      },
+      legend: {
+        labels: {
+          fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black',
+          fontFamily: 'monospace',
+          defaultFontFamily: 'monospace',
+
+        }
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Volume',
+            fontStyle: 'bold',
+            fontSize: '13',
+            fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black',
+            fontFamily: 'monospace'
+          },
+          ticks: {
+            fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black',
+            fontFamily: 'monospace'
+          }
+        }],
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Time (UTC)',
+            fontStyle: 'bold',
+            fontSize: '13',
+            fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black',
+            fontFamily: 'monospace'
+          },
+          ticks: {
+            fontColor: (this.theme === ThemeMode.DARK) ? 'white' : 'black',
+            fontFamily: 'monospace'
+          }
+        }]
+      }
+    };
+  }
+
+  getDefaultData() {
+    const defaultChoose = 'hour';
+    this.result = this.timeNow - (24 * (this.unixHour));
+    this.volumeService.queryVolume(defaultChoose, this.result, this.timeNow).subscribe(value => {
+      this.timeLabels = value.map(val => val.time);
+      this.setHourLabels();
+      this.totalVolume = [{ data: value.map(val => +val.totalVolume / (10 ** 8)) }];
+      this.totalVolume = [{ data: this.totalVolume[0].data.toString().split(',').map((item) => parseInt(item, 10)) }];
+      this.buyVolume = [{ data: value.map(val => +val.buyVolume / (10 ** 8)) }];
+      this.buyVolume = [{ data: this.buyVolume[0].data.toString().split(',').map((item) => parseInt(item, 10)) }];
+      this.sellVolume = [{ data: value.map(val => +val.sellVolume / (10 ** 8)) }];
+      this.sellVolume = [{ data: this.sellVolume[0].data.toString().split(',').map((item) => parseInt(item, 10)) }];
+
+      this.lineChartData = [
+        { data: this.totalVolume[0].data, label: 'totalVolume', fill: false },
+        { data: this.buyVolume[0].data, label: 'buyVolume', fill: false },
+        { data: this.sellVolume[0].data, label: 'sellVolume', fill: false }
+      ];
+      this.lineChartLabels = this.timeString;
+    });
   }
 
   onChange(event: any) {
@@ -78,93 +198,14 @@ export class VolumeComponent implements OnInit, OnDestroy {
       this.sellVolume = [{ data: val.map(prop => +prop.sellVolume / (10 ** 8)) }];
       this.sellVolume = [{ data: this.sellVolume[0].data.toString().split(',').map((item: string) => parseInt(item, 10)) }];
 
-      this.chartOptions = {
-        series: [
-          {
-            name: 'totalVolume',
-            data: this.totalVolume[0].data
-          },
-          {
-            name: 'buyVolume',
-            data: this.buyVolume[0].data
-          },
-          {
-            name: 'sellVolume',
-            data: this.sellVolume[0].data
-          },
-        ],
-        xAxis: {
-          title: {
-            text: 'Time (UTC)'
-          },
-          gridLineWidth: 1,
-          categories: this.timeString
-        },
-      };
+      this.lineChartData = [
+        { data: this.totalVolume[0].data, label: 'totalVolume', fill: false },
+        { data: this.buyVolume[0].data, label: 'buyVolume', fill: false },
+        { data: this.sellVolume[0].data, label: 'sellVolume', fill: false }
+      ];
+      this.lineChartLabels = this.timeString;
     });
   }
-
-  getDefaultData() {
-    const defaultChoose = 'hour';
-    this.result = this.timeNow - (24 * (this.unixHour));
-    this.volumeService.queryVolume(defaultChoose, this.result, this.timeNow).subscribe(value => {
-      this.timeLabels = value.map(val => val.time);
-      this.setHourLabels();
-      this.totalVolume = [{ data: value.map(val => +val.totalVolume / (10 ** 8)) }];
-      this.totalVolume = [{ data: this.totalVolume[0].data.toString().split(',').map((item) => parseInt(item, 10)) }];
-      this.buyVolume = [{ data: value.map(val => +val.buyVolume / (10 ** 8)) }];
-      this.buyVolume = [{ data: this.buyVolume[0].data.toString().split(',').map((item) => parseInt(item, 10)) }];
-      this.sellVolume = [{ data: value.map(val => +val.sellVolume / (10 ** 8)) }];
-      this.sellVolume = [{ data: this.sellVolume[0].data.toString().split(',').map((item) => parseInt(item, 10)) }];
-
-      this.chartOptions = {
-        title: {
-          text: 'Volume History'
-        },
-        lang: {
-          noData: 'No data at the moment'
-        },
-        yAxis: {
-          title: {
-            text: 'Volume',
-            gridLineWidth: 1
-          }
-        },
-        xAxis: {
-          title: {
-            text: 'Time (UTC)'
-          },
-          gridLineWidth: 1,
-          categories: this.timeString
-        },
-        legend: {
-          layout: 'horizontal',
-          align: 'center',
-          verticalAlign: 'bottom'
-        },
-        chart: {
-          styledMode: true,
-        },
-        series: [
-          {
-            name: 'totalVolume',
-            data: this.totalVolume[0].data
-          },
-          {
-            name: 'buyVolume',
-            color: '#F07C04',
-            data: this.buyVolume[0].data
-          },
-          {
-            name: 'sellVolume',
-            data: this.sellVolume[0].data
-          }
-        ]
-      };
-    });
-
-  }
-
 
   setHourLabels() {
     this.timeString = [];

@@ -36,7 +36,8 @@ import { VolumeService } from './_services/volume.service';
  * External
  */
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HighchartsChartModule } from 'highcharts-angular';
+import { ChartsModule } from 'ng2-charts';
+
 
 export function themeFactory(themeService: UiStyleToggleService) {
   return () => themeService.setThemeOnStart();
@@ -56,7 +57,7 @@ export function themeFactory(themeService: UiStyleToggleService) {
     AppRoutingModule,
     FormsModule,
     FontAwesomeModule,
-    HighchartsChartModule
+    ChartsModule
   ],
   providers: [
     ThorchainNetworkService,
