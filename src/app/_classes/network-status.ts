@@ -44,6 +44,8 @@ export class NetworkStatus extends NetworkStatusBase {
   standbyBonds: number[];
   totalStaked: number;
   totalReserve: number;
+  totalActiveBonded: number;
+  totalStandbyBonded: number;
   totalBonded: number;
   totalCapital: number;
 
@@ -58,7 +60,10 @@ export class NetworkStatus extends NetworkStatusBase {
      */
     this.activeBonds = networkDTO.activeBonds.map( (bondStr) => this.formatAssetUnits( Number(bondStr), 8 ));
     this.standbyBonds = networkDTO.standbyBonds.map( (bondStr) => this.formatAssetUnits( Number(bondStr), 8 ) );
-    this.totalBonded = this._calculateTotalBonded(this.activeBonds, this.standbyBonds);
+    this.totalActiveBonded = this.activeBonds.reduce( (total, bond) => total + bond, 0);
+    this.totalStandbyBonded = this.standbyBonds.reduce( (total, bond) => total + bond, 0);
+    this.totalBonded = this.totalActiveBonded + this.totalStandbyBonded;
+
 
 
     this.totalStaked = this.formatAssetUnits( (Number(networkDTO.totalStaked) * 2), 8);
@@ -76,23 +81,5 @@ export class NetworkStatus extends NetworkStatusBase {
     this.totalCapital = this.totalStaked + this.totalBonded + this.totalReserve;
 
   }
-
-  private _calculateTotalBonded(activeBonds: number[], standbyBonds: number[]): number {
-
-    let total = 0;
-
-    for (const bond of activeBonds) {
-      total += bond;
-    }
-
-    for (const bond of standbyBonds) {
-      total += bond;
-    }
-
-    return total;
-
-  }
-
-
 
 }
