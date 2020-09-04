@@ -20,10 +20,17 @@
       </td>
     </tr>
     <tr>
-      <td>Total Bonded</td>
+      <td>Total Active Bonded</td>
       <td>
-        {{network.totalBonded | number:'1.0-0'}}
-        <span *ngIf="currentRate">(${{network.totalBonded * currentRate | number:'1.0-0'}})</span>
+        {{network.totalActiveBonded | number:'1.0-0'}}
+        <span *ngIf="currentRate">(${{network.totalActiveBonded * currentRate | number:'1.0-0'}})</span>
+      </td>
+    </tr>
+    <tr>
+      <td>Total Standby Bonded</td>
+      <td>
+        {{network.totalStandbyBonded | number:'1.0-0'}}
+        <span *ngIf="currentRate">(${{network.totalStandbyBonded * currentRate | number:'1.0-0'}})</span>
       </td>
     </tr>
     <tr>
