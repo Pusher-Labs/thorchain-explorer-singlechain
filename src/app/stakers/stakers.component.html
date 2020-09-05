@@ -10,6 +10,6 @@
   </tbody>
 </table>
 
-<app-loading *ngIf="!stakers"></app-loading>
+<app-loading *ngIf="!stakers && !error"></app-loading>
 
 <app-error *ngIf="error" [message]="error"></app-error>

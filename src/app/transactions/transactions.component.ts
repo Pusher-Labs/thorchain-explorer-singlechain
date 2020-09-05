@@ -30,6 +30,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
     [TransactionType.UNSTAKE]: boolean,
   };
   subs: Subscription[];
+  error: string;
 
   constructor(
     private transactionService: TransactionService,
@@ -116,6 +117,8 @@ export class TransactionsComponent implements OnInit, OnDestroy {
 
   async getTransactions() {
 
+    this.error = null;
+
     const params: TransactionIndexParams = {
       offset: this.offset
     };
@@ -139,7 +142,10 @@ export class TransactionsComponent implements OnInit, OnDestroy {
         this.transactions = res.txs;
         this.totalCount = res.count;
       },
-      (err) => console.error('error fetching stakers: ', err)
+      (err) => {
+        console.error('error fetching stakers: ', err);
+        this.error = 'Error Connecting to THORChain';
+      }
     );
 
   }

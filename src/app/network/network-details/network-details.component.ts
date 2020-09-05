@@ -24,6 +24,7 @@ export class NetworkDetailsComponent implements OnInit, OnDestroy {
   subs: Subscription[];
   thorchainNetwork: THORChainNetwork;
   currentRate: number;
+  error: string;
 
   constructor(
     private networkService: NetworkService,
@@ -61,12 +62,17 @@ export class NetworkDetailsComponent implements OnInit, OnDestroy {
 
   getConstants(): void {
 
+    this.error = null;
+
     this.constantsService.getConstants().subscribe(
       (res) => {
         this.constants = res;
         this.getNetworkStatus();
       },
-      (err) => console.error('error fetching constants...', err)
+      (err) => {
+        console.error('error fetching constants...', err);
+        this.error = 'Error Connecting to THORChain';
+      }
     );
   }
 
@@ -87,7 +93,10 @@ export class NetworkDetailsComponent implements OnInit, OnDestroy {
 
         this.orderActiveandStandByBonds();
       },
-      (err) => console.error('NetworkDetailsComponent -> error fetching network status: ', err)
+      (err) => {
+        console.error('NetworkDetailsComponent -> error fetching network status: ', err);
+        this.error = 'Error Connecting to THORChain';
+      }
     );
   }
 

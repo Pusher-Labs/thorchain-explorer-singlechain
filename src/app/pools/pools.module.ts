@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { PoolsComponent } from './pools.component';
 import { LoadingModule } from '../_components/loading/loading.module';
 import { AssetLogoModule } from '../_components/asset-logo/asset-logo.module';
-
+import { ErrorModule } from '../_components/error/error.module';
 
 @NgModule({
   declarations: [PoolsComponent],
@@ -12,6 +12,7 @@ import { AssetLogoModule } from '../_components/asset-logo/asset-logo.module';
     CommonModule,
     LoadingModule,
     AssetLogoModule,
+    ErrorModule,
     RouterModule.forChild([
       {
         path: '',

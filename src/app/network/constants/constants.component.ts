@@ -29,6 +29,7 @@ export class ConstantsComponent implements OnInit, OnDestroy {
   boolVals: ConstantTableItem<boolean>[];
   subs: Subscription[];
   mimirVals: MimirTableItem[] = [];
+  error: string;
 
   constructor(private constantsService: ConstantsService, private thorchainNetworkService: ThorchainNetworkService) {
     const network$ = this.thorchainNetworkService.networkUpdated$.subscribe((_) => this.getConstants());
@@ -44,10 +45,14 @@ export class ConstantsComponent implements OnInit, OnDestroy {
     this.int64Vals = null;
     this.stringVals = null;
     this.boolVals = null;
+    this.error = null;
 
     this.constantsService.getConstants().subscribe(
       (res) => this.getMimirOverrides(res),
-      (err) => console.error('error fetching constants: ', err)
+      (err) => {
+        console.error('error fetching constants: ', err);
+        this.error = 'Error Connecting to THORChain';
+      }
     );
   }
 
@@ -132,7 +137,10 @@ export class ConstantsComponent implements OnInit, OnDestroy {
         this.stringVals = stringVals;
         this.boolVals = boolVals;
       },
-      (err) => console.error('error fetching mimir...', err)
+      (err) => {
+        console.error('error fetching mimir...', err);
+        this.error = 'Error Connecting to THORChain';
+      }
     );
   }
 

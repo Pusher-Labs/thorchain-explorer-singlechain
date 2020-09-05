@@ -51,4 +51,6 @@
 
 </div>
 
-<app-loading *ngIf="!transactions"></app-loading>
+<app-loading *ngIf="!transactions && !error"></app-loading>
+
+<app-error *ngIf="error" [message]="error"></app-error>

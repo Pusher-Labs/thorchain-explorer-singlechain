@@ -1,4 +1,4 @@
-<div *ngIf="network" class="grid">
+<div *ngIf="network && !error" class="grid">
 
   <div class="shadow grid-item">
     <app-network-summary-table [network]="network" [currentRate]="currentRate"></app-network-summary-table>
@@ -145,4 +145,6 @@
 
 </div>
 
-<app-loading *ngIf="!network"></app-loading>
+<app-loading *ngIf="!network && !error"></app-loading>
+
+<app-error *ngIf="error" [message]="error"></app-error>
