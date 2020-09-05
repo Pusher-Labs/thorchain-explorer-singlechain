@@ -76,7 +76,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       (res) => this.stats = res,
       (err) => {
         console.error(err);
-        this.error = `Error fetching ${this.thorchainNetworkService.network} data`;
+        this.error = `Error Connecting to THORChain ${this.thorchainNetworkService.network}`;
       }
     );
 
@@ -96,7 +96,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       },
       (err) => {
         console.error('error fetching stakers: ', err);
-        this.error = `Error fetching ${this.thorchainNetworkService.network} data`;
+        this.error = `Error Connecting to THORChain ${this.thorchainNetworkService.network}`;
       }
     );
   }
@@ -111,7 +111,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       },
       (err) => {
         console.error('error fetching network status: ', err);
-        this.error = `Error fetching ${this.thorchainNetworkService.network} data`;
+        this.error = `Error Connecting to THORChain ${this.thorchainNetworkService.network}`;
       }
     );
   }
@@ -122,7 +122,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         (res) => this.nodes = res,
         (err) => {
           console.error('error on dashboard fetching nodes: ', err);
-          this.error = `Error fetching ${this.thorchainNetworkService.network} data`;
+          this.error = `Error Connecting to THORChain ${this.thorchainNetworkService.network}`;
         }
     );
 

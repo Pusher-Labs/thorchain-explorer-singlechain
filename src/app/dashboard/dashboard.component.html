@@ -1,8 +1,8 @@
 <h1 class="mobile-padding">THORChain Explorer</h1>
 
-<app-loading *ngIf="!network || !nodes || !transactions || !stats"></app-loading>
+<app-loading *ngIf="(!network || !nodes || !transactions || !stats) && !error"></app-loading>
 
-<div id="dashboard" *ngIf="network && nodes && transactions && stats">
+<div id="dashboard" *ngIf="network && nodes && transactions && stats && !error">
 
   <div class="grid">
 
