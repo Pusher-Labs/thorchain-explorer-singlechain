@@ -90,4 +90,6 @@
   </table>
 </div>
 
-<app-loading *ngIf="!int64Vals || !stringVals || !boolVals"></app-loading>
+<app-loading *ngIf="(!int64Vals || !stringVals || !boolVals) && !error"></app-loading>
+
+<app-error *ngIf="error" [message]="error"></app-error>

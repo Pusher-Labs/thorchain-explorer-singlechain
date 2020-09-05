@@ -12,6 +12,7 @@ export class PoolsComponent implements OnInit, OnDestroy {
 
   pools: string[];
   networkSub: Subscription;
+  error: string;
 
   constructor(private poolService: PoolService, private thorchainNetworkService: ThorchainNetworkService) {
     this.networkSub = this.thorchainNetworkService.networkUpdated$.subscribe(
@@ -27,9 +28,13 @@ export class PoolsComponent implements OnInit, OnDestroy {
   }
 
   getAssetPools(): void {
+    this.error = null;
     this.poolService.index().subscribe(
       (res) => this.pools = res,
-      (err) => console.error(err)
+      (err) => {
+        console.error(err);
+        this.error = 'Error Connecting to THORChain';
+      }
     );
   }
 
