@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NodeService } from '../_services/node.service';
-import { ThorNode, NodeStatus } from '../_classes/thor-node';
+import { NodeStatus, ThorNode } from '../_classes/thor-node';
 import { VersionService, VersionSummary } from '../_services/version.service';
-import { ThorchainNetworkService, THORChainNetwork } from '../_services/thorchain-network.service';
+import { THORChainNetwork, ThorchainNetworkService } from '../_services/thorchain-network.service';
 import { Subscription } from 'rxjs';
-import { LastBlockService, LastBlock } from '../_services/last-block.service';
+import { LastBlock, LastBlockService } from '../_services/last-block.service';
 
 @Component({
   selector: 'app-nodes',
@@ -13,12 +13,15 @@ import { LastBlockService, LastBlock } from '../_services/last-block.service';
 })
 export class NodesComponent implements OnInit, OnDestroy {
 
-  nodes: ThorNode[];
   thorNode: ThorNode;
   versionSummary: VersionSummary;
   subs: Subscription[];
   thorchainNetwork: THORChainNetwork;
   lastBlock: LastBlock;
+  activeNodes: ThorNode[];
+  standbyNodes: ThorNode[];
+  disabledNodes: ThorNode[];
+  error: string;
 
   constructor(
     private nodeService: NodeService,
@@ -52,18 +55,54 @@ export class NodesComponent implements OnInit, OnDestroy {
   }
 
   getNodes(): void {
-    this.nodes = null;
+
+    this.activeNodes = null;
+    this.standbyNodes = null;
+    this.disabledNodes = null;
+    this.error = null;
+
     this.nodeService.findAll().subscribe(
       (res) => {
-        this.nodes = res;
 
-        /**
-         * TODO: add back in when we can check against a jailed node
-         */
-        this.checkIfJailed();
+        this.activeNodes = res
+          .filter( (node) => node.status === NodeStatus.ACTIVE )
+          .map( (node) => this.updateStatusIfJailed(node) );
+
+        this.standbyNodes = res
+          .filter( (node) => node.status === NodeStatus.STANDBY )
+          .map( (node) => this.updateStatusIfJailed(node) );
+
+        this.disabledNodes = res
+          .filter( (node) => node.status === NodeStatus.DISABLED )
+          .map( (node) => this.updateStatusIfJailed(node) );
+
       },
-      (err) => console.error('NodesComponent -> getNodes: ', err)
+      (err) => {
+        console.error('NodesComponent -> getNodes: ', err);
+        this.error = 'Error fetching Nodes';
+      }
     );
+  }
+
+  /**
+   * Update the node status if jailed
+   */
+  updateStatusIfJailed(node: ThorNode): ThorNode {
+    const currentStatus = node.status;
+    node.status = (this.nodeIsJailed(node)) ? NodeStatus.JAILED : currentStatus;
+
+    return node;
+  }
+
+  /**
+   * Check if node is jailed
+   */
+  nodeIsJailed(node: ThorNode): boolean {
+
+    const jailReleaseHeight = Number(node.jail.release_height);
+
+    return (jailReleaseHeight > Number(this.lastBlock.thorchain));
+
   }
 
   getVersion(): void {
@@ -76,13 +115,9 @@ export class NodesComponent implements OnInit, OnDestroy {
 
   calculateNodesOnVersion(version: string): number {
 
-    if (this.nodes) {
+    if (this.activeNodes) {
 
-      /**
-       * Filter for Active Nodes
-       */
-      const activeNodes = this.nodes.filter((node) => node.status === NodeStatus.ACTIVE);
-
+      const activeNodes = this.activeNodes;
 
       /**
        * Get the total count of active nodes that match version
@@ -108,19 +143,6 @@ export class NodesComponent implements OnInit, OnDestroy {
     console.error('nodes is not set');
 
     return null;
-
-  }
-
-  checkIfJailed() {
-
-    this.nodes.map((value) => {
-      const jailReleaseHeight = Number(value.jail.release_height);
-
-      if (jailReleaseHeight > Number(this.lastBlock.thorchain)) {
-        value.status = NodeStatus.JAILED;
-      }
-
-    });
 
   }
 

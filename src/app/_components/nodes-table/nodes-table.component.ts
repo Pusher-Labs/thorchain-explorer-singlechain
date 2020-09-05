@@ -9,6 +9,7 @@ import { ThorNode } from 'src/app/_classes/thor-node';
 export class NodesTableComponent implements OnInit {
 
   @Input() nodes: ThorNode[];
+  @Input() tableName: string;
 
   constructor() { }
 
