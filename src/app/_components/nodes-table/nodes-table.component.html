@@ -1,7 +1,7 @@
 <table *ngIf="nodes && nodes.length > 0" class="shadow nodes-table">
   <thead>
     <tr *ngIf="tableName">
-      <th colspan="6">{{tableName}}</th>
+      <th colspan="7">{{tableName}}</th>
     </tr>
     <tr>
       <th>Address</th>
@@ -10,6 +10,7 @@
       <th>IP</th>
       <th>Slash Points</th>
       <th>Current Award</th>
+      <th>Total Bond</th>
     </tr>
   </thead>
   <tbody>
@@ -30,6 +31,9 @@
       <td>{{node.slash_points}}</td>
       <td>
         {{node.current_award | assetUnits:8 | number:"0.0-2"}}
+      </td>
+      <td>
+        {{node.bond | assetUnits:8 | number:"0.0-2"}}
       </td>
     </tr>
   </tbody>
