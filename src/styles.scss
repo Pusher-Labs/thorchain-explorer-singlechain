@@ -32,7 +32,6 @@ body {
   background-color: var(--background-color);
   font-size: 1.6rem;
   margin: 0;
-  overflow-x: hidden;
 }
 
 h1, span, label {
@@ -44,11 +43,16 @@ span {
 }
 
 table {
+  text-align: left;
   border-collapse: collapse;
   background-color: var(--background-dashboard);
   width: 100%;
   border-radius: 5px;
   overflow: auto;
+
+  thead tr:nth-child(1) th {
+    text-align: center;
+  }
 
   th, td {
     padding: 5px 10px;
@@ -67,6 +71,9 @@ table {
   }
 
   th {
+    background-color: var(--background-dashboard);
+    position: sticky;
+    top: 0;
     border-top: 0;
   }
 
