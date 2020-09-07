@@ -13,6 +13,10 @@ $background-dashboard-dark: rgb(49, 49, 49);
 $link-color-light: black;
 $link-color-dark: #F07C04;
 
+
+$border-bottom-color-light: gainsboro;
+$border-bottom-color-dark: #232323;
+
 $hover-color-light: whitesmoke;
 $hover-color-dark: rgba(255,255,255, 0.3);
 
@@ -22,5 +26,6 @@ $colors: (
   --hover-text-color: ($hover-color-light, $hover-color-dark),
   --header-background: ($background-header, $background-header-dark),
   --background-dashboard: ($background-dashboard-light, $background-dashboard-dark),
+  --border-bottom-color: ($border-bottom-color-light, $border-bottom-color-dark),
   --link-color: ($link-color-light, $link-color-dark)
 )
