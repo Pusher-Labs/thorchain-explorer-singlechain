@@ -37,6 +37,8 @@ import { VolumeService } from './_services/volume.service';
  */
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChartsModule } from 'ng2-charts';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 export function themeFactory(themeService: UiStyleToggleService) {
@@ -57,7 +59,8 @@ export function themeFactory(themeService: UiStyleToggleService) {
     AppRoutingModule,
     FormsModule,
     FontAwesomeModule,
-    ChartsModule
+    ChartsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     ThorchainNetworkService,
