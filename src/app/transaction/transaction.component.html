@@ -42,6 +42,10 @@
         <td>Withdraw Basis Points</td>
         <td>{{transaction.options.withdrawBasisPoints}}</td>
       </tr>
+      <tr>
+        <td>Stake Units</td>
+        <td>{{transaction.events.stakeUnits | assetUnits:8 | number:'1.0-0'}}</td>
+      </tr>
     </tbody>
 
   </table>
