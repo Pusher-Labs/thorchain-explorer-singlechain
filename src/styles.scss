@@ -2,7 +2,6 @@
 @import "styles/colors";
 @import "styles/animations";
 @import "styles/theme";
-@import "https://code.highcharts.com/css/highcharts.css";
 
 * {
   box-sizing: border-box;
@@ -32,6 +31,7 @@ body {
   background-color: var(--background-color);
   font-size: 1.6rem;
   margin: 0;
+  overflow-x: hidden;
 }
 
 h1, span, label {
@@ -71,9 +71,6 @@ table {
   }
 
   th {
-    background-color: var(--background-dashboard);
-    position: sticky;
-    top: 0;
     border-top: 0;
   }
 
