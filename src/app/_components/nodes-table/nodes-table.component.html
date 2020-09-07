@@ -1,13 +1,14 @@
 <table *ngIf="nodes && nodes.length > 0" class="shadow nodes-table">
   <thead>
     <tr *ngIf="tableName">
-      <th colspan="7">{{tableName}}</th>
+      <th colspan="8">{{tableName}}</th>
     </tr>
     <tr>
       <th>Address</th>
       <th>Status</th>
       <th>Version</th>
       <th>IP</th>
+      <th>Location</th>
       <th>Slash Points</th>
       <th>Current Award</th>
       <th>Total Bond</th>
@@ -28,12 +29,15 @@
       <td>
         {{node.ipAddress}}
       </td>
+      <td *ngIf="node.location">
+        {{node.location.country_name}}
+      </td>
       <td>{{node.slashPoints}}</td>
       <td>
-        {{node.currentAward | assetUnits:8 | number:"0.0-2"}}
+        {{node.currentAward | assetUnits:8 | number:"0.0-0"}}
       </td>
       <td>
-        {{node.bond | assetUnits:8 | number:"0.0-2"}}
+        {{node.bond | assetUnits:8 | number:"0.0-0"}}
       </td>
     </tr>
   </tbody>
