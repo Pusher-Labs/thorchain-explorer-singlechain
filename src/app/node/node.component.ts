@@ -68,10 +68,10 @@ export class NodeComponent implements OnInit, OnDestroy {
               this.error = 'Invalid account address. Are you on the correct network?';
             } else {
 
-              this.thorNode = res;
+              this.thorNode = new ThorNode(res);
 
-              if (res.jail) {
-                const jailReleaseHeight = Number(res.jail.release_height);
+              if (this.thorNode.jail) {
+                const jailReleaseHeight = Number(this.thorNode.jail.releaseHeight);
 
                 if (jailReleaseHeight > Number(this.lastBlock?.thorchain)) {
                    this.isInJail = true;
