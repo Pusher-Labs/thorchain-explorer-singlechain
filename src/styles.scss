@@ -2,7 +2,6 @@
 @import "styles/colors";
 @import "styles/animations";
 @import "styles/theme";
-@import "https://code.highcharts.com/css/highcharts.css";
 
 * {
   box-sizing: border-box;
@@ -44,11 +43,16 @@ span {
 }
 
 table {
+  text-align: left;
   border-collapse: collapse;
   background-color: var(--background-dashboard);
   width: 100%;
   border-radius: 5px;
   overflow: auto;
+
+  thead tr:nth-child(1) th {
+    text-align: center;
+  }
 
   th, td {
     padding: 5px 10px;
