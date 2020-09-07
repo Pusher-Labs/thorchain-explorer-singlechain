@@ -1,4 +1,4 @@
-import { IPLocation, sampleLocation } from "./ip-location";
+import { IPLocation, sampleLocation } from './ip-location';
 import { environment } from '../../environments/environment';
 
 export enum NodeStatus {
@@ -90,11 +90,11 @@ export class ThorNode {
     this.currentAward = dto.current_award;
     this.error = dto.error;
 
-    if(environment.production){
-      this.location = dto.location
+    if (environment.production){
+      this.location = dto.location;
     }else{
-      //Test location data
-      this.location = sampleLocation
+      // Test location data
+      this.location = sampleLocation;
     }
   }
 }

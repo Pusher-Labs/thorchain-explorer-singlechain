@@ -63,7 +63,7 @@ export class NodesComponent implements OnInit, OnDestroy {
 
     this.nodeService.findAll().subscribe(
       (res) => {
-        const tNodes = res.map(dto=>new ThorNode(dto));
+        const tNodes = res.map( dto => new ThorNode(dto));
 
         this.activeNodes = tNodes
           .filter( (node) => node.status === NodeStatus.ACTIVE )
