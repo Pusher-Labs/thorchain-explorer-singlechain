@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ThorNode } from 'src/app/_classes/thor-node';
-import { IconDefinition, faThumbtack } from '@fortawesome/free-solid-svg-icons';
+import { IconDefinition, faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-nodes-table',
@@ -15,7 +15,7 @@ export class NodesTableComponent implements OnInit {
   pinIcon: IconDefinition;
 
   constructor() {
-    this.pinIcon = faThumbtack;
+    this.pinIcon = faStar;
   }
 
   ngOnInit(): void {
