@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "thorchain-test": {
+    "thorchain-explorer": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -18,7 +18,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "allowedCommonJsDependencies": [],
           "options": {
-            "outputPath": "dist/thorchain-test",
+            "outputPath": "dist/thorchain-explorer",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -26,7 +26,8 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.scss"
@@ -60,25 +61,27 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "thorchain-test:build"
+            "browserTarget": "thorchain-explorer:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "thorchain-test:build:production"
+              "browserTarget": "thorchain-explorer:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "thorchain-test:build"
+            "browserTarget": "thorchain-explorer:build"
           }
         },
         "test": {
@@ -90,7 +93,8 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.scss"
@@ -122,16 +126,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "thorchain-test:serve"
+            "devServerTarget": "thorchain-explorer:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "thorchain-test:serve:production"
+              "devServerTarget": "thorchain-explorer:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "thorchain-test"
+  "defaultProject": "thorchain-explorer"
 }
