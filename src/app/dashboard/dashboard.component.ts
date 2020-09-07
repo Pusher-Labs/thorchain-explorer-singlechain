@@ -119,7 +119,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   getNodes() {
     this.nodes = null;
     this.nodeService.findAll().subscribe(
-        (res) => this.nodes = res,
+      (res) => {
+        this.nodes = res.map( dto => new ThorNode(dto));
+      },
         (err) => {
           console.error('error on dashboard fetching nodes: ', err);
           this.error = `Error Connecting to THORChain ${this.thorchainNetworkService.network}`;

@@ -63,16 +63,17 @@ export class NodesComponent implements OnInit, OnDestroy {
 
     this.nodeService.findAll().subscribe(
       (res) => {
+        const tNodes = res.map( dto => new ThorNode(dto));
 
-        this.activeNodes = res
+        this.activeNodes = tNodes
           .filter( (node) => node.status === NodeStatus.ACTIVE )
           .map( (node) => this.updateStatusIfJailed(node) );
 
-        this.standbyNodes = res
+        this.standbyNodes = tNodes
           .filter( (node) => node.status === NodeStatus.STANDBY || node.status === NodeStatus.READY)
           .map( (node) => this.updateStatusIfJailed(node) );
 
-        this.disabledNodes = res
+        this.disabledNodes = tNodes
           .filter( (node) => node.status === NodeStatus.DISABLED )
           .map( (node) => this.updateStatusIfJailed(node) );
 
@@ -99,7 +100,7 @@ export class NodesComponent implements OnInit, OnDestroy {
    */
   nodeIsJailed(node: ThorNode): boolean {
 
-    const jailReleaseHeight = Number(node.jail.release_height);
+    const jailReleaseHeight = Number(node.jail.releaseHeight);
 
     return (jailReleaseHeight > Number(this.lastBlock.thorchain));
 
