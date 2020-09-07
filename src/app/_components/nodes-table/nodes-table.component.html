@@ -1,9 +1,10 @@
 <table *ngIf="nodes && nodes.length > 0" class="shadow nodes-table">
   <thead>
     <tr *ngIf="tableName">
-      <th colspan="8" class="text-align--center">{{tableName}}</th>
+      <th colspan="9" class="text-align--center">{{tableName}}</th>
     </tr>
     <tr>
+      <th></th>
       <th>Address</th>
       <th>Status</th>
       <th>Version</th>
@@ -15,7 +16,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let node of nodes">
+    <tr *ngFor="let node of nodes" [class.pinned]="isPinned(node.nodeAddress)">
+      <td>
+        <button (click)="toggleNodePin(node.nodeAddress)" class="pin-btn">
+          <fa-icon *ngIf="true" [icon]="pinIcon"></fa-icon>
+        </button>
+      </td>
       <td>
         <a
           [routerLink]="['/', 'nodes', node.nodeAddress]">{{node.nodeAddress.substring(0, 8)}}...{{node.nodeAddress.substring(node.nodeAddress.length - 4, node.nodeAddress.length)}}</a>
