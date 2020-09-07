@@ -135,7 +135,6 @@ export class NetworkDetailsComponent implements OnInit, OnDestroy {
   standByBondMetrics(): void {
     this.networkService.network().subscribe(
       (res) => {
-        console.log(res);
         this.AverageStandByBond = parseInt(res.bondMetrics.averageStandbyBond, 10) / 10 ** 8;
         this.MaximumStandByBond = parseInt(res.bondMetrics.maximumStandbyBond, 10) / 10 ** 8;
         this.MedianStandByBond = parseInt(res.bondMetrics.medianStandbyBond, 10) / 10 ** 8;
