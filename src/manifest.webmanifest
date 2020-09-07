@@ -1,5 +1,6 @@
 {
   "name": "THORChain Explorer",
+  "short_name": "THORChain Explorer",
   "theme_color": "#eee",
   "background_color": "#eee",
   "display": "standalone",
