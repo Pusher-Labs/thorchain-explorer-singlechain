@@ -22,6 +22,9 @@ $pin-btn-color-dark: #9e9e9e;
 $pin-btn-pinned-color-light: blue;
 $pin-btn-pinned-color-dark: white;
 
+$border-bottom-color-light: gainsboro;
+$border-bottom-color-dark: #232323;
+
 $hover-color-light: whitesmoke;
 $hover-color-dark: rgba(255,255,255, 0.3);
 
@@ -34,5 +37,6 @@ $colors: (
   --link-color: ($link-color-light, $link-color-dark),
   --pin-color: ($pin-color-light, $pin-color-dark),
   --pin-btn-color: ($pin-btn-color-light, $pin-btn-color-dark),
-  --pin-btn-pinned-color: ($pin-btn-pinned-color-light, $pin-btn-pinned-color-dark)
+  --pin-btn-pinned-color: ($pin-btn-pinned-color-light, $pin-btn-pinned-color-dark),
+  --border-bottom-color: ($border-bottom-color-light, $border-bottom-color-dark),
 )
