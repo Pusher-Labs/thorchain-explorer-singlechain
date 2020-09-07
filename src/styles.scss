@@ -50,10 +50,6 @@ table {
   border-radius: 5px;
   overflow: auto;
 
-  thead tr:nth-child(1) th {
-    text-align: center;
-  }
-
   th, td {
     padding: 5px 10px;
     border-bottom: 1px solid gainsboro;
@@ -283,3 +279,10 @@ ul {
   min-height: 145px;
 }
 
+.text-align {
+
+  &--center {
+    text-align: center;
+  }
+
+}
