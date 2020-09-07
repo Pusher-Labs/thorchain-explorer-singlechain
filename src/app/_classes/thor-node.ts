@@ -1,6 +1,7 @@
 export enum NodeStatus {
   ACTIVE = 'active',
   STANDBY = 'standby',
+  READY = 'ready',
   DISABLED = 'disabled',
   JAILED = 'jailed'
 }
