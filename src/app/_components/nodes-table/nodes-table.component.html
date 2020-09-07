@@ -1,7 +1,7 @@
 <table *ngIf="nodes && nodes.length > 0" class="shadow nodes-table">
   <thead>
     <tr *ngIf="tableName">
-      <th colspan="8">{{tableName}}</th>
+      <th colspan="9">{{tableName}}</th>
     </tr>
     <tr>
       <th>Address</th>
@@ -12,10 +12,11 @@
       <th>Slash Points</th>
       <th>Current Award</th>
       <th>Total Bond</th>
+      <th>Pinned</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let node of nodes">
+    <tr *ngFor="let node of nodes" [class.pinned]="isPinned(node.nodeAddress)">
       <td>
         <a
           [routerLink]="['/', 'nodes', node.nodeAddress]">{{node.nodeAddress.substring(0, 8)}}...{{node.nodeAddress.substring(node.nodeAddress.length - 4, node.nodeAddress.length)}}</a>
@@ -38,6 +39,11 @@
       </td>
       <td>
         {{node.bond | assetUnits:8 | number:"0.0-0"}}
+      </td>
+      <td>
+        <button (click)="toggleNodePin(node.nodeAddress)" class="pin-btn">
+          <fa-icon *ngIf="true" [icon]="pinIcon"></fa-icon>
+        </button>
       </td>
     </tr>
   </tbody>

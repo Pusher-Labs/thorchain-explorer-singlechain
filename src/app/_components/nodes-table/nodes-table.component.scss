@@ -5,3 +5,37 @@
 		white-space: nowrap;
 	}
 }
+
+.pinned {
+  background-color: var(--pin-color);
+}
+
+.pin-btn {
+  cursor: pointer;
+  border: none;
+  padding: 3px 5px;
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  color: var(--pin-btn-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  transition: none; 
+
+}
+.pin-btn .ng-fa-icon {
+  transition: none !important;
+}
+
+.pin-btn:focus {
+  outline: none;
+}
+.pin-btn:hover {
+  color: blue;
+}
+
+.pinned .pin-btn {
+  color: var(--pin-btn-pinned-color);
+}

@@ -13,6 +13,15 @@ $background-dashboard-dark: rgb(49, 49, 49);
 $link-color-light: black;
 $link-color-dark: #F07C04;
 
+$pin-color-light: #f9ffd5;
+$pin-color-dark: #006d86;
+
+$pin-btn-color-light: #b3b3b3;
+$pin-btn-color-dark: #9e9e9e;
+
+$pin-btn-pinned-color-light: blue;
+$pin-btn-pinned-color-dark: white;
+
 $hover-color-light: whitesmoke;
 $hover-color-dark: rgba(255,255,255, 0.3);
 
@@ -22,5 +31,8 @@ $colors: (
   --hover-text-color: ($hover-color-light, $hover-color-dark),
   --header-background: ($background-header, $background-header-dark),
   --background-dashboard: ($background-dashboard-light, $background-dashboard-dark),
-  --link-color: ($link-color-light, $link-color-dark)
+  --link-color: ($link-color-light, $link-color-dark),
+  --pin-color: ($pin-color-light, $pin-color-dark),
+  --pin-btn-color: ($pin-btn-color-light, $pin-btn-color-dark),
+  --pin-btn-pinned-color: ($pin-btn-pinned-color-light, $pin-btn-pinned-color-dark)
 )
