@@ -2,7 +2,6 @@
 @import "styles/colors";
 @import "styles/animations";
 @import "styles/theme";
-@import "https://code.highcharts.com/css/highcharts.css";
 
 * {
   box-sizing: border-box;
@@ -44,6 +43,7 @@ span {
 }
 
 table {
+  text-align: left;
   border-collapse: collapse;
   background-color: var(--background-dashboard);
   width: 100%;
@@ -279,3 +279,10 @@ ul {
   min-height: 145px;
 }
 
+.text-align {
+
+  &--center {
+    text-align: center;
+  }
+
+}
