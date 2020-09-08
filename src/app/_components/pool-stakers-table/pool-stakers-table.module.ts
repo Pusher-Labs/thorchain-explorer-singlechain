@@ -4,6 +4,7 @@ import { PoolStakersTableComponent } from './pool-stakers-table.component';
 import { RouterModule } from '@angular/router';
 import { PipesModule } from '../../_pipes/pipes.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
@@ -13,6 +14,7 @@ import { ChartsModule } from 'ng2-charts';
     PipesModule,
     FontAwesomeModule,
     RouterModule,
+    FormsModule,
     ChartsModule
   ],
   exports: [PoolStakersTableComponent]
