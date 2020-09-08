@@ -42,7 +42,9 @@ export class PoolStakersTableComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getDefaultData();
+    if (this.stakers !== undefined) {
+      this.getDefaultData();
+    }
   }
 
   changeTheme() {

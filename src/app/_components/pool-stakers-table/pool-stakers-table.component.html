@@ -41,7 +41,7 @@
     </tbody>
 </table>
 
-<div class="pieChart" *ngIf="this.pieChartData !== undefined">
+<div class="pieChart" *ngIf="this.pieChartData !== undefined && this.stakers !== undefined">
     <canvas baseChart width="350" height="1000" [datasets]="pieChartData" [labels]="pieChartLabels"
         [options]="pieChartOptions" [legend]="pieChartLegend" [chartType]="pieChartType"
         [plugins]="pieChartPlugins">
