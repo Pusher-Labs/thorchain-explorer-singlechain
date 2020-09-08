@@ -1,3 +1,10 @@
+<div class="pool-staker-sort flxr flxr--just-end" name="sel2">
+  <label>Sort:</label>
+  <select class="pool-staker-sort--select" [ngModel]="selectedSortOption" (change)="onSortChange($event.target.value)">
+    <option [value]="i" *ngFor="let i of sortOptions">{{i}}</option>
+  </select>
+</div>
+
 <table *ngIf="stakers">
   <thead>
     <tr>
@@ -8,10 +15,11 @@
       <th>Last UnStake</th>
       <th>Pending Rune</th>
       <th>Pending TX Id</th>
+      <th>Ownership (%)</th>
     </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let staker of stakers">
+  <tr *ngFor="let staker of sortedStakers">
       <td>
           <a [routerLink]="['/', 'addresses', staker.rune_address]" title="Rune Address">
               <b>{{staker.rune_address.substring(0,8)}}...</b>
@@ -36,6 +44,9 @@
       </td>
       <td >
           <div *ngIf="staker.pending_tx_id">{{ staker.pending_tx_id.substring(0,8) }}...</div>
+      </td>
+      <td >
+        {{ ownership[staker.asset_address] | percent:'1.0-2' }}
       </td>
   </tr>
   </tbody>
