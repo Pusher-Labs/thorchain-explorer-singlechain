@@ -67,6 +67,11 @@ export class NodeComponent implements OnInit, OnDestroy {
             if (res.error) {
               this.error = 'Invalid account address. Are you on the correct network?';
             } else {
+              for (const elem in res) {
+                if (res[elem] === null) {
+                  res[elem] = ['⚠ Not found...'];
+                }
+              }
 
               this.thorNode = new ThorNode(res);
 
