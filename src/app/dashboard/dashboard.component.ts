@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { StatsService, GlobalStats } from '../_services/stats.service';
+import { StatsService } from '../_services/stats.service';
 import { TransactionService, TransactionIndexParams } from '../_services/transaction.service';
 import { Transaction } from '../_classes/transaction';
 import { NetworkService } from '../_services/network.service';
@@ -9,6 +9,7 @@ import { ThorNode } from '../_classes/thor-node';
 import { ThorchainNetworkService } from '../_services/thorchain-network.service';
 import { CoinGeckoService } from '../_services/coingecko.service';
 import { Subscription } from 'rxjs';
+import { GlobalStats } from '../_classes/global-stats';
 
 @Component({
   selector: 'app-dashboard',
@@ -73,7 +74,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.stats = null;
 
     this.statsService.getStats().subscribe(
-      (res) => this.stats = res,
+      (res) => this.stats = new GlobalStats(res),
       (err) => {
         console.error(err);
         this.error = `Error Connecting to THORChain ${this.thorchainNetworkService.network}`;
