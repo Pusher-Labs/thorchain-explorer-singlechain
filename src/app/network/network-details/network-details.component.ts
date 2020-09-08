@@ -31,16 +31,16 @@ export class NetworkDetailsComponent implements OnInit, OnDestroy {
     private constantsService: ConstantsService,
     private thorchainNetworkService: ThorchainNetworkService,
     private coinGeckoService: CoinGeckoService) {
-      this.activeBonds = [];
-      this.standByBonds = [];
+    this.activeBonds = [];
+    this.standByBonds = [];
 
-      const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
-        (_) => {
-          this.getConstants();
-        }
-      );
+    const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
+      (_) => {
+        this.getConstants();
+      }
+    );
 
-      this.subs = [network$];
+    this.subs = [network$];
 
   }
 

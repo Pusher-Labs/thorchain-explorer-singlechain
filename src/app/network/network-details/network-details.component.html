@@ -5,7 +5,7 @@
   </div>
 
   <div class="shadow grid-item">
-    <table *ngIf="network.blockRewards">
+    <table *ngIf="network.blockRewards && currentRate">
 
       <thead>
         <tr>
@@ -16,22 +16,35 @@
       <tbody>
         <tr>
           <td>Block Reward</td>
-          <td *ngIf="dailyBlockReward">{{ dailyBlockReward | number:"0.0-2" }} / day</td>
+          <td *ngIf="dailyBlockReward">
+            {{ dailyBlockReward | number:"0.0-2" }}
+            <span *ngIf="currentRate">(${{dailyBlockReward * currentRate | number:"0.0-2"}})</span>
+            / day
+          </td>
           <td *ngIf="!dailyBlockReward"> - </td>
         </tr>
         <tr>
           <td>Bond Reward</td>
-          <td *ngIf="dailyBondReward">{{ dailyBondReward | number:"0.0-2"}} / day</td>
+          <td *ngIf="dailyBondReward">
+            {{ dailyBondReward | number:"0.0-2"}}
+            <span *ngIf="currentRate">(${{dailyBondReward * currentRate | number:"0.0-2"}})</span>
+            / day</td>
           <td *ngIf="!dailyBondReward"> - </td>
         </tr>
         <tr>
           <td>Stake Reward</td>
-          <td *ngIf="dailyStakeReward">{{ dailyStakeReward | number:"0.0-2"}} / day</td>
+          <td *ngIf="dailyStakeReward">
+            {{ dailyStakeReward | number:"0.0-2"}}
+            <span *ngIf="currentRate">(${{dailyStakeReward * currentRate | number:"0.0-2"}})</span>
+            / day</td>
           <td *ngIf="!dailyStakeReward"> - </td>
         </tr>
         <tr>
           <td>Bond Reward / Node</td>
-          <td *ngIf="monthlyNodeBondReward">{{ monthlyNodeBondReward | number:"0.0-2"}} / month</td>
+          <td *ngIf="monthlyNodeBondReward">
+            {{ monthlyNodeBondReward | number:"0.0-2"}}
+            <span *ngIf="currentRate">(${{monthlyNodeBondReward * currentRate | number:"0.0-2"}})</span>
+            / month</td>
           <td *ngIf="!monthlyNodeBondReward"> - </td>
         </tr>
       </tbody>
@@ -68,23 +81,38 @@
       <tbody>
         <tr>
           <td>Average Active Bond</td>
-          <td>{{network.bondMetrics.averageActiveBond | assetUnits:8 | number:"1.0-0"}}</td>
+          <td>
+            {{network.bondMetrics.averageActiveBond | number:"1.0-0"}}
+            <span *ngIf="currentRate">(${{network.bondMetrics.averageActiveBond * currentRate | number:"1.0-0"}})</span>
+          </td>
         </tr>
         <tr>
           <td>Maximum Active Bond</td>
-          <td>{{network.bondMetrics.maximumActiveBond | assetUnits:8 | number:"1.0-0"}}</td>
+          <td>
+            {{network.bondMetrics.maximumActiveBond | number:"1.0-0"}}
+            <span *ngIf="currentRate">(${{network.bondMetrics.maximumActiveBond * currentRate | number:"1.0-0"}})</span>
+          </td>
         </tr>
         <tr>
           <td>Median Active Bond</td>
-          <td>{{network.bondMetrics.medianActiveBond | assetUnits:8 | number:"1.0-0"}}</td>
+          <td>
+            {{network.bondMetrics.medianActiveBond | number:"1.0-0"}}
+            <span *ngIf="currentRate">(${{network.bondMetrics.medianActiveBond * currentRate | number:"1.0-0"}})</span>
+          </td>
         </tr>
         <tr>
           <td>Minimum Active Bond</td>
-          <td>{{network.bondMetrics.minimumActiveBond | assetUnits:8 | number:"1.0-0"}}</td>
+          <td>
+            {{network.bondMetrics.minimumActiveBond | number:"1.0-0"}}
+            <span *ngIf="currentRate">(${{network.bondMetrics.minimumActiveBond * currentRate | number:"1.0-0"}})</span>
+          </td>
         </tr>
         <tr>
           <td>Total Active Bond</td>
-          <td>{{network.bondMetrics.totalActiveBond | assetUnits:8 | number:"1.0-0"}}</td>
+          <td>
+            {{network.bondMetrics.totalActiveBond | number:"1.0-0"}}
+            <span *ngIf="currentRate">(${{network.bondMetrics.totalActiveBond * currentRate | number:"1.0-0"}})</span>
+          </td>
         </tr>
       </tbody>
 
@@ -121,23 +149,38 @@
       <tbody>
         <tr>
           <td>Average Standby Bond</td>
-          <td>{{network.bondMetrics.averageStandbyBond | assetUnits:8 | number:"1.0-0"}}</td>
+          <td>
+            {{network.bondMetrics.averageStandbyBond | number:"1.0-0"}}
+            <span *ngIf="currentRate">(${{network.bondMetrics.averageStandbyBond * currentRate | number:"1.0-0"}})</span>
+          </td>
         </tr>
         <tr>
           <td>Maximum Standby Bond</td>
-          <td>{{network.bondMetrics.maximumStandbyBond | assetUnits:8 | number:"1.0-0"}}</td>
+          <td>
+            {{network.bondMetrics.maximumStandbyBond | number:"1.0-0"}}
+            <span *ngIf="currentRate">(${{network.bondMetrics.maximumStandbyBond * currentRate | number:"1.0-0"}})</span>
+          </td>
         </tr>
         <tr>
           <td>Median Standby Bond</td>
-          <td>{{network.bondMetrics.medianStandbyBond | assetUnits:8 | number:"1.0-0"}}</td>
+          <td>
+            {{network.bondMetrics.medianStandbyBond | number:"1.0-0"}}
+            <span *ngIf="currentRate">(${{network.bondMetrics.medianStandbyBond * currentRate | number:"1.0-0"}})</span>
+          </td>
         </tr>
         <tr>
           <td>Minimum Standby Bond</td>
-          <td>{{network.bondMetrics.minimumStandbyBond | assetUnits:8 | number:"1.0-0"}}</td>
+          <td>
+            {{network.bondMetrics.minimumStandbyBond | number:"1.0-0"}}
+            <span *ngIf="currentRate">(${{network.bondMetrics.minimumStandbyBond * currentRate | number:"1.0-0"}})</span>
+          </td>
         </tr>
         <tr>
           <td>Total Standby Bond</td>
-          <td>{{network.bondMetrics.totalStandbyBond | assetUnits:8 | number:"1.0-0"}}</td>
+          <td>
+            {{network.bondMetrics.totalStandbyBond | number:"1.0-0"}}
+            <span *ngIf="currentRate">(${{network.bondMetrics.totalStandbyBond * currentRate | number:"1.0-0"}})</span>
+          </td>
         </tr>
       </tbody>
     </table>
