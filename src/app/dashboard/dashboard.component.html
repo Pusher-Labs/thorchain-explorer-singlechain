@@ -36,7 +36,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let node of nodes | slice:0:(nodes.length < 13) ? nodes.length : 13;">
+          <tr *ngFor="let node of nodes | slice:0:(nodes.length < 14) ? nodes.length : 14;">
             <td>
               <a [routerLink]="['/', 'nodes', node.nodeAddress]">{{node.nodeAddress.substring(0, 8)}}...{{node.nodeAddress.substring(node.nodeAddress.length - 4, node.nodeAddress.length)}}</a>
             </td>
