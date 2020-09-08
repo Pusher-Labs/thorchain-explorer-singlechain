@@ -1,6 +1,6 @@
 import { FormattableAsset } from './helpers/formattable-asset';
 
-export interface BondMetrics {
+export interface BondMetricsDTO {
   totalActiveBond: string;
   averageActiveBond: string;
   medianActiveBond: string;
@@ -13,6 +13,36 @@ export interface BondMetrics {
   maximumStandbyBond: string;
 }
 
+export class BondMetrics extends FormattableAsset {
+  totalActiveBond: number;
+  averageActiveBond: number;
+  medianActiveBond: number;
+  minimumActiveBond: number;
+  maximumActiveBond: number;
+  totalStandbyBond: number;
+  averageStandbyBond: number;
+  medianStandbyBond: number;
+  minimumStandbyBond: number;
+  maximumStandbyBond: number;
+
+  constructor(bondMetricsDTO: BondMetricsDTO) {
+
+    super();
+
+    this.totalActiveBond = this.formatAssetUnits( Number(bondMetricsDTO.totalActiveBond), 8 );
+    this.averageActiveBond = this.formatAssetUnits( Number(bondMetricsDTO.averageActiveBond), 8 );
+    this.medianActiveBond = this.formatAssetUnits( Number(bondMetricsDTO.medianActiveBond), 8 );
+    this.minimumActiveBond = this.formatAssetUnits( Number(bondMetricsDTO.minimumActiveBond), 8 );
+    this.maximumActiveBond = this.formatAssetUnits( Number(bondMetricsDTO.maximumActiveBond), 8 );
+    this.totalStandbyBond = this.formatAssetUnits( Number(bondMetricsDTO.totalStandbyBond), 8 );
+    this.averageStandbyBond = this.formatAssetUnits( Number(bondMetricsDTO.averageStandbyBond), 8 );
+    this.medianStandbyBond = this.formatAssetUnits( Number(bondMetricsDTO.medianStandbyBond), 8 );
+    this.minimumStandbyBond = this.formatAssetUnits( Number(bondMetricsDTO.minimumStandbyBond), 8 );
+    this.maximumStandbyBond = this.formatAssetUnits( Number(bondMetricsDTO.maximumStandbyBond), 8 );
+  }
+
+}
+
 export interface BlockRewards {
   blockReward: string;
   bondReward: string;
@@ -20,7 +50,7 @@ export interface BlockRewards {
 }
 
 class NetworkStatusBase extends FormattableAsset {
-  bondMetrics: BondMetrics;
+  // bondMetrics: BondMetrics;
   activeNodeCount: number;
   standbyNodeCount: number;
   poolShareFactor: string;
@@ -36,6 +66,7 @@ export class NetworkStatusDTO extends NetworkStatusBase {
   standbyBonds: string[];
   totalStaked: string;
   totalReserve: string;
+  bondMetrics: BondMetricsDTO;
 }
 
 export class NetworkStatus extends NetworkStatusBase {
@@ -48,12 +79,13 @@ export class NetworkStatus extends NetworkStatusBase {
   totalStandbyBonded: number;
   totalBonded: number;
   totalCapital: number;
+  bondMetrics: BondMetrics;
 
 
   constructor(networkDTO: NetworkStatusDTO) {
     super();
 
-    this.bondMetrics = networkDTO.bondMetrics;
+    this.bondMetrics = new BondMetrics(networkDTO.bondMetrics);
 
     /**
      * Bonds

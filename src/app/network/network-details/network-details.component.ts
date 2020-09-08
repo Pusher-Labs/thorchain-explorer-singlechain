@@ -19,16 +19,6 @@ export class NetworkDetailsComponent implements OnInit, OnDestroy {
   dailyBondReward: number;
   dailyStakeReward: number;
   monthlyNodeBondReward: number;
-  AverageStandByBond: number;
-  MaximumStandByBond: number;
-  MedianStandByBond: number;
-  MinimumStandByBond: number;
-  TotalStandByBond: number;
-  AverageActiveBond: number;
-  MaximumActiveBond: number;
-  MedianActiveBond: number;
-  MinimumActiveBond: number;
-  TotalActiveBond: number;
   activeBonds: number[];
   standByBonds: number[];
   subs: Subscription[];
@@ -78,8 +68,6 @@ export class NetworkDetailsComponent implements OnInit, OnDestroy {
       (res) => {
         this.constants = res;
         this.getNetworkStatus();
-        this.standByBondMetrics();
-        this.ActiveBondMetrics();
       },
       (err) => {
         console.error('error fetching constants...', err);
@@ -130,38 +118,6 @@ export class NetworkDetailsComponent implements OnInit, OnDestroy {
       this.activeBonds.sort((a, b) => b - a);
       this.standByBonds.sort((a, b) => b - a);
     }
-  }
-
-  standByBondMetrics(): void {
-    this.networkService.network().subscribe(
-      (res) => {
-        this.AverageStandByBond = parseInt(res.bondMetrics.averageStandbyBond, 10) / 10 ** 8;
-        this.MaximumStandByBond = parseInt(res.bondMetrics.maximumStandbyBond, 10) / 10 ** 8;
-        this.MedianStandByBond = parseInt(res.bondMetrics.medianStandbyBond, 10) / 10 ** 8;
-        this.MinimumStandByBond = parseInt(res.bondMetrics.minimumStandbyBond, 10) / 10 ** 8;
-        this.TotalStandByBond = parseInt(res.bondMetrics.totalStandbyBond, 10) / 10 ** 8;
-      },
-      (err) => {
-        console.error('NetworkDetailsComponent -> error fetching network status: ', err);
-        this.error = 'Error Connecting to THORChain';
-      }
-    );
-  }
-
-  ActiveBondMetrics(): void {
-    this.networkService.network().subscribe(
-      (res) => {
-        this.AverageActiveBond = parseInt(res.bondMetrics.averageActiveBond, 10) / 10 ** 8;
-        this.MaximumActiveBond = parseInt(res.bondMetrics.maximumActiveBond, 10) / 10 ** 8;
-        this.MedianActiveBond = parseInt(res.bondMetrics.medianActiveBond, 10) / 10 ** 8;
-        this.MinimumActiveBond = parseInt(res.bondMetrics.minimumActiveBond, 10) / 10 ** 8;
-        this.TotalActiveBond = parseInt(res.bondMetrics.totalActiveBond, 10) / 10 ** 8;
-      },
-      (err) => {
-        console.error('NetworkDetailsComponent -> error fetching network status: ', err);
-        this.error = 'Error Connecting to THORChain';
-      }
-    );
   }
 
   ngOnDestroy() {
