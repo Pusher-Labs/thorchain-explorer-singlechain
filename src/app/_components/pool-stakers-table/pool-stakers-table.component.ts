@@ -25,7 +25,7 @@ export class PoolStakersTableComponent implements OnInit, OnDestroy {
   public pieChartLabels: Label[] = [];
   public pieChartOptions = {};
 
-  public pieChartLegend = true;
+  public pieChartLegend = false;
   public pieChartType = 'pie';
   public pieChartPlugins = [pluginAnnotations];
 
@@ -78,7 +78,7 @@ export class PoolStakersTableComponent implements OnInit, OnDestroy {
     this.pieChartData = [
       { data: this.stakers.map(val => (((+val.units / (10 ** 8))) * 100) / this.num), label: 'totalPool', fill: true }
     ];
-    this.pieChartLabels = this.stakers.map(value => value.asset_address);
+    this.pieChartLabels = this.stakers.map((value) => value.asset_address.substring(0, 12) + '...');
   }
 
   ngOnDestroy() {
