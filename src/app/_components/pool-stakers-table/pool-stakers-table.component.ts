@@ -17,10 +17,10 @@ export class PoolStakersTableComponent implements OnInit, OnDestroy {
 
   theme: string;
   num: number;
-  private totalPool: any[] = [{ data: [] }];
+  // private totalPool: any[] = [{ data: [] }];
   subs: Subscription[];
   public pieChartData: ChartDataSets[] = [
-    { data: this.totalPool, label: 'Total Pool' },
+    // { data: this.totalPool, label: 'Total Pool' },
   ];
   public pieChartLabels: Label[] = [];
   public pieChartOptions = {};
@@ -28,6 +28,7 @@ export class PoolStakersTableComponent implements OnInit, OnDestroy {
   public pieChartLegend = false;
   public pieChartType = 'pie';
   public pieChartPlugins = [pluginAnnotations];
+  totalStaked: number;
 
   constructor(uiService: UiStyleToggleService) {
     const theme$ = uiService.theme$.subscribe(
@@ -75,6 +76,11 @@ export class PoolStakersTableComponent implements OnInit, OnDestroy {
   getDefaultData(): void {
     this.num = 0;
     this.stakers.map(item => this.num += (+item.units / (10 ** 8)));
+
+    this.totalStaked = this.stakers.reduce( (total, staker) => {
+      return total + Number(staker.units) / (10 ** 8);
+    }, 0);
+
     this.pieChartData = [
       { data: this.stakers.map(val => (((+val.units / (10 ** 8))) * 100) / this.num), label: 'totalPool', fill: true }
     ];

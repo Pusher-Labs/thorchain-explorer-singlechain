@@ -1,3 +1,20 @@
+<div class="staker-summary mobile-padding" *ngIf="stakers">
+
+  <div>
+    <span>Total Stakers: {{stakers.length}}</span>
+    <br />
+    <span *ngIf="totalStaked">Total Units Staked: {{totalStaked | number:"0.0-0"}}</span>
+  </div>
+
+  <div class="pieChart" *ngIf="this.pieChartData !== undefined && this.stakers !== undefined">
+    <canvas baseChart width="250" height="250" [datasets]="pieChartData" [labels]="pieChartLabels"
+        [options]="pieChartOptions" [legend]="pieChartLegend" [chartType]="pieChartType"
+        [plugins]="pieChartPlugins">
+    </canvas>
+  </div>
+
+</div>
+
 <table *ngIf="stakers">
     <thead>
         <tr>
@@ -40,12 +57,5 @@
         </tr>
     </tbody>
 </table>
-
-<div class="pieChart" *ngIf="this.pieChartData !== undefined && this.stakers !== undefined">
-    <canvas baseChart width="350" height="350" [datasets]="pieChartData" [labels]="pieChartLabels"
-        [options]="pieChartOptions" [legend]="pieChartLegend" [chartType]="pieChartType"
-        [plugins]="pieChartPlugins">
-    </canvas>
-</div>
 
 <span *ngIf="!stakers">...</span>
