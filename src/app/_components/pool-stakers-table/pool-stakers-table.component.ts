@@ -53,6 +53,7 @@ export class PoolStakersTableComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.updateOwnershipPercent();
     this.sortedStakers = [...this.stakers];
+    this.sortStakers();
 
 
     // Preserve user config for sort
