@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { PoolStakersTableComponent } from './pool-stakers-table.component';
 
 describe('PoolStakersTableComponent', () => {
@@ -8,7 +8,8 @@ describe('PoolStakersTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PoolStakersTableComponent ]
+      declarations: [ PoolStakersTableComponent ],
+      imports: [ HttpClientTestingModule ]
     })
     .compileComponents();
   }));
