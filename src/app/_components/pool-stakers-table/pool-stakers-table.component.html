@@ -1,44 +1,61 @@
+<div class="staker-summary mobile-padding" *ngIf="stakers">
+
+  <div>
+    <span>Total Stakers: {{stakers.length}}</span>
+    <br />
+    <span *ngIf="totalStaked">Total Units Staked: {{totalStaked | number:"0.0-0"}}</span>
+  </div>
+
+  <div class="pieChart" *ngIf="this.pieChartData !== undefined && this.stakers !== undefined">
+    <canvas baseChart width="250" height="250" [datasets]="pieChartData" [labels]="pieChartLabels"
+        [options]="pieChartOptions" [legend]="pieChartLegend" [chartType]="pieChartType"
+        [plugins]="pieChartPlugins">
+    </canvas>
+  </div>
+
+</div>
+
 <table *ngIf="stakers">
-  <thead>
-    <tr>
-      <th>Rune Address</th>
-      <th>Asset Address</th>
-      <th>Units</th>
-      <th>Last Stake</th>
-      <th>Last UnStake</th>
-      <th>Pending Rune</th>
-      <th>Pending TX Id</th>
-    </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let staker of stakers">
-      <td>
-          <a [routerLink]="['/', 'addresses', staker.rune_address]" title="Rune Address">
-              <b>{{staker.rune_address.substring(0,8)}}...</b>
-          </a>
-      </td>
-      <td >
-          <a [routerLink]="['/', 'addresses', staker.asset_address]" title="Asset Address">
-              <b>{{staker.asset_address.substring(0,8)}}...</b>
-          </a>
-      </td>
-      <td>
-          {{staker.units | assetUnits:8 | number:"1.0-2" }}
-      </td>
-      <td >
-          {{staker.last_stake}}
-      </td>
-      <td >
-          {{staker.last_unstake}}
-      </td>
-      <td >
-          {{staker.pending_rune}}
-      </td>
-      <td >
-          <div *ngIf="staker.pending_tx_id">{{ staker.pending_tx_id.substring(0,8) }}...</div>
-      </td>
-  </tr>
-  </tbody>
+    <thead>
+        <tr>
+            <th>Rune Address</th>
+            <th>Asset Address</th>
+            <th>Units</th>
+            <th>Last Stake</th>
+            <th>Last UnStake</th>
+            <th>Pending Rune</th>
+            <th>Pending TX Id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let staker of stakers">
+            <td>
+                <a [routerLink]="['/', 'addresses', staker.rune_address]" title="Rune Address">
+                    <b>{{staker.rune_address.substring(0,8)}}...</b>
+                </a>
+            </td>
+            <td>
+                <a [routerLink]="['/', 'addresses', staker.asset_address]" title="Asset Address">
+                    <b>{{staker.asset_address.substring(0,8)}}...</b>
+                </a>
+            </td>
+            <td>
+                {{staker.units | assetUnits:8 | number:"1.0-2" }}
+            </td>
+            <td>
+                {{staker.last_stake}}
+            </td>
+            <td>
+                {{staker.last_unstake}}
+            </td>
+            <td>
+                {{staker.pending_rune}}
+            </td>
+            <td>
+                <div *ngIf="staker.pending_tx_id">{{ staker.pending_tx_id.substring(0,8) }}...</div>
+            </td>
+        </tr>
+    </tbody>
 </table>
 
 <span *ngIf="!stakers">...</span>

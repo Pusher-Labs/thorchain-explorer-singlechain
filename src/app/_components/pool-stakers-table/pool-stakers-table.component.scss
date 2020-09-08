@@ -28,6 +28,33 @@ table {
 	}
 }
 
+.staker-summary {
+  display: flex;
+  justify-content: space-between;
+
+  .pieChart {
+    display: block;
+    margin: -100px 0 30px 0;
+  }
+
+  @media
+  only screen and (max-width: 767px),
+  (min-device-width: 768px) and (max-device-width: 1024px)  {
+    flex-flow: column;
+
+
+    .pieChart {
+      // display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+
+      margin: 30px 0 30px 0;
+    }
+  }
+}
+
 /*
 Max width before for this particular table
 This query will take effect for any screen smaller than 760px
@@ -40,4 +67,8 @@ and also iPads specifically.
 		white-space: nowrap;
 	}
 
+	.pieChart {
+		display: block;
+		width: 100%;
+	}
 }
