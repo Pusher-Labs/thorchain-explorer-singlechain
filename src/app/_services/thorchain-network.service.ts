@@ -36,7 +36,7 @@ export class ThorchainNetworkService {
      */
       default:
         this.midgardBasePath = 'https://chaosnet-midgard.bepswap.com';
-        this.nodeBasePath = (isDevMode()) ? 'http://44.235.130.167:1317' : 'https://a2wva4alb6.execute-api.us-east-1.amazonaws.com/dev/thornode';
+        this.nodeBasePath = (isDevMode()) ? 'http://18.159.173.48:1317' : 'https://a2wva4alb6.execute-api.us-east-1.amazonaws.com/dev/thornode';
         this.network = network;
         break;
     }
