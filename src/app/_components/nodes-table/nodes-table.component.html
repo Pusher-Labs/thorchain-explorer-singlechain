@@ -1,4 +1,4 @@
-<table *ngIf="nodes && nodes.length > 0" class="shadow nodes-table">
+<table class="shadow nodes-table">
   <thead>
     <tr *ngIf="tableName">
       <th colspan="9" class="text-align--center">{{tableName}}</th>
@@ -16,6 +16,11 @@
     </tr>
   </thead>
   <tbody>
+    <tr *ngIf="!nodes || nodes.length === 0">
+      <td colspan="9" class="text-align--center">
+        <span style="display:inline-block; padding: 15px;">No data found!</span>
+      </td>
+    </tr>
     <tr *ngFor="let node of nodes" [class.pinned]="isPinned(node.nodeAddress)">
       <td>
         <button (click)="toggleNodePin(node.nodeAddress)" class="pin-btn">

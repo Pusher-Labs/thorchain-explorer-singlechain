@@ -22,7 +22,7 @@
   </select>
 </div> -->
 
-<table *ngIf="stakers">
+<table >
     <thead>
         <tr>
             <th>Rune Address</th>
@@ -36,6 +36,12 @@
         </tr>
     </thead>
     <tbody>
+        <tr *ngIf="!sortedStakers || sortedStakers.length === 0">
+          <td colspan="8" class="text-align--center">
+            <span style="display:inline-block; padding: 15px;">No data found!</span>
+          </td>
+        </tr>
+
         <tr *ngFor="let staker of sortedStakers">
             <td>
                 <a [routerLink]="['/', 'addresses', staker.rune_address]" title="Rune Address">
@@ -68,5 +74,3 @@
         </tr>
     </tbody>
 </table>
-
-<span *ngIf="!stakers">...</span>
