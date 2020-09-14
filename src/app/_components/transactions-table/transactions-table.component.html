@@ -9,6 +9,12 @@
     </tr>
   </thead>
   <tbody>
+    <tr *ngIf="transactions.length === 0">
+      <td colspan="5" class="text-align--center">
+        <span style="display:inline-block; padding: 15px;">No data found!</span>
+      </td>
+    </tr>
+
     <tr *ngFor="let transaction of transactions">
 
       <td>
