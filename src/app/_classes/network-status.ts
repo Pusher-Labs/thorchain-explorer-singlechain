@@ -90,8 +90,14 @@ export class NetworkStatus extends NetworkStatusBase {
     /**
      * Bonds
      */
-    this.activeBonds = networkDTO.activeBonds.map( (bondStr) => this.formatAssetUnits( Number(bondStr), 8 ));
-    this.standbyBonds = networkDTO.standbyBonds.map( (bondStr) => this.formatAssetUnits( Number(bondStr), 8 ) );
+    this.activeBonds = (networkDTO.activeBonds)
+      ? networkDTO.activeBonds.map( (bondStr) => this.formatAssetUnits( Number(bondStr), 8 ))
+      : [];
+
+    this.standbyBonds = (networkDTO.standbyBonds)
+      ? networkDTO.standbyBonds.map( (bondStr) => this.formatAssetUnits( Number(bondStr), 8 ) )
+      : [];
+
     this.totalActiveBonded = this.activeBonds.reduce( (total, bond) => total + bond, 0);
     this.totalStandbyBonded = this.standbyBonds.reduce( (total, bond) => total + bond, 0);
     this.totalBonded = this.totalActiveBonded + this.totalStandbyBonded;
