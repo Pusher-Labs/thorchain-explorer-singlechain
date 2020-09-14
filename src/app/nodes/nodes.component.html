@@ -6,6 +6,7 @@
 
 <br />
 
+
 <app-nodes-table *ngIf="activeNodes" [nodes]="activeNodes" tableName="Active Nodes"></app-nodes-table>
 
 <br />
@@ -17,6 +18,8 @@
 <br />
 
 <app-nodes-table *ngIf="disabledNodes" [nodes]="disabledNodes" tableName="Disabled Nodes"></app-nodes-table>
+
+<app-map *ngIf="mapData && mapData.length > 0" [data]="mapData"></app-map>
 
 <app-loading *ngIf="!activeNodes && !error"></app-loading>
 

@@ -22,6 +22,7 @@ export class NodesComponent implements OnInit, OnDestroy {
   standbyNodes: ThorNode[];
   disabledNodes: ThorNode[];
   error: string;
+  mapData = [];
 
   constructor(
     private nodeService: NodeService,
@@ -54,6 +55,18 @@ export class NodesComponent implements OnInit, OnDestroy {
     );
   }
 
+  updateMapLocations(nodes: ThorNode[]): void {
+    this.mapData = nodes.map(node => {
+      return {
+        name: node.location.country_name,
+        description: node.location.country_name,
+        latitude: node.location.latitude,
+        longitude: node.location.longitude,
+        value: 1,
+      };
+    });
+  }
+
   getNodes(): void {
 
     this.activeNodes = null;
@@ -64,6 +77,7 @@ export class NodesComponent implements OnInit, OnDestroy {
     this.nodeService.findAll().subscribe(
       (res) => {
         const tNodes = res.map( dto => new ThorNode(dto));
+        this.updateMapLocations(tNodes);
 
         this.activeNodes = tNodes
           .filter( (node) => node.status === NodeStatus.ACTIVE )
