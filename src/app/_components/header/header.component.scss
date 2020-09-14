@@ -11,6 +11,10 @@ header {
   margin-bottom: 15px;
   position: relative;
 
+  .net-status {
+    color: var(--toolbar-text-color);
+  }
+
   //Theme button
 
   .icon-style {
@@ -103,13 +107,16 @@ header {
 
   .optimal {
     color: green;
+    filter: brightness(150%);
   }
 
   .warning {
     color: orange;
+    filter: brightness(150%);
   }
 
   .alert {
     color: red;
+    filter: brightness(150%);
   }
 }
