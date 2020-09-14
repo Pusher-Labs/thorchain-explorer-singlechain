@@ -36,6 +36,7 @@ export class MapComponent implements OnInit {
   }
 
   getChartOpts(): any {
+    const colors = this.data.map((d) => d.color || 'steelblue');
     return {
       type: 'bubbleMap',
       data: {
@@ -44,15 +45,17 @@ export class MapComponent implements OnInit {
           {
             outline: this.countries,
             showOutline: true,
-            backgroundColor: 'steelblue',
+            backgroundColor: colors,
             outlineBorderColor:
-            this.theme === ThemeMode.DARK ? 'white' : 'rgba(0,0,0,0.1)',
+              this.theme === ThemeMode.DARK ? 'white' : 'rgba(0,0,0,0.1)',
             data: this.data,
+            radius: 4,
           },
         ],
       },
       options: {
-        responsive: false,
+        responsive: true,
+        maintainAspectRatio: false,
         legend: {
           display: false,
         },

@@ -57,13 +57,29 @@ export class NodesComponent implements OnInit, OnDestroy {
 
   updateMapLocations(nodes: ThorNode[]): void {
     this.mapData = nodes.map(node => {
-      return {
+      const result = {
         name: node.location.country_name,
-        description: node.location.country_name,
+        description: `${node.location.ip}: (${node.status}) ${node.location.country_name}`,
         latitude: node.location.latitude,
         longitude: node.location.longitude,
         value: 1,
+        color: 'steelblue'
       };
+      switch (node.status){
+        case NodeStatus.ACTIVE:
+          result.color = 'green';
+          break;
+        case NodeStatus.STANDBY:
+          result.color = 'blue';
+          break;
+        case NodeStatus.DISABLED:
+          result.color = 'gray';
+          break;
+        case NodeStatus.JAILED:
+          result.color = 'red';
+          break;
+      }
+      return result;
     });
   }
 
