@@ -69,12 +69,7 @@ table {
   }
 
   th {
-    background: var(--background-dashboard);
-    position: sticky; 
-    position: -webkit-sticky; 
-    top: 0;
     border-top: 0;
-    z-index: 100;
   }
 
   tbody {
