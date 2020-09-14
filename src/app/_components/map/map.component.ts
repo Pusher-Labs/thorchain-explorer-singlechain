@@ -14,14 +14,14 @@ import {
 })
 export class MapComponent implements OnInit {
   @Input() data = [];
-  countries = [];
+  outline = [];
   chart: Chart;
   theme: string;
 
   constructor(uiService: UiStyleToggleService) {
-    this.countries = pluginGeo.topojson.feature(
+    this.outline = pluginGeo.topojson.feature(
       topoData,
-      topoData.objects.countries
+      topoData.objects.land
     ).features;
 
     const theme$ = uiService.theme$.subscribe((theme) => {
@@ -43,13 +43,14 @@ export class MapComponent implements OnInit {
         labels: this.data.map((d) => d.description),
         datasets: [
           {
-            outline: this.countries,
+            outline: this.outline,
             showOutline: true,
             backgroundColor: colors,
+            outlineBackgroundColor: '#2f7ebc',
             outlineBorderColor:
-              this.theme === ThemeMode.DARK ? 'white' : 'rgba(0,0,0,0.1)',
+              this.theme === ThemeMode.DARK ? 'white' : 'rgba(0,0,0,0.4)',
             data: this.data,
-            radius: 4,
+            radius: 7,
           },
         ],
       },

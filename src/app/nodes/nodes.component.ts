@@ -67,7 +67,7 @@ export class NodesComponent implements OnInit, OnDestroy {
       };
       switch (node.status){
         case NodeStatus.ACTIVE:
-          result.color = 'green';
+          result.color = 'yellow';
           break;
         case NodeStatus.STANDBY:
           result.color = 'blue';
