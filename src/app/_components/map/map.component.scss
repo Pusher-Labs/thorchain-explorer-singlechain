@@ -1,0 +1,12 @@
+.map-container {
+  margin-top: 20px;
+  background-color: var(--background-dashboard);
+  border-radius: 5px;
+  overflow: auto;
+
+
+  h4 {
+    text-align: center;
+    color: var(--toolbar-text-color);
+  }
+}

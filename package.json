@@ -27,6 +27,7 @@
     "@thorchain/asgardex-binance": "^2.0.0",
     "@thorchain/asgardex-midgard": "^0.1.0",
     "chart.js": "^2.9.3",
+    "chartjs-chart-geo": "^2.1.0",
     "chartjs-plugin-annotation": "^0.5.7",
     "ng2-charts": "^2.4.0",
     "rxjs": "~6.6.2",
