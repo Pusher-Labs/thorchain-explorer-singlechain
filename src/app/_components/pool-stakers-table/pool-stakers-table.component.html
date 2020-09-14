@@ -22,7 +22,7 @@
   </select>
 </div> -->
 
-<table >
+<table *ngIf="sortedStakers">
     <thead>
         <tr>
             <th>Rune Address</th>
@@ -36,7 +36,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngIf="!sortedStakers || sortedStakers.length === 0">
+        <tr *ngIf="sortedStakers.length === 0">
           <td colspan="8" class="text-align--center">
             <span style="display:inline-block; padding: 15px;">No data found!</span>
           </td>
@@ -74,3 +74,4 @@
         </tr>
     </tbody>
 </table>
+<span *ngIf="!sortedStakers">...</span>

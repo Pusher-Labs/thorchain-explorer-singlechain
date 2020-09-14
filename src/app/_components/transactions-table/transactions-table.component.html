@@ -1,4 +1,4 @@
-<table>
+<table *ngIf="transactions">
   <thead>
     <tr>
       <th>Type</th>
@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngIf="!transactions || transactions.length === 0">
+    <tr *ngIf="transactions.length === 0">
       <td colspan="5" class="text-align--center">
         <span style="display:inline-block; padding: 15px;">No data found!</span>
       </td>
@@ -59,3 +59,5 @@
     </tr>
   </tbody>
 </table>
+
+<span *ngIf="!transactions">...</span>
