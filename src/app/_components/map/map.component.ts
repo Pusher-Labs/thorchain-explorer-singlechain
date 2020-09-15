@@ -28,9 +28,11 @@ export class MapComponent implements OnInit {
         name: `${item.ip} - ${item.country_name}`,
         latitude: item.latitude,
         longitude: item.longitude,
-        radius: 8,
+        radius: 5,
         fillKey: item.status,
         status: item.status,
+        fillOpacity: 1,
+        borderColor: 'white',
       };
     });
   }
@@ -46,10 +48,11 @@ export class MapComponent implements OnInit {
     return result;
   }
 
-  makeLi(country: string): string {
+  // Takes alpha3 code
+  makeLi(countryCode3: string): string {
     const cities = {};
     this.data
-      .filter((item) => item.country_name === country)
+      .filter((item) => getCountryCode(item.country_code) === countryCode3)
       .forEach((i) => {
         if (!cities[i.city]) {
           cities[i.city] = 0;
@@ -77,9 +80,9 @@ export class MapComponent implements OnInit {
         fills: {
           defaultFill: mapColor,
           countriesWithNode: 'var(--map-countries-color)',
-          active: 'white',
+          active: 'green',
           standby: 'blue',
-          disabled: 'gray',
+          disabled: 'black',
           jailed: 'red',
         },
         data: this.makeDataset(),
@@ -101,7 +104,7 @@ export class MapComponent implements OnInit {
                 geo.properties.name
               }</span>
               <ul style='margin-top: 5px;'>
-              ${this.makeLi(geo.properties.name)}
+              ${this.makeLi(geo.id)}
               </ul>
             </div>
             `;
