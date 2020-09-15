@@ -31,7 +31,8 @@
       </svg>
     </div>
 
-    <div id="network-status-container">Network Status:
+    <div id="network-status-container">
+      <span class="net-status">Network Status:  </span>
       <span *ngIf="networkSecurityStatus" id="network-status">
         <fa-icon class="optimal" *ngIf="networkSecurityStatus == 'Optimal'" [icon]="optimalIcon"></fa-icon>
         <fa-icon class="warning"
