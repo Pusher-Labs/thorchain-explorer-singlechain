@@ -63,7 +63,9 @@ export class NodesComponent implements OnInit, OnDestroy {
         latitude: node.location.latitude,
         longitude: node.location.longitude,
         value: 1,
-        color: 'steelblue'
+        status: node.status,
+        color: 'steelblue',
+        ...node.location,
       };
       switch (node.status){
         case NodeStatus.ACTIVE:
