@@ -44,12 +44,11 @@ span {
 
 table {
   text-align: left;
-  position: relative;
   border-collapse: collapse;
   background-color: var(--background-dashboard);
   width: 100%;
   border-radius: 5px;
-  overflow: visible;
+  overflow: auto;
 
   th, td {
     padding: 5px 10px;
@@ -94,10 +93,6 @@ table {
   }
 
 }
-
-// @media (max-width: 768px) {
-//   table th {}
-// }
 
 .pieChart {
   display: block;
