@@ -28,9 +28,11 @@ export class MapComponent implements OnInit {
         name: `${item.ip} - ${item.country_name}`,
         latitude: item.latitude,
         longitude: item.longitude,
-        radius: 8,
+        radius: 5,
         fillKey: item.status,
         status: item.status,
+        fillOpacity: 1,
+        borderColor: 'white',
       };
     });
   }
@@ -40,16 +42,22 @@ export class MapComponent implements OnInit {
 
     this.data.forEach((item) => {
       const countryCode = getCountryCode(item.country_code);
-      result[countryCode] = { fillKey: 'countriesWithNode', fillColor: 'blue' };
+      result[countryCode] = {
+        latitude: item.latitude,
+        longitude: item.longitude,
+        fillKey: 'countriesWithNode',
+        fillColor: 'blue',
+      };
     });
 
     return result;
   }
 
-  makeLi(country: string): string {
+  // Takes alpha3 code
+  makeLi(countryCode3: string): string {
     const cities = {};
     this.data
-      .filter((item) => item.country_name === country)
+      .filter((item) => getCountryCode(item.country_code) === countryCode3)
       .forEach((i) => {
         if (!cities[i.city]) {
           cities[i.city] = 0;
@@ -77,9 +85,9 @@ export class MapComponent implements OnInit {
         fills: {
           defaultFill: mapColor,
           countriesWithNode: 'var(--map-countries-color)',
-          active: 'white',
+          active: 'green',
           standby: 'blue',
-          disabled: 'gray',
+          disabled: 'black',
           jailed: 'red',
         },
         data: this.makeDataset(),
@@ -95,13 +103,29 @@ export class MapComponent implements OnInit {
             if (!d) {
               return;
             }
+
+            // Fix for overflowing on hover at the edge
+            let popupStyle = 'position: absolute;';
+            if (d.latitude > 50){
+              popupStyle += 'top: 0;';
+            }
+            if (d.latitude < -50){
+              popupStyle += 'bottom: 0;';
+            }
+            if (d.longitude > 100){
+              popupStyle += 'right: 0;';
+            }
+            if (d.longitude < -100){
+              popupStyle += 'left: 0;';
+            }
+
             return `
-            <div class='hoverinfo' style='width: 200px; padding: 0 0 5px 0; background-color: whitesmoke; border-radius: 5px; box-shadow: none;'>
+            <div class='hoverinfo' style='${popupStyle} width: 200px; padding: 0 0 5px 0; background-color: whitesmoke; border-radius: 5px; box-shadow: none;'>
               <span style='line-height: 1; padding: 5px 0px; color: black; font-size: 1.5rem; display:block; text-align: center; border-bottom: 1px solid lightgray;'>${
                 geo.properties.name
               }</span>
               <ul style='margin-top: 5px;'>
-              ${this.makeLi(geo.properties.name)}
+              ${this.makeLi(geo.id)}
               </ul>
             </div>
             `;
