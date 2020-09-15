@@ -109,7 +109,7 @@ export class MapComponent implements OnInit {
             if (d.latitude > 50){
               popupStyle += 'top: 0;';
             }
-            if (d.latitude < -50){
+            if (d.latitude < -10){
               popupStyle += 'bottom: 0;';
             }
             if (d.longitude > 100){
