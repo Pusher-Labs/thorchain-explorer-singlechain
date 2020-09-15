@@ -28,6 +28,8 @@ export class MapComponent implements OnInit {
         name: `${item.ip} - ${item.country_name}`,
         latitude: item.latitude,
         longitude: item.longitude,
+        city: item.city,
+        countryCode: item.country_code,
         radius: 5,
         fillKey: item.status,
         status: item.status,
@@ -75,6 +77,25 @@ export class MapComponent implements OnInit {
       .join('\n');
   }
 
+  makePopupStyle(point: any): string {
+    // Fix for overflowing on hover at the edge
+    let popupStyle = 'position: absolute;';
+    if (point.latitude > 50) {
+      popupStyle += 'top: 0;';
+    }
+    if (point.latitude < -10) {
+      popupStyle += 'bottom: 0;';
+    }
+    if (point.longitude > 100) {
+      popupStyle += 'right: 0;';
+    }
+    if (point.longitude < -100) {
+      popupStyle += 'left: 0;';
+    }
+
+    return popupStyle;
+  }
+
   updateChart(): void {
     const element = document.getElementById('map');
     const mapColor = 'var(--map-fill-color)';
@@ -104,23 +125,10 @@ export class MapComponent implements OnInit {
               return;
             }
 
-            // Fix for overflowing on hover at the edge
-            let popupStyle = 'position: absolute;';
-            if (d.latitude > 50){
-              popupStyle += 'top: 0;';
-            }
-            if (d.latitude < -10){
-              popupStyle += 'bottom: 0;';
-            }
-            if (d.longitude > 100){
-              popupStyle += 'right: 0;';
-            }
-            if (d.longitude < -100){
-              popupStyle += 'left: 0;';
-            }
+            const popupStyle = this.makePopupStyle(d);
 
             return `
-            <div class='hoverinfo' style='${popupStyle} width: 200px; padding: 0 0 5px 0; background-color: whitesmoke; border-radius: 5px; box-shadow: none;'>
+            <div class="hoverinfo" style='${popupStyle} width: 200px; padding: 0 0 5px 0; background-color: whitesmoke; border-radius: 5px; box-shadow: none;'>
               <span style='line-height: 1; padding: 5px 0px; color: black; font-size: 1.5rem; display:block; text-align: center; border-bottom: 1px solid lightgray;'>${
                 geo.properties.name
               }</span>
@@ -135,7 +143,17 @@ export class MapComponent implements OnInit {
       const bubbles = this.makeBubbles();
       this.map.bubbles(bubbles, {
         popupTemplate: (geo, data) => {
-          return '<div class="hoverinfo">' + `${data.name} (${data.status})`;
+          let count = 0;
+          this.data.forEach((item) => {
+            if (item.city === data.city && item.country_code === data.countryCode) {
+              count++;
+            }
+          });
+          return `<div class="hoverinfo" style='${this.makePopupStyle(
+            data
+          )} border-radius: 4px; padding: 5px; display:flex; justify-content: space-between; min-width: 150px;'><span>${
+            data.city
+          }</span><span>(${count}) </span></div>`;
         },
       });
     }
