@@ -9,4 +9,17 @@
     text-align: center;
     color: var(--toolbar-text-color);
   }
+
+  .map {
+    position: relative;
+    width: auto;
+    height: 550px;
+  }
+
+  @media
+  only screen and (max-width: 767px) {
+    .map {
+      height: 250px;
+    }
+  }
 }
