@@ -42,7 +42,12 @@ export class MapComponent implements OnInit {
 
     this.data.forEach((item) => {
       const countryCode = getCountryCode(item.country_code);
-      result[countryCode] = { fillKey: 'countriesWithNode', fillColor: 'blue' };
+      result[countryCode] = {
+        latitude: item.latitude,
+        longitude: item.longitude,
+        fillKey: 'countriesWithNode',
+        fillColor: 'blue',
+      };
     });
 
     return result;
@@ -98,8 +103,24 @@ export class MapComponent implements OnInit {
             if (!d) {
               return;
             }
+
+            // Fix for overflowing on hover at the edge
+            let popupStyle = 'position: absolute;';
+            if (d.latitude > 50){
+              popupStyle += 'top: 0;';
+            }
+            if (d.latitude < -50){
+              popupStyle += 'bottom: 0;';
+            }
+            if (d.longitude > 100){
+              popupStyle += 'right: 0;';
+            }
+            if (d.longitude < -100){
+              popupStyle += 'left: 0;';
+            }
+
             return `
-            <div class='hoverinfo' style='width: 200px; padding: 0 0 5px 0; background-color: whitesmoke; border-radius: 5px; box-shadow: none;'>
+            <div class='hoverinfo' style='${popupStyle} width: 200px; padding: 0 0 5px 0; background-color: whitesmoke; border-radius: 5px; box-shadow: none;'>
               <span style='line-height: 1; padding: 5px 0px; color: black; font-size: 1.5rem; display:block; text-align: center; border-bottom: 1px solid lightgray;'>${
                 geo.properties.name
               }</span>
