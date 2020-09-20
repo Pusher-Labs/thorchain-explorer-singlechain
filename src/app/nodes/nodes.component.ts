@@ -104,6 +104,7 @@ export class NodesComponent implements OnInit, OnDestroy {
         this.standbyNodes = tNodes
           .filter( (node) => node.status === NodeStatus.STANDBY || node.status === NodeStatus.READY)
           .map( (node) => this.updateStatusIfJailed(node) );
+        this.standbyNodes.sort((a, b) => (+b.bond > +a.bond ? 1 : -1));
 
         this.disabledNodes = tNodes
           .filter( (node) => node.status === NodeStatus.DISABLED )
