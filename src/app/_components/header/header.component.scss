@@ -107,16 +107,16 @@ header {
 
   .optimal {
     color: green;
-    filter: brightness(150%);
+    filter: var(--bright-mode);
   }
 
   .warning {
     color: orange;
-    filter: brightness(150%);
+    filter: var(--bright-mode);
   }
 
   .alert {
     color: red;
-    filter: brightness(150%);
+    filter: var(--bright-mode);
   }
 }

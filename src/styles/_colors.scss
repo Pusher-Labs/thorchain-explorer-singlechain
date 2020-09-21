@@ -36,6 +36,9 @@ $border-bottom-color-dark: #232323;
 $hover-color-light: whitesmoke;
 $hover-color-dark: rgba(255,255,255, 0.3);
 
+$bright-light-mode: brightness(100%);
+$bright-dark-mode: brightness(150%);
+
 $colors: (
   --background-color: ($background-color-light, $background-color-dark),
   --toolbar-text-color: ($text-color, $text-color-dark),
@@ -49,4 +52,5 @@ $colors: (
   --border-bottom-color: ($border-bottom-color-light, $border-bottom-color-dark),
   --map-fill-color: ($map-fill-color-light, $map-fill-color-dark),
   --map-countries-color: ($map-countries-color-light, $map-countries-color-dark),
+  --bright-mode: ($bright-light-mode, $bright-dark-mode),
 )
