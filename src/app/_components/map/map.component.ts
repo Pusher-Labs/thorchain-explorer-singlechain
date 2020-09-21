@@ -151,9 +151,10 @@ export class MapComponent implements OnInit {
           });
           return `<div class="hoverinfo" style='${this.makePopupStyle(
             data
-          )} border-radius: 4px; padding: 5px; display:flex; justify-content: space-between; min-width: 150px;'><span>${
-            data.city
-          }</span><span>(${count}) </span></div>`;
+          )} border-radius: 4px; padding: 5px; display:flex; justify-content: space-between; min-width: 150px;'>
+              <span style="color: black;">${data.city}</span>
+              <span style="color: black;">(${count}) </span>
+            </div>`;
         },
       });
     }
