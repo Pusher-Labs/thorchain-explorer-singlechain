@@ -38,12 +38,8 @@ export class PoolDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const route$ = this.route.parent.paramMap.subscribe( async (params) => {
-
       this.poolName = params.get('pool');
-      console.log('this pool name is: ', this.poolName);
-
       this.fetchData();
-
     });
     this.subs.push(route$);
   }
@@ -65,7 +61,6 @@ export class PoolDetailsComponent implements OnInit, OnDestroy {
 
   fetchData() {
     if (this.poolName) {
-      console.log('fetch data called with pool name: ', this.poolName);
       this.poolDetail = null;
       this.error = false;
       this.getPoolDetails();

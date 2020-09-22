@@ -31,7 +31,7 @@
     "chartjs-plugin-annotation": "^0.5.7",
     "datamaps": "^0.5.9",
     "ng2-charts": "^2.4.0",
-    "rxjs": "~6.6.2",
+    "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
