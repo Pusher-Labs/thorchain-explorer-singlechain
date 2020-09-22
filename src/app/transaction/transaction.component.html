@@ -42,7 +42,7 @@
         <td>Withdraw Basis Points</td>
         <td>{{transaction.options.withdrawBasisPoints}}</td>
       </tr>
-      <tr ngIf="transaction.events && transaction.events.stakeUnits && transaction.type == 'stake'">
+      <tr *ngIf="transaction.events && transaction.events.stakeUnits && transaction.type == 'stake'">
         <td>Stake Units</td>
         <td>{{transaction.events.stakeUnits | assetUnits:8 | number:'1.0-0'}}</td>
       </tr>

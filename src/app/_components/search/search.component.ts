@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Params, Router, ActivatedRoute } from '@angular/router';
+import { Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -10,29 +10,28 @@ export class SearchComponent implements OnInit {
 
   searchString: string;
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
   search() {
 
-    console.log('search hit!: ', this.searchString);
+    const isAddress = this.searchString.substr(0, 4) === 'tbnb'
+      || this.searchString.substr(0, 3) === 'bnb'
+      || this.searchString.substr(0, 4) === 'thor';
 
-    let queryParams: Params;
+    const route = (isAddress)
+      ? ['/', 'addresses', this.searchString]
+      : ['/', 'txs'];
 
-    if (this.searchString.substr(0, 4) === 'tbnb' || this.searchString.substr(0, 4) === 'thor' ) {
-      queryParams = { offset: String(0), address: this.searchString };
-    } else {
-      queryParams = { offset: String(0), txid: this.searchString };
-    }
-
-    console.log('query params are: ', queryParams);
+    const queryParams: Params = (isAddress)
+      ? { offset: String(0) }
+      : { offset: String(0), txid: this.searchString };
 
     this.router.navigate(
-      ['/', 'txs'],
+      route,
       {
-        // relativeTo: this.route,
         queryParams,
         queryParamsHandling: 'merge', // remove to replace all query params by provided
       }
