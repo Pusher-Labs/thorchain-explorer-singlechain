@@ -1,6 +1,5 @@
 <div *ngIf="assetPool" class="asset-logo">
   <a class="flxr" [routerLink]="['/', 'pools', assetPool]">
-    <img *ngIf="isKnownAsset" [src]="assetImgPath" />
-    <span class="unknown-asset-name" *ngIf="!isKnownAsset">{{asset}}</span>
+    <img  [src]="asset.iconPath" [alt]="asset.symbol"/>
   </a>
 </div>
