@@ -25,6 +25,10 @@
             <td>Pool Staked Total</td>
             <td>{{poolDetail.poolStakedTotal | assetUnits:8 | number:'1.0-2'}}</td>
           </tr>
+          <tr *ngIf="poolDetail.poolEarned">
+            <td>Pool Earned</td>
+            <td>{{poolDetail.poolEarned | assetUnits:8 | number:'1.0-2'}}</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -52,6 +56,10 @@
             <td>Asset Staked Total</td>
             <td>{{poolDetail.assetStakedTotal | assetUnits:8 | number:'1.0-2'}}</td>
           </tr>
+          <tr *ngIf="poolDetail.assetEarned">
+            <td>Pool Earned</td>
+            <td>{{poolDetail.assetEarned | assetUnits:8 | number:'1.0-2'}}</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -78,6 +86,10 @@
           <tr>
             <td>Rune Staked Total</td>
             <td>{{poolDetail.runeStakedTotal | assetUnits:8 | number:'1.0-2'}}</td>
+          </tr>
+          <tr *ngIf="poolDetail.runeEarned">
+            <td>Pool Earned</td>
+            <td>{{poolDetail.runeEarned | assetUnits:8 | number:'1.0-2'}}</td>
           </tr>
         </tbody>
       </table>
