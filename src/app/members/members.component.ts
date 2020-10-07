@@ -4,13 +4,13 @@ import { ThorchainNetworkService } from '../_services/thorchain-network.service'
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-stakers',
-  templateUrl: './stakers.component.html',
-  styleUrls: ['./stakers.component.scss']
+  selector: 'app-members',
+  templateUrl: './members.component.html',
+  styleUrls: ['./members.component.scss']
 })
 export class StakersComponent implements OnInit, OnDestroy {
 
-  stakers: string[];
+  members: string[];
   subs: Subscription[];
   error: string;
 
@@ -29,14 +29,14 @@ export class StakersComponent implements OnInit, OnDestroy {
   }
 
   getStakers(): void {
-    this.stakers = null;
+    this.members = null;
     this.error = null;
 
     this.stakerService.findAll().subscribe(
-      (res) => this.stakers = res,
+      (res) => this.members = res,
       (err) => {
-        console.error('error fetching stakers: ', err);
-        this.error = 'Could not fetch stakers';
+        console.error('error fetching members: ', err);
+        this.error = 'Could not fetch members';
       }
     );
   }

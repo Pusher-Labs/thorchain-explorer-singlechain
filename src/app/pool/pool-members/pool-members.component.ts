@@ -6,13 +6,13 @@ import { Subscription } from 'rxjs';
 import { ThorchainNetworkService } from 'src/app/_services/thorchain-network.service';
 
 @Component({
-  selector: 'app-pool-stakers',
-  templateUrl: './pool-stakers.component.html',
-  styleUrls: ['./pool-stakers.component.scss']
+  selector: 'app-pool-members',
+  templateUrl: './pool-members.component.html',
+  styleUrls: ['./pool-members.component.scss']
 })
 export class PoolStakersComponent implements OnInit, OnDestroy {
 
-  stakers: PoolStaker[];
+  members: PoolStaker[];
   totalCount: number;
   poolName: string;
   subs: Subscription[];
@@ -26,7 +26,7 @@ export class PoolStakersComponent implements OnInit, OnDestroy {
       const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
         (_) => {
 
-          this.stakers = null;
+          this.members = null;
           this.getAssetStakers();
 
         }
@@ -52,7 +52,7 @@ export class PoolStakersComponent implements OnInit, OnDestroy {
     this.poolStakerService.findAll(this.poolName).subscribe(
       (res) => {
           if (res){
-              this.stakers = res;
+              this.members = res;
               this.error = false;
           }else{
               // Because on 404 issues the api returns null

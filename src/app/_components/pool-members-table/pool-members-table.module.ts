@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PoolStakersTableComponent } from './pool-stakers-table.component';
+import { PoolStakersTableComponent } from './pool-members-table.component';
 import { RouterModule } from '@angular/router';
 import { PipesModule } from '../../_pipes/pipes.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';

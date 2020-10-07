@@ -1,12 +1,12 @@
-<div class="staker-summary mobile-padding" *ngIf="stakers">
+<div class="staker-summary mobile-padding" *ngIf="members">
 
   <div>
-    <span>Total Stakers: {{stakers.length}}</span>
+    <span>Total Liquidity Providers: {{members.length}}</span>
     <br />
-    <span *ngIf="totalStaked">Total Units Staked: {{totalStaked | number:"0.0-0"}}</span>
+    <span *ngIf="totalStaked">Total Liquidity Units: {{totalStaked | number:"0.0-0"}}</span>
   </div>
 
-  <div class="pieChart" *ngIf="this.pieChartData !== undefined && this.stakers !== undefined">
+  <div class="pieChart" *ngIf="this.pieChartData !== undefined && this.members !== undefined">
     <canvas baseChart width="250" height="250" [datasets]="pieChartData" [labels]="pieChartLabels"
         [options]="pieChartOptions" [legend]="pieChartLegend" [chartType]="pieChartType"
         [plugins]="pieChartPlugins">
@@ -28,8 +28,8 @@
             <th>Rune Address</th>
             <th>Asset Address</th>
             <th>Units</th>
-            <th>Last Stake</th>
-            <th>Last UnStake</th>
+            <th>Last Deposit</th>
+            <th>Last Withdraw</th>
             <th>Pending Rune</th>
             <th>Pending TX Id</th>
             <th>Ownership (%)</th>

@@ -143,7 +143,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
         this.totalCount = res.count;
       },
       (err) => {
-        console.error('error fetching stakers: ', err);
+        console.error('error fetching members: ', err);
         this.error = 'Error Connecting to THORChain';
       }
     );

@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { PoolComponent } from './pool.component';
 import { TransactionsTableModule } from '../_components/transactions-table/transactions-table.module';
-import { PoolStakersTableModule } from '../_components/pool-stakers-table/pool-stakers-table.module';
+import { PoolStakersTableModule } from '../_components/pool-members-table/pool-members-table.module';
 import { PoolTxsComponent } from './pool-txs/pool-txs.component';
-import { PoolStakersComponent } from './pool-stakers/pool-stakers.component';
+import { PoolStakersComponent } from './pool-members/pool-members.component';
 import { PoolDetailsComponent } from './pool-details/pool-details.component';
 import { PipesModule } from '../_pipes/pipes.module';
 import { LoadingModule } from '../_components/loading/loading.module';
@@ -39,10 +39,10 @@ import { ErrorModule } from '../_components/error/error.module';
             }
           },
           {
-            path: 'stakers',
+            path: 'members',
             component: PoolStakersComponent,
             data: {
-                breadcrumb: 'Stakers'
+                breadcrumb: 'Members'
             }
           }
         ]

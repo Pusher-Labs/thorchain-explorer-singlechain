@@ -44,7 +44,7 @@
       </td>
     </tr>
     <tr>
-      <td>Total Staked</td>
+      <td>Total Pooled</td>
       <td>
         {{stats.totalStaked | number:"0.0-2"}}
         <span *ngIf="currentRate">(${{stats.totalStaked * currentRate | number:"0.0-2"}})</span>
@@ -78,7 +78,7 @@
       <td>{{stats.totalAssetSells | number}}</td>
     </tr>
     <tr>
-      <td>Total Stake Tx</td>
+      <td>Total Deposit Tx</td>
       <td>{{stats.totalStakeTx | number}}</td>
     </tr>
     <tr>

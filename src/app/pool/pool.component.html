@@ -6,7 +6,7 @@
   <nav>
     <a  [routerLink]="['/', 'pools', asset.asset]" [routerLinkActive]="['nav-active']" [routerLinkActiveOptions]="{ exact: true }">Details</a>
     <a  [routerLink]="['/', 'pools', asset.asset, 'txs']" [queryParams]="{offset: '0'}" [routerLinkActive]="['nav-active']" [routerLinkActiveOptions]="{ exact: true }">Transactions</a>
-    <a  [routerLink]="['/', 'pools', asset.asset, 'stakers']" [routerLinkActive]="['nav-active']" [routerLinkActiveOptions]="{ exact: true }">Stakers</a>
+    <a  [routerLink]="['/', 'pools', asset.asset, 'members']" [routerLinkActive]="['nav-active']" [routerLinkActiveOptions]="{ exact: true }">Members</a>
   </nav>
   <br />
   <span>Price: {{asset.priceRune}}</span> <br />

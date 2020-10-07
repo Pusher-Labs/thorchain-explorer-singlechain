@@ -96,7 +96,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.transactions = res.txs;
       },
       (err) => {
-        console.error('error fetching stakers: ', err);
+        console.error('error fetching members: ', err);
         this.error = `Error Connecting to THORChain ${this.thorchainNetworkService.network}`;
       }
     );

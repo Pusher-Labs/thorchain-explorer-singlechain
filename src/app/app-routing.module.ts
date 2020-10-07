@@ -42,7 +42,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'stakers',
+    path: 'members',
     children: [
       {
         path: ':address',
@@ -50,11 +50,11 @@ const routes: Routes = [
       },
       {
         path: '',
-        loadChildren: () => import('./stakers/stakers.module').then(m => m.StakersModule),
+        loadChildren: () => import('./members/members.module').then(m => m.StakersModule),
       }
     ],
     data: {
-        breadcrumb: 'Stakers'
+        breadcrumb: 'Members'
     }
   },
   {

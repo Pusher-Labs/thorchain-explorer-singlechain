@@ -7,13 +7,13 @@ import { UiStyleToggleService, ThemeMode } from 'src/app/_services/ui-style-togg
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-pool-stakers-table',
-  templateUrl: './pool-stakers-table.component.html',
-  styleUrls: ['./pool-stakers-table.component.scss']
+  selector: 'app-pool-members-table',
+  templateUrl: './pool-members-table.component.html',
+  styleUrls: ['./pool-members-table.component.scss']
 })
 export class PoolStakersTableComponent implements OnInit, OnDestroy {
 
-  @Input() stakers: PoolStaker[] = [];
+  @Input() members: PoolStaker[] = [];
   sortedStakers: PoolStaker[] = [];
   selectedSortOption = 'Default';
   sortOptions = [
@@ -52,7 +52,7 @@ export class PoolStakersTableComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.updateOwnershipPercent();
-    this.sortedStakers = [...this.stakers];
+    this.sortedStakers = [...this.members];
     this.sortStakers();
 
 
@@ -79,7 +79,7 @@ export class PoolStakersTableComponent implements OnInit, OnDestroy {
   }
 
   resetSort(): void {
-    this.sortedStakers = [...this.stakers];
+    this.sortedStakers = [...this.members];
   }
 
   sortStakers(): void {
@@ -92,12 +92,12 @@ export class PoolStakersTableComponent implements OnInit, OnDestroy {
 
   updateOwnershipPercent(): void {
     this.sumStaked = 0;
-    this.stakers.map(item => this.sumStaked += (+item.units / (10 ** 8)));
+    this.members.map(item => this.sumStaked += (+item.units / (10 ** 8)));
 
-    this.stakers.forEach((item) => {
+    this.members.forEach((item) => {
       this.ownership[item.asset_address] = +item.units / 10 ** 8 / this.sumStaked;
     });
-    if (this.stakers !== undefined) {
+    if (this.members !== undefined) {
       this.getDefaultData();
     }
   }
@@ -129,16 +129,16 @@ export class PoolStakersTableComponent implements OnInit, OnDestroy {
 
   getDefaultData(): void {
     this.num = 0;
-    this.stakers.map(item => this.num += (+item.units / (10 ** 8)));
+    this.members.map(item => this.num += (+item.units / (10 ** 8)));
 
-    this.totalStaked = this.stakers.reduce( (total, staker) => {
+    this.totalStaked = this.members.reduce( (total, staker) => {
       return total + Number(staker.units) / (10 ** 8);
     }, 0);
 
     this.pieChartData = [
-      { data: this.stakers.map(val => (((+val.units / (10 ** 8))) * 100) / this.num), label: 'totalPool', fill: true }
+      { data: this.members.map(val => (((+val.units / (10 ** 8))) * 100) / this.num), label: 'totalPool', fill: true }
     ];
-    this.pieChartLabels = this.stakers.map((value) => value.asset_address.substring(0, 12) + '...');
+    this.pieChartLabels = this.members.map((value) => value.asset_address.substring(0, 12) + '...');
   }
 
   ngOnDestroy() {

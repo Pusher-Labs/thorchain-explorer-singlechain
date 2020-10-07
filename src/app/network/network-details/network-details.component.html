@@ -32,7 +32,7 @@
           <td *ngIf="!dailyBondReward"> - </td>
         </tr>
         <tr>
-          <td>Stake Reward</td>
+          <td>Pool Reward</td>
           <td *ngIf="dailyStakeReward">
             {{ dailyStakeReward | number:"0.0-2"}}
             <span *ngIf="currentRate">(${{dailyStakeReward * currentRate | number:"0.0-2"}})</span>

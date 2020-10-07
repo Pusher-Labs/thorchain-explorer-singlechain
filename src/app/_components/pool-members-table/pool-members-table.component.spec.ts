@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { PoolStakersTableComponent } from './pool-stakers-table.component';
+import { PoolStakersTableComponent } from './pool-members-table.component';
 
 describe('PoolStakersTableComponent', () => {
   let component: PoolStakersTableComponent;
