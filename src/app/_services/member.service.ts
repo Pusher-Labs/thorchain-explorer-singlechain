@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { StakerDTO } from '../_classes/staker';
+import { MemberDTO } from '../_classes/member';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { StakerPoolData } from '../_classes/staker-pool-data';
+import { MemberPoolData } from '../_classes/member-pool-data';
 import { environment } from '../../environments/environment';
 import { ThorchainNetworkService } from './thorchain-network.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class StakerService {
+export class MemberService {
 
   constructor(private http: HttpClient, private thorchainNetworkService: ThorchainNetworkService) { }
 
@@ -19,17 +19,17 @@ export class StakerService {
 
   }
 
-  findOne(address: string): Observable<StakerDTO> {
+  findOne(address: string): Observable<MemberDTO> {
 
-    return this.http.get<StakerDTO>(`${this.thorchainNetworkService.midgardBasePath}/v1/stakers/${address}`);
+    return this.http.get<MemberDTO>(`${this.thorchainNetworkService.midgardBasePath}/v1/stakers/${address}`);
 
   }
 
-  findStakerPoolData(stakerAddress: string, pools: string[]): Observable<StakerPoolData[]> {
+  findMemberPoolData(memberAddress: string, pools: string[]): Observable<MemberPoolData[]> {
 
     const params = new HttpParams().set('asset', pools.join(','));
 
-    return this.http.get<StakerPoolData[]>(`${this.thorchainNetworkService.midgardBasePath}/v1/stakers/${stakerAddress}/pools`, {params});
+    return this.http.get<MemberPoolData[]>(`${this.thorchainNetworkService.midgardBasePath}/v1/stakers/${memberAddress}/pools`, {params});
 
   }
 

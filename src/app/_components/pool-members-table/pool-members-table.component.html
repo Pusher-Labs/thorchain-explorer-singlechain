@@ -1,0 +1,77 @@
+<div class="member-summary mobile-padding" *ngIf="members">
+
+  <div>
+    <span>Total Pool Members: {{members.length}}</span>
+    <br />
+    <span *ngIf="totalStaked">Total Pool Units: {{totalStaked | number:"0.0-0"}}</span>
+  </div>
+
+  <div class="pieChart" *ngIf="this.pieChartData !== undefined && this.members !== undefined">
+    <canvas baseChart width="250" height="250" [datasets]="pieChartData" [labels]="pieChartLabels"
+        [options]="pieChartOptions" [legend]="pieChartLegend" [chartType]="pieChartType"
+        [plugins]="pieChartPlugins">
+    </canvas>
+  </div>
+
+</div>
+
+<!-- <div class="pool-member-sort flxr flxr--just-end" name="sel2">
+  <label>Sort:</label>
+  <select class="pool-member-sort--select" [ngModel]="selectedSortOption" (change)="onSortChange($event.target.value)">
+    <option [value]="i" *ngFor="let i of sortOptions">{{i}}</option>
+  </select>
+</div> -->
+
+<table *ngIf="sortedMembers">
+    <thead>
+        <tr>
+            <th>Rune Address</th>
+            <th>Asset Address</th>
+            <th>Units</th>
+            <th>Last Deposit</th>
+            <th>Last Withdraw</th>
+            <th>Pending Rune</th>
+            <th>Pending TX Id</th>
+            <th>Ownership (%)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="sortedMembers.length === 0">
+          <td colspan="8" class="text-align--center">
+            <span style="display:inline-block; padding: 15px;">No data found!</span>
+          </td>
+        </tr>
+
+        <tr *ngFor="let member of sortedMembers">
+            <td>
+                <a [routerLink]="['/', 'addresses', member.rune_address]" title="Rune Address">
+                    <b>{{member.rune_address.substring(0,8)}}...</b>
+                </a>
+            </td>
+            <td>
+                <a [routerLink]="['/', 'addresses', member.asset_address]" title="Asset Address">
+                    <b>{{member.asset_address.substring(0,8)}}...</b>
+                </a>
+            </td>
+            <td>
+                {{member.units | assetUnits:8 | number:"1.0-2" }}
+            </td>
+            <td>
+                {{member.last_deposit}}
+            </td>
+            <td>
+                {{member.last_withdraw}}
+            </td>
+            <td>
+                {{member.pending_rune}}
+            </td>
+            <td>
+                <div *ngIf="member.pending_tx_id">{{ member.pending_tx_id.substring(0,8) }}...</div>
+            </td>
+            <td >
+              {{ ownership[member.asset_address] | percent:'1.0-2' }}
+            </td>
+        </tr>
+    </tbody>
+</table>
+<span *ngIf="!sortedMembers">...</span>

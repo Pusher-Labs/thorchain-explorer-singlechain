@@ -1,27 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Staker } from '../_classes/staker';
-import { StakerService } from '../_services/staker.service';
-import { StakerPoolData } from '../_classes/staker-pool-data';
+import { Member } from '../_classes/member';
+import { MemberService } from '../_services/member.service';
+import { MemberPoolData } from '../_classes/member-pool-data';
 import { ThorchainNetworkService } from '../_services/thorchain-network.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-staker',
-  templateUrl: './staker.component.html',
-  styleUrls: ['./staker.component.scss']
+  selector: 'app-member',
+  templateUrl: './member.component.html',
+  styleUrls: ['./member.component.scss']
 })
-export class StakerComponent implements OnInit {
+export class MemberComponent implements OnInit {
 
-  staker: Staker;
+  member: Member;
   address: string;
-  stakerPoolsData: StakerPoolData[];
+  memberPoolsData: MemberPoolData[];
   subs: Subscription[];
   error: string;
 
   constructor(
     private route: ActivatedRoute,
-    private stakerService: StakerService,
+    private memberService: MemberService,
     private thorchainNetworkService: ThorchainNetworkService) {
       const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
         (_) => {
@@ -49,22 +49,22 @@ export class StakerComponent implements OnInit {
   }
 
   fetchStaker(address: string) {
-    this.staker = null;
+    this.member = null;
     this.error = null;
 
-    this.stakerService.findOne(address).subscribe(
+    this.memberService.findOne(address).subscribe(
       (res) => {
-        this.staker = new Staker(res);
-        if (this.staker && this.staker.poolsArray) {
-          console.log('this staker pools array is: ', this.staker.poolsArray);
-          this.fetchPoolsData(address, this.staker.poolsArray);
+        this.member = new Member(res);
+        if (this.member && this.member.poolsArray) {
+          console.log('this member pools array is: ', this.member.poolsArray);
+          this.fetchPoolsData(address, this.member.poolsArray);
         } else {
-          this.error = 'Could not find staker pools';
+          this.error = 'Could not find member pools';
         }
       },
       (err) => {
-        console.error('error finding staker: ', err);
-        this.error = 'Error fetching staker';
+        console.error('error finding member: ', err);
+        this.error = 'Error fetching member';
       }
     );
 
@@ -72,10 +72,10 @@ export class StakerComponent implements OnInit {
 
   fetchPoolsData(address: string, pools: string[]) {
 
-    this.stakerService.findStakerPoolData(address, pools).subscribe(
-      (res) => this.stakerPoolsData = res,
+    this.memberService.findMemberPoolData(address, pools).subscribe(
+      (res) => this.memberPoolsData = res,
       (err) => {
-        console.error('error finding staker: ', err);
+        console.error('error finding member: ', err);
         this.error = 'Error fetching pools data';
       }
     );

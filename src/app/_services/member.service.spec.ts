@@ -1,15 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { PoolStakerService } from './pool-staker.service';
+import { MemberService } from './member.service';
 
-describe('PoolStakerService', () => {
-  let service: PoolStakerService;
+describe('MemberService', () => {
+  let service: MemberService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ HttpClientTestingModule ]
     });
-    service = TestBed.inject(PoolStakerService);
+    service = TestBed.inject(MemberService);
   });
 
   it('should be created', () => {

@@ -1,10 +1,10 @@
-export class Staker {
+export class Member {
   poolsArray: string[];
   totalEarned: number;
   totalStaked: number;
   totalROI: number;
 
-  constructor(dto: StakerDTO) {
+  constructor(dto: MemberDTO) {
     this.poolsArray = dto.poolsArray;
     this.totalEarned = +dto.totalEarned;
     this.totalStaked = +dto.totalStaked;
@@ -13,7 +13,7 @@ export class Staker {
 
 }
 
-export interface StakerDTO {
+export interface MemberDTO {
   poolsArray: string[];
   totalEarned: string;
   totalStaked: string;

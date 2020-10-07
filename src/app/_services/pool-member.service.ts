@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { PoolStaker } from '../_classes/pool-staker';
+import { PoolMember } from '../_classes/pool-member';
 import { ThorchainNetworkService, THORChainNetwork } from './thorchain-network.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PoolStakerService {
+export class PoolMemberService {
 
   constructor(private http: HttpClient, private thorchainNetworkService: ThorchainNetworkService) { }
 
-  findAll(asset: string): Observable<PoolStaker[]> {
+  findAll(asset: string): Observable<PoolMember[]> {
 
     let params = new HttpParams();
 
@@ -19,6 +19,6 @@ export class PoolStakerService {
       params = params.set('network', THORChainNetwork.TESTNET);
     }
 
-    return this.http.get<PoolStaker[]>(`${this.thorchainNetworkService.nodeBasePath}/thorchain/pool/${asset}/stakers`, {params});
+    return this.http.get<PoolMember[]>(`${this.thorchainNetworkService.nodeBasePath}/thorchain/pool/${asset}/stakers`, {params});
   }
 }

@@ -24,7 +24,7 @@ import { LocalStorageService } from './_services/local-storage.service';
 import { NetworkService } from './_services/network.service';
 import { NodeService } from './_services/node.service';
 import { PoolService } from './_services/pool.service';
-import { StakerService } from './_services/staker.service';
+import { MemberService } from './_services/member.service';
 import { StatsService } from './_services/stats.service';
 import { TransactionService } from './_services/transaction.service';
 import { UiStyleToggleService } from './_services/ui-style-toggle.service';
@@ -70,7 +70,7 @@ export function themeFactory(themeService: UiStyleToggleService) {
     NodeService,
     LastBlockService,
     PoolService,
-    StakerService,
+    MemberService,
     StatsService,
     TransactionService,
     VersionService,

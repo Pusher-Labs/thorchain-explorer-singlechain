@@ -1,0 +1,15 @@
+<h1 class="mobile-padding">Members</h1>
+
+<table *ngIf="members" class="shadow">
+  <tbody>
+    <tr *ngFor="let member of members">
+      <td>
+        <a [routerLink]="['/', 'members', member]">{{member}}</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<app-loading *ngIf="!members && !error"></app-loading>
+
+<app-error *ngIf="error" [message]="error"></app-error>

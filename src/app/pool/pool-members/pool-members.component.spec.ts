@@ -1,17 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { PoolStakersComponent } from './pool-stakers.component';
+import { PoolMembersComponent } from './pool-members.component';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 
-describe('PoolStakersComponent', () => {
-  let component: PoolStakersComponent;
-  let fixture: ComponentFixture<PoolStakersComponent>;
+describe('PoolMembersComponent', () => {
+  let component: PoolMembersComponent;
+  let fixture: ComponentFixture<PoolMembersComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PoolStakersComponent ],
+      declarations: [ PoolMembersComponent ],
       imports: [ RouterTestingModule, HttpClientTestingModule ],
       providers: [
         {
@@ -28,7 +28,7 @@ describe('PoolStakersComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PoolStakersComponent);
+    fixture = TestBed.createComponent(PoolMembersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
