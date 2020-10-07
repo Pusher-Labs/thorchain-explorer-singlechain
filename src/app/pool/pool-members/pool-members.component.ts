@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PoolStaker } from 'src/app/_classes/pool-staker';
+import { PoolMember } from 'src/app/_classes/pool-member';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { PoolStakerService } from 'src/app/_services/pool-staker.service';
+import { PoolMemberService } from 'src/app/_services/pool-member.service';
 import { Subscription } from 'rxjs';
 import { ThorchainNetworkService } from 'src/app/_services/thorchain-network.service';
 
@@ -10,9 +10,9 @@ import { ThorchainNetworkService } from 'src/app/_services/thorchain-network.ser
   templateUrl: './pool-members.component.html',
   styleUrls: ['./pool-members.component.scss']
 })
-export class PoolStakersComponent implements OnInit, OnDestroy {
+export class PoolMembersComponent implements OnInit, OnDestroy {
 
-  members: PoolStaker[];
+  members: PoolMember[];
   totalCount: number;
   poolName: string;
   subs: Subscription[];
@@ -20,14 +20,14 @@ export class PoolStakersComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private poolStakerService: PoolStakerService,
+    private poolMemberService: PoolMemberService,
     private router: Router,
     private thorchainNetworkService: ThorchainNetworkService) {
       const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
         (_) => {
 
           this.members = null;
-          this.getAssetStakers();
+          this.getPoolMembers();
 
         }
       );
@@ -40,16 +40,16 @@ export class PoolStakersComponent implements OnInit, OnDestroy {
 
     const params$ = this.route.parent.paramMap.subscribe( async (params) => {
       this.poolName = params.get('pool');
-      this.getAssetStakers();
+      this.getPoolMembers();
     });
 
     this.subs.push(params$);
 
   }
 
-  async getAssetStakers() {
+  async getPoolMembers() {
     this.error = false;
-    this.poolStakerService.findAll(this.poolName).subscribe(
+    this.poolMemberService.findAll(this.poolName).subscribe(
       (res) => {
           if (res){
               this.members = res;

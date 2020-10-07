@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { PoolStaker } from 'src/app/_classes/pool-staker';
+import { PoolMember } from 'src/app/_classes/pool-member';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
@@ -11,10 +11,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './pool-members-table.component.html',
   styleUrls: ['./pool-members-table.component.scss']
 })
-export class PoolStakersTableComponent implements OnInit, OnDestroy {
+export class PoolMembersTableComponent implements OnInit, OnDestroy {
 
-  @Input() members: PoolStaker[] = [];
-  sortedStakers: PoolStaker[] = [];
+  @Input() members: PoolMember[] = [];
+  sortedMembers: PoolMember[] = [];
   selectedSortOption = 'Default';
   sortOptions = [
     'Default',
@@ -52,13 +52,13 @@ export class PoolStakersTableComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.updateOwnershipPercent();
-    this.sortedStakers = [...this.members];
-    this.sortStakers();
+    this.sortedMembers = [...this.members];
+    this.sortMembers();
 
 
     // Preserve user config for sort
     try{
-      const result = localStorage.getItem(`pool-staker-sort`);
+      const result = localStorage.getItem(`pool-member-sort`);
       if (result !== null){
         this.onSortChange(result);
       }
@@ -68,10 +68,10 @@ export class PoolStakersTableComponent implements OnInit, OnDestroy {
   onSortChange(value: string): void {
     this.selectedSortOption = value;
 
-    localStorage.setItem(`pool-staker-sort`, value);
+    localStorage.setItem(`pool-member-sort`, value);
 
     if (this.selectedSortOption === 'Ownership Desc') {
-      this.sortStakers();
+      this.sortMembers();
     }else{
       this.resetSort();
     }
@@ -79,11 +79,11 @@ export class PoolStakersTableComponent implements OnInit, OnDestroy {
   }
 
   resetSort(): void {
-    this.sortedStakers = [...this.members];
+    this.sortedMembers = [...this.members];
   }
 
-  sortStakers(): void {
-    this.sortedStakers.sort((a, b) => {
+  sortMembers(): void {
+    this.sortedMembers.sort((a, b) => {
       // Sorting by units is same as sort by percentage
       // percentage is derived from units
       return +a.units < +b.units ? 1 : -1;
@@ -131,8 +131,8 @@ export class PoolStakersTableComponent implements OnInit, OnDestroy {
     this.num = 0;
     this.members.map(item => this.num += (+item.units / (10 ** 8)));
 
-    this.totalStaked = this.members.reduce( (total, staker) => {
-      return total + Number(staker.units) / (10 ** 8);
+    this.totalStaked = this.members.reduce( (total, member) => {
+      return total + Number(member.units) / (10 ** 8);
     }, 0);
 
     this.pieChartData = [

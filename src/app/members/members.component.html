@@ -2,9 +2,9 @@
 
 <table *ngIf="members" class="shadow">
   <tbody>
-    <tr *ngFor="let staker of members">
+    <tr *ngFor="let member of members">
       <td>
-        <a [routerLink]="['/', 'members', staker]">{{staker}}</a>
+        <a [routerLink]="['/', 'members', member]">{{member}}</a>
       </td>
     </tr>
   </tbody>

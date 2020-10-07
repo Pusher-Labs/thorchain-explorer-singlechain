@@ -1,9 +1,9 @@
-<div class="staker-summary mobile-padding" *ngIf="members">
+<div class="member-summary mobile-padding" *ngIf="members">
 
   <div>
-    <span>Total Liquidity Providers: {{members.length}}</span>
+    <span>Total Pool Members: {{members.length}}</span>
     <br />
-    <span *ngIf="totalStaked">Total Liquidity Units: {{totalStaked | number:"0.0-0"}}</span>
+    <span *ngIf="totalStaked">Total Pool Units: {{totalStaked | number:"0.0-0"}}</span>
   </div>
 
   <div class="pieChart" *ngIf="this.pieChartData !== undefined && this.members !== undefined">
@@ -15,14 +15,14 @@
 
 </div>
 
-<!-- <div class="pool-staker-sort flxr flxr--just-end" name="sel2">
+<!-- <div class="pool-member-sort flxr flxr--just-end" name="sel2">
   <label>Sort:</label>
-  <select class="pool-staker-sort--select" [ngModel]="selectedSortOption" (change)="onSortChange($event.target.value)">
+  <select class="pool-member-sort--select" [ngModel]="selectedSortOption" (change)="onSortChange($event.target.value)">
     <option [value]="i" *ngFor="let i of sortOptions">{{i}}</option>
   </select>
 </div> -->
 
-<table *ngIf="sortedStakers">
+<table *ngIf="sortedMembers">
     <thead>
         <tr>
             <th>Rune Address</th>
@@ -36,42 +36,42 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngIf="sortedStakers.length === 0">
+        <tr *ngIf="sortedMembers.length === 0">
           <td colspan="8" class="text-align--center">
             <span style="display:inline-block; padding: 15px;">No data found!</span>
           </td>
         </tr>
 
-        <tr *ngFor="let staker of sortedStakers">
+        <tr *ngFor="let member of sortedMembers">
             <td>
-                <a [routerLink]="['/', 'addresses', staker.rune_address]" title="Rune Address">
-                    <b>{{staker.rune_address.substring(0,8)}}...</b>
+                <a [routerLink]="['/', 'addresses', member.rune_address]" title="Rune Address">
+                    <b>{{member.rune_address.substring(0,8)}}...</b>
                 </a>
             </td>
             <td>
-                <a [routerLink]="['/', 'addresses', staker.asset_address]" title="Asset Address">
-                    <b>{{staker.asset_address.substring(0,8)}}...</b>
+                <a [routerLink]="['/', 'addresses', member.asset_address]" title="Asset Address">
+                    <b>{{member.asset_address.substring(0,8)}}...</b>
                 </a>
             </td>
             <td>
-                {{staker.units | assetUnits:8 | number:"1.0-2" }}
+                {{member.units | assetUnits:8 | number:"1.0-2" }}
             </td>
             <td>
-                {{staker.last_stake}}
+                {{member.last_deposit}}
             </td>
             <td>
-                {{staker.last_unstake}}
+                {{member.last_withdraw}}
             </td>
             <td>
-                {{staker.pending_rune}}
+                {{member.pending_rune}}
             </td>
             <td>
-                <div *ngIf="staker.pending_tx_id">{{ staker.pending_tx_id.substring(0,8) }}...</div>
+                <div *ngIf="member.pending_tx_id">{{ member.pending_tx_id.substring(0,8) }}...</div>
             </td>
             <td >
-              {{ ownership[staker.asset_address] | percent:'1.0-2' }}
+              {{ ownership[member.asset_address] | percent:'1.0-2' }}
             </td>
         </tr>
     </tbody>
 </table>
-<span *ngIf="!sortedStakers">...</span>
+<span *ngIf="!sortedMembers">...</span>

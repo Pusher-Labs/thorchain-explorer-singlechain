@@ -46,11 +46,11 @@ const routes: Routes = [
     children: [
       {
         path: ':address',
-        loadChildren: () => import('./staker/staker.module').then(m => m.StakerModule),
+        loadChildren: () => import('./member/member.module').then(m => m.StakerModule),
       },
       {
         path: '',
-        loadChildren: () => import('./members/members.module').then(m => m.StakersModule),
+        loadChildren: () => import('./members/members.module').then(m => m.MembersModule),
       }
     ],
     data: {

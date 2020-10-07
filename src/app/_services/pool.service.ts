@@ -35,10 +35,10 @@ export interface PoolDetail {
   buyAssetCount: string;
   swappingTxCount: string;
   swappersCount: string;
-  stakeTxCount: string;
+  depositTxCount: string;
   withdrawTxCount: string;
-  stakingTxCount: string;
-  stakersCount: string;
+  liquidityTxCount: string;
+  membersCount: string;
   assetROI: string;
   runeROI: string;
   poolROI: string;

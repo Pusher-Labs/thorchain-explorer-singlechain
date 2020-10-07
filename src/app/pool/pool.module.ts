@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { PoolComponent } from './pool.component';
 import { TransactionsTableModule } from '../_components/transactions-table/transactions-table.module';
-import { PoolStakersTableModule } from '../_components/pool-members-table/pool-members-table.module';
+import { PoolMembersTableModule } from '../_components/pool-members-table/pool-members-table.module';
 import { PoolTxsComponent } from './pool-txs/pool-txs.component';
-import { PoolStakersComponent } from './pool-members/pool-members.component';
+import { PoolMembersComponent } from './pool-members/pool-members.component';
 import { PoolDetailsComponent } from './pool-details/pool-details.component';
 import { PipesModule } from '../_pipes/pipes.module';
 import { LoadingModule } from '../_components/loading/loading.module';
@@ -13,12 +13,12 @@ import { AssetLogoModule } from '../_components/asset-logo/asset-logo.module';
 import { ErrorModule } from '../_components/error/error.module';
 
 @NgModule({
-  declarations: [PoolComponent, PoolTxsComponent, PoolDetailsComponent, PoolStakersComponent],
+  declarations: [PoolComponent, PoolTxsComponent, PoolDetailsComponent, PoolMembersComponent],
   imports: [
     CommonModule,
     PipesModule,
     TransactionsTableModule,
-    PoolStakersTableModule,
+    PoolMembersTableModule,
     LoadingModule,
     AssetLogoModule,
     ErrorModule,
@@ -40,7 +40,7 @@ import { ErrorModule } from '../_components/error/error.module';
           },
           {
             path: 'members',
-            component: PoolStakersComponent,
+            component: PoolMembersComponent,
             data: {
                 breadcrumb: 'Members'
             }
