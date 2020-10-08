@@ -1,6 +1,6 @@
 export class MemberPoolData {
     asset: string;
-    liquidityUnits: string;
-    dateFirstDeposited: number;
-    heightLastDeposited: number;
+    units: string;
+    dateFirstStaked: number; // will change to dateFirstDeposited
+    heightLastStaked: number; // will change to heightLastDeposited
 }
