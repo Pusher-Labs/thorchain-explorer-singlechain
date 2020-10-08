@@ -43,9 +43,9 @@
     <tbody>
       <tr *ngFor="let pool of memberPoolsData">
         <td><a [routerLink]="['/', 'pools', pool.asset]">{{pool.asset}}</a></td>
-        <td>{{pool.dateFirstDeposited * 1000 | date:'short'}}</td>
-        <td>{{pool.heightLastDeposited}}</td>
-        <td>{{pool.liquidityUnits | assetUnits:8 | number}}</td>
+        <td>{{pool.dateFirstStaked * 1000 | date:'short'}}</td>
+        <td>{{pool.heightLastStaked}}</td>
+        <td>{{pool.units | assetUnits:8 | number}}</td>
       </tr>
     </tbody>
   </table>
