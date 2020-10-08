@@ -26,7 +26,7 @@ export class MemberComponent implements OnInit {
       const network$ = this.thorchainNetworkService.networkUpdated$.subscribe(
         (_) => {
           if (this.address) {
-            this.fetchStaker(this.address);
+            this.fetchMember(this.address);
           }
         }
       );
@@ -41,14 +41,14 @@ export class MemberComponent implements OnInit {
       this.address = params.get('address');
 
       if (this.address) {
-        this.fetchStaker(this.address);
+        this.fetchMember(this.address);
       }
 
     });
 
   }
 
-  fetchStaker(address: string) {
+  fetchMember(address: string) {
     this.member = null;
     this.error = null;
 
@@ -58,8 +58,6 @@ export class MemberComponent implements OnInit {
         if (this.member && this.member.poolsArray) {
           console.log('this member pools array is: ', this.member.poolsArray);
           this.fetchPoolsData(address, this.member.poolsArray);
-        } else {
-          this.error = 'Could not find member pools';
         }
       },
       (err) => {
