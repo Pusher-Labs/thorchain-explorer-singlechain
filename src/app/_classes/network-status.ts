@@ -46,7 +46,7 @@ export class BondMetrics extends FormattableAsset {
 export interface BlockRewards {
   blockReward: string;
   bondReward: string;
-  poolReward: string;
+  stakeReward: string;
 }
 
 class NetworkStatusBase extends FormattableAsset {
