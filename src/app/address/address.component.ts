@@ -93,7 +93,7 @@ export class AddressComponent implements OnInit, OnDestroy {
         }
       },
       (err) => {
-        console.error('error fetching stakers: ', err);
+        console.error('error fetching members: ', err);
         this.error = 'Something went wrong fetching address transactions';
       }
     );

@@ -1,21 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { PoolStakersTableComponent } from './pool-stakers-table.component';
+import { PoolMembersTableComponent } from './pool-members-table.component';
 
-describe('PoolStakersTableComponent', () => {
-  let component: PoolStakersTableComponent;
-  let fixture: ComponentFixture<PoolStakersTableComponent>;
+describe('PoolMembersTableComponent', () => {
+  let component: PoolMembersTableComponent;
+  let fixture: ComponentFixture<PoolMembersTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PoolStakersTableComponent ],
+      declarations: [ PoolMembersTableComponent ],
       imports: [ HttpClientTestingModule ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PoolStakersTableComponent);
+    fixture = TestBed.createComponent(PoolMembersTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

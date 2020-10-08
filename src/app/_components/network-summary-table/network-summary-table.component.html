@@ -6,7 +6,7 @@
   </thead>
   <tbody>
     <tr>
-      <td>Total Staked</td>
+      <td>Total Pooled</td>
       <td>
         {{ network.totalStaked | number:'1.0-0' }}
         <span *ngIf="currentRate">(${{network.totalStaked * currentRate | number:'1.0-0'}})</span>
@@ -57,12 +57,12 @@
       <td>{{network.poolActivationCountdown}}</td>
     </tr>
     <tr>
-      <td>Bonding ROI</td>
+      <td>Node APY</td>
       <td *ngIf="isFinite(network.bondingROI)">{{network.bondingROI | percent:'1.0-2'}}</td>
       <td *ngIf="!isFinite(network.bondingROI)">{{network.bondingROI}}</td>
     </tr>
     <tr>
-      <td>Staking ROI</td>
+      <td>Pool APY</td>
       <td>{{network.stakingROI | percent:'1.0-2'}}</td>
     </tr>
     <tr>

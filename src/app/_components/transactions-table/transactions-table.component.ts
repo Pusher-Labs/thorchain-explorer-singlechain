@@ -10,8 +10,8 @@ import { IconDefinition, faExchangeAlt, faLevelDownAlt, faLevelUpAlt, faUndoAlt,
 export class TransactionsTableComponent implements OnInit {
 
   swapIcon: IconDefinition;
-  stakeIcon: IconDefinition;
-  unStakeIcon: IconDefinition;
+  depositIcon: IconDefinition;
+  withdrawIcon: IconDefinition;
   refundIcon: IconDefinition;
   addIcon: IconDefinition;
   timesIcon: IconDefinition;
@@ -20,8 +20,8 @@ export class TransactionsTableComponent implements OnInit {
 
   constructor() {
     this.swapIcon = faExchangeAlt;
-    this.stakeIcon = faLevelDownAlt;
-    this.unStakeIcon = faLevelUpAlt;
+    this.depositIcon = faLevelDownAlt;
+    this.withdrawIcon = faLevelUpAlt;
     this.refundIcon = faUndoAlt;
     this.addIcon = faPlus;
     this.timesIcon = faTimes;

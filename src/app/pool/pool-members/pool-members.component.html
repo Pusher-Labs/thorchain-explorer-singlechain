@@ -1,0 +1,7 @@
+<div *ngIf="members">
+  <app-pool-members-table [members]="members"></app-pool-members-table>
+</div>
+
+<app-loading *ngIf="!members && !error"></app-loading>
+
+<app-error *ngIf="error" message="Pool Members Not Found"></app-error>

@@ -1,0 +1,59 @@
+<h1 *ngIf="address" class="mobile-padding break-word">Member: {{address}}</h1>
+
+<div *ngIf="member && memberPoolsData && !error">
+
+  <table *ngIf="member" class="shadow margin-bottom">
+    <thead>
+      <tr>
+        <th colspan="2" class="text-align--center">Member Info</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td>Total Earned</td>
+        <td>{{member.totalEarned}}</td>
+      </tr>
+
+      <tr>
+        <td>Total Pooled</td>
+        <td>{{member.totalStaked}}</td>
+      </tr>
+
+      <tr>
+        <td>Total ROI</td>
+        <td>{{member.totalROI}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <table *ngIf="memberPoolsData" class="shadow">
+    <thead>
+      <tr>
+        <th colspan="4" class="text-align--center">Pool Member</th>
+      </tr>
+      <tr>
+        <th>Asset</th>
+        <th>Date First Deposited</th>
+        <th>Height Last Deposited</th>
+        <th>Liquidity Units</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pool of memberPoolsData">
+        <td><a [routerLink]="['/', 'pools', pool.asset]">{{pool.asset}}</a></td>
+        <td>{{pool.dateFirstDeposited * 1000 | date:'short'}}</td>
+        <td>{{pool.heightLastDeposited}}</td>
+        <td>{{pool.liquidityUnits | assetUnits:8 | number}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<app-loading *ngIf="!member || !memberPoolsData"></app-loading>
+
+<app-error *ngIf="error" [message]="error"></app-error>
+
+
