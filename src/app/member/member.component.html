@@ -1,6 +1,6 @@
 <h1 *ngIf="address" class="mobile-padding break-word">Member: {{address}}</h1>
 
-<div *ngIf="member && memberPoolsData && !error">
+<div *ngIf="member && !error">
 
   <table *ngIf="member" class="shadow margin-bottom">
     <thead>
@@ -52,7 +52,7 @@
 
 </div>
 
-<app-loading *ngIf="!member || !memberPoolsData"></app-loading>
+<app-loading *ngIf="!member"></app-loading>
 
 <app-error *ngIf="error" [message]="error"></app-error>
 
