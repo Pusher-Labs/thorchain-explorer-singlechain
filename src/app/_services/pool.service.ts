@@ -43,6 +43,9 @@ export interface PoolDetail {
   runeROI: string;
   poolROI: string;
   poolROI12: string;
+  poolEarned: string;
+  assetEarned: string;
+  runeEarned: string;
 }
 
 @Injectable({
