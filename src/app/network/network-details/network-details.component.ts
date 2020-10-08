@@ -85,7 +85,7 @@ export class NetworkDetailsComponent implements OnInit, OnDestroy {
 
         this.dailyBlockReward = (+res.blockRewards.blockReward / 10 ** 8) * (blocksPerYear / 365);
         this.dailyBondReward = (+res.blockRewards.bondReward / 10 ** 8) * (blocksPerYear / 365);
-        this.dailyPoolReward = (+res.blockRewards.poolReward / 10 ** 8) * (blocksPerYear / 365);
+        this.dailyPoolReward = (+res.blockRewards.stakeReward / 10 ** 8) * (blocksPerYear / 365);
 
         this.monthlyNodeBondReward = (this.dailyBondReward * 30) / activeNodeCount;
 
