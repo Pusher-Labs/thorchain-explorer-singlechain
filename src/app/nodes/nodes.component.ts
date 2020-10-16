@@ -56,7 +56,11 @@ export class NodesComponent implements OnInit, OnDestroy {
   }
 
   updateMapLocations(nodes: ThorNode[]): void {
-    this.mapData = nodes.map(node => {
+    const mapItems = [];
+    nodes.forEach(node => {
+      if (!node.location) {
+        return;
+      }
       const result = {
         name: node.location.country_name,
         description: `${node.location.ip}: (${node.status}) ${node.location.country_name}`,
@@ -81,8 +85,9 @@ export class NodesComponent implements OnInit, OnDestroy {
           result.color = 'red';
           break;
       }
-      return result;
+      mapItems.push(result);
     });
+    this.mapData = mapItems;
   }
 
   getNodes(): void {
