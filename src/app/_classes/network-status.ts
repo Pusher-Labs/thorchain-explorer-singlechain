@@ -104,7 +104,7 @@ export class NetworkStatus extends NetworkStatusBase {
 
 
 
-    this.totalStaked = this.formatAssetUnits( (Number(networkDTO.totalStaked) * 2), 8);
+    this.totalStaked = this.formatAssetUnits(Number(networkDTO.totalStaked), 8);
     this.totalReserve = this.formatAssetUnits(Number(networkDTO.totalReserve), 8);
 
     this.activeNodeCount = networkDTO.activeNodeCount;
