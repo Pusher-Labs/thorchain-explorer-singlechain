@@ -48,7 +48,9 @@ export class GlobalStats extends FormattableAsset {
     this.totalTx = Number(dto.totalTx);
     this.totalVolume24hr = this.formatAssetUnits( Number(dto.totalVolume24hr), 8 );
     this.totalVolume = this.formatAssetUnits( Number(dto.totalVolume), 8 );
+    console.log('STAKED:'+dto.totalStaked)
     this.totalStaked = this.formatAssetUnits( Number(dto.totalStaked), 8 );
+    console.log('STAKED:'+this.totalStaked)
     this.totalDepth = this.formatAssetUnits( Number(dto.totalDepth), 8 );
     this.totalEarned = this.formatAssetUnits( Number(dto.totalEarned), 8 );
     this.poolCount = Number(dto.poolCount);
