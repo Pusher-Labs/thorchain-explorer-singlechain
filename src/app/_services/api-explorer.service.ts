@@ -92,12 +92,13 @@ export class ApiService {
   }
 
   callEndpoint(opts): Promise<any> {
-    let { path, method = 'GET' } = opts;
+    let { path } = opts;
+    const { method = 'GET' } = opts;
     if (!path) {
       return null;
     }
 
-    path = path.replace("/api-explorer", "")
+    path = path.replace('/api-explorer', '');
 
     return this.http.get(`${this.getRoot()}${path}`).toPromise();
   }

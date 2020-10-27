@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { ResponseLinksComponent } from './response-links.component';
 
@@ -8,7 +9,8 @@ describe('ResponseLinksComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ResponseLinksComponent ]
+      declarations: [ ResponseLinksComponent ],
+      imports: [ RouterTestingModule ]
     })
     .compileComponents();
   });

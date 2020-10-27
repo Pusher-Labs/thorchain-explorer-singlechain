@@ -139,7 +139,7 @@ export class ExplorerUiComponent implements OnInit, OnDestroy {
     e.preventDefault();
     const pathArr = [];
 
-    //Stakers have weird curly braces so should not be replaced.
+    // Stakers have weird curly braces so should not be replaced.
     if (!this.router.url.startsWith('/v1/stakers')) {
       let newUrl = this.router.url.split('?')[0];
 
@@ -164,7 +164,7 @@ export class ExplorerUiComponent implements OnInit, OnDestroy {
     if (!this.currentEndpoint) {
       return;
     }
-    let path = this.currentEndpoint.path.replace("/api-explorer", "");
+    let path = this.currentEndpoint.path.replace('/api-explorer', '');
     let hasQuery = false;
     const params = this.searchParamsFromUrl(this.router.url);
     this.currentEndpoint.params?.forEach((p) => {
