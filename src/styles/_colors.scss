@@ -22,6 +22,11 @@ $pin-btn-color-dark: #9e9e9e;
 $pin-btn-pinned-color-light: orange;
 $pin-btn-pinned-color-dark: orange;
 
+$btn-bg-color-light: blue;
+$btn-bg-color-dark: white;
+$btn-color-light: white;
+$btn-color-dark: blue;
+
 
 $map-fill-color-light: lightgray;
 $map-fill-color-dark: gray;
@@ -40,6 +45,8 @@ $bright-light-mode: brightness(100%);
 $bright-dark-mode: brightness(150%);
 
 $colors: (
+  --btn-bg-color: ($btn-bg-color-light, $btn-bg-color-dark),
+  --btn-color: ($btn-color-light, $btn-color-dark),
   --background-color: ($background-color-light, $background-color-dark),
   --toolbar-text-color: ($text-color, $text-color-dark),
   --hover-text-color: ($hover-color-light, $hover-color-dark),

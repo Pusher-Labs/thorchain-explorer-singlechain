@@ -12,6 +12,10 @@ import { HeaderComponent } from './_components/header/header.component';
 import { BreadcrumbComponent } from './_components/breadcrumb/breadcrumb.component';
 import { SearchComponent } from './_components/search/search.component';
 import { NetworkToggleComponent } from './_components/network-toggle/network-toggle.component';
+import { ExplorerComponent } from './explorer/explorer.component';
+import { ExplorerUiComponent } from './explorer-ui/explorer-ui.component';
+import { QueryInputComponent } from './query-input/query-input.component';
+import { ResponseLinksComponent } from './response-links/response-links.component';
 
 /**
  * Services
@@ -51,7 +55,11 @@ export function themeFactory(themeService: UiStyleToggleService) {
     SearchComponent,
     HeaderComponent,
     BreadcrumbComponent,
-    NetworkToggleComponent
+    NetworkToggleComponent,
+    ExplorerComponent,
+    ExplorerUiComponent,
+    QueryInputComponent,
+    ResponseLinksComponent,
   ],
   imports: [
     BrowserModule,

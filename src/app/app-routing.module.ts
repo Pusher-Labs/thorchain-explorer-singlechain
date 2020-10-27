@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ExplorerComponent } from './explorer/explorer.component';
 
 
 const routes: Routes = [
@@ -96,7 +97,30 @@ const routes: Routes = [
     data: {
         breadcrumb: 'Nodes'
     }
-  }
+  },
+  {
+    path: 'api-explorer',
+    children: [
+      {
+        path: '',
+        redirectTo: 'v1/health',
+        pathMatch: 'full',
+      },
+
+      // Override routes for custom paths
+      {
+        path: 'v1/stakers/:address',
+        component: ExplorerComponent,
+      },
+      {
+        path: '**',
+        component: ExplorerComponent,
+      },
+    ],
+    data: {
+        breadcrumb: 'API Explorer'
+    }
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,23 @@
+<div *ngIf="param" class="query-input">
+  <label>{{ param.name + (param.required ? "*" : "") }} </label>
+
+  <select
+    [name]="param.name"
+    *ngIf="param.schema.enum"
+    (input)="handleChange($event)"
+  >
+    <option
+      *ngFor="let opt of param.schema.enum"
+      [selected]="opt === param.schema.default"
+    >
+      {{ opt }}
+    </option>
+  </select>
+  <input
+    (input)="handleChange($event)"
+    [type]="param.schema.type === 'integer' ? 'number' : 'text'"
+    [name]="param.name"
+    [value]="value"
+    [placeholder]="getPlaceholder()"
+  />
+</div>

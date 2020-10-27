@@ -1,0 +1,8 @@
+<ul>
+  <li *ngFor="let item of formattedResponse">
+    <a [routerLink]="item.routerLink" [queryParams]="item.queryParams">
+      <span>{{ item.label }}:</span>
+      <span>{{ item.prettyUrl }}</span>
+    </a>
+  </li>
+</ul>
