@@ -18,15 +18,10 @@ export class LastBlockService {
   constructor(private http: HttpClient, private thorchainNetworkService: ThorchainNetworkService) { }
 
   getLastBlock(): Observable<LastBlock> {
-
-    let params = new HttpParams();
-
-    if (this.thorchainNetworkService.network === THORChainNetwork.TESTNET) {
-      params = params.set('network', THORChainNetwork.TESTNET);
-    }
-
-    return this.http.get<LastBlock>(`${this.thorchainNetworkService.nodeBasePath}/thorchain/lastblock`, {params});
-
+    return this.http.get<LastBlock>(
+      `${this.thorchainNetworkService.nodeBasePath}/thorchain/lastblock`,
+      {params: this.thorchainNetworkService.nodeReqParams}
+    );
   }
 
 }

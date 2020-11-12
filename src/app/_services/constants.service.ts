@@ -62,14 +62,10 @@ export class ConstantsService {
   }
 
   getMimir(): Observable<StringDictionary> {
-
-    let params = new HttpParams();
-
-    if (this.thorchainNetworkService.network === THORChainNetwork.TESTNET) {
-      params = params.set('network', THORChainNetwork.TESTNET);
-    }
-
-    return this.http.get<StringDictionary>(`${this.thorchainNetworkService.nodeBasePath}/thorchain/mimir`, {params});
+    return this.http.get<StringDictionary>(
+      `${this.thorchainNetworkService.nodeBasePath}/thorchain/mimir`,
+      {params: this.thorchainNetworkService.nodeReqParams}
+    );
   }
 
 }

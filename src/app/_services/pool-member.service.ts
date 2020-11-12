@@ -12,13 +12,9 @@ export class PoolMemberService {
   constructor(private http: HttpClient, private thorchainNetworkService: ThorchainNetworkService) { }
 
   findAll(asset: string): Observable<PoolMember[]> {
-
-    let params = new HttpParams();
-
-    if (this.thorchainNetworkService.network === THORChainNetwork.TESTNET) {
-      params = params.set('network', THORChainNetwork.TESTNET);
-    }
-
-    return this.http.get<PoolMember[]>(`${this.thorchainNetworkService.nodeBasePath}/thorchain/pool/${asset}/stakers`, {params});
+    return this.http.get<PoolMember[]>(
+      `${this.thorchainNetworkService.nodeBasePath}/thorchain/pool/${asset}/stakers`,
+      {params: this.thorchainNetworkService.nodeReqParams}
+    );
   }
 }

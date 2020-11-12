@@ -8,25 +8,20 @@ import { ThorchainNetworkService, THORChainNetwork } from 'src/app/_services/tho
 })
 export class NetworkToggleComponent implements OnInit {
 
-  network: THORChainNetwork;
-  isTestnet: boolean;
+  set network(network: THORChainNetwork) {
+    this._network = network;
+    this.thorchainNetworkService.setNetwork(network);
+  }
+  get network() {
+    return this._network;
+  }
+  _network: THORChainNetwork;
 
   constructor(private thorchainNetworkService: ThorchainNetworkService) {
-    this.thorchainNetworkService.networkUpdated$.subscribe(
-      (network) => {
-        this.network = network;
-        this.isTestnet = (network === THORChainNetwork.TESTNET) ? true : false;
-      }
-    );
+    this.network = THORChainNetwork.CHAOSNET;
   }
 
   ngOnInit(): void {
-  }
-
-  toggleNetwork() {
-    const update = (this.network === THORChainNetwork.TESTNET) ? THORChainNetwork.CHAOSNET : THORChainNetwork.TESTNET;
-
-    this.thorchainNetworkService.setNetwork(update);
   }
 
 }
