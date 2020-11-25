@@ -19,7 +19,9 @@ export class SearchComponent implements OnInit {
 
     const isAddress = this.searchString.substr(0, 4) === 'tbnb'
       || this.searchString.substr(0, 3) === 'bnb'
-      || this.searchString.substr(0, 4) === 'thor';
+      || this.searchString.substr(0, 4) === 'thor'
+      || this.searchString.substr(0, 3) === 'tb1'
+      || this.searchString.substr(0, 3) === 'bc1';
 
     const route = (isAddress)
       ? ['/', 'addresses', this.searchString]
