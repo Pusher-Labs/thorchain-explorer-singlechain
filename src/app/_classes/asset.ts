@@ -22,6 +22,9 @@ export class Asset {
         case 'BNB.BNB':
           this.iconPath =  'assets/images/token-icons/bnb.png';
           break;
+        case 'BTC.BTC':
+          this.iconPath =  'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/binance/assets/BTCB-1DE/logo.png';
+          break;
         default:
           console.warn(`Icon not available for poolName ${poolName}. Add override in src\\app\\_classes\\asset.ts`);
           this.iconPath = 'assets/images/token-icons/unknown.png';
