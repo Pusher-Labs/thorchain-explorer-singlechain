@@ -21,9 +21,7 @@ export class ThorchainNetworkService {
   network: THORChainNetwork;
   nodeReqParams: HttpParams;
 
-  constructor() {
-    this.setNetwork(THORChainNetwork.CHAOSNET);
-  }
+  constructor() { }
 
   setNetwork(network: THORChainNetwork) {
 

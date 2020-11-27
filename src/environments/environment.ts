@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  midgardUrl: 'https://midgard.bepswap.com',
-  thorNodeUrl: 'http://195.248.242.140:1317'
+  network: 'MULTICHAIN_TESTNET'
 };
 
 /*
