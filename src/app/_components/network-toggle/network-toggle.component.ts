@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThorchainNetworkService, THORChainNetwork } from 'src/app/_services/thorchain-network.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-network-toggle',
@@ -19,6 +20,21 @@ export class NetworkToggleComponent implements OnInit {
 
   constructor(private thorchainNetworkService: ThorchainNetworkService) {
     this.network = THORChainNetwork.CHAOSNET;
+
+    switch (environment.network) {
+      case 'TESTNET':
+        this.network = THORChainNetwork.TESTNET;
+        break;
+
+      case 'MULTICHAIN_TESTNET':
+        this.network = THORChainNetwork.MULTICHAIN_TESTNET;
+        break;
+
+      default:
+        this.network = THORChainNetwork.CHAOSNET;
+        break;
+    }
+
   }
 
   ngOnInit(): void {
