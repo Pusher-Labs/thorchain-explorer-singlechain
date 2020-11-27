@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  network: 'CHAOSNET'
+  network: 'MULTICHAIN_TESTNET'
 };
