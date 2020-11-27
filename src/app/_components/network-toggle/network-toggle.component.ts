@@ -19,7 +19,6 @@ export class NetworkToggleComponent implements OnInit {
   _network: THORChainNetwork;
 
   constructor(private thorchainNetworkService: ThorchainNetworkService) {
-    this.network = THORChainNetwork.CHAOSNET;
 
     switch (environment.network) {
       case 'TESTNET':

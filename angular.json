@@ -165,6 +165,9 @@
           "configurations": {
             "production": {
               "browserTarget": "thorchain-explorer:build:production"
+            },
+            "multichain-testnet": {
+              "browserTarget": "thorchain-explorer:build:multichain-testnet"
             }
           }
         },
