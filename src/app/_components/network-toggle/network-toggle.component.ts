@@ -12,6 +12,7 @@ export class NetworkToggleComponent implements OnInit {
 
   set network(network: THORChainNetwork) {
     if (!this._network || this.network && this.network === network) {
+      console.log('setting network: ', network);
       this._network = network;
     } else {
       this.navigateToRoute(network);
@@ -46,16 +47,21 @@ export class NetworkToggleComponent implements OnInit {
 
   navigateToRoute(network: THORChainNetwork) {
 
+    console.log('navigate to route hit: ', network);
+
     switch (network) {
       case 'TESTNET':
+        console.log('TESTNET');
         this.document.location.href = 'https://testnet.thorchain.net/';
         break;
 
       case 'MULTICHAIN_TESTNET':
+        console.log('MULTICHAIN_TESTNET');
         this.document.location.href = 'https://multichain-testnet.thorchain.net/';
         break;
 
       default:
+        console.log('DEFAULT');
         this.document.location.href = 'https://thorchain.net/';
         break;
     }
