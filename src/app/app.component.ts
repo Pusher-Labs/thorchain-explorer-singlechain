@@ -26,7 +26,9 @@ export class AppComponent implements OnInit {
     this.mediumIcon = faMedium;
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.setNetwork();
+  }
 
   setNetwork() {
 

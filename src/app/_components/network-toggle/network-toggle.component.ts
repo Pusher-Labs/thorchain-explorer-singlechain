@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ThorchainNetworkService, THORChainNetwork } from 'src/app/_services/thorchain-network.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { THORChainNetwork } from 'src/app/_services/thorchain-network.service';
 import { environment } from 'src/environments/environment';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-network-toggle',
@@ -10,15 +11,19 @@ import { environment } from 'src/environments/environment';
 export class NetworkToggleComponent implements OnInit {
 
   set network(network: THORChainNetwork) {
-    this._network = network;
-    this.thorchainNetworkService.setNetwork(network);
+    if (!this._network || this.network && this.network === network) {
+      this._network = network;
+    } else {
+      this.navigateToRoute(network);
+    }
+
   }
   get network() {
     return this._network;
   }
   _network: THORChainNetwork;
 
-  constructor(private thorchainNetworkService: ThorchainNetworkService) {
+  constructor(@Inject(DOCUMENT) private document: Document) {
 
     switch (environment.network) {
       case 'TESTNET':
@@ -37,6 +42,23 @@ export class NetworkToggleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  navigateToRoute(network: THORChainNetwork) {
+
+    switch (network) {
+      case 'TESTNET':
+        this.document.location.href = 'https://testnet.thorchain.net/';
+        break;
+
+      case 'MULTICHAIN_TESTNET':
+        this.document.location.href = 'https://multichain-testnet.thorchain.net/';
+        break;
+
+      default:
+        this.document.location.href = 'https://thorchain.net/';
+        break;
+    }
   }
 
 }
