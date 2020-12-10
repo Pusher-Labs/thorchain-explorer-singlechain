@@ -43,8 +43,16 @@
         <td>{{transaction.options.withdrawBasisPoints}}</td>
       </tr>
       <tr *ngIf="transaction.events && transaction.events.fee">
-        <td>Outbound Fee</td>
+        <td>Liquidity Fee</td>
         <td>{{transaction.events.fee | assetUnits:8 | number:'1.0-0'}} RUNE</td>
+      </tr>
+      <tr *ngIf="transaction.type != 'stake'">
+        <td>Outbound Fee</td>
+        <td>1 RUNE</td>
+      </tr>
+      <tr *ngIf="transaction.type != 'stake'">
+        <td>Total Fee</td>
+        <td>{{+(transaction.events.fee | assetUnits:8 | number:'1.0-0') + 1}} RUNE</td>
       </tr>
       <tr *ngIf="transaction.events && transaction.events.slip">
         <td>Slip</td>
