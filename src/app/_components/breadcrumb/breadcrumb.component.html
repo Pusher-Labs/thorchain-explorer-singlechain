@@ -1,6 +1,6 @@
-<ol class="breadcrumb">
+<ol class="breadcrumb flex pb-2">
   <li *ngFor="let breadcrumb of breadcrumbs$ | async; last as isLast;"
-      [ngClass]="{'active': isLast}" class="text-gray-500 dark:text-yellow-600" aria-current="page">
+      [ngClass]="{'active': isLast}" class="text-gray-500 dark:text-yellow-600 px-1" aria-current="page">
     <a *ngIf="!isLast; else lastRoute"
        [routerLink]="[breadcrumb.url]"
        routerLinkActive="active"
