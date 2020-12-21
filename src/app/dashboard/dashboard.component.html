@@ -1,4 +1,4 @@
-<h1 class="mobile-padding">THORChain Explorer</h1>
+<h1 class="mobile-padding text-2xl font-bold font-mono py-4 dark:text-white">THORChain Explorer</h1>
 
 <app-loading *ngIf="(!network || !nodes || !transactions || !stats) && !error"></app-loading>
 
@@ -7,28 +7,29 @@
   <div class="grid">
 
     <!-- Network Status Summary -->
-    <div class="grid-item">
+    <app-content-item>
       <app-network-summary-table *ngIf="network" [network]="network" [currentRate]="currentRate"></app-network-summary-table>
-      <a *ngIf="network" [routerLink]="['/', 'network']" class="view-more">View Network</a>
-    </div>
+      <div class="text-right px-4 py-2 border-t border-gray-200 dark:border-gray-800">
+        <a *ngIf="network" [routerLink]="['/', 'network']" class="text-yellow-600 text-sm">View Network >></a>
+      </div>
+    </app-content-item>
 
 
     <!-- Volume -->
-    <div class="grid-item">
+    <app-content-item>
       <app-volume></app-volume>
-    </div>
+    </app-content-item>
 
     <!-- Daily Stats-->
-    <div class="grid-item">
+    <app-content-item>
       <app-stats-table *ngIf="stats" [stats]="stats"></app-stats-table>
-    </div>
-
+    </app-content-item>
 
     <!-- Nodes Summary -->
-    <div class="grid-item">
-      <table *ngIf="nodes">
+    <app-content-item>
+      <table class="border-collapse" *ngIf="nodes">
         <thead>
-          <tr><th colspan="3" class="text-align--center">Nodes</th></tr>
+          <tr><th colspan="3" class="text-center font-mono font-bold">Nodes</th></tr>
           <tr>
             <th>Address</th>
             <th>Status</th>
@@ -36,26 +37,35 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let node of nodes | slice:0:(nodes.length < 14) ? nodes.length : 14;">
-            <td>
+          <tr class="table-row" *ngFor="let node of nodes | slice:0:(nodes.length < 14) ? nodes.length : 14;">
+            <td class="table-item">
               <a [routerLink]="['/', 'nodes', node.nodeAddress]">{{node.nodeAddress.substring(0, 8)}}...{{node.nodeAddress.substring(node.nodeAddress.length - 4, node.nodeAddress.length)}}</a>
             </td>
-            <td>{{node.status}}</td>
-            <td>{{node.currentAward | assetUnits:8 | number}}</td>
+            <td class="table-item">{{node.status}}</td>
+            <td class="table-item">{{node.currentAward | assetUnits:8 | number}}</td>
           </tr>
         </tbody>
       </table>
-      <a *ngIf="nodes" [routerLink]="['/', 'nodes']" class="view-more">View All Nodes</a>
-    </div>
+
+      <div class="text-right px-4 py-2 border-t border-gray-200 dark:border-gray-800">
+        <a *ngIf="nodes" [routerLink]="['/', 'nodes']" class="text-yellow-600 text-sm">View All Nodes >></a>
+      </div>
+
+    </app-content-item>
 
   </div>
 
   <!-- Dash Transactions Summary-->
 
-  <div class="grid-item">
+  <app-content-item>
     <app-transactions-table [transactions]="transactions"></app-transactions-table>
-    <a [routerLink]="['/', 'txs']" [queryParams]="{offset: 0}" class="view-more">View More Transactions</a>
-  </div>
+
+    <div class="text-right px-4 py-2 border-t border-gray-200 dark:border-gray-800">
+      <a [routerLink]="['/', 'txs']" [queryParams]="{offset: 0}" class="text-yellow-600 text-sm">View More Transactions >></a>
+    </div>
+
+    <!-- <a [routerLink]="['/', 'txs']" [queryParams]="{offset: 0}" class="view-more">View More Transactions</a> -->
+  </app-content-item>
 
 </div>
 

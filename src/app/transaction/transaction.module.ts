@@ -6,6 +6,7 @@ import { TransactionsTableModule } from '../_components/transactions-table/trans
 import { PipesModule } from '../_pipes/pipes.module';
 import { LoadingModule } from '../_components/loading/loading.module';
 import { ErrorModule } from '../_components/error/error.module';
+import { ContentItemModule } from '../_components/content-item/content-item.module';
 
 @NgModule({
   declarations: [TransactionComponent],
@@ -15,6 +16,7 @@ import { ErrorModule } from '../_components/error/error.module';
     PipesModule,
     LoadingModule,
     ErrorModule,
+    ContentItemModule,
     RouterModule.forChild([
       {
         path: '',

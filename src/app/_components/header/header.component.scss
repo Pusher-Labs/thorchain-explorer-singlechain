@@ -8,20 +8,17 @@ header {
   width: 100%;
   background-color: var(--header-background);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 15px;
   position: relative;
 
   .net-status {
     color: var(--toolbar-text-color);
   }
 
-  //Theme button
-
+  // Theme button
   .icon-style {
     width: 35px;
     height: 35px;
     cursor: pointer;
-    position: absolute;
     display: flex;
 
     @media
@@ -42,7 +39,6 @@ header {
       overflow: visible;
     }
   }
-
   // End theme button
 
   #logo {
@@ -64,7 +60,6 @@ header {
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 10px;
 
     @media only screen and (max-width: 767px), (min-device-width: 768px) and (max-device-width: 1024px) {
       justify-content: space-between;
@@ -85,24 +80,7 @@ header {
     a:hover {
       border-bottom: 2px solid var(--link-color);
     }
-    a.nav-active {
-      border-bottom: 2px solid var(--link-color);
-    }
 
-  }
-
-  #network-status-container {
-    float: right;
-  }
-
-  #network-status {
-    &::before {
-      content: "";
-      width: 12px;
-      height: 12px;
-      border-radius: 6px;
-      background-color: green;
-    }
   }
 
   .optimal {

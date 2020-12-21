@@ -1,7 +1,17 @@
-<h1 class="mobile-padding">Network</h1>
+<h1 class="mobile-padding text-2xl font-bold font-mono py-4 dark:text-white">Network</h1>
 <nav>
-  <a [routerLink]="['/', 'network']" [routerLinkActive]="['nav-active']" [routerLinkActiveOptions]="{ exact: true }">Details</a>
-  <a [routerLink]="['/', 'network', 'constants']"  [routerLinkActive]="['nav-active']" [routerLinkActiveOptions]="{ exact: true }">Constants</a>
+  <a
+    [routerLink]="['/', 'network']"
+    [routerLinkActive]="['border-b-2']"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="dark:text-white mr-4"
+  >Details</a>
+  <a
+    [routerLink]="['/', 'network', 'constants']"
+    [routerLinkActive]="['border-b-2']"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="dark:text-white"
+  >Constants</a>
 </nav>
 
 <br />

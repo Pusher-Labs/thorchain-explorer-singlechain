@@ -1,20 +1,19 @@
-<div class="explorer-ui" *ngIf="currentEndpoint">
-  <div class="explorer-ui-panel">
-    <h4>{{ currentEndpoint.summary }}</h4>
+<div class="explorer-ui dark:text-white text-base font-mono" *ngIf="currentEndpoint">
+  <div class="mb-4">
+    <h4 class="text-lg font-semibold">{{ currentEndpoint.summary }}</h4>
     <p>{{ currentEndpoint.description }}</p>
   </div>
-  <div class="explorer-ui-panel">
-    <h5>URL</h5>
+  <div class="mb-4">
+    <h5 class="text-lg font-semibold">URL</h5>
     <pre>{{ currentEndpoint.method }} {{ makePathWithParams() }}</pre>
   </div>
   <div
     *ngIf="currentEndpoint.params"
-    class="explorer-ui-panel"
-    style="margin-top: 10px"
+    class="mb-4"
   >
-    <h5>Params</h5>
+    <h5 class="text-lg font-semibold">Params</h5>
     <form (ngSubmit)="submitQueries($event)">
-      <div *ngFor="let p of currentEndpoint.params">
+      <div *ngFor="let p of currentEndpoint.params" class="my-2">
         <app-query-input
           [param]="p"
           [value]="getValue(p)"
@@ -24,19 +23,19 @@
       <button
         [disabled]="loading"
         (click)="submitQueries($event)"
-        class="query-submit"
+        class="text-black px-4 mt-6 float-right"
       >
         Submit
       </button>
     </form>
   </div>
-  <div class="explorer-ui-panel flex-1 mt-1">
-    <h5>Response</h5>
-    <pre *ngIf="!loading && response" class="">{{ formatResponse() }}</pre>
+  <div class="mt-1">
+    <h5 class="text-lg font-semibold">Response</h5>
+    <pre *ngIf="!loading && response" class="text-base">{{ formatResponse() }}</pre>
     <pre *ngIf="loading">Loading...</pre>
   </div>
 
-  <div *ngIf="shouldShowLinks()" class="explorer-ui-panel flex-1 mt-1">
+  <div *ngIf="shouldShowLinks()" class="mt-1">
     <h5>Links</h5>
     <app-response-links [response]="response"></app-response-links>
   </div>

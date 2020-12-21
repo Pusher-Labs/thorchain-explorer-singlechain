@@ -1,73 +1,74 @@
-<table *ngIf="network">
+
+<table class="border-collapse" *ngIf="network">
   <thead>
     <tr>
-      <th colspan="2" class="text-align--center">Network Summary</th>
+      <th colspan="2" class="text-center font-mono font-bold">Network Summary</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Total Pooled</td>
-      <td>
+    <tr class="table-row">
+      <td class="table-item">Total Pooled</td>
+      <td class="table-item">
         {{ network.totalStaked | number:'1.0-0' }}
         <span *ngIf="currentRate">(${{network.totalStaked * currentRate | number:'1.0-0'}})</span>
       </td>
     </tr>
-    <tr>
-      <td>Total Reserve</td>
-      <td>
+    <tr class="table-row">
+      <td class="table-item">Total Reserve</td>
+      <td class="table-item">
         {{network.totalReserve | number:'1.0-0'}}
         <span *ngIf="currentRate">(${{network.totalReserve * currentRate | number:'1.0-0'}})</span>
       </td>
     </tr>
-    <tr>
-      <td>Total Active Bonded</td>
-      <td>
+    <tr class="table-row">
+      <td class="table-item">Total Active Bonded</td>
+      <td class="table-item">
         {{network.totalActiveBonded | number:'1.0-0'}}
         <span *ngIf="currentRate">(${{network.totalActiveBonded * currentRate | number:'1.0-0'}})</span>
       </td>
     </tr>
-    <tr>
-      <td>Total Standby Bonded</td>
-      <td>
+    <tr class="table-row">
+      <td class="table-item">Total Standby Bonded</td>
+      <td class="table-item">
         {{network.totalStandbyBonded | number:'1.0-0'}}
         <span *ngIf="currentRate">(${{network.totalStandbyBonded * currentRate | number:'1.0-0'}})</span>
       </td>
     </tr>
-    <tr>
-      <td>Total Capital</td>
-      <td>
+    <tr class="table-row">
+      <td class="table-item">Total Capital</td>
+      <td class="table-item">
         {{network.totalCapital | number:'1.0-0'}}
         <span *ngIf="currentRate">(${{network.totalCapital * currentRate | number:'1.0-0'}})</span>
       </td>
     </tr>
-    <tr>
-      <td>Active Node Count</td>
-      <td>{{network.activeNodeCount}}</td>
+    <tr class="table-row">
+      <td class="table-item">Active Node Count</td>
+      <td class="table-item">{{network.activeNodeCount}}</td>
     </tr>
-    <tr>
-      <td>Standby Node Count</td>
-      <td>{{network.standbyNodeCount}}</td>
+    <tr class="table-row">
+      <td class="table-item">Standby Node Count</td>
+      <td class="table-item">{{network.standbyNodeCount}}</td>
     </tr>
-    <tr>
-      <td>Pool Share Factor</td>
-      <td>{{network.poolShareFactor | percent:'1.0-2'}}</td>
+    <tr class="table-row">
+      <td class="table-item">Pool Share Factor</td>
+      <td class="table-item">{{network.poolShareFactor | percent:'1.0-2'}}</td>
     </tr>
-    <tr>
-      <td>Pool Activation Countdown</td>
-      <td>{{network.poolActivationCountdown}}</td>
+    <tr class="table-row">
+      <td class="table-item">Pool Activation Countdown</td>
+      <td class="table-item">{{network.poolActivationCountdown}}</td>
     </tr>
-    <tr>
-      <td>Node APY</td>
-      <td *ngIf="isFinite(network.bondingROI)">{{network.bondingROI | percent:'1.0-2'}}</td>
-      <td *ngIf="!isFinite(network.bondingROI)">{{network.bondingROI}}</td>
+    <tr class="table-row">
+      <td class="table-item">Node APY</td>
+      <td *ngIf="isFinite(network.bondingROI)" class="table-item">{{network.bondingROI | percent:'1.0-2'}}</td>
+      <td *ngIf="!isFinite(network.bondingROI)" class="table-item">{{network.bondingROI}}</td>
     </tr>
-    <tr>
-      <td>Pool APY</td>
-      <td>{{network.stakingROI | percent:'1.0-2'}}</td>
+    <tr class="table-row">
+      <td class="table-item">Pool APY</td>
+      <td class="table-item">{{network.stakingROI | percent:'1.0-2'}}</td>
     </tr>
-    <tr>
-      <td>Next Churn Height</td>
-      <td>{{network.nextChurnHeight}}</td>
+    <tr class="table-row">
+      <td class="table-item">Next Churn Height</td>
+      <td class="table-item">{{network.nextChurnHeight}}</td>
     </tr>
   </tbody>
 </table>

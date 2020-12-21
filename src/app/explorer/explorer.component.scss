@@ -1,13 +1,11 @@
 .explorer {
   display: flex;
-  height: 100%;
 }
 .explorer aside {
   flex: 1;
   max-width: 300px;
   margin-right: 5px;
 }
-
 
 @media screen and (max-width: 768px) {
   .explorer {
@@ -19,35 +17,12 @@
   }
 }
 
-.endpoints-label {
-  font-size: 1.2rem;
-  padding: 10px 5px;
-  margin: 0;
-  text-transform: uppercase;
-  background: transparent;
-  font-family: monospace;
-  color: var(--toolbar-text-color);
-}
-
 .endpoints-list {
   height: 100%;
   list-style-type: none;
   padding: 5px 0px 5px 5px;
   margin: 0;
   overflow: auto;
-}
-
-.endpoint {
-  display: block;
-  padding: 10px;
-  margin: 0 0 5px 0;
-  text-decoration: none;
-  border-radius: 4px 0 0 4px;
-  font-size: 1.4rem;
-  font-family: monospace;
-  &:hover {
-    background: var(--header-background);
-  }
 }
 
 .endpoint.is-active {

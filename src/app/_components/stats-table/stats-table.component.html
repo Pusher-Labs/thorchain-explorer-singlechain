@@ -1,89 +1,88 @@
-<table *ngIf="stats">
+<table class="border-collapse" *ngIf="stats">
   <thead>
     <tr>
-      <th colspan="2" class="text-align--center">Stats</th>
+      <th colspan="2" class="text-center font-mono font-bold">Stats</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Daily Active Users</td>
-      <td>{{stats.dailyActiveUsers | number}}</td>
+    <tr class="table-row">
+      <td class="table-item">Daily Active Users</td>
+      <td class="table-item">{{stats.dailyActiveUsers | number}}</td>
     </tr>
-    <tr>
-      <td>Monthly Active Users</td>
-      <td>{{stats.monthlyActiveUsers | number}}</td>
+    <tr class="table-row">
+      <td class="table-item">Monthly Active Users</td>
+      <td class="table-item">{{stats.monthlyActiveUsers | number}}</td>
     </tr>
-    <tr>
-      <td>Total Users</td>
-      <td>{{stats.totalUsers | number}}</td>
+    <tr class="table-row">
+      <td class="table-item">Total Users</td>
+      <td class="table-item">{{stats.totalUsers | number}}</td>
     </tr>
-    <tr>
-      <td>Daily Tx</td>
-      <td>{{stats.dailyTx | number}}</td>
+    <tr class="table-row">
+      <td class="table-item">Daily Tx</td>
+      <td class="table-item">{{stats.dailyTx | number}}</td>
     </tr>
-    <tr>
-      <td>Monthly Tx</td>
-      <td>{{stats.monthlyTx | number}}</td>
+    <tr class="table-row">
+      <td class="table-item">Monthly Tx</td>
+      <td class="table-item">{{stats.monthlyTx | number}}</td>
     </tr>
-    <tr>
-      <td>Total Tx</td>
-      <td>{{stats.totalTx | number}}</td>
+    <tr class="table-row">
+      <td class="table-item">Total Tx</td>
+      <td class="table-item">{{stats.totalTx | number}}</td>
     </tr>
-    <tr>
-      <td>Volume (24 Hour)</td>
-      <td>
+    <tr class="table-row">
+      <td class="table-item">Volume (24 Hour)</td>
+      <td class="table-item">
         {{stats.totalVolume24hr | number:"0.0-2"}}
         <span *ngIf="currentRate">(${{stats.totalVolume24hr * currentRate | number:"0.0-2"}})</span>
       </td>
     </tr>
-    <tr>
-      <td>Total Volume</td>
-      <td>
+    <tr class="table-row">
+      <td class="table-item">Total Volume</td>
+      <td class="table-item">
         {{stats.totalVolume | number:"0.0-2"}}
         <span *ngIf="currentRate">(${{stats.totalVolume * currentRate | number:"0.0-2"}})</span>
       </td>
     </tr>
-    <tr>
-      <td>Total Pooled</td>
-      <td>
+    <tr class="table-row">
+      <td class="table-item">Total Pooled</td>
+      <td class="table-item">
         {{stats.totalStaked | number:"0.0-2"}}
         <span *ngIf="currentRate">(${{stats.totalStaked * currentRate | number:"0.0-2"}})</span>
       </td>
     </tr>
-    <tr>
-      <td>Total Depth</td>
-      <td>
+    <tr class="table-row">
+      <td class="table-item">Total Depth</td>
+      <td class="table-item">
         {{stats.totalDepth | number:"0.0-2"}}
         <span *ngIf="currentRate">(${{stats.totalDepth * currentRate | number:"0.0-2"}})</span>
       </td>
     </tr>
-
-    <tr>
-      <td>Total Earned</td>
-      <td>
+    <tr class="table-row">
+      <td class="table-item">Total Earned</td>
+      <td class="table-item">
         {{stats.totalEarned | number:"0.0-2"}}
         <span *ngIf="currentRate">(${{stats.totalEarned * currentRate | number:"0.0-2"}})</span>
       </td>
     </tr>
-    <tr>
-      <td>Pool Count</td>
-      <td>{{stats.poolCount}}</td>
+    <tr class="table-row">
+      <td class="table-item">Pool Count</td>
+      <td class="table-item">{{stats.poolCount}}</td>
     </tr>
-    <tr>
-      <td>Total Asset Buys</td>
-      <td>{{stats.totalAssetBuys | number}}</td>
+    <tr class="table-row">
+      <td class="table-item">Total Asset Buys</td>
+      <td class="table-item">{{stats.totalAssetBuys | number}}</td>
     </tr>
-    <tr>
-      <td>Total Asset Sells</td>
-      <td>{{stats.totalAssetSells | number}}</td>
+    <tr class="table-row">
+      <td class="table-item">Total Asset Sells</td>
+      <td class="table-item">{{stats.totalAssetSells | number}}</td>
     </tr>
-    <tr>
-      <td>Total Deposit Tx</td>
-      <td>{{stats.totalStakeTx | number}}</td>
+    <tr class="table-row">
+      <td class="table-item">Total Deposit Tx</td>
+      <td class="table-item">{{stats.totalStakeTx | number}}</td>
     </tr>
-    <tr>
-      <td>Total Withdraw Tx</td>
-      <td>{{stats.totalWithdrawTx | number}}</td>
+    <tr class="table-row">
+      <td class="table-item">Total Withdraw Tx</td>
+      <td class="table-item">{{stats.totalWithdrawTx | number}}</td>
     </tr>
   </tbody>
 </table>

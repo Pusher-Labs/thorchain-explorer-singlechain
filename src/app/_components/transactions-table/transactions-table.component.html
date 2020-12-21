@@ -9,15 +9,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngIf="transactions.length === 0">
+    <tr class="table-row" *ngIf="transactions.length === 0">
       <td colspan="5" class="text-align--center">
         <span style="display:inline-block; padding: 15px;">No data found!</span>
       </td>
     </tr>
 
-    <tr *ngFor="let transaction of transactions">
+    <tr class="table-row" *ngFor="let transaction of transactions">
 
-      <td>
+      <td class="table-item">
 
         {{transaction.type}}
 
@@ -33,14 +33,14 @@
       </td>
 
       <!-- IN -->
-      <td class="transaction-data">
+      <td class="table-item">
 
         <app-tx-detail-table-data [transactionDetail]="transaction.in" direction="IN"></app-tx-detail-table-data>
 
       </td>
 
       <!-- OUT -->
-      <td class="transaction-data">
+      <td class="table-item">
 
         <ul>
 
@@ -54,8 +54,8 @@
         </ul>
       </td>
 
-      <td>{{transaction.status}}</td>
-      <td>{{transaction.date * 1000 | date:'short'}}</td>
+      <td class="table-item">{{transaction.status}}</td>
+      <td class="table-item">{{transaction.date * 1000 | date:'short'}}</td>
     </tr>
   </tbody>
 </table>

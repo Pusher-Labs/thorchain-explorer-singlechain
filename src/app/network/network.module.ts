@@ -8,6 +8,7 @@ import { PipesModule } from '../_pipes/pipes.module';
 import { LoadingModule } from '../_components/loading/loading.module';
 import { ConstantsComponent } from './constants/constants.component';
 import { ErrorModule } from '../_components/error/error.module';
+import { ContentItemModule } from '../_components/content-item/content-item.module';
 
 @NgModule({
   declarations: [NetworkComponent, NetworkDetailsComponent, ConstantsComponent],
@@ -17,6 +18,7 @@ import { ErrorModule } from '../_components/error/error.module';
     LoadingModule,
     ErrorModule,
     NetworkSummaryTableModule,
+    ContentItemModule,
     RouterModule.forChild([
       {
         path: '',

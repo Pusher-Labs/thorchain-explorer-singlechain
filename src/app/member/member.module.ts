@@ -5,6 +5,7 @@ import { MemberComponent } from './member.component';
 import { LoadingModule } from '../_components/loading/loading.module';
 import { ErrorModule } from '../_components/error/error.module';
 import { PipesModule } from '../_pipes/pipes.module';
+import { ContentItemModule } from '../_components/content-item/content-item.module';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { PipesModule } from '../_pipes/pipes.module';
     LoadingModule,
     ErrorModule,
     PipesModule,
+    ContentItemModule,
     RouterModule.forChild([
       {
         path: '',

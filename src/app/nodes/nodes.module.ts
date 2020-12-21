@@ -7,6 +7,7 @@ import { PipesModule } from '../_pipes/pipes.module';
 import { NodesTableModule } from '../_components/nodes-table/nodes-table.module';
 import {ErrorModule} from '../_components/error/error.module';
 import { MapModule } from '../_components/map/map.module';
+import { ContentItemModule } from '../_components/content-item/content-item.module';
 
 @NgModule({
   declarations: [NodesComponent],
@@ -17,6 +18,7 @@ import { MapModule } from '../_components/map/map.module';
     PipesModule,
     NodesTableModule,
     MapModule,
+    ContentItemModule,
     RouterModule.forChild([
       {
         path: '',

@@ -1,151 +1,151 @@
-<h1 class="mobile-padding break-word">TX: {{txid}}</h1>
+<h1 class="mobile-padding break-all text-2xl font-bold font-mono py-4 dark:text-white">TX: {{txid}}</h1>
 
-<div *ngIf="transaction">
+<app-content-item *ngIf="transaction">
 
-  <table class="shadow margin-bottom">
+  <table class="border-collapse">
     <thead>
       <tr>
-        <th colspan="2" class="text-align--center">
+        <th colspan="2" class="text-center font-mono font-bold">
           Transaction Summary
         </th>
       </tr>
     </thead>
 
     <tbody>
-      <tr>
-        <td>Pool</td>
-        <td>
+      <tr class="table-row">
+        <td class="table-item">Pool</td>
+        <td class="table-item">
           <a [routerLink]="['/', 'pools', transaction.pool]">{{transaction.pool}}</a>
         </td>
       </tr>
-      <tr>
-        <td>Status</td>
-        <td>{{transaction.status}}</td>
+      <tr class="table-row">
+        <td class="table-item">Status</td>
+        <td class="table-item">{{transaction.status}}</td>
       </tr>
-      <tr>
-        <td>Type</td>
-        <td>{{transaction.type}}</td>
+      <tr class="table-row">
+        <td class="table-item">Type</td>
+        <td class="table-item">{{transaction.type}}</td>
       </tr>
-      <tr>
-        <td>Date</td>
-        <td>{{transaction.date * 1000 | date:'short'}}</td>
+      <tr class="table-row">
+        <td class="table-item">Date</td>
+        <td class="table-item">{{transaction.date * 1000 | date:'short'}}</td>
       </tr>
-      <tr>
-        <td>Asymmetry</td>
-        <td>{{transaction.options.asymmetry}}</td>
+      <tr class="table-row">
+        <td class="table-item">Asymmetry</td>
+        <td class="table-item">{{transaction.options.asymmetry}}</td>
       </tr>
-      <tr>
-        <td>Price Target</td>
-        <td>{{transaction.options.priceTarget}}</td>
+      <tr class="table-row">
+        <td class="table-item">Price Target</td>
+        <td class="table-item">{{transaction.options.priceTarget}}</td>
       </tr>
-      <tr>
-        <td>Withdraw Basis Points</td>
-        <td>{{transaction.options.withdrawBasisPoints}}</td>
+      <tr class="table-row">
+        <td class="table-item">Withdraw Basis Points</td>
+        <td class="table-item">{{transaction.options.withdrawBasisPoints}}</td>
       </tr>
-      <tr *ngIf="transaction.events && transaction.events.fee">
-        <td>Liquidity Fee</td>
-        <td>{{transaction.events.fee | assetUnits:8 | number:'1.0-0'}} RUNE</td>
+      <tr class="table-row" *ngIf="transaction.events && transaction.events.fee">
+        <td class="table-item">Liquidity Fee</td>
+        <td class="table-item">{{transaction.events.fee | assetUnits:8 | number:'1.0-0'}} RUNE</td>
       </tr>
-      <tr *ngIf="transaction.type != 'stake'">
-        <td>Outbound Fee</td>
-        <td>1 RUNE</td>
+      <tr class="table-row" *ngIf="transaction.type != 'stake'">
+        <td class="table-item">Outbound Fee</td>
+        <td class="table-item">1 RUNE</td>
       </tr>
-      <tr *ngIf="transaction.type != 'stake'">
-        <td>Total Fee</td>
-        <td>{{+(transaction.events.fee | assetUnits:8 | number:'1.0-0') + 1}} RUNE</td>
+      <tr class="table-row" *ngIf="transaction.type != 'stake'">
+        <td class="table-item">Total Fee</td>
+        <td class="table-item">{{+(transaction.events.fee | assetUnits:8 | number:'1.0-0') + 1}} RUNE</td>
       </tr>
-      <tr *ngIf="transaction.events && transaction.events.slip">
-        <td>Slip</td>
-        <td>{{transaction.events.slip | percent:'1.0-0'}}</td>
+      <tr class="table-row" *ngIf="transaction.events && transaction.events.slip">
+        <td class="table-item">Slip</td>
+        <td class="table-item">{{transaction.events.slip | percent:'1.0-0'}}</td>
       </tr>
-      <tr *ngIf="transaction.events && transaction.events.stakeUnits && transaction.type == 'liquidity'">
-        <td>Stake Units</td>
-        <td>{{transaction.events.stakeUnits | assetUnits:8 | number:'1.0-0'}}</td>
+      <tr class="table-row" *ngIf="transaction.events && transaction.events.stakeUnits && transaction.type == 'liquidity'">
+        <td class="table-item">Stake Units</td>
+        <td class="table-item">{{transaction.events.stakeUnits | assetUnits:8 | number:'1.0-0'}}</td>
       </tr>
     </tbody>
 
   </table>
 
-  <div class="grid">
+</app-content-item>
 
-    <div class="grid-item">
+<div class="grid my-4">
 
-      <table>
-        <thead>
-          <tr>
-            <th colspan="2" class="text-align--center">
-              In
-            </th>
-          </tr>
-        </thead>
+  <app-content-item *ngIf="transaction && transaction.in">
 
-        <tbody>
-          <tr>
-            <td>Address</td>
-            <td class="break-word">
-              <a [routerLink]="['/', 'addresses', transaction.in.address]">{{transaction.in.address.substring(0, 8)}}...{{transaction.in.address.substring(transaction.in.address.length - 4, transaction.in.address.length)}}</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Memo</td>
-            <td class="break-word">{{transaction.in.memo}}</td>
-          </tr>
-          <tr>
-            <td>Transaction Id</td>
-            <td>
-              <a [routerLink]="['/', 'txs', transaction.in.txID]">{{transaction.in.txID.substring(0, 8)}}...{{transaction.in.txID.substring(transaction.in.txID.length - 4, transaction.in.txID.length)}}</a>
-            </td>
-          </tr>
-          <tr *ngFor="let coin of transaction.in.coins">
-            <td>Asset: <a [routerLink]="['/', 'pools', coin.asset]">{{coin.asset}}</a></td>
-            <td>Amount: {{coin.amount | assetUnits:8 | number}}</td>
-          </tr>
-        </tbody>
+    <table>
+      <thead>
+        <tr class="table-row">
+          <th colspan="2" class="text-align--center">
+            In
+          </th>
+        </tr>
+      </thead>
 
-      </table>
+      <tbody>
+        <tr class="table-row">
+          <td class="table-item">Address</td>
+          <td class="table-item break-all">
+            <a [routerLink]="['/', 'addresses', transaction.in.address]">{{transaction.in.address.substring(0, 8)}}...{{transaction.in.address.substring(transaction.in.address.length - 4, transaction.in.address.length)}}</a>
+          </td>
+        </tr>
+        <tr class="table-row">
+          <td class="table-item">Memo</td>
+          <td class="table-item break-all">{{transaction.in.memo}}</td>
+        </tr>
+        <tr class="table-row">
+          <td class="table-item">Transaction Id</td>
+          <td class="table-item">
+            <a [routerLink]="['/', 'txs', transaction.in.txID]">{{transaction.in.txID.substring(0, 8)}}...{{transaction.in.txID.substring(transaction.in.txID.length - 4, transaction.in.txID.length)}}</a>
+          </td>
+        </tr>
+        <tr class="table-row" *ngFor="let coin of transaction.in.coins">
+          <td class="table-item">Asset: <a [routerLink]="['/', 'pools', coin.asset]">{{coin.asset}}</a></td>
+          <td class="table-item">Amount: {{coin.amount | assetUnits:8 | number}}</td>
+        </tr>
+      </tbody>
 
-    </div>
+    </table>
 
-    <div *ngIf="transaction.out && transaction.out.length > 0" class="grid-item">
+  </app-content-item>
 
-      <table>
-        <thead>
-          <tr>
-            <th colspan="2" class="text-align--center">
-              Out
-            </th>
-          </tr>
-        </thead>
+  <app-content-item *ngIf="transaction && transaction.out && transaction.out.length > 0">
 
-        <tbody *ngFor="let out of transaction.out; let i = index" [ngClass]="{'out-separator': transaction.out.length > 1 && i < transaction.out.length - 1}">
-          <tr>
-            <td>Address</td>
-            <td class="break-word">
-              <a [routerLink]="['/', 'addresses', out.address]">{{out.address.substring(0, 8)}}...{{out.address.substring(out.address.length - 4, out.address.length)}}</a>
-            </td>
-          </tr>
-          <tr>
-            <td>Memo</td>
-            <td class="break-word">{{out.memo}}</td>
-          </tr>
-          <tr>
-            <td>Transaction Id</td>
-            <td>
-              <a [routerLink]="['/', 'txs', out.txID]">{{out.txID.substring(0, 8)}}...{{out.txID.substring(out.txID.length - 4, out.txID.length)}}</a>
+    <table>
+      <thead>
+        <tr class="table-row">
+          <th colspan="2" class="text-align--center">
+            Out
+          </th>
+        </tr>
+      </thead>
 
-            </td>
-          </tr>
-          <tr *ngFor="let coin of out.coins">
-            <td>Asset: <a [routerLink]="['/', 'pools', coin.asset]">{{coin.asset}}</a></td>
-            <td>Amount: {{coin.amount | assetUnits:8 | number}}</td>
-          </tr>
-        </tbody>
+      <tbody *ngFor="let out of transaction.out; let i = index" [ngClass]="{'out-separator': transaction.out.length > 1 && i < transaction.out.length - 1}">
+        <tr class="table-row">
+          <td class="table-item">Address</td>
+          <td class="table-item break-all">
+            <a [routerLink]="['/', 'addresses', out.address]">{{out.address.substring(0, 8)}}...{{out.address.substring(out.address.length - 4, out.address.length)}}</a>
+          </td>
+        </tr>
+        <tr class="table-row">
+          <td class="table-item">Memo</td>
+          <td class="table-item break-all">{{out.memo}}</td>
+        </tr>
+        <tr class="table-row">
+          <td class="table-item">Transaction Id</td>
+          <td class="table-item">
+            <a [routerLink]="['/', 'txs', out.txID]">{{out.txID.substring(0, 8)}}...{{out.txID.substring(out.txID.length - 4, out.txID.length)}}</a>
 
-      </table>
+          </td>
+        </tr>
+        <tr class="table-row" *ngFor="let coin of out.coins">
+          <td class="table-item">Asset: <a [routerLink]="['/', 'pools', coin.asset]">{{coin.asset}}</a></td>
+          <td class="table-item">Amount: {{coin.amount | assetUnits:8 | number}}</td>
+        </tr>
+      </tbody>
 
-    </div>
+    </table>
 
-  </div>
+  </app-content-item>
 
 </div>
 

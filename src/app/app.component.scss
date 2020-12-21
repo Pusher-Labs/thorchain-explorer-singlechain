@@ -6,7 +6,7 @@
 main {
   width: 100%;
   max-width: 100%;
-  min-height: calc(100vh - 260px);
+  min-height: calc(100vh - 240px);
 
   // Medium devices (tablets, 768px and up)
   @media (min-width: 768px) { width: 768px; }
@@ -32,7 +32,6 @@ footer {
       padding: 0 15px;
 
       a {
-        font-size: 2.2rem;
         color: gainsboro;
 
         &:hover {

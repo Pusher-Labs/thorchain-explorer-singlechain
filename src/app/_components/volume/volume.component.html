@@ -1,7 +1,7 @@
 <div class="volume-container" *ngIf="this.lineChartData !== undefined">
 
 
-  <select id="volume-interval-select" (change)="onChange($event)">
+  <select id="volume-interval-select" (change)="onChange($event)" class="text-black">
     <option *ngFor="let state of states" [value]="state.value"> {{ state.name }} </option>
   </select>
 

@@ -11,6 +11,7 @@ import { LoadingModule } from '../_components/loading/loading.module';
 import { VolumeModule } from '../_components/volume/volume.module';
 import { TransactionsTableModule } from '../_components/transactions-table/transactions-table.module';
 import { ErrorModule } from '../_components/error/error.module';
+import { ContentItemModule } from '../_components/content-item/content-item.module';
 
 @NgModule({
   declarations: [DashboardComponent, StatsTableComponent],
@@ -24,6 +25,7 @@ import { ErrorModule } from '../_components/error/error.module';
     VolumeModule,
     TransactionsTableModule,
     ErrorModule,
+    ContentItemModule,
     RouterModule.forChild([
       {
         path: '',

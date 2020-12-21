@@ -1,14 +1,16 @@
-<h1 class="mobile-padding">Members</h1>
+<h1 class="mobile-padding text-2xl font-bold font-mono py-4 dark:text-white">Members</h1>
 
-<table *ngIf="members" class="shadow">
-  <tbody>
-    <tr *ngFor="let member of members">
-      <td>
-        <a [routerLink]="['/', 'members', member]">{{member}}</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<app-content-item class="mb-4">
+  <table *ngIf="members">
+    <tbody>
+      <tr class="table-row" *ngFor="let member of members">
+        <td class="table-item">
+          <a [routerLink]="['/', 'members', member]">{{member}}</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</app-content-item>
 
 <app-loading *ngIf="!members && !error"></app-loading>
 
