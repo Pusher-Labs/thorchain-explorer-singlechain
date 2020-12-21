@@ -30,39 +30,39 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngIf="sortedMembers.length === 0">
-          <td colspan="8" class="text-align--center">
+        <tr class="table-row" *ngIf="sortedMembers.length === 0">
+          <td class="table-item" colspan="8" class="text-align--center">
             <span style="display:inline-block; padding: 15px;">No data found!</span>
           </td>
         </tr>
 
-        <tr *ngFor="let member of sortedMembers">
-            <td>
+        <tr class="table-row" *ngFor="let member of sortedMembers">
+            <td class="table-item">
                 <a [routerLink]="['/', 'addresses', member.rune_address]" title="Rune Address">
                     <b>{{member.rune_address.substring(0,8)}}...</b>
                 </a>
             </td>
-            <td>
+            <td class="table-item">
                 <a [routerLink]="['/', 'addresses', member.asset_address]" title="Asset Address">
                     <b>{{member.asset_address.substring(0,8)}}...</b>
                 </a>
             </td>
-            <td>
+            <td class="table-item">
                 {{member.units | assetUnits:8 | number:"1.0-2" }}
             </td>
-            <td>
+            <td class="table-item">
                 {{member.last_stake}}
             </td>
-            <td>
+            <td class="table-item">
                 {{member.last_unstake}}
             </td>
-            <td>
+            <td class="table-item">
                 {{member.pending_rune}}
             </td>
-            <td>
+            <td class="table-item">
                 <div *ngIf="member.pending_tx_id">{{ member.pending_tx_id.substring(0,8) }}...</div>
             </td>
-            <td >
+            <td class="table-item" >
               {{ ownership[member.asset_address] | percent:'1.0-2' }}
             </td>
         </tr>
