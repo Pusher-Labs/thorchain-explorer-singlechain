@@ -1,116 +1,122 @@
-<h1 class="mobile-padding">Node:
+<h1 class="mobile-padding text-2xl font-bold font-mono py-4 dark:text-white">Node:
   <span *ngIf="address" class="break-word">{{address}}</span>
   <span *ngIf="!address">...</span>
 </h1>
 
 <div *ngIf="thorNode">
 
-  <table class="shadow margin-bottom">
-    <thead>
-      <tr>
-        <th colspan="2" class="text-align--center">
-          General Stats
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Status</td>
-        <td>{{thorNode.status}}</td>
-      </tr>
-      <tr>
-        <td>Status Since</td>
-        <td>{{thorNode.statusSince | number}}</td>
-      </tr>
-      <tr>
-        <td>IP Address</td>
-        <td>{{thorNode.ipAddress}}</td>
-      </tr>
-      <tr>
-        <td>Version</td>
-        <td>{{thorNode.version}}</td>
-      </tr>
-      <tr>
-        <td>Active Block Height</td>
-        <td>{{thorNode.activeBlockHeight | number}}</td>
-      </tr>
-      <tr>
-        <td>In Jail</td>
-        <td>
-          <div *ngIf="isInJail">
-            Until Block: {{thorNode.jail.releaseHeight}} <br />
-            Reason: {{thorNode.jail.reason}}
-          </div>
-          <div *ngIf="!isInJail">
-            false
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>Validator Cons Pub Key</td>
-        <td class="break-word">{{thorNode.validatorConsPubKey}}</td>
-      </tr>
-      <tr>
-        <td>Bond</td>
-        <td>{{thorNode.bond | assetUnits:8 | number}}</td>
-      </tr>
-      <tr>
-        <td>Bond Address</td>
-        <td class="break-word">{{thorNode.bondAddress}}</td>
-      </tr>
-      <tr>
-        <td>Requested To Leave</td>
-        <td>{{thorNode.requestedToLeave}}</td>
-      </tr>
-      <tr>
-        <td>Forced To Leave</td>
-        <td>{{thorNode.forcedToLeave}}</td>
-      </tr>
-      <tr>
-        <td>Leave Height</td>
-        <td>{{thorNode.leaveHeight}}</td>
-      </tr>
-      <tr>
-        <td>Slash Points</td>
-        <td>{{thorNode.slashPoints}}</td>
-      </tr>
-      <tr>
-        <td>Current Award</td>
-        <td>{{thorNode.currentAward | assetUnits:8 | number:"0.0-2"}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <app-content-item class="mb-8">
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2" class="text-align--center">
+            General Stats
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-row">
+          <td class="table-item">Status</td>
+          <td class="table-item">{{thorNode.status}}</td>
+        </tr>
+        <tr class="table-row">
+          <td class="table-item">Status Since</td>
+          <td class="table-item">{{thorNode.statusSince | number}}</td>
+        </tr>
+        <tr class="table-row">
+          <td class="table-item">IP Address</td>
+          <td class="table-item">{{thorNode.ipAddress}}</td>
+        </tr>
+        <tr class="table-row">
+          <td class="table-item">Version</td>
+          <td class="table-item">{{thorNode.version}}</td>
+        </tr>
+        <tr class="table-row">
+          <td class="table-item">Active Block Height</td>
+          <td class="table-item">{{thorNode.activeBlockHeight | number}}</td>
+        </tr>
+        <tr class="table-row">
+          <td class="table-item">In Jail</td>
+          <td class="table-item">
+            <div *ngIf="isInJail">
+              Until Block: {{thorNode.jail.releaseHeight}} <br />
+              Reason: {{thorNode.jail.reason}}
+            </div>
+            <div *ngIf="!isInJail">
+              false
+            </div>
+          </td>
+        </tr>
+        <tr class="table-row">
+          <td class="table-item">Validator Cons Pub Key</td>
+          <td class="table-item break-all">{{thorNode.validatorConsPubKey}}</td>
+        </tr>
+        <tr class="table-row">
+          <td class="table-item">Bond</td>
+          <td class="table-item">{{thorNode.bond | assetUnits:8 | number}}</td>
+        </tr>
+        <tr class="table-row">
+          <td class="table-item">Bond Address</td>
+          <td class="table-item break-all">{{thorNode.bondAddress}}</td>
+        </tr>
+        <tr class="table-row">
+          <td class="table-item">Requested To Leave</td>
+          <td class="table-item">{{thorNode.requestedToLeave}}</td>
+        </tr>
+        <tr class="table-row">
+          <td class="table-item">Forced To Leave</td>
+          <td class="table-item">{{thorNode.forcedToLeave}}</td>
+        </tr>
+        <tr class="table-row">
+          <td class="table-item">Leave Height</td>
+          <td class="table-item">{{thorNode.leaveHeight}}</td>
+        </tr>
+        <tr class="table-row">
+          <td class="table-item">Slash Points</td>
+          <td class="table-item">{{thorNode.slashPoints}}</td>
+        </tr>
+        <tr class="table-row">
+          <td class="table-item">Current Award</td>
+          <td class="table-item">{{thorNode.currentAward | assetUnits:8 | number:"0.0-2"}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </app-content-item>
 
-  <table class="shadow margin-bottom">
-    <thead>
-      <tr>
-        <th colspan="2" class="text-align--center">Pub Key Set</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>secp256k1</td>
-        <td class="break-word">{{thorNode.pubKeySet.secp256k1}}</td>
-      </tr>
-      <tr>
-        <td>ed25519</td>
-        <td class="break-word">{{thorNode.pubKeySet.ed25519}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <app-content-item class="mb-8">
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2" class="text-align--center">Pub Key Set</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-row">
+          <td class="table-item">secp256k1</td>
+          <td class="table-item break-all">{{thorNode.pubKeySet.secp256k1}}</td>
+        </tr>
+        <tr class="table-row">
+          <td class="table-item">ed25519</td>
+          <td class="table-item break-all">{{thorNode.pubKeySet.ed25519}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </app-content-item>
 
-  <table class="shadow margin-bottom">
-    <thead>
-      <tr>
-        <th class="text-align--center">Signer Membership</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let signer of thorNode.signerMembership">
-        <td class="break-word">{{signer}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <app-content-item class="mb-8">
+    <table>
+      <thead>
+        <tr>
+          <th class="text-align--center">Signer Membership</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-row" *ngFor="let signer of thorNode.signerMembership">
+          <td class="table-item break-all">{{signer}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </app-content-item>
 
 </div>
 

@@ -1,15 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
-@import "styles/colors";
-@import "styles/animations";
-@import "styles/theme";
 
-* {
-  box-sizing: border-box;
-}
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 html {
-  font-size: 62.5%;
-  // overflow-x: hidden;
+  // font-size: 62.5%;
+  font-size: 12px;
+  overflow-x: hidden;
 }
 
 /*** iPhone and iOS Form Input Zoom Fixes ***/
@@ -23,15 +21,12 @@ html {
 }
 
 body {
-  font-family: monospace;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-flow: column;
-  background-color: var(--background-color);
-  font-size: 1.6rem;
   margin: 0;
-  // overflow-x: hidden;
+  @apply font-mono;
 }
 
 h1, span, label {
@@ -43,53 +38,10 @@ span {
 }
 
 table {
-  text-align: left;
-  border-collapse: collapse;
-  background-color: var(--background-dashboard);
   width: 100%;
-  border-radius: 5px;
-  overflow: auto;
-
-  th, td {
-    padding: 5px 10px;
-    border-bottom: 1px solid gainsboro;
-    overflow-x: auto;
-    padding: 10px;
-    vertical-align: top;
-    color: var(--toolbar-text-color);
-    border-bottom: 1px solid var(--border-bottom-color);
-
-    &:first-of-type {
-      border-left: 0;
-    }
-    &:last-of-type {
-      border-right: 0;
-    }
-  }
 
   th {
-    border-top: 0;
-  }
-
-  tbody {
-
-    tr {
-
-      &:nth-of-type(even) {
-
-        // todo: make work with dark mode..
-        // background: whitesmoke;
-
-        @media (min-width: 768px) { background: none; }
-
-      }
-
-      &:hover {
-        background-color: var(--hover-text-color);
-      }
-
-    }
-
+    padding: 5px 10px;
   }
 
 }
@@ -105,64 +57,17 @@ a {
 
 h1 {
   font-weight: normal;
-  font-size: 2.0rem;
+  // font-size: 2.0rem;
 }
 
 input, select, textarea, button{font-family:inherit;}
 
 input {
-  font-size: 1.6rem;
+  // font-size: 1.6rem;
   border: 1px solid gainsboro;
   border-radius: 3px;
 }
 
-.container {
-  width: 100%;
-  max-width: 100%;
-  padding-top: 10px;
-
-  // Medium devices (tablets, 768px and up)
-  @media (min-width: 768px) { width: 768px; }
-
-  // Large devices (desktops, 992px and up)
-  @media (min-width: 992px) { width: 992px; }
-}
-
-.checkbox-container {
-  input[type="checkbox"] {
-    visibility: hidden;
-  }
-  label {
-    cursor: pointer;
-  }
-  input[type="checkbox"] + label:before {
-    border: 2px solid black;
-    content: "\00a0";
-    display:inline-flex;
-    align-items: center;
-    font: 22px/1rem monospace;
-    height: 14px;
-    margin: 0 .25em 0 0;
-    padding: 0;
-    vertical-align: top;
-    width: 14px;
-    color: #fff;
-    border-radius: 3px;
-  }
-  input[type="checkbox"]:checked + label:before {
-    background: black;
-    color: #fff;
-    content: "\2713";
-    text-align: center;
-  }
-  input[type="checkbox"]:checked + label:after {
-    font-weight: bold;
-  }
-
-  input[type="checkbox"]:focus + label::before {
-      outline: black;
-  }
-}
 
 button {
   background-color: rgb(239, 239, 239);
@@ -178,30 +83,6 @@ ul {
     list-style-type: none;
   }
 
-}
-
-.flxr {
-  display: flex;
-
-  &--space-between {
-    justify-content: space-between;
-  }
-
-  &--just-center {
-    justify-content: center;
-  }
-
-  &--just-end {
-    justify-content: flex-end;
-  }
-
-  &--align-center {
-    align-items: center;
-  }
-
-  &--flow-column {
-    flex-flow: column;
-  }
 }
 
 .ellipsis {
@@ -228,10 +109,6 @@ ul {
   }
 }
 
-.break-word {
-  word-break: break-word;
-}
-
 .page-actions {
   float: right;
   margin: 30px 0;
@@ -246,14 +123,6 @@ ul {
     margin-left: 5px;
   }
 
-}
-
-.shadow {
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-}
-
-.margin-bottom {
-  margin-bottom: 45px;
 }
 
 .grid {
@@ -275,19 +144,13 @@ ul {
   }
 }
 
-.grid-item {
-  float: left;
-  width: 100%;
-  background-color: var(--background-dashboard);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  min-height: 145px;
-}
-
-.text-align {
-
-  &--center {
-    text-align: center;
+// tailwind
+@layer components {
+  .table-row {
+    @apply hover:bg-gray-50 dark:hover:bg-gray-700;
   }
 
+  .table-item {
+    @apply py-2 px-4 font-mono text-sm border-t border-gray-200 dark:border-gray-800;
+  }
 }

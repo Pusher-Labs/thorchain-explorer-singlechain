@@ -5,6 +5,7 @@ import { PoolsComponent } from './pools.component';
 import { LoadingModule } from '../_components/loading/loading.module';
 import { AssetLogoModule } from '../_components/asset-logo/asset-logo.module';
 import { ErrorModule } from '../_components/error/error.module';
+import { ContentItemModule } from '../_components/content-item/content-item.module';
 
 @NgModule({
   declarations: [PoolsComponent],
@@ -13,6 +14,7 @@ import { ErrorModule } from '../_components/error/error.module';
     LoadingModule,
     AssetLogoModule,
     ErrorModule,
+    ContentItemModule,
     RouterModule.forChild([
       {
         path: '',

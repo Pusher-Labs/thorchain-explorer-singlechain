@@ -1,0 +1,12 @@
+// .grid-item {
+//   float: left;
+//   width: 100%;
+//   background-color: var(--background-dashboard);
+//   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+//   border-radius: 5px;
+//   min-height: 145px;
+// }
+
+:host {
+  @apply block;
+}

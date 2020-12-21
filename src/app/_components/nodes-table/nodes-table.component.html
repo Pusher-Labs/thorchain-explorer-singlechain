@@ -1,7 +1,7 @@
-<table *ngIf="nodes" class="shadow nodes-table">
+<table *ngIf="nodes" class="border-collapse">
   <thead>
     <tr *ngIf="tableName">
-      <th colspan="9" class="text-align--center">{{tableName}}</th>
+      <th colspan="9" class="text-center font-mono font-bold">{{tableName}}</th>
     </tr>
     <tr>
       <th></th>
@@ -16,38 +16,38 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngIf="nodes.length === 0">
+    <tr class="table-row" *ngIf="nodes.length === 0">
       <td colspan="9" class="text-align--center">
         <span style="display:inline-block; padding: 15px;">No data found!</span>
       </td>
     </tr>
-    <tr *ngFor="let node of nodes" [class.pinned]="isPinned(node.nodeAddress)">
-      <td>
+    <tr class="table-row" *ngFor="let node of nodes" [class.pinned]="isPinned(node.nodeAddress)">
+      <td class="table-item">
         <button (click)="toggleNodePin(node.nodeAddress)" class="pin-btn">
           <fa-icon *ngIf="true" [icon]="pinIcon"></fa-icon>
         </button>
       </td>
-      <td>
+      <td class="table-item">
         <a
           [routerLink]="['/', 'nodes', node.nodeAddress]">{{node.nodeAddress.substring(0, 8)}}...{{node.nodeAddress.substring(node.nodeAddress.length - 4, node.nodeAddress.length)}}</a>
       </td>
-      <td>
+      <td class="table-item">
         {{node.status}}
       </td>
-      <td>
+      <td class="table-item">
         {{node.version}}
       </td>
-      <td>
+      <td class="table-item">
         {{node.ipAddress}}
       </td>
-      <td *ngIf="node.location">
+      <td *ngIf="node.location" class="table-item">
         {{node.location.country_name}}
       </td>
-      <td>{{node.slashPoints}}</td>
-      <td>
+      <td class="table-item">{{node.slashPoints}}</td>
+      <td class="table-item">
         {{node.currentAward | assetUnits:8 | number:"0.0-0"}}
       </td>
-      <td>
+      <td class="table-item">
         {{node.bond | assetUnits:8 | number:"0.0-0"}}
       </td>
     </tr>

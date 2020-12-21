@@ -1,4 +1,4 @@
-<div class="member-summary mobile-padding" *ngIf="members">
+<div class="member-summary mobile-padding text-white" *ngIf="members">
 
   <div>
     <span>Total Pool Members: {{members.length}}</span>
@@ -15,14 +15,8 @@
 
 </div>
 
-<!-- <div class="pool-member-sort flxr flxr--just-end" name="sel2">
-  <label>Sort:</label>
-  <select class="pool-member-sort--select" [ngModel]="selectedSortOption" (change)="onSortChange($event.target.value)">
-    <option [value]="i" *ngFor="let i of sortOptions">{{i}}</option>
-  </select>
-</div> -->
-
-<table *ngIf="sortedMembers">
+<app-content-item>
+  <table *ngIf="sortedMembers">
     <thead>
         <tr>
             <th>Rune Address</th>
@@ -75,3 +69,4 @@
     </tbody>
 </table>
 <span *ngIf="!sortedMembers">...</span>
+</app-content-item>

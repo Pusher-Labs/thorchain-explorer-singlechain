@@ -1,17 +1,19 @@
-<h1 class="mobile-padding">Asset Pools</h1>
+<h1 class="mobile-padding text-2xl font-bold font-mono py-4 dark:text-white">Asset Pools</h1>
 
-<table *ngIf="pools && !error" class="shadow">
-  <tbody>
-    <tr *ngFor="let pool of pools">
-      <td>
-        <div class="flxr">
-          <app-asset-logo style="margin: 0 25px 0 5px;" *ngIf="pool" [assetPool]="pool"></app-asset-logo>
-          <a [routerLink]="['/', 'pools', pool]">{{pool}}</a>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<app-content-item>
+  <table *ngIf="pools && !error">
+    <tbody>
+      <tr class="table-row" *ngFor="let pool of pools">
+        <td class="table-item">
+          <div class="flex">
+            <app-asset-logo style="margin: 0 25px 0 5px;" *ngIf="pool" [assetPool]="pool"></app-asset-logo>
+            <a [routerLink]="['/', 'pools', pool]">{{pool}}</a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</app-content-item>
 
 <app-loading *ngIf="!pools && !error"></app-loading>
 

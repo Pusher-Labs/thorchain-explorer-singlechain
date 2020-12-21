@@ -6,6 +6,7 @@ import { PipesModule } from '../../_pipes/pipes.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
+import { ContentItemModule } from '../content-item/content-item.module';
 
 @NgModule({
   declarations: [PoolMembersTableComponent],
@@ -15,7 +16,8 @@ import { ChartsModule } from 'ng2-charts';
     FontAwesomeModule,
     RouterModule,
     FormsModule,
-    ChartsModule
+    ChartsModule,
+    ContentItemModule
   ],
   exports: [PoolMembersTableComponent]
 })

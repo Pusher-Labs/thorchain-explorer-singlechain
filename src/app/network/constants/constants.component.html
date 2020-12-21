@@ -1,93 +1,116 @@
 <div *ngIf="int64Vals && stringVals && boolVals">
-  <table *ngIf="int64Vals">
-    <thead>
-      <tr>
-        <th colspan="3" class="text-align--center">Int 64 Constants</th>
-      </tr>
-      <tr>
-        <th>Key</th>
-        <th>Value</th>
-        <th>Mimir Overrides</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let constant of int64Vals">
-        <td>{{constant.key}}</td>
-        <td>{{constant.value | number}}<span>{{addDetail(constant.key)}}</span></td>
-        <td>
-          <div *ngIf="constant.override">{{constant.override | number}} <span>{{addDetail(constant.key)}}</span></div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
+  <app-content-item>
+    <table class="table-fixed" *ngIf="int64Vals">
+      <thead>
+        <tr>
+          <th colspan="3" class="text-align--center w-3/3">Int 64 Constants</th>
+        </tr>
+        <tr>
+          <th class="w-1/3">Key</th>
+          <th class="w-1/3">Value</th>
+          <th class="w-1/3">Mimir Overrides</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-row" *ngFor="let constant of int64Vals">
+          <td class="table-item">{{constant.key}}</td>
+          <td class="table-item">{{constant.value | number}}<span>{{addDetail(constant.key)}}</span></td>
+          <td class="table-item">
+            <div *ngIf="constant.override">{{constant.override | number}} <span>{{addDetail(constant.key)}}</span></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </app-content-item>
 
   <br />
   <br />
 
-  <table *ngIf="stringVals">
-    <thead>
-      <tr>
-        <th colspan="3" class="text-align--center">String Constants</th>
-      </tr>
-      <tr>
-        <th>Key</th>
-        <th>Value</th>
-        <th>Mimir Overrides</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let constant of stringVals">
-        <td>{{constant.key}}</td>
-        <td>{{constant.value}}</td>
-        <td>{{constant.override}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <app-content-item>
+
+    <table class="table-fixed" *ngIf="stringVals">
+      <thead>
+        <tr>
+          <th colspan="3" class="text-align--center">String Constants</th>
+        </tr>
+        <tr>
+          <th class="w-1/3">Key</th>
+          <th class="w-1/3">Value</th>
+          <th class="w-1/3">Mimir Overrides</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-row" *ngFor="let constant of stringVals">
+          <td class="table-item">{{constant.key}}</td>
+          <td class="table-item">{{constant.value}}</td>
+          <td class="table-item">{{constant.override}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </app-content-item>
 
   <br />
   <br />
 
-  <table *ngIf="boolVals">
-    <thead>
-      <tr>
-        <th colspan="3" class="text-align--center">Boolean Constants</th>
-      </tr>
-      <tr>
-        <th>Key</th>
-        <th>Value</th>
-        <th>Mimir Overrides</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let constant of boolVals">
-        <td>{{constant.key}}</td>
-        <td>{{constant.value}}</td>
-        <td>{{constant.override}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <app-content-item>
+
+    <table class="table-fixed" *ngIf="boolVals">
+      <thead>
+        <tr>
+          <th colspan="3" class="text-align--center">Boolean Constants</th>
+        </tr>
+        <tr>
+          <th class="w-1/3">Key</th>
+          <th class="w-1/3">Value</th>
+          <th class="w-1/3">Mimir Overrides</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-row" *ngFor="let constant of boolVals">
+          <td class="table-item">{{constant.key}}</td>
+          <td class="table-item">{{constant.value}}</td>
+          <td class="table-item">{{constant.override}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </app-content-item>
 
   <br />
   <br />
 
-  <table *ngIf="mimirVals">
-    <thead>
-      <tr>
-        <th colspan="2">Mimir Overrides</th>
-      </tr>
-      <tr>
-        <th>Key</th>
-        <th>Value</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let val of mimirVals">
-        <td>{{val.label}}</td>
-        <td *ngIf="val.type == 'INT64'">{{val.value | number}}</td>
-        <td *ngIf="val.type != 'INT64'">{{val.value }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <app-content-item>
+
+    <table class="table-fixed" *ngIf="mimirVals">
+      <thead>
+        <tr>
+          <th colspan="2">Mimir Overrides</th>
+        </tr>
+        <tr>
+          <th class="w-1/2">Key</th>
+          <th class="w-1/2">Value</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="mimirVals && mimirVals.length > 0">
+        <tr class="table-row" *ngFor="let val of mimirVals">
+          <td class="table-item">{{val.label}}</td>
+          <td class="table-item" *ngIf="val.type == 'INT64'">{{val.value | number}}</td>
+          <td class="table-item" *ngIf="val.type != 'INT64'">{{val.value }}</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="mimirVals && mimirVals.length < 1">
+        <tr class="table-row">
+          <td class="table-item">No Mimirs found</td>
+          <td class="table-item"></td>
+          <td class="table-item"></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </app-content-item>
+
 </div>
 
 <app-loading *ngIf="(!int64Vals || !stringVals || !boolVals) && !error"></app-loading>

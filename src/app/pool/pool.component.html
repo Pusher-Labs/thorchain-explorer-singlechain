@@ -1,16 +1,16 @@
 <div *ngIf="asset" class="mobile-padding">
-  <h1 class="flxr flxr--align-center">
+  <h1 class="flex items-center mobile-padding text-2xl font-bold font-mono py-4 dark:text-white">
     <app-asset-logo *ngIf="asset.asset" [assetPool]="asset.asset"></app-asset-logo>
     {{asset.asset}}
   </h1>
   <nav>
-    <a  [routerLink]="['/', 'pools', asset.asset]" [routerLinkActive]="['nav-active']" [routerLinkActiveOptions]="{ exact: true }">Details</a>
-    <a  [routerLink]="['/', 'pools', asset.asset, 'txs']" [queryParams]="{offset: '0'}" [routerLinkActive]="['nav-active']" [routerLinkActiveOptions]="{ exact: true }">Transactions</a>
-    <a  [routerLink]="['/', 'pools', asset.asset, 'members']" [routerLinkActive]="['nav-active']" [routerLinkActiveOptions]="{ exact: true }">Members</a>
+    <a [routerLink]="['/', 'pools', asset.asset]" [routerLinkActive]="['border-b-2']" [routerLinkActiveOptions]="{ exact: true }" class="dark:text-white mr-4">Details</a>
+    <a [routerLink]="['/', 'pools', asset.asset, 'txs']" [routerLinkActive]="['border-b-2']" [queryParams]="{offset: '0'}" [routerLinkActiveOptions]="{ exact: true }" class="dark:text-white mr-4">Transactions</a>
+    <a [routerLink]="['/', 'pools', asset.asset, 'members']" [routerLinkActive]="['border-b-2']" [routerLinkActiveOptions]="{ exact: true }" class="dark:text-white mr-4">Members</a>
   </nav>
   <br />
-  <span>Price: {{asset.priceRune}}</span> <br />
-  <span>Date Created: {{asset.dateCreated * 1000 | date:'short'}}</span>
+  <span class="dark:text-white">Price: {{asset.priceRune}}</span> <br />
+  <span class="dark:text-white">Date Created: {{asset.dateCreated * 1000 | date:'short'}}</span>
 
 </div>
 

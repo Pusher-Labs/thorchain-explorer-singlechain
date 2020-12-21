@@ -1,4 +1,4 @@
-<div *ngIf="param" class="query-input">
+<div *ngIf="param" class="query-input flex">
   <label>{{ param.name + (param.required ? "*" : "") }} </label>
 
   <select
@@ -19,5 +19,6 @@
     [name]="param.name"
     [value]="value"
     [placeholder]="getPlaceholder()"
+    class="text-black"
   />
 </div>

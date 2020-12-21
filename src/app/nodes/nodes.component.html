@@ -1,25 +1,32 @@
-<h1 class="mobile-padding">Nodes</h1>
-<div *ngIf="versionSummary && activeNodes">
+<h1 class="mobile-padding text-2xl font-bold font-mono py-4 dark:text-white">Nodes</h1>
+<div class="dark:text-white" *ngIf="versionSummary && activeNodes">
   <span *ngIf="versionSummary.next != versionSummary.current"><b>{{calculateNodesOnVersion(versionSummary.next) | percent}}</b> active network running: <b>{{versionSummary.next}}</b></span><br />
   <span><b>{{calculateNodesOnVersion(versionSummary.current) | percent}}</b> active network running: <b>{{versionSummary.current}}</b></span><br />
 </div>
 
 <br />
 
-
-<app-nodes-table *ngIf="activeNodes" [nodes]="activeNodes" tableName="Active Nodes"></app-nodes-table>
-
-<br />
-<br />
-
-<app-nodes-table *ngIf="standbyNodes" [nodes]="standbyNodes" tableName="Standby Nodes"></app-nodes-table>
+<app-content-item>
+  <app-nodes-table *ngIf="activeNodes" [nodes]="activeNodes" tableName="Active Nodes"></app-nodes-table>
+</app-content-item>
 
 <br />
 <br />
 
-<app-nodes-table *ngIf="disabledNodes" [nodes]="disabledNodes" tableName="Disabled Nodes"></app-nodes-table>
+<app-content-item>
+  <app-nodes-table *ngIf="standbyNodes" [nodes]="standbyNodes" tableName="Standby Nodes"></app-nodes-table>
+</app-content-item>
 
-<app-map *ngIf="mapData && mapData.length > 0" [data]="mapData"></app-map>
+<br />
+<br />
+
+<app-content-item>
+  <app-nodes-table *ngIf="disabledNodes" [nodes]="disabledNodes" tableName="Disabled Nodes"></app-nodes-table>
+</app-content-item>
+
+<app-content-item>
+  <app-map *ngIf="mapData && mapData.length > 0" [data]="mapData"></app-map>
+</app-content-item>
 
 <app-loading *ngIf="!activeNodes && !error"></app-loading>
 

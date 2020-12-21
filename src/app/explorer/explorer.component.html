@@ -1,11 +1,11 @@
-<h1 class="mobile-padding">Midgard API Explorer</h1>
+<h1 class="mobile-padding text-2xl font-bold font-mono py-4 dark:text-white break-all">Midgard API Explorer</h1>
 <br />
 
 <div class="explorer">
-  <aside>
-    <h4 class="endpoints-label">Endpoints</h4>
+  <aside class="dark:text-white">
+    <h4>Endpoints</h4>
     <ul class="endpoints-list">
-      <li *ngFor="let endpoint of endpoints">
+      <li class="my-4" *ngFor="let endpoint of endpoints">
         <a
           class="endpoint"
           [routerLinkActive]="['is-active']"

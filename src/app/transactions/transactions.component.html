@@ -1,45 +1,49 @@
 
-<h1 class="mobile-padding">TXs</h1>
+<h1 class="mobile-padding text-2xl font-bold font-mono py-4 dark:text-white">TXs</h1>
 
 <div *ngIf="transactions">
 
-  <div *ngIf="selectedTypes" class="type-filter flxr">
+  <div class="container pb-4">
+    <div *ngIf="selectedTypes" class="flex">
 
-    <div class="checkbox-container">
-      <input [(ngModel)]="selectedTypes.add" type="checkbox" name="add" id="add" (change)="filterType()" />
-      <label for="add">Add</label>
+      <div class="flex items-center mr-4">
+        <input [(ngModel)]="selectedTypes.add" type="checkbox" name="add" id="add" (change)="filterType()" class="rounded text-yellow-600" />
+        <label class="dark:text-white ml-2" for="add">Add</label>
+      </div>
+
+      <div class="flex items-center mr-4">
+        <input [(ngModel)]="selectedTypes.doubleSwap" type="checkbox" name="doubleSwap" id="doubleSwap" (change)="filterType()" class="rounded text-yellow-600" />
+        <label class="dark:text-white ml-2" for="doubleSwap">Double Swap</label>
+      </div>
+
+      <div class="flex items-center mr-4">
+        <input [(ngModel)]="selectedTypes.refund" type="checkbox" name="refund" id="refund" (change)="filterType()" class="rounded text-yellow-600" />
+        <label class="dark:text-white ml-2" for="refund">Refund</label>
+      </div>
+
+      <div class="flex items-center mr-4">
+        <input [(ngModel)]="selectedTypes.stake" type="checkbox" name="stake" id="stake" (change)="filterType()" class="rounded text-yellow-600" />
+        <label class="dark:text-white ml-2" for="stake">Deposit</label>
+      </div>
+
+      <div class="flex items-center mr-4">
+        <input [(ngModel)]="selectedTypes.swap" type="checkbox" name="swap" id="swap" (change)="filterType()" class="rounded text-yellow-600" />
+        <label class="dark:text-white ml-2" for="swap">Swap</label>
+      </div>
+
+      <div class="flex items-center mr-4">
+        <input [(ngModel)]="selectedTypes.unstake" type="checkbox" name="unstake" id="unstake" (change)="filterType()" class="rounded text-yellow-600" />
+        <label class="dark:text-white ml-2" for="unstake">Withdraw</label>
+      </div>
+
     </div>
-
-    <div class="checkbox-container">
-      <input [(ngModel)]="selectedTypes.doubleSwap" type="checkbox" name="doubleSwap" id="doubleSwap" (change)="filterType()" />
-      <label for="doubleSwap">Double Swap</label>
-    </div>
-
-    <div class="checkbox-container">
-      <input [(ngModel)]="selectedTypes.refund" type="checkbox" name="refund" id="refund" (change)="filterType()" />
-      <label for="refund">Refund</label>
-    </div>
-
-    <div class="checkbox-container">
-      <input [(ngModel)]="selectedTypes.stake" type="checkbox" name="stake" id="stake" (change)="filterType()" />
-      <label for="stake">Deposit</label>
-    </div>
-
-    <div class="checkbox-container">
-      <input [(ngModel)]="selectedTypes.swap" type="checkbox" name="swap" id="swap" (change)="filterType()" />
-      <label for="swap">Swap</label>
-    </div>
-
-    <div class="checkbox-container">
-      <input [(ngModel)]="selectedTypes.unstake" type="checkbox" name="unstake" id="unstake" (change)="filterType()" />
-      <label for="unstake">Withdraw</label>
-    </div>
-
-
   </div>
 
-
-    <app-transactions-table class="shadow" [transactions]="transactions"></app-transactions-table>
+  <div class="container">
+    <app-content-item>
+      <app-transactions-table [transactions]="transactions"></app-transactions-table>
+    </app-content-item>
+  </div>
 
 
   <div class="page-actions">

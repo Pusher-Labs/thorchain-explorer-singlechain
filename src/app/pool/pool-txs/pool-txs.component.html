@@ -1,4 +1,4 @@
-<div *ngIf="transactions">
+<app-content-item *ngIf="transactions">
 
   <app-transactions-table [transactions]="transactions"></app-transactions-table>
 
@@ -7,7 +7,7 @@
   <button *ngIf="offset + limit < totalCount" (click)="setPage(offset + limit)">></button>
   <button *ngIf="offset + limit < totalCount" (click)="setPage(getLastPageOffset())">>></button>
 
-</div>
+</app-content-item>
 
 <app-loading *ngIf="!transactions"></app-loading>
 
