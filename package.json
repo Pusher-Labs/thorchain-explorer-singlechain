@@ -32,7 +32,6 @@
     "@tailwindcss/postcss7-compat": "^2.0.2",
     "@tailwindcss/typography": "^0.3.1",
     "@thorchain/asgardex-binance": "^2.0.0",
-    "@thorchain/asgardex-midgard": "^0.1.0",
     "autoprefixer": "^10.1.0",
     "chart.js": "^2.9.3",
     "chartjs-chart-geo": "^2.1.0",
