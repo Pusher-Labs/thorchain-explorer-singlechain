@@ -3,7 +3,7 @@
 
 <div *ngIf="transactions">
 
-  <div class="container pb-4">
+  <div class="pb-4">
     <div *ngIf="selectedTypes" class="flex">
 
       <div class="flex items-center mr-4">
@@ -39,7 +39,7 @@
     </div>
   </div>
 
-  <div class="container">
+  <div>
     <app-content-item>
       <app-transactions-table [transactions]="transactions"></app-transactions-table>
     </app-content-item>
