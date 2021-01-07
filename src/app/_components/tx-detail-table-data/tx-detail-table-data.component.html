@@ -1,12 +1,16 @@
 
 <div *ngIf="transactionDetail" class="flex align-center">
   <div class="tx-id" [class.tx-id--out]="direction === 'OUT'">
-    <a [routerLink]="['/', 'txs', transactionDetail.txID]" title="Transaction ID">
-      <b>{{transactionDetail.txID.substring(0, 8)}}...</b>
+    <a [routerLink]="['/', 'txs', transactionDetail.txID]" [title]="'Transaction ID: ' + transactionDetail.txID">
+      <b>{{transactionDetail.txID.substring(0, 4)}}...{{transactionDetail.txID.substring(transactionDetail.txID.length - 4, transactionDetail.txID.length)}}</b>
     </a>
   </div>
 
-  <a class="tx-address" [routerLink]="['/', 'addresses', transactionDetail.address]" title="Address"><b>{{transactionDetail.address.substring(0, 8)}}...</b></a>
+  <a class="tx-address" [routerLink]="['/', 'addresses', transactionDetail.address]" [title]="'Address: ' + transactionDetail.address">
+    <b>
+      {{transactionDetail.address.substring(0, 8)}}...{{transactionDetail.address.substring(transactionDetail.address.length - 4, transactionDetail.address.length)}}
+    </b>
+  </a>
 </div>
 
 <ul *ngIf="transactionDetail" class="asset-row">
