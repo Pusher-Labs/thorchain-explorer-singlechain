@@ -21,10 +21,10 @@
         <span style="display:inline-block; padding: 15px;">No data found!</span>
       </td>
     </tr>
-    <tr class="table-row" *ngFor="let node of nodes" [class.pinned]="isPinned(node.nodeAddress)">
+    <tr class="table-row" *ngFor="let node of nodes">
       <td class="table-item">
-        <button (click)="toggleNodePin(node.nodeAddress)" class="pin-btn">
-          <fa-icon *ngIf="true" [icon]="pinIcon"></fa-icon>
+        <button (click)="toggleNodePin(node.nodeAddress)" class="bg-transparent border-none focus:outline-none">
+          <fa-icon *ngIf="true" [icon]="pinIcon" class="fill-current" [class.text-yellow-500]="isPinned(node.nodeAddress)"></fa-icon>
         </button>
       </td>
       <td class="table-item">
