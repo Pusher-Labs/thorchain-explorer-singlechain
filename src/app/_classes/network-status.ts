@@ -55,8 +55,8 @@ class NetworkStatusBase extends FormattableAsset {
   standbyNodeCount: number;
   poolShareFactor: string;
   blockRewards: BlockRewards;
-  bondingROI: string;
-  stakingROI: string;
+  bondingAPY: string;
+  liquidityAPY: string;
   nextChurnHeight: string;
   poolActivationCountdown: number;
 }
@@ -111,8 +111,8 @@ export class NetworkStatus extends NetworkStatusBase {
     this.standbyNodeCount = networkDTO.standbyNodeCount;
     this.poolShareFactor = networkDTO.poolShareFactor;
     this.blockRewards = networkDTO.blockRewards;
-    this.bondingROI = networkDTO.bondingROI;
-    this.stakingROI = networkDTO.stakingROI;
+    this.bondingAPY = networkDTO.bondingAPY;
+    this.liquidityAPY = networkDTO.liquidityAPY;
     this.nextChurnHeight = networkDTO.nextChurnHeight;
     this.poolActivationCountdown = networkDTO.poolActivationCountdown;
 

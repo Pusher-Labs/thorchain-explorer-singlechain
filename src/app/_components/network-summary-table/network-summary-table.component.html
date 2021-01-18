@@ -59,12 +59,12 @@
     </tr>
     <tr class="table-row">
       <td class="table-item">Node APY</td>
-      <td *ngIf="isFinite(network.bondingROI)" class="table-item">{{network.bondingROI | percent:'1.0-2'}}</td>
-      <td *ngIf="!isFinite(network.bondingROI)" class="table-item">{{network.bondingROI}}</td>
+      <td *ngIf="isFinite(network.bondingAPY)" class="table-item">{{network.bondingAPY | percent:'1.0-2'}}</td>
+      <td *ngIf="!isFinite(network.bondingAPY)" class="table-item">{{network.bondingAPY}}</td>
     </tr>
     <tr class="table-row">
       <td class="table-item">Pool APY</td>
-      <td class="table-item">{{network.stakingROI | percent:'1.0-2'}}</td>
+      <td class="table-item">{{network.liquidityAPY | percent:'1.0-2'}}</td>
     </tr>
     <tr class="table-row">
       <td class="table-item">Next Churn Height</td>
