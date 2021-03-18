@@ -46,15 +46,12 @@ export class NetworkToggleComponent implements OnInit {
       case 'TESTNET':
         this.document.location.href = 'https://singlechain-testnet.thorchain.net/';
         break;
-
       case 'MULTICHAIN_TESTNET':
         this.document.location.href = 'https://testnet.thorchain.net/';
-        break;  
-
+        break;
       default:
         this.document.location.href = 'https://singlechain.thorchain.net/';
         break;
     }
   }
-
 }
