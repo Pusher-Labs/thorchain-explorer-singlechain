@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NetworkToggleComponent } from './network-toggle.component';
 
@@ -6,7 +6,7 @@ describe('NetworkToggleComponent', () => {
   let component: NetworkToggleComponent;
   let fixture: ComponentFixture<NetworkToggleComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ NetworkToggleComponent ]
     })

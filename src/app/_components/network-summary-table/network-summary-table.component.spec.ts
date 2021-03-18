@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NetworkSummaryTableComponent } from './network-summary-table.component';
 
@@ -6,7 +6,7 @@ describe('NetworkSummaryTableComponent', () => {
   let component: NetworkSummaryTableComponent;
   let fixture: ComponentFixture<NetworkSummaryTableComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ NetworkSummaryTableComponent ]
     })

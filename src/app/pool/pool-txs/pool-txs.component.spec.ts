@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { PoolTxsComponent } from './pool-txs.component';
@@ -9,7 +9,7 @@ describe('PoolTxsComponent', () => {
   let component: PoolTxsComponent;
   let fixture: ComponentFixture<PoolTxsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PoolTxsComponent ],
       imports: [ RouterTestingModule, HttpClientTestingModule ],

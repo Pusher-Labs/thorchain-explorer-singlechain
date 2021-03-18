@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StatsTableComponent } from './stats-table.component';
 
@@ -6,7 +6,7 @@ describe('StatsTableComponent', () => {
   let component: StatsTableComponent;
   let fixture: ComponentFixture<StatsTableComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ StatsTableComponent ],
       imports: [ HttpClientTestingModule ]

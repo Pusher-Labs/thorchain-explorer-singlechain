@@ -68,36 +68,6 @@
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json"
             },
-            "multichain-testnet": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.multichain-testnet.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
-                }
-              ],
-              "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json"
-            },
             "testnet": {
               "fileReplacements": [
                 {
@@ -171,9 +141,6 @@
           "configurations": {
             "production": {
               "browserTarget": "thorchain-explorer:build:production"
-            },
-            "multichain-testnet": {
-              "browserTarget": "thorchain-explorer:build:multichain-testnet"
             }
           }
         },
