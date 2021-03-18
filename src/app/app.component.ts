@@ -37,10 +37,6 @@ export class AppComponent implements OnInit {
         this.thorchainNetworkService.setNetwork(THORChainNetwork.TESTNET);
         break;
 
-      case 'MULTICHAIN_TESTNET':
-        this.thorchainNetworkService.setNetwork(THORChainNetwork.MULTICHAIN_TESTNET);
-        break;
-
       default:
         this.thorchainNetworkService.setNetwork(THORChainNetwork.CHAOSNET);
         break;

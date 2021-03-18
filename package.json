@@ -7,7 +7,6 @@
     "build": "ng build --prod",
     "build:chaosnet": "ng build --configuration chaosnet",
     "build:testnet": "ng build --configuration testnet",
-    "build:multichain-testnet": "ng build --configuration multichain-testnet",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

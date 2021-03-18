@@ -35,13 +35,6 @@ export class ThorchainNetworkService {
         this.nodeReqParams = new HttpParams().set('network', THORChainNetwork.TESTNET);
         break;
 
-      case THORChainNetwork.MULTICHAIN_TESTNET:
-        this.midgardBasePath = 'https://testnet.multichain.midgard.thorchain.info';
-        this.nodeBasePath = (isDevMode()) ? 'http://18.158.236.117:1317' : proxy;
-        this.network = network;
-        this.nodeReqParams = new HttpParams().set('network', THORChainNetwork.MULTICHAIN_TESTNET);
-        break;
-
     /**
      * Right now default is CHAOSNET
      */

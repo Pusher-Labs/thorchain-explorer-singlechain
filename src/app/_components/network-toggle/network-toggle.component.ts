@@ -30,10 +30,6 @@ export class NetworkToggleComponent implements OnInit {
         this.network = THORChainNetwork.TESTNET;
         break;
 
-      case 'MULTICHAIN_TESTNET':
-        this.network = THORChainNetwork.MULTICHAIN_TESTNET;
-        break;
-
       default:
         this.network = THORChainNetwork.CHAOSNET;
         break;
@@ -48,15 +44,15 @@ export class NetworkToggleComponent implements OnInit {
 
     switch (network) {
       case 'TESTNET':
-        this.document.location.href = 'https://testnet.thorchain.net/';
+        this.document.location.href = 'https://singlechain-testnet.thorchain.net/';
         break;
 
       case 'MULTICHAIN_TESTNET':
-        this.document.location.href = 'https://multichain-testnet.thorchain.net/';
-        break;
+        this.document.location.href = 'https://testnet.thorchain.net/';
+        break;  
 
       default:
-        this.document.location.href = 'https://thorchain.net/';
+        this.document.location.href = 'https://singlechain.thorchain.net/';
         break;
     }
   }
